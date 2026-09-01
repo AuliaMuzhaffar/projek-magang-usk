@@ -5,7 +5,7 @@
 
 ## 1️⃣ Overview: Daya Tampung vs Lulus Seleksi vs Mendaftar Ulang
 
-![Perbandingan total DT, Lulus Seleksi, dan Mendaftar Ulang seluruh prodi USK 2022-2026](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/01_dt_vs_mu_total.png)
+![Perbandingan total DT, Lulus Seleksi, dan Mendaftar Ulang seluruh prodi USK 2022-2026](grafik_analisis/01_dt_vs_mu_total.png)
 
 | Tahun | Daya Tampung | Lulus Seleksi | Mendaftar Ulang | Perubahan MU |
 |:-----:|:-----------:|:------------:|:---------------:|:------------:|
@@ -22,7 +22,7 @@
 
 ## 2️⃣ Tren Total & Yield Rate
 
-![Tren total pendaftaran ulang dan yield rate USK 2022-2026](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/02_tren_total_mu.png)
+![Tren total pendaftaran ulang dan yield rate USK 2022-2026](grafik_analisis/02_tren_total_mu.png)
 
 **Yield Rate** = % mahasiswa yang lulus seleksi dan benar-benar mendaftar ulang.
 
@@ -41,7 +41,7 @@
 
 ## 3️⃣ Prodi dengan Perubahan Terbesar (2022 → 2026)
 
-![15 prodi penurunan dan 15 prodi peningkatan terbesar dalam mendaftar ulang](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/03_top_bottom_prodi_change.png)
+![15 prodi penurunan dan 15 prodi peningkatan terbesar dalam mendaftar ulang](grafik_analisis/03_top_bottom_prodi_change.png)
 
 ### 📈 Top 5 Peningkatan
 
@@ -67,13 +67,13 @@
 
 ## 4️⃣ Tren per Fakultas
 
-![Tren daya tampung vs mendaftar ulang per fakultas 2022-2026](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/04_tren_per_fakultas.png)
+![Tren daya tampung vs mendaftar ulang per fakultas 2022-2026](grafik_analisis/04_tren_per_fakultas.png)
 
 ---
 
 ## 5️⃣ Rasio Keketatan per Prodi (2026)
 
-![Rasio lulus seleksi dibagi daya tampung per prodi tahun 2026](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/05_rasio_keketatan_2026.png)
+![Rasio lulus seleksi dibagi daya tampung per prodi tahun 2026](grafik_analisis/05_rasio_keketatan_2026.png)
 
 > [!NOTE]
 > **Rasio > 1.0** = lebih banyak yang lulus seleksi daripada daya tampung (prodi populer).
@@ -83,7 +83,7 @@
 
 ## 6️⃣ Distribusi Tren Prodi
 
-![Distribusi tren peminatan prodi dan histogram perubahan](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/06_distribusi_tren.png)
+![Distribusi tren peminatan prodi dan histogram perubahan](grafik_analisis/06_distribusi_tren.png)
 
 | Kategori Tren | Jumlah Prodi | Persentase |
 |:-------------|:------------:|:----------:|
@@ -99,19 +99,19 @@
 
 ## 7️⃣ 10 Prodi Tren Menurun
 
-![Line chart 10 prodi dengan penurunan mendaftar ulang terbesar](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/07_prodi_menurun.png)
+![Line chart 10 prodi dengan penurunan mendaftar ulang terbesar](grafik_analisis/07_prodi_menurun.png)
 
 ---
 
 ## 8️⃣ 10 Prodi Tren Meningkat
 
-![Line chart 10 prodi dengan peningkatan mendaftar ulang terbesar](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/08_prodi_meningkat.png)
+![Line chart 10 prodi dengan peningkatan mendaftar ulang terbesar](grafik_analisis/08_prodi_meningkat.png)
 
 ---
 
 ## 9️⃣ Prodi dengan Fill Rate Terendah (2026)
 
-![20 prodi dengan fill rate terendah tahun 2026](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/09_prodi_peminatan_rendah.png)
+![20 prodi dengan fill rate terendah tahun 2026](grafik_analisis/09_prodi_peminatan_rendah.png)
 
 > [!CAUTION]
 > Prodi **PDD Gayo Lues** mendominasi daftar fill rate terendah (15-32%). Ini menunjukkan program studi di kampus satelit memerlukan perhatian khusus — kemungkinan faktor: lokasi geografis, akses, atau kurangnya sosialisasi.
@@ -120,7 +120,7 @@
 
 ## 🔟 Perbandingan Mendaftar Ulang antar Fakultas
 
-![Perbandingan mendaftar ulang per fakultas 2022-2026](/Users/auliamuzhaffar/.gemini/antigravity-ide/brain/19321dd0-a40b-47df-afbe-6444b2473249/10_perbandingan_fakultas.png)
+![Perbandingan mendaftar ulang per fakultas 2022-2026](grafik_analisis/10_perbandingan_fakultas.png)
 
 ---
 
