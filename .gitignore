@@ -4,6 +4,10 @@ UKT_USK_2022_2026
 UKT USK 2022-2026.rar
 *.rar
 
-# File Sistem
+# File Sistem & Temp
 .DS_Store
 Thumbs.db
+~$*
+*.tmp
+__pycache__/
+*.pyc
