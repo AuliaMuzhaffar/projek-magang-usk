@@ -1,4 +1,4 @@
-# 📊 Laporan Analisis Peminatan & Daya Tampung Prodi USK
+1# 📊 Laporan Analisis Peminatan & Daya Tampung Prodi USK
 ## Periode 2022 — 2026
 
 ---

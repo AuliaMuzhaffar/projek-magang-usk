@@ -5,7 +5,7 @@
 ---
 
 **Peserta Rapat:** Rektor, Para Wakil Rektor, Ketua Senat Akademik, dan Para Dekan Fakultas  
-**Dasar Analisis:** Data Empiris PMB 2022–2026 (Sumber Resmi: `rekap data.xlsx` & `DAYA_TAMPUNG_2026_2027 GANJIL_MAGANG.xlsx`)  
+**Dasar Analisis:** Data Empiris PMB 2022–2026 (Sumber Resmi: `rekap data (fix).xlsx` & `DAYA_TAMPUNG_2026_2027 GANJIL_MAGANG.xlsx`)  
 **Tujuan:** Pengambilan Keputusan Strategis Rasionalisasi Kuota Menuju Efisiensi PTN-BH  
 **File Presentasi Asli (.pptx):** [`presentasi_analisa_peminatan_dan_daya_tampung.pptx`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/presentasi_analisa_peminatan_dan_daya_tampung.pptx)
 

@@ -8,8 +8,8 @@
 **Penyusun:** Tim Magang Universitas Syiah Kuala  
 **Periode Analisis:** 5 Tahun Akademik (2022 s.d. 2026)  
 **Basis Data Sumber:** 
-1. Data Historis (2022–2025): `tugas-5/rekap data.xlsx` (Sheet *Rekapitulasi Data*)
-2. Data Tahun 2026: `DAYA_TAMPUNG_2026_2027 GANJIL_MAGANG.xlsx` (Sheet *DT D3_D4_S1 2026*)  
+1. Dataset Master Resmi (2022–2026): `tugas-5/rekap data (fix).xlsx` (Sheet *Rekapitulasi Data*)
+2. Data Validasi Daya Tampung 2026: `DAYA_TAMPUNG_2026_2027 GANJIL_MAGANG.xlsx` (Sheet *DT D3_D4_S1 2026*)  
 **Master Excel:** `tugas-5/analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`  
 **Paket Grafik (300 DPI):** `tugas-5/analisa_peminatan_dan_daya_tampung/grafik/`  
 **File Presentasi PowerPoint (.pptx):** `tugas-5/analisa_peminatan_dan_daya_tampung/presentasi_analisa_peminatan_dan_daya_tampung.pptx`  
@@ -74,7 +74,7 @@ Laporan ini disusun untuk menjawab mandat strategis pimpinan universitas dan pan
   * *Manajemen FEB:* Merosot 3 tahun beruntun (-25% / 266 ke 199 mhs) akibat *kanibalisasi internal* oleh dibukanya prodi baru S1 Bisnis Digital pada 2024 yang menyerap 800+ peminat.
   * *Budidaya Perairan & Fisika:* Persepsi minimnya formasi kerja kantoran di daerah serta materi sains murni yang dihindari generasi muda.
   * *Jalur Mandiri:* Tagihan Iuran Pengembangan Institusi (IPI) belasan hingga puluhan juta rupiah dalam tempo 5 hari kerja (SK Rektor 1162/2026) memicu *liquidity shock*, menyebabkan 25% calon mahasiswa yang lulus memilih gugur.
-  * *Jalur TALENTA:* Sebanyak 75% siswa lolos (930 orang) kabur karena tiket Talenta dijadikan cadangan gratis sambil menunggu pengumuman UTBK SNBT.
+  * *Jalur TALENTA:* Sebanyak 75,5% siswa lolos (935 orang) kabur karena tiket Talenta dijadikan cadangan gratis sambil menunggu pengumuman UTBK SNBT.
 
 ---
 
@@ -145,11 +145,18 @@ Untuk mencegah distorsi data statistik, seluruh 81 program studi USK dipisahkan 
 | **2024** | 65.495 | 10.240 | 10.158 | **7.791** | **76,1%** | **76,7%** | 2.449 Kursi |
 | **2025** | 70.945 | 10.420 | 9.487 | **8.027** | **77,0%** | **84,6%** | 2.393 Kursi |
 | **2026** | 68.010 | 10.435 | 10.776 | **8.440** | **80,9%** | **78,3%** | 1.995 Kursi |
+| **TOTAL 5 TAHUN** | **297.872** | **47.738** | **45.577** | **36.754** | **77,0% (Kumulatif)** | **80,6% (Kumulatif)** | **10.984 Kursi Kosong** |
 
-### 3.2 Analisis Dinamika Makro:
-* **Fase Ekspansi Kapasitas (2023–2024):** USK memperluas kuota secara masif (+1.460 kursi di 2024) saat menyandang status PTN-BH. Kenaikan kuota ini direspon positif oleh pasar dengan lonjakan peminat dari 44 ribu ke 65 ribu orang.
-* **Tingkat Keterisian Membaik di 2026:** Keterisian kuota mencapai level terbaiknya di angka **80,9%** dengan 8.440 mahasiswa baru resmi terdaftar.
-* **Persistensi Masalah Kursi Kosong:** Angka kursi kosong tidak pernah turun di bawah 1.600 kursi. Di tahun 2026, masih terdapat **1.995 kursi yang gagal diisi mahasiswa**, mencerminkan adanya ketidaksesuaian alokasi kuota antar-program studi.
+### 3.2 Analisis Dinamika Makro & Dekonstruksi Paradoks PMB (2022–2026):
+1. **Dinamika Pasar (Demand Side): Ledakan Minat Pendaftar (+39,5%):**
+   * Peminat USK melonjak tajam dari 48.769 orang (2022) menjadi 68.010 orang (2026), bahkan sempat mencapai puncaknya di angka 70.945 orang pada tahun 2025 (*CAGR +8,7%/tahun*).
+   * Titik balik terjadi pada tahun 2024 (*lonjakan +46,7% YoY*), dipicu oleh transformasi USK menjadi PTN-BH dan perluasan program studi baru serta integrasi vokasi ke jalur nasional.
+2. **Sisi Kapasitas & Realitas Serapan (Supply & Conversion Side):**
+   * Kenaikan minat pendaftar direspons oleh manajemen kampus dengan ekspansi agresif kuota daya tampung dari 7.863 kursi (2022) menjadi 10.435 kursi (2026), bertambah sebanyak **2.572 kursi baru (+32,7%)**.
+   * Meskipun pendaftar ulang riil tumbuh mencapai level tertinggi di 8.440 mahasiswa (keterisian kuota 80,9% di 2026), **jurang bangku kosong tetap menganga lebar**.
+3. **Akumulasi 10.984 Kursi Kosong (Inefisiensi Kapasitas 23,0%):**
+   * Sepanjang 5 tahun (2022–2026), USK mengalokasikan total 47.738 kursi daya tampung, namun hanya berhasil merekrut 36.754 mahasiswa baru.
+   * Sebanyak **10.984 bangku kuliah (23,0% dari seluruh kuota yang dibuka)** berakhir kosong melompong. Ini membuktikan bahwa krisis kursi kosong di USK bukan diakibatkan oleh kurangnya peminat makro, melainkan **kesalahan alokasi distribusi kuota antar-program studi (*structural mismatch*)** dan kebocoran calon mahasiswa yang tidak mendaftar ulang.
 
 ---
 
@@ -256,17 +263,16 @@ Evaluasi program studi sarjana di Banda Aceh dilakukan secara objektif dengan me
 
 ![Top Penurunan](grafik/03_top_tren_penurunan_pendaftar_dan_peminat.png)
 
-| No | Program Studi | Fakultas | DU 2022 | DU 2026 | Slope Tren DU (Orang/Thn) | CAGR DU (%/Thn) | Riwayat Transisi YoY | Pola Konsistensi |
+| No | Program Studi | Fakultas | DU 2022 | DU 2026 | Slope Tren DU (Orang/Thn) | CAGR DU (%/Thn) | Kontraksi 5-Tahun (%) | Pola Konsistensi Tren |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 1 | **Manajemen** | FEB | 266 | 199 | **-16,4** | **-7,0%** | **0x Naik, 3x Turun** | **Merosot Kronis** |
-| 2 | **Ekonomi Islam** | FEB | 165 | 122 | **-10,3** | **-7,3%** | **0x Naik, 3x Turun** | **Merosot Kronis** |
-| 3 | **Ekonomi Pembangunan** | FEB | 169 | 135 | **-7,7** | **-5,5%** | 1x Naik, 3x Turun | Menurun Konsisten |
-| 4 | **Sosiologi** | FISIP | 108 | 92 | **-4,0** | **-3,9%** | 2x Naik, 2x Turun | Fluktuatif Menurun |
-| 5 | **PSP Perikanan** | FPK | 80 | 67 | **-3,7** | **-4,3%** | 2x Naik, 2x Turun | Fluktuatif Menurun |
-| 6 | **Matematika** | FMIPA | 67 | 56 | **-2,9** | **-4,4%** | 2x Naik, 2x Turun | Menurun Konsisten |
-| 7 | **Teknik Geofisika** | Teknik | 59 | 51 | **-1,8** | **-3,6%** | 1x Naik, 2x Turun | Menurun Moderat |
+| 1 | **Manajemen** | FEB | 266 | 199 | **-16,2** | **-7,0%** | **-25,2% (-67 Mhs)** | **Merosot Kronis (0x Naik)** |
+| 2 | **Ekonomi Islam** | FEB | 165 | 122 | **-9,3** | **-7,3%** | **-26,1% (-43 Mhs)** | **Merosot Kronis (0x Naik)** |
+| 3 | **Ekonomi Pembangunan** | FEB | 169 | 135 | **-6,4** | **-5,5%** | **-20,1% (-34 Mhs)** | Menurun Konsisten |
+| 4 | **Sosiologi** | FISIP | 108 | 92 | **-4,9** | **-3,9%** | **-14,8% (-16 Mhs)** | Fluktuatif Menurun |
+| 5 | **PSP Perikanan** | FPK | 80 | 67 | **-3,8** | **-4,3%** | **-16,2% (-13 Mhs)** | Fluktuatif Menurun |
+| 6 | **Ilmu Kelautan** | FPK | 119 | 113 | **-3,1** | **-1,3%** | **-5,0% (-6 Mhs)** | Menurun Moderat |
 
-> **Temuan Kunci:** Manajemen dan Ekonomi Islam (FEB) tidak pernah mengalami kenaikan pendaftar ulang sejak 2022 (3 tahun berturut-turut merosot). Hal ini menjadi peringatan darurat bagi pimpinan fakultas untuk mereformasi kurikulum dan strategi pemasarannya.
+> **Temuan Kritis Rektorat (Episentrum FEB):** Tiga program studi utama di Fakultas Ekonomi & Bisnis (Manajemen, Ekonomi Islam, dan Ekonomi Pembangunan) secara bersama-sama **kehilangan 144 mahasiswa baru per angkatan dibandingkan basis 2022 (kontraksi gabungan -24,0%)**. Manajemen dan Ekonomi Islam bahkan mencatatkan rekor negatif *zero-rebound* (tidak pernah sekalipun mengalami kenaikan pendaftar ulang dalam 4 tahun berturut-turut). Fenomena ini menuntut evaluasi mendalam terhadap kurikulum bisnis tradisional di era ekonomi digital.
 
 ---
 
@@ -443,9 +449,59 @@ Untuk memberikan analisis helikopter bagi pimpinan universitas, seluruh dinamika
    * Seleksi TALENTA dilaksanakan lebih awal tanpa membebankan biaya registrasi yang mengikat atau uang muka komitmen (*commitment deposit*). Akibatnya, ribuan siswa berprestasi menjadikan pengumuman TALENTA hanya sebagai "tiket cadangan gratis" sambil menunggu hasil pengumuman UTBK-SNBT atau tes perguruan tinggi kedinasan. Begitu mereka diterima di jalur nasional/kedinasan, tiket TALENTA langsung dilepas begitu saja.
    * **Rekomendasi Kebijakan:** Terapkan skema *Commitment Fee* atau *Early Registration Deposit* (misal Rp500.000 s.d. Rp1.000.000 yang langsung memotong biaya UKT semester 1) saat calon mahasiswa mengklaim kelulusan TALENTA.
 
-2. **Akar Masalah Kebocoran Jalur SMMPTN Mandiri (25% Gugur):**
+2. **Akar Masalah Kebocoran Jalur SMMPTN Mandiri (25%–30% Gugur):**
    * Calon mahasiswa mandiri dihadapkan pada tenggat pembayaran uang pangkal IPI yang sangat sempit (5–7 hari kalender) setelah pengumuman kelulusan. Keluarga dengan likuiditas terbatas mengalami syok finansial dan terpaksa merelakan kursi tersebut.
    * **Rekomendasi Kebijakan:** Buka fasilitas *Cicilan IPI 3 Tahap* otomatis bagi mahasiswa baru jalur mandiri dan percepat pemanggilan kuota cadangan (*waitlist*) sebelum sistem registrasi nasional ditutup.
+
+---
+
+### 7.5 Analisis Jalur Masuk & Episentrum Kebocoran per Program Studi (Tahunan & Akumulasi 5 Tahun)
+
+Untuk memenuhi kebutuhan analitis pimpinan fakultas dan dekanat mengenai **pintu masuk utama dan titik kebocoran calon mahasiswa di tingkat program studi**, data 1.944 baris telah diekstraksi ke dalam file analitis khusus:  
+📂 [**analisa_jalur_masuk_dan_kebocoran_per_prodi_2022_2026.xlsx**](data/analisa_jalur_masuk_dan_kebocoran_per_prodi_2022_2026.xlsx).
+
+#### A. Rangkuman Porsi Pintu Masuk USK Akumulasi 5 Tahun (2022–2026)
+
+| Jalur Penerimaan | Total Lulus (5-Thn) | Total Daftar Ulang | Porsi Serapan (Share %) | Total Calon Gugur | Rata-rata Yield Rate (%) | Tingkat Kebocoran (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **SNBT (Tes Nasional)** | 18.542 | **15.812** | **43,1%** | 2.731 | 85,3% | 14,7% |
+| **SNBP (Rapor Prestasi)** | 12.960 | **11.883** | **32,4%** | 1.078 | **91,7%** | **8,3% (Paling Solid)** |
+| **SMMPTN (Mandiri)** | 10.846 | **7.752** | **21,1%** | 3.268 | 71,5% | 28,5% |
+| **TALENTA (Prestasi USK)** | 1.742 | **690** | **1,9%** | **1.057** | **39,6%** | **60,7% (Episentrum Bocor)** |
+| **SMC (Seleksi Cadangan)**| 704 | **495** | **1,3%** | 209 | 70,3% | 29,7% |
+| **ADIK (Afirmasi 3T)** | 71 | **43** | **0,1%** | 28 | 60,6% | 39,4% |
+| **TOTAL KESELURUHAN** | **44.865** | **36.754** | **100,0%** | **8.371** | **81,9%** | **18,1%** |
+
+#### B. Program Studi S1 Paling Bergantung pada Jalur Mandiri (SMMPTN)
+Beberapa program studi baru atau spesifik memiliki struktur pembiayaan dan pendaftaran yang sangat ditopang oleh Jalur Mandiri (bukan jalur nasional):
+
+| Program Studi | Fakultas | Total Mahasiswa (5-Thn) | Mahasiswa Jalur Mandiri | Ketergantungan Mandiri (%) | Jalur Masuk Dominan |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Hubungan Internasional** | FISIP | 73 | 68 | **93,2%** | Mandiri SMMPTN (93,2%) |
+| **Bisnis Digital** | FEB | 150 | 94 | **62,7%** | Mandiri SMMPTN (62,7%) |
+| **Teknik Sumber Daya Air** | Teknik | 103 | 57 | **55,3%** | Mandiri SMMPTN (55,3%) |
+| **Teknik Lingkungan** | Teknik | 160 | 82 | **51,2%** | Mandiri SMMPTN (51,2%) |
+| **Ilmu Pemerintahan** | FISIP | 795 | 263 | **33,1%** | SNBT (36,5%) & Mandiri |
+
+#### C. Program Studi S1 Paling Bergantung pada Jalur Nasional (SNBP + SNBT)
+Sebaliknya, program studi di rumpun sains murni, kependidikan dasar, dan kampus cabang hampir 100% mahasiswa barunya disuplai oleh seleksi nasional (hampir tidak diminati melalui jalur mandiri berbayar):
+
+| Program Studi | Fakultas | Total Mahasiswa (5-Thn) | Mahasiswa Jalur Nasional | Ketergantungan Nasional (%) | Keterangan Pasar |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Kehutanan (PDD Gayo Lues)** | PSDKU | 59 | 59 | **100,0%** | Nol pendaftar jalur mandiri |
+| **Pendidikan Biologi (Gayo Lues)**| PSDKU | 49 | 48 | **98,0%** | Sangat bergantung beasiswa/KIP-K |
+| **Proteksi Tanaman** | Pertanian | 228 | 223 | **97,8%** | Diserap penuh via SNBT/SNBP |
+| **Pendidikan Fisika** | FKIP | 343 | 335 | **97,7%** | Diserap penuh via SNBT/SNBP |
+| **Pendidikan Kimia** | FKIP | 341 | 331 | **97,1%** | Diserap penuh via SNBT/SNBP |
+
+#### D. Episentrum Kebocoran Terbesar di Tingkat Program Studi
+1. **Titik Kebocoran Tertinggi Jalur TALENTA (Efek Tiket Cadangan Bebas Biaya):**
+   * **Pendidikan Dokter (FK):** Diluluskan 260 orang, tetapi yang daftar ulang hanya 34 orang (**226 calon dokter atau 86,9% mengundurkan diri!**). Calon mahasiswa kedokteran USK jalur Talenta terbukti menjadikan kelulusan ini hanya sebagai asuransi cadangan sembari menunggu pengumuman UTBK-SNBT di universitas top Pulau Jawa atau Akademi Militer/Kedinasan.
+   * **Pendidikan Jasmani (FKIP):** Diluluskan 164 orang, daftar ulang 72 orang (**92 orang atau 56,1% gugur**).
+   * **Ilmu Hukum (FH):** Diluluskan 122 orang, daftar ulang 38 orang (**84 orang atau 68,9% gugur**).
+2. **Titik Kebocoran Tertinggi Jalur Mandiri SMMPTN (Efek Syok Finansial IPI):**
+   * **Ilmu Keperawatan (FKEP):** Diluluskan 463 orang, daftar ulang 240 orang (**223 orang atau 48,2% gugur**). Biaya IPI mandiri Keperawatan memicu calon mahasiswa memilih pindah ke Poltekkes Kemenkes yang biaya kuliahnya bersubsidi penuh.
+   * **Teknik Sipil (FT):** Diluluskan 347 orang, daftar ulang 202 orang (**145 orang atau 41,8% gugur**).
 
 ---
 
@@ -473,7 +529,7 @@ Sesuai catatan khusus pada halaman 1 dan butir 13 dokumen `TUGAS 05 - MAGANG (KH
 | **Budidaya Perairan** | Peminat hanya 145 orang untuk 160 kursi (keketatan < 1:1), pendaftar ulang macet di 90 orang. | **Faktor Persepsi Karir Agromaritim:** Persepsi minimnya prospek kerja kantoran di instansi daerah dan kurang populernya sektor perikanan budidaya di mata lulusan SMA perkotaan. |
 | **Fisika (FMIPA)** | Peminat hanya 94 orang untuk 80 kuota, keterisian kuota 5 tahun rata-rata hanya 44,2%. | **Faktor Kurikulum Sains Murni:** Jurusan sains murni dipersepsikan memiliki tingkat kesulitan akademik tinggi namun minim formasi lowongan kerja korporasi di daerah Aceh. |
 | **Jalur Mandiri** | 604 calon mahasiswa lulus (25%) mengundurkan diri pada tahun 2026. | **Beban Finansial IPI (SK Rektor 1162/2026):** Tagihan uang pangkal IPI berkisar Rp10.000.000 s.d. Rp35.000.000 yang wajib dibayar dalam 5–7 hari kerja memicu *liquidity shock* keluarga menengah-bawah. |
-| **Jalur TALENTA** | 930 calon mahasiswa lulus (75%) mengundurkan diri pada tahun 2026. | **Perilaku Spekulatif Pendaftar:** Pendaftaran jalur prestasi tidak membebankan biaya hangus, sehingga siswa menjadikannya cadangan gratis sambil menunggu pengumuman UTBK. |
+| **Jalur TALENTA** | 935 calon mahasiswa lulus (75,5%) mengundurkan diri pada tahun 2026. | **Perilaku Spekulatif Pendaftar:** Pendaftaran jalur prestasi tidak membebankan biaya hangus, sehingga siswa menjadikannya cadangan gratis sambil menunggu pengumuman UTBK. |
 
 ---
 

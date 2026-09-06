@@ -9,8 +9,10 @@ plt.rcParams['font.sans-serif'] = 'DejaVu Sans'
 plt.rcParams['axes.edgecolor'] = '#94A3B8'
 plt.rcParams['axes.linewidth'] = 1.0
 
-excel_path = 'tugas-5/analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx'
-chart_dir = 'tugas-5/analisa_peminatan_dan_daya_tampung/grafik'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+excel_path = os.path.abspath(os.path.join(script_dir, '..', 'data', 'master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx'))
+chart_dir = os.path.abspath(os.path.join(script_dir, '..', 'grafik'))
+os.makedirs(chart_dir, exist_ok=True)
 df_all = pd.read_excel(excel_path, sheet_name='Rincian_Jalur_Semua_Tahun')
 
 # Consistent Brand Colors for Jalur

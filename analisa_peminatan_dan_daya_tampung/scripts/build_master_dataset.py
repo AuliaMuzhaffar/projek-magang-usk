@@ -80,7 +80,7 @@ def calculate_cagr(start_val, end_val, periods=4):
 
 def main():
     base_dir = "/Users/auliamuzhaffar/Documents/maganghub"
-    file_old = os.path.join(base_dir, "tugas-5", "rekap data.xlsx")
+    file_old = os.path.join(base_dir, "tugas-5", "rekap data (fix).xlsx")
     file_2026 = os.path.join(base_dir, "DAYA_TAMPUNG_2026_2027 GANJIL_MAGANG.xlsx")
     out_dir = os.path.join(base_dir, "tugas-5", "analisa_peminatan_dan_daya_tampung", "data")
     os.makedirs(out_dir, exist_ok=True)
@@ -115,35 +115,35 @@ def main():
 
         fakultas, klaster = get_fakultas_and_klaster(kd_prodi, nm_prodi, jenjang)
 
-        # ---------------- 2022 ----------------
+        # ---------------- 2022 (Col 4 - 23 in rekap data (fix)) ----------------
         pm_22 = float(r_old[19]) if r_old[19] is not None else 0.0
-        dt_22 = float(r_old[20]) if r_old[20] is not None else 0.0
+        dt_22 = float(r_old[22]) if r_old[22] is not None else 0.0
         la_22 = (float(r_old[6] or 0) + float(r_old[11] or 0) + float(r_old[16] or 0))
         du_22 = (float(r_old[7] or 0) + float(r_old[12] or 0) + float(r_old[17] or 0))
 
-        # ---------------- 2023 ----------------
-        pm_23 = float(r_old[36]) if r_old[36] is not None else 0.0
-        dt_23 = float(r_old[37]) if r_old[37] is not None else 0.0
-        la_23 = (float(r_old[24] or 0) + float(r_old[29] or 0) + float(r_old[33] or 0))
-        du_23 = (float(r_old[25] or 0) + float(r_old[30] or 0) + float(r_old[34] or 0))
+        # ---------------- 2023 (Col 24 - 43 in rekap data (fix)) ----------------
+        pm_23 = float(r_old[38]) if r_old[38] is not None else 0.0
+        dt_23 = float(r_old[41]) if r_old[41] is not None else 0.0
+        la_23 = (float(r_old[26] or 0) + float(r_old[31] or 0) + float(r_old[35] or 0))
+        du_23 = (float(r_old[27] or 0) + float(r_old[32] or 0) + float(r_old[36] or 0))
 
-        # ---------------- 2024 ----------------
-        pm_24 = float(r_old[60]) if r_old[60] is not None else 0.0
-        dt_24 = float(r_old[61]) if r_old[61] is not None else 0.0
-        la_24 = (float(r_old[41] or 0) + float(r_old[45] or 0) + float(r_old[49] or 0) + float(r_old[53] or 0) + float(r_old[56] or 0) + float(r_old[58] or 0))
-        du_24 = (float(r_old[42] or 0) + float(r_old[46] or 0) + float(r_old[50] or 0) + float(r_old[54] or 0) + float(r_old[57] or 0) + float(r_old[59] or 0))
+        # ---------------- 2024 (Col 44 - 69 in rekap data (fix)) ----------------
+        pm_24 = float(r_old[64]) if r_old[64] is not None else 0.0
+        dt_24 = float(r_old[65]) if r_old[65] is not None else 0.0
+        la_24 = (float(r_old[45] or 0) + float(r_old[49] or 0) + float(r_old[53] or 0) + float(r_old[57] or 0) + float(r_old[60] or 0) + float(r_old[62] or 0))
+        du_24 = (float(r_old[46] or 0) + float(r_old[50] or 0) + float(r_old[54] or 0) + float(r_old[58] or 0) + float(r_old[61] or 0) + float(r_old[63] or 0))
 
-        # ---------------- 2025 ----------------
-        pm_25 = float(r_old[87]) if r_old[87] is not None else 0.0
-        dt_25 = float(r_old[88]) if r_old[88] is not None else 0.0
-        la_25 = (float(r_old[65] or 0) + float(r_old[69] or 0) + float(r_old[73] or 0) + float(r_old[77] or 0) + float(r_old[81] or 0) + float(r_old[84] or 0))
-        du_25 = (float(r_old[66] or 0) + float(r_old[70] or 0) + float(r_old[74] or 0) + float(r_old[78] or 0) + float(r_old[82] or 0) + float(r_old[85] or 0))
+        # ---------------- 2025 (Col 70 - 98 in rekap data (fix)) ----------------
+        pm_25 = float(r_old[93]) if r_old[93] is not None else 0.0
+        dt_25 = float(r_old[96]) if r_old[96] is not None else 0.0
+        la_25 = (float(r_old[71] or 0) + float(r_old[75] or 0) + float(r_old[79] or 0) + float(r_old[83] or 0) + float(r_old[87] or 0) + float(r_old[90] or 0))
+        du_25 = (float(r_old[72] or 0) + float(r_old[76] or 0) + float(r_old[80] or 0) + float(r_old[84] or 0) + float(r_old[88] or 0) + float(r_old[91] or 0))
 
-        # ---------------- 2026 ----------------
-        pm_26 = float(r_26[79]) if r_26[79] is not None else 0.0
-        dt_26 = float(r_26[78]) if r_26[78] is not None else 0.0
-        la_26 = float(r_26[80]) if r_26[80] is not None else 0.0
-        du_26 = float(r_26[77]) if r_26[77] is not None else 0.0
+        # ---------------- 2026 (Col 99 - 127 in rekap data (fix)) ----------------
+        pm_26 = float(r_old[122]) if r_old[122] is not None else 0.0
+        dt_26 = float(r_old[125]) if r_old[125] is not None else 0.0
+        la_26 = (float(r_old[100] or 0) + float(r_old[104] or 0) + float(r_old[108] or 0) + float(r_old[112] or 0) + float(r_old[116] or 0) + float(r_old[119] or 0))
+        du_26 = (float(r_old[101] or 0) + float(r_old[105] or 0) + float(r_old[109] or 0) + float(r_old[113] or 0) + float(r_old[117] or 0) + float(r_old[120] or 0))
 
         # Helper to construct clean pathway record
         def make_jalur_row(yr, j_std, j_asli, j_pm, j_dt, j_la, j_du):
@@ -179,9 +179,9 @@ def main():
 
         # 2. Jalur 2023 (SNBP, SNBT, SMMPTN)
         j_2023_list = [
-            ("SNBP", "SNBP", float(r_old[22] or 0), float(r_old[23] or 0), float(r_old[24] or 0), float(r_old[25] or 0)),
-            ("SNBT", "SNBT", float(r_old[27] or 0), float(r_old[28] or 0), float(r_old[29] or 0), float(r_old[30] or 0)),
-            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[32] or 0), float(r_old[33] or 0), float(r_old[34] or 0))
+            ("SNBP", "SNBP", float(r_old[24] or 0), float(r_old[25] or 0), float(r_old[26] or 0), float(r_old[27] or 0)),
+            ("SNBT", "SNBT", float(r_old[29] or 0), float(r_old[30] or 0), float(r_old[31] or 0), float(r_old[32] or 0)),
+            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[34] or 0), float(r_old[35] or 0), float(r_old[36] or 0))
         ]
         for j_std, j_asli, pm, dt, la, du in j_2023_list:
             row_dict = make_jalur_row(2023, j_std, j_asli, pm, dt, la, du)
@@ -190,12 +190,12 @@ def main():
 
         # 3. Jalur 2024 (SNBP, SNBT, SMMPTN, TALENTA, SMC, ADIK)
         j_2024_list = [
-            ("SNBP", "SNBP", 0.0, float(r_old[40] or 0), float(r_old[41] or 0), float(r_old[42] or 0)),
-            ("SNBT", "SNBT", 0.0, float(r_old[44] or 0), float(r_old[45] or 0), float(r_old[46] or 0)),
-            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[48] or 0), float(r_old[49] or 0), float(r_old[50] or 0)),
-            ("TALENTA", "TALENTA USK", 0.0, float(r_old[52] or 0), float(r_old[53] or 0), float(r_old[54] or 0)),
-            ("SMC", "SELEKSI MANDIRI CADANGAN", 0.0, 0.0, float(r_old[56] or 0), float(r_old[57] or 0)),
-            ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, float(r_old[58] or 0), float(r_old[59] or 0))
+            ("SNBP", "SNBP", 0.0, float(r_old[44] or 0), float(r_old[45] or 0), float(r_old[46] or 0)),
+            ("SNBT", "SNBT", 0.0, float(r_old[48] or 0), float(r_old[49] or 0), float(r_old[50] or 0)),
+            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[52] or 0), float(r_old[53] or 0), float(r_old[54] or 0)),
+            ("TALENTA", "TALENTA USK", 0.0, float(r_old[56] or 0), float(r_old[57] or 0), float(r_old[58] or 0)),
+            ("SMC", "SELEKSI MANDIRI CADANGAN", 0.0, 0.0, float(r_old[60] or 0), float(r_old[61] or 0)),
+            ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, float(r_old[62] or 0), float(r_old[63] or 0))
         ]
         for j_std, j_asli, pm, dt, la, du in j_2024_list:
             row_dict = make_jalur_row(2024, j_std, j_asli, pm, dt, la, du)
@@ -204,51 +204,53 @@ def main():
 
         # 4. Jalur 2025 (SNBP, SNBT, SMMPTN, TALENTA, SMC, ADIK)
         j_2025_list = [
-            ("SNBP", "SNBP", 0.0, float(r_old[64] or 0), float(r_old[65] or 0), float(r_old[66] or 0)),
-            ("SNBT", "SNBT", 0.0, float(r_old[68] or 0), float(r_old[69] or 0), float(r_old[70] or 0)),
-            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[72] or 0), float(r_old[73] or 0), float(r_old[74] or 0)),
-            ("TALENTA", "TALENTA USK", 0.0, float(r_old[76] or 0), float(r_old[77] or 0), float(r_old[78] or 0)),
-            ("SMC", "SELEKSI MANDIRI CADANGAN", 0.0, float(r_old[80] or 0), float(r_old[81] or 0), float(r_old[82] or 0)),
-            ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, float(r_old[84] or 0), float(r_old[85] or 0))
+            ("SNBP", "SNBP", 0.0, float(r_old[70] or 0), float(r_old[71] or 0), float(r_old[72] or 0)),
+            ("SNBT", "SNBT", 0.0, float(r_old[74] or 0), float(r_old[75] or 0), float(r_old[76] or 0)),
+            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[78] or 0), float(r_old[79] or 0), float(r_old[80] or 0)),
+            ("TALENTA", "TALENTA USK", 0.0, float(r_old[82] or 0), float(r_old[83] or 0), float(r_old[84] or 0)),
+            ("SMC", "SELEKSI MANDIRI CADANGAN", 0.0, float(r_old[86] or 0), float(r_old[87] or 0), float(r_old[88] or 0)),
+            ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, float(r_old[90] or 0), float(r_old[91] or 0))
         ]
         for j_std, j_asli, pm, dt, la, du in j_2025_list:
             row_dict = make_jalur_row(2025, j_std, j_asli, pm, dt, la, du)
             jalur_records_2025.append(row_dict)
             jalur_records_all.append(row_dict)
 
-        # 5. Jalur 2026 (SNBP, SNBT, SMMPTN, TALENTA, SMC, ADIK)
-        dt_snbp_26 = float(r_26[19] or 0)
+        # 5. Jalur 2026 (SNBP, SNBT, SMMPTN, TALENTA, SMC, ADIK from rekap data (fix))
+        dt_snbp_26 = float(r_old[99] or 0)
+        la_snbp_26 = float(r_old[100] or 0)
+        du_snbp_26 = float(r_old[101] or 0)
         pm_snbp_26 = float(r_26[22] or 0)
-        la_snbp_26 = float(r_26[23] or 0)
-        du_snbp_26 = float(r_26[33] or 0)
 
-        dt_snbt_26 = float(r_26[36] or 0)
+        dt_snbt_26 = float(r_old[103] or 0)
+        la_snbt_26 = float(r_old[104] or 0)
+        du_snbt_26 = float(r_old[105] or 0)
         pm_snbt_26 = float(r_26[37] or 0)
-        la_snbt_26 = float(r_26[38] or 0)
-        du_snbt_26 = float(r_26[42] or 0)
 
-        dt_smm_26 = float(r_26[46] or 0)
+        dt_smm_26 = float(r_old[107] or 0)
+        la_smm_26 = float(r_old[108] or 0)
+        du_smm_26 = float(r_old[109] or 0)
         pm_smm_26 = float(r_26[48] or 0)
-        la_smm_26 = float(r_26[49] or 0)
-        du_smm_26 = float(r_26[53] or 0)
 
+        dt_tal_26 = float(r_old[111] or 0)
+        la_tal_26 = float(r_old[112] or 0)
+        du_tal_26 = float(r_old[113] or 0)
         pm_tal_26 = float(r_26[56] or 0)
-        la_tal_26 = float(r_26[57] or 0)
-        du_tal_26 = float(r_26[62] or 0)
 
+        dt_smc_26 = float(r_old[115] or 0)
+        la_smc_26 = float(r_old[116] or 0)
+        du_smc_26 = float(r_old[117] or 0)
         pm_smc_26 = float(r_26[64] or 0)
-        la_smc_26 = float(r_26[65] or 0)
-        du_smc_26 = float(r_26[67] or 0)
 
-        la_adik_26 = float(r_26[74] or 0)
-        du_adik_26 = float(r_26[76] or 0)
+        la_adik_26 = float(r_old[119] or 0)
+        du_adik_26 = float(r_old[120] or 0)
 
         j_2026_list = [
             ("SNBP", "SNBP", pm_snbp_26, dt_snbp_26, la_snbp_26, du_snbp_26),
             ("SNBT", "SNBT", pm_snbt_26, dt_snbt_26, la_snbt_26, du_snbt_26),
             ("SMMPTN", "SMMPTN Barat", pm_smm_26, dt_smm_26, la_smm_26, du_smm_26),
-            ("TALENTA", "TALENTA USK", pm_tal_26, 0.0, la_tal_26, du_tal_26),
-            ("SMC", "SELEKSI MANDIRI CADANGAN", pm_smc_26, 0.0, la_smc_26, du_smc_26),
+            ("TALENTA", "TALENTA USK", pm_tal_26, dt_tal_26, la_tal_26, du_tal_26),
+            ("SMC", "SELEKSI MANDIRI CADANGAN", pm_smc_26, dt_smc_26, la_smc_26, du_smc_26),
             ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, la_adik_26, du_adik_26)
         ]
         for j_std, j_asli, pm, dt, la, du in j_2026_list:

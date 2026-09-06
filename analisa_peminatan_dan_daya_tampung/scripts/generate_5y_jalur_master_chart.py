@@ -7,8 +7,10 @@ plt.rcParams['font.sans-serif'] = 'DejaVu Sans'
 plt.rcParams['axes.edgecolor'] = '#94A3B8'
 plt.rcParams['axes.linewidth'] = 1.0
 
-excel_path = 'tugas-5/analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx'
-chart_dir = 'tugas-5/analisa_peminatan_dan_daya_tampung/grafik'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+excel_path = os.path.abspath(os.path.join(script_dir, '..', 'data', 'master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx'))
+chart_dir = os.path.abspath(os.path.join(script_dir, '..', 'grafik'))
+os.makedirs(chart_dir, exist_ok=True)
 df_all = pd.read_excel(excel_path, sheet_name='Rincian_Jalur_Semua_Tahun')
 
 years = [2022, 2023, 2024, 2025, 2026]
@@ -134,7 +136,7 @@ ax2.spines['right'].set_visible(False)
 ax2.legend(loc='lower left', frameon=True, fontsize=8.8, framealpha=0.92)
 
 # Callout for TALENTA collapse
-ax2.annotate('CRASH KONVERSI TALENTA:\n935 dari 1,238 Calon Mhs\nMengundurkan Diri (75.1% Bocor)',
+ax2.annotate('CRASH KONVERSI TALENTA:\n935 dari 1,238 Calon Mhs\nMengundurkan Diri (75.5% Bocor)',
              xy=(2026, 24.9), xytext=(2024.5, 34.0),
              arrowprops=dict(facecolor='#DC2626', edgecolor='#DC2626', shrink=0.08, width=1.5, headwidth=7),
              fontsize=8.5, fontweight='bold', color='#991B1B',
