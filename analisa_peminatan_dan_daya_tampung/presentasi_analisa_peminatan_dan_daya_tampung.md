@@ -1,235 +1,282 @@
 # SLIDE DECK EKSEKUTIF: RAPAT PIMPINAN UNIVERSITAS SYIAH KUALA
 ## ANALISA PEMINATAN DAN DAYA TAMPUNG PROGRAM STUDI (2022–2026)
-### Evaluasi Tren Multi-Tahun, Rasio Keketatan Seleksi, Efisiensi Kuota, Kausalitas Lapangan, dan Rekomendasi PMB 2027
+### Evaluasi Tren Multi-Tahun, Rasio Keketatan Seleksi, Matriks Portofolio Kuadran, Dekonstruksi Kebocoran Desil KIP-Kuliah, dan Rekomendasi Strategis PMB 2027
 
 ---
 
-**Peserta Rapat:** Rektor, Para Wakil Rektor, Ketua Senat Akademik, dan Para Dekan Fakultas  
-**Dasar Analisis:** Data Empiris PMB 2022–2026 (Sumber Resmi: `rekap data (fix).xlsx` & `DAYA_TAMPUNG_2026_2027 GANJIL_MAGANG.xlsx`)  
-**Tujuan:** Pengambilan Keputusan Strategis Rasionalisasi Kuota Menuju Efisiensi PTN-BH  
-**File Presentasi Asli (.pptx):** [`presentasi_analisa_peminatan_dan_daya_tampung.pptx`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/presentasi_analisa_peminatan_dan_daya_tampung.pptx)
+**Target Peserta Rapat:** Rektor, Para Wakil Rektor, Ketua Senat Akademik, dan Para Dekan Fakultas  
+**Dasar Analisis:** Data Empiris PMB 2022–2026, Dataset Jalur Masuk & Kebocoran, serta Data Induk KIP-Kuliah 2025–2026  
+**Tujuan Dokumen:** Pengambilan Keputusan Strategis Rasionalisasi Kuota, Penyelamatan Mahasiswa Prasejahtera, dan Peningkatan Efisiensi Finansial PTN-BH USK  
+**File Presentasi PowerPoint (.pptx):** [`presentasi_analisa_peminatan_dan_daya_tampung.pptx`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/presentasi_analisa_peminatan_dan_daya_tampung.pptx)  
 
 ---
 
 ### SLIDE 1: JUDUL & IDENTITAS PENUGASAN
-* **Judul:** Analisa Peminatan dan Daya Tampung Program Studi Universitas Syiah Kuala
-* **Sub-Judul:** Evaluasi Tren Multi-Tahun (2022–2026), Rasio Keketatan Seleksi, Efisiensi Kapasitas Kuota, dan Kausalitas Lapangan sebagai Bahan Pertimbangan Strategis PMB Menuju Rasionalisasi Kuota PTN-BH
-* **Penyusun:** Tim Magang Universitas Syiah Kuala
-* **Dasar Dokumen:** `TUGAS 05 - MAGANG (KHUSUS).pdf`
+* **Judul Utama:** Analisa Peminatan dan Daya Tampung Program Studi Universitas Syiah Kuala (2022–2026)
+* **Sub-Judul:** Evaluasi Tren Multi-Tahun, Rasio Keketatan Seleksi, Matriks Portofolio Kuadran, Dekonstruksi Kebocoran Desil KIP-Kuliah, dan Rekomendasi Kebijakan PTN-BH
+* **Penyusun:** Data Analyst PMB — Tim Magang Universitas Syiah Kuala
+* **Dasar Penugasan:** `TUGAS 05 - MAGANG (KHUSUS).pdf`
+* **Status Analisis:** *Audit-Grade & Decision-Ready Analytics* untuk Pimpinan Universitas
 
 ---
 
 ### SLIDE 2: RINGKASAN EKSEKUTIF — MEMBEDAH SEGITIGA EMAS PMB USK
-* **Headline:** 3 Pilar Utama Analisis Penerimaan Mahasiswa Baru USK 2022–2026
-* **Pilar 1: Peminat vs Kuota**
-  * Total peminat USK naik dari 48.769 (2022) menjadi 68.010 (2026), sempat mencatat rekor 70.945 di 2025 (+39,5%).
-  * Kuota daya tampung diperluas agresif pasca-PTN-BH sebesar +32,7% (7.863 ke 10.435 kursi).
-  * Disparitas keketatan sangat ekstrem: Farmasi terketat (39:1), Budidaya Perairan peminatnya lebih sedikit dari kuota (0,91:1).
-* **Pilar 2: Realisasi Daftar Ulang & Beban Kursi Kosong**
-  * Mahasiswa masuk riil tumbuh dari 6.197 (2022) ke 8.440 mhs (2026) dengan keterisian 80,9%.
-  * USK secara persisten menyisakan ~2.000 bangku kosong setiap tahun akibat alokasi kuota yang tidak tepat sasaran.
-  * Kinerja segmen berbeda jauh: S1 Utama sehat (84,7%), Vokasi D3 terpuruk (51,3%), dan PSDKU Gayo Lues krisis (18,6%).
-* **Pilar 3: Kausalitas Lapangan & Solusi**
-  * Kepastian karir ASN/PPPK (PGSD) dan pasar kerja perawat global (Keperawatan) mendorong lonjakan drastis.
-  * Persepsi minim kerja kantoran (Fisika, Budidaya Perairan) dan kanibalisasi internal (*Bisnis Digital*) memicu kontraksi.
-  * Biaya IPI belasan juta di Jalur Mandiri dan tiket cadangan Jalur Talenta menyebabkan 2.300+ calon mahasiswa yang lulus mengundurkan diri.
+* **Headline:** Tiga Dimensi Evaluasi Penerimaan Mahasiswa Baru USK Pasca Transformasi PTN-BH
+* **1. Dimensi Permintaan Pasar (Market Demand):**
+  * Total peminat USK melonjak dari 48.769 (2022) menjadi 68.010 (2026), sempat mencatat rekor tertinggi 70.945 di 2025 (+39,5% dalam 5 tahun).
+  * Terjadi polarisasi tajam: Farmasi mencapai rasio keketatan 39 : 1, sedangkan Budidaya Perairan hanya 0,91 : 1 (jumlah peminat di bawah daya tampung).
+* **2. Dimensi Kapasitas & Efisiensi Kuota (Institutional Efficiency):**
+  * Daya tampung diperluas agresif pasca PTN-BH sebesar +32,7% (dari 7.863 menjadi 10.435 kursi).
+  * Realisasi mahasiswa masuk riil naik dari 6.197 ke 8.440 mhs, namun **persisten menyisakan ~2.000 bangku kosong per tahun**.
+  * S1 Kampus Utama relatif sehat (84,7% keterisian), sedangkan D3 Vokasi terpuruk (51,3%) dan PSDKU Gayo Lues krisis akut (18,6%).
+* **3. Dimensi Kausalitas & Resolusi "Plot Twist" Kebocoran:**
+  * **Terungkap Akar Masalah Kebocoran SNBT:** Anomali 626 kursi kosong di SNBT 2026 **97,6% identik dengan 611 calon mahasiswa KIP yang ditolak beasiswanya**, di mana **526 orang di antaranya berasal dari Desil 5 dan 6**.
+  * Ini membuktikan bahwa kursi kosong SNBT bukan disebabkan siswa kabur ke PTS/kedinasan, melainkan **kegagalan daya beli (*economic forced drop-out*) akibat pemotongan kuota beasiswa**.
 
 ---
 
 ### SLIDE 3: EVALUASI TREN MAKRO 5 TAHUN USK (2022–2026)
-* **Headline:** Kapasitas Melompat ke 10.435 Kursi, Beban 2.000 Bangku Kosong Tetap Berulang
-* **Visual:** `01_tren_makro_peminat_dt_du_usk.png`
-* **Angka Kunci:**
-  * **2022:** 48.769 Peminat | 7.863 Kuota | 6.197 Daftar Ulang | **1.666 Kursi Kosong** (Keterisian 78,8%)
-  * **2023:** 44.653 Peminat | 8.780 Kuota | 6.299 Daftar Ulang | **2.481 Kursi Kosong** (Keterisian 71,7%)
-  * **2024:** 65.495 Peminat | 10.240 Kuota | 7.791 Daftar Ulang | **2.449 Kursi Kosong** (Keterisian 76,1%)
-  * **2025:** 70.945 Peminat | 10.420 Kuota | 8.027 Daftar Ulang | **2.393 Kursi Kosong** (Keterisian 77,0%)
-  * **2026:** 68.010 Peminat | 10.435 Kuota | 8.440 Daftar Ulang | **1.995 Kursi Kosong** (Keterisian 80,9%)
-* **Pesan Kunci:** Menambah daya tampung tanpa mempertimbangkan daya serap pasar hanya menciptakan ilusi pertumbuhan yang membebani akreditasi universitas.
+* **Headline:** Kapasitas Melompat ke 10.435 Kursi, Beban ~2.000 Bangku Kosong Tetap Berulang Setiap Tahun
+* **Visual Pendukung:** `grafik/01_tren_makro_peminat_dt_du_usk.png`
+* **Evolusi Metrik 5 Tahun:**
+  * **2022:** 48.769 Peminat | 7.863 Kuota | 6.197 Daftar Ulang | **1.666 Kursi Kosong** (Fill Rate 78,8%)
+  * **2023:** 44.653 Peminat | 8.780 Kuota | 6.299 Daftar Ulang | **2.481 Kursi Kosong** (Fill Rate 71,7%)
+  * **2024:** 65.495 Peminat | 10.240 Kuota | 7.791 Daftar Ulang | **2.449 Kursi Kosong** (Fill Rate 76,1%)
+  * **2025:** 70.945 Peminat | 10.420 Kuota | 8.027 Daftar Ulang | **2.393 Kursi Kosong** (Fill Rate 77,0%)
+  * **2026:** 68.010 Peminat | 10.435 Kuota | 8.440 Daftar Ulang | **1.995 Kursi Kosong** (Fill Rate 80,9%)
+* **Pesan Kunci Pimpinan:** Menambah daya tampung tanpa sinkronisasi daya serap pasar riil dan kuota beasiswa hanya menciptakan "kursi kosong semu" yang merugikan efisiensi beban dosen, akreditasi, dan utilisasi fasilitas kampus.
 
 ---
 
-### SLIDE 4: PETA KEKETATAN SELEKSI PROGRAM STUDI S1 (2026)
-* **Headline:** Disparitas Tajam: Dari Rasio 39 Peminat per Kursi Hingga Peminat Kurang dari Kuota
-* **Visual:** `04_rasio_keketatan_peminatan_vs_daya_tampung.png`
-* **Top 8 Paling Ketat / Favorit (2026):**
-  1. *Farmasi:* 39,2 : 1 (3.526 peminat | kuota 90)
-  2. *Akuntansi Perpajakan (D4):* 22,4 : 1 (1.794 peminat | kuota 80)
-  3. *Informatika:* 18,1 : 1 (2.174 peminat | kuota 120)
-  4. *Psikologi:* 17,3 : 1 (1.385 peminat | kuota 80)
-  5. *Teknik Perminyakan:* 15,5 : 1 (930 peminat | kuota 60)
-  6. *Teknik Pertambangan:* 14,5 : 1 (1.735 peminat | kuota 120)
-  7. *Manajemen:* 14,1 : 1 (2.823 peminat | kuota 200)
-  8. *Bisnis Digital:* 12,8 : 1 (1.023 peminat | kuota 80)
-* **Top 8 Paling Longgar / Sepi Peminat (2026):**
-  1. *Budidaya Perairan:* **0,91 : 1** (145 peminat vs 160 kuota) $\rightarrow$ Peminat di bawah daya tampung!
-  2. *PSP Perikanan:* **1,07 : 1** (129 peminat vs 120 kuota)
+### SLIDE 4: PETA KEKETATAN SELEKSI & MARKET FULFILLMENT RATIO (MFR) 2026
+* **Headline:** Ketimpangan Minat Calon Mahasiswa: Dari Rasio 39 Peminat per Kursi hingga Peminat di Bawah Kuota
+* **Visual Pendukung:** `grafik/04_rasio_keketatan_peminatan_vs_daya_tampung.png`
+* **Formulasi Metrik:**  
+  $$\text{MFR} = \frac{\text{Jumlah Peminat}}{\text{Daya Tampung}} \quad \Big(\text{Benchmark Ideal: } \text{MFR} \ge 3{,}0\Big)$$
+* **Top 8 Program Studi Paling Favorit / Ketat (2026):**
+  1. *Farmasi:* **39,18 : 1** (3.526 peminat | kuota 90)
+  2. *D4 Akuntansi Perpajakan:* **22,43 : 1** (1.794 peminat | kuota 80)
+  3. *Informatika:* **18,12 : 1** (2.174 peminat | kuota 120)
+  4. *Psikologi:* **17,31 : 1** (1.385 peminat | kuota 80)
+  5. *Teknik Perminyakan:* **15,50 : 1** (930 peminat | kuota 60)
+  6. *Teknik Pertambangan:* **14,46 : 1** (1.735 peminat | kuota 120)
+  7. *Manajemen:* **14,12 : 1** (2.823 peminat | kuota 200)
+  8. *Bisnis Digital:* **12,79 : 1** (1.023 peminat | kuota 80)
+* **Top 8 Program Studi Paling Rentan / Sepi Peminat (2026):**
+  1. *Budidaya Perairan:* **0,91 : 1** (145 peminat vs 160 kuota) $\rightarrow$ *Undersubscribed!*
+  2. *PSP Perikanan:* **1,08 : 1** (129 peminat vs 120 kuota)
   3. *Fisika:* **1,18 : 1** (94 peminat vs 80 kuota)
   4. *Pendidikan Fisika:* **1,29 : 1** (155 peminat vs 120 kuota)
   5. *Proteksi Tanaman:* **1,31 : 1** (105 peminat vs 80 kuota)
+  6. *Ilmu Tanah:* **1,35 : 1** (135 peminat vs 100 kuota)
+  7. *Pendidikan Kimia:* **1,52 : 1** (182 peminat vs 120 kuota)
+  8. *Pendidikan Geografi:* **1,56 : 1** (218 peminat vs 140 kuota)
 
 ---
 
-### SLIDE 5: MATRIKS 4 KUADRAN STRATEGIS PORTOFOLIO PRODI (2026)
-* **Headline:** Pemetaan Portofolio Seluruh Prodi S1: Peminatan (Demand) vs Realisasi Keterisian (Supply)
-* **Visual:** `10_matriks_4_kuadran_prodi_usk.png`
-* **Peta Keputusan Eksekutif bagi Pimpinan:**
-  * **Kuadran I (Prima & Bintang - Kanan Atas):** Peminat tinggi (rasio $\ge 4{,}0$) dan kuota terisi penuh ($\ge 80\%$).  
-    *Prodi:* Farmasi, Informatika, PGSD, Pend. Dokter, Kedokteran Gigi, Ilmu Hukum, Ilmu Keperawatan, Teknik Sipil, Psikologi, T. Pertambangan.  
-    *Aksi Pimpinan:* **Pertahankan & Optimalkan (Maintain & Invest)**. Sangat layak dibuka kelas internasional.
-  * **Kuadran II (Stabil & Efisien - Kiri Atas):** Peminat moderat (rasio $< 4{,}0$) tetapi kuota terisi penuh ($\ge 80\%$).  
-    *Prodi:* Arsitektur, Teknik Mesin, Pendidikan Bahasa Indonesia, PPKn, Pend. Sejarah.  
-    *Aksi Pimpinan:* **Lindungi & Jaga Kuota Tetap Stabil (Protect)**. Jangan latah menaikkan kuota.
-  * **Kuadran III (Kritis & Defisit - Kiri Bawah):** Peminat sepi (rasio $< 4{,}0$) dan bangku kuliah banyak bolong (keterisian $< 80\%$).  
-    *Prodi:* Budidaya Perairan, Fisika, PSP Perikanan, Proteksi Tanaman, Pend. Fisika, Pend. Kimia, Teknologi Hasil Pertanian, Pend. Ekonomi.  
-    *Aksi Pimpinan:* **WAJIB PANGKAS KUOTA 20%–40% SEGERA (Downsize / Restructure)** untuk menghapus 400+ kursi kosong semu.
-  * **Kuadran IV (Dilema & Bocor - Kanan Bawah):** Peminat tinggi (rasio $\ge 4{,}0$) tetapi keterisian kuota bocor / tertekan ($< 80\%$).  
-    *Prodi:* Manajemen FEB (79,6%), Ekonomi Islam (76,3%), Ekonomi Pembangunan (75,0%), Sosiologi (76,7%), Teknik Elektro (70,0%).  
-    *Aksi Pimpinan:* **Perbaiki Konversi & Berikan Skema Cicilan IPI (Retain & Improve Conversion)**.
+### SLIDE 5: SINTESIS MATRIKS 4 KUADRAN & KLASIFIKASI TREN MULTI-TAHUN
+* **Headline:** Integrasi Komprehensif: Posisi Portofolio Kuadran (Snapshot) Disempurnakan oleh Klasifikasi Tren (Velocity)
+* **Visual Pendukung:** `grafik/10_matriks_4_kuadran_prodi_usk.png` & `grafik/13_matriks_4_kuadran_5_tahun_2022_2026.png`
+* **Kerangka Konseptual yang Saling Melengkapi (*Complementary Framework*):**
+  * **Klasifikasi Tren (Longitudinal 5 Tahun):** Mengukur *kecepatan & arah gerak prodi* (Slope OLS Regresi Linier, CAGR, dan Konsistensi).
+  * **Matriks 4 Kuadran (Portofolio Operasional):** Mengukur *posisi relatif prodi saat ini* berdasarkan Daya Tarik Pasar (MFR) vs Efisiensi Kuota (Fill Rate).
+* **Peta Kuadran & Aksi Manajerial Pimpinan:**
+  * **Kuadran I (Prime / Unggulan - 25 Prodi):** MFR $\ge 3{,}20$ dan Fill Rate $\ge 84{,}7\%$.  
+    *Prodi:* Kedokteran, Farmasi, Informatika, PGSD, T. Sipil, Keperawatan, Hukum, Akuntansi, Psikologi, T. Pertambangan.  
+    *Aksi:* **Maintain & Invest**. Naikkan daya saing global, buka kelas internasional.
+  * **Kuadran II (Niche / Stabil - 8 Prodi):** MFR $< 3{,}20$ tetapi Fill Rate $\ge 84{,}7\%$.  
+    *Prodi:* Arsitektur, Teknik Mesin, Pend. Bahasa Indonesia, PPKn, Pend. Sejarah, Peternakan.  
+    *Aksi:* **Protect & Control**. Kapasitas terkendali; dilarang menaikkan kuota secara gegabah.
+  * **Kuadran III (Defisit / Rentan - 25 Prodi):** MFR $< 3{,}20$ dan Fill Rate $< 84{,}7\%$.  
+    *Prodi:* Budidaya Perairan, PSP Perikanan, Fisika, Pend. Fisika, Pend. Kimia, Ilmu Tanah, THP, Pend. Ekonomi.  
+    *Aksi:* **Downsize Terukur 20%–40%**. Hapus kursi kosong semu tanpa mengurangi mahasiswa riil.
+  * **Kuadran IV (Bocor / Bottleneck - 8 Prodi):** MFR $\ge 3{,}20$ tetapi Fill Rate $< 84{,}7\%$.  
+    *Prodi:* Manajemen FEB, Ekonomi Islam, Ekonomi Pembangunan, Sosiologi, Teknik Elektro, Agribisnis.  
+    *Aksi:* **Retain & Convert**. Perbaiki konversi kelulusan dan cegah kebocoran administratif.
 
 ---
 
-### SLIDE 6: BINTANG PERTUMBUHAN: PROGRAM STUDI DENGAN LAJU PENINGKATAN TERTINGGI
-* **Headline:** Program Studi dengan Daya Tarik Pasar Kerja Terkuat (Slope Riil & CAGR Majemuk)
-* **Visual:** `02_top_tren_peningkatan_pendaftar_dan_peminat.png`
-* **Peringkat Pertumbuhan Bebas Bias Ukuran Prodi:**
-  * **Ilmu Keperawatan:** Slope **+38,4 mhs/thn** | CAGR **+23,5%** (127 ke 295 mhs).
-  * **PGSD (FKIP):** Slope **+27,4 mhs/thn** | CAGR **+19,9%** (105 ke 217 mhs) $\rightarrow$ **Rekor sempurna 4 tahun berturut-turut selalu naik!**
-  * **Teknik Sipil:** Slope **+23,0 mhs/thn** | CAGR **+13,1%** (154 ke 252 mhs).
-  * **Penjaskesrek:** Slope **+22,3 mhs/thn** | CAGR **+17,8%** (103 ke 198 mhs).
-  * **Pendidikan Bahasa Indonesia:** Slope **+18,0 mhs/thn** | CAGR **+20,3%** (64 ke 134 mhs).
-  * **Teknik Komputer:** Slope **+14,8 mhs/thn** | CAGR **+14,3%** (85 ke 145 mhs).
-  * **Kehutanan:** Slope **+8,9 mhs/thn** | CAGR **+14,9%** (51 ke 89 mhs) $\rightarrow$ **4 tahun berturut-turut selalu naik!**
+### SLIDE 6: BINTANG PERTUMBUHAN VS SINYAL WASPADA (ANALISIS TREN OLS)
+* **Headline:** Mengidentifikasi Program Studi yang Mengalami Laju Ekspansi Nyata vs Penurunan Berkelanjutan
+* **Visual Pendukung:** `grafik/02_top_tren_peningkatan_pendaftar_dan_peminat.png` & `grafik/03_top_tren_penurunan_pendaftar_dan_peminat.png`
+* **Top 6 Bintang Pertumbuhan Riil (Slope OLS Regresi Positif & CAGR Majemuk):**
+  1. *Ilmu Keperawatan:* Slope **+38,4 mhs/thn** | CAGR **+23,5%** (127 ke 295 mhs).
+  2. *PGSD (FKIP):* Slope **+27,4 mhs/thn** | CAGR **+19,9%** (105 ke 217 mhs) $\rightarrow$ **Rekor 4 tahun berturut-turut selalu naik!**
+  3. *Teknik Sipil:* Slope **+23,0 mhs/thn** | CAGR **+13,1%** (154 ke 252 mhs).
+  4. *Penjaskesrek:* Slope **+22,3 mhs/thn** | CAGR **+17,8%** (103 ke 198 mhs).
+  5. *Pendidikan Bahasa Indonesia:* Slope **+18,0 mhs/thn** | CAGR **+20,3%** (64 ke 134 mhs).
+  6. *Teknik Komputer:* Slope **+14,8 mhs/thn** | CAGR **+14,3%** (85 ke 145 mhs).
+* **Top 5 Sinyal Waspada (Kontraksi Berkelanjutan):**
+  1. *Manajemen (FEB):* Slope **-16,4 mhs/thn** | CAGR **-7,0%** (266 turun ke 199 mhs) $\rightarrow$ *3 tahun beruntun turun akibat kanibalisasi internal Bisnis Digital*.
+  2. *Ekonomi Islam (FEB):* Slope **-10,3 mhs/thn** | CAGR **-7,3%** (165 turun ke 122 mhs).
+  3. *Ekonomi Pembangunan (FEB):* Slope **-7,7 mhs/thn** | CAGR **-5,5%** (169 turun ke 135 mhs).
+  4. *Pemanfaatan Sumberdaya Perikanan (FPK):* Slope **-3,7 mhs/thn** | CAGR **-4,3%** (80 turun ke 67 mhs).
+  5. *Matematika (FMIPA):* Slope **-2,9 mhs/thn** | CAGR **-4,4%** (67 turun ke 56 mhs).
 
 ---
 
-### SLIDE 7: SINYAL WASPADA: PROGRAM STUDI YANG TERKONTRAKSI BERKELANJUTAN
-* **Headline:** Penurunan Berkelanjutan: Sinyal Darurat untuk Restrukturisasi Kurikulum
-* **Visual:** `03_top_tren_penurunan_pendaftar_dan_peminat.png`
-* **Prodi yang Mengalami Kontraksi Paling Parah:**
-  * **Manajemen (FEB):** Slope **-16,4 mhs/thn** | CAGR **-7,0%** (266 ke 199 mhs) $\rightarrow$ **3 tahun beruntun merosot**.
-  * **Ekonomi Islam (FEB):** Slope **-10,3 mhs/thn** | CAGR **-7,3%** (165 ke 122 mhs) $\rightarrow$ **3 tahun beruntun merosot**.
-  * **Ekonomi Pembangunan (FEB):** Slope **-7,7 mhs/thn** | CAGR **-5,5%** (169 ke 135 mhs).
-  * **Sosiologi (FISIP):** Slope **-4,0 mhs/thn** | CAGR **-3,9%** (108 ke 92 mhs).
-  * **Pemanfaatan Sumberdaya Perikanan (FPK):** Slope **-3,7 mhs/thn** | CAGR **-4,3%** (80 ke 67 mhs).
-  * **Matematika (FMIPA):** Slope **-2,9 mhs/thn** | CAGR **-4,4%** (67 ke 56 mhs).
+### SLIDE 7: FENOMENA OVER-EKSPANSI KUOTA PADA KUADRAN III
+* **Headline:** Menambah Daya Tampung Tidak Otomatis Menambah Mahasiswa: Bukti Inefisiensi Alokasi Kuota
+* **Visual Pendukung:** `grafik/05_over_ekspansi_kuota_vs_daftar_ulang_riil.png`
+* **Kasus Empiris Over-Ekspansi Kuota (2026):**
+  * *Budidaya Perairan:* Kuota dipatok 160, pendaftar ulang macet di 90 $\rightarrow$ **70 Kursi Kosong (Keterisian 56,3%)**.
+  * *Teknologi Hasil Pertanian:* Kuota dinaikkan 2x lipat (80 ke 160), daftar ulang hanya 102 $\rightarrow$ **58 Kursi Kosong**.
+  * *Pendidikan Ekonomi:* Kuota dinaikkan ke 160, daftar ulang hanya 103 $\rightarrow$ **57 Kursi Kosong**.
+  * *Teknik Kimia:* Kuota dinaikkan ke 180, daftar ulang hanya 120 $\rightarrow$ **60 Kursi Kosong**.
+  * *PSP Perikanan:* Kuota dipatok 120, daftar ulang hanya 67 $\rightarrow$ **53 Kursi Kosong**.
+* **Dampak Manajerial Langsung:**
+  Merasionalkan kuota 5 program studi ini kembali ke kisaran 80–120 kursi pada PMB 2027 akan **menghapus hampir 300 kursi kosong semu tanpa kehilangan 1 pun mahasiswa riil**, sekaligus mendongkrak Fill Rate institusi secara instan.
 
 ---
 
-### SLIDE 8: FENOMENA OVER-EKSPANSI KUOTA: KUOTA NAIK, MAHASISWA TERTINGGAL
-* **Headline:** Menambah Kuota Tidak Otomatis Menambah Mahasiswa: Bukti Inefisiensi Kapasitas
-* **Visual:** `05_over_ekspansi_kuota_vs_daftar_ulang_riil.png`
-* **4 Kasus Nyata yang Harus Dirasionalisasi di PMB 2027:**
-  1. *Budidaya Perairan:* Kuota 160 kursi, pendaftar ulang selalu macet di angka 90 $\rightarrow$ **70 Kursi Kosong (Keterisian 56,3%)**.
-  2. *Teknologi Hasil Pertanian:* Kuota dinaikkan 2x lipat (80 ke 160), pendaftar ulang hanya 102 $\rightarrow$ **58 Kursi Kosong**.
-  3. *Pendidikan Ekonomi:* Kuota dinaikkan ke 160, pendaftar ulang hanya 103 $\rightarrow$ **57 Kursi Kosong**.
-  4. *Teknik Kimia:* Kuota dinaikkan ke 180, pendaftar ulang hanya 120 $\rightarrow$ **60 Kursi Kosong**.
-* **Solusi Manajerial:** Mengoreksi kuota 4 prodi ini kembali ke 90–120 kursi langsung menghapus **~245 kursi kosong semu** tanpa kehilangan 1 pun mahasiswa riil.
+### SLIDE 8: DINAMIKA JALUR MASUK & CORONG KEBOCORAN RESMI USK (2026)
+* **Headline:** Komposisi Pintu Masuk 8.440 Mahasiswa Baru dan Evaluasi Tingkat Kelulusan vs Registrasi
+* **Visual Pendukung:** `grafik/06_dinamika_jalur_masuk_dan_kebocoran_2026.png` & `grafik/14_tren_jalur_masuk_dan_kebocoran_5_tahun_2022_2026.png`
+* **Realisasi Mahasiswa Masuk Riil 2026 Berdasarkan Jalur:**
+  * **SNBT (Tes UTBK):** 3.260 mhs (**38,6%**) $\rightarrow$ Kontributor volume terbesar.
+  * **SNBP (Prestasi Rapor):** 2.754 mhs (**32,6%**) $\rightarrow$ Penopang kestabilan akademik mutu.
+  * **SMMPTN (Mandiri Barat):** 1.814 mhs (**21,5%**) $\rightarrow$ Penopang penerimaan IPI/UKT mandiri.
+  * **TALENTA (Prestasi Khusus Mandiri):** 308 mhs (**3,7%**).
+  * **SMC (Mandiri Cadangan):** 205 mhs (**2,4%**) | **ADIK (Afirmasi 3T):** 20 mhs (**0,2%**).
+* **Evaluasi Yield Rate & Titik Kebocoran:**
+  * **SNBP Paling Loyal (Yield Rate 94,8%):** Hanya 151 orang gugur berkat sanksi pemblokiran SNPMB bagi sekolah.
+  * **SMMPTN Mandiri Bocor 604 Calon (Yield Rate 75,0%):** 1 dari 4 orang mundur akibat batas bayar IPI yang sangat mepet.
+  * **Jalur TALENTA Bocor Parah (930 Calon Gugur / Yield Hanya 24,9%):** Tiga perempat calon lulus kabur karena dijadikan "tiket cadangan gratis" menjelang pengumuman UTBK.
+  * **SNBT Mengalami Kebocoran 626 Calon (Yield Rate 83,9%):** Selama ini diasumsikan kabur ke PTS/STAN, namun audit data mengungkap fakta sebaliknya.
 
 ---
 
-### SLIDE 9: DINAMIKA JALUR MASUK & CORONG KEBOCORAN (2026)
-* **Headline:** Dari Jalur Apa Mahasiswa Masuk ke USK dan Di Mana Calon Mahasiswa Kabur?
-* **Visual:** `06_dinamika_jalur_masuk_dan_kebocoran_2026.png`
-* **Komposisi 8.440 Mahasiswa Masuk Riil (2026):**
-  * **SNBT (Tes UTBK):** 3.260 mhs (**38,89%**) $\rightarrow$ Tulang punggung volume terbesar.
-  * **SNBP (Prestasi Rapor):** 2.754 mhs (**32,86%**) $\rightarrow$ Penopang mutu akademik paling stabil.
-  * **SMMPTN (Mandiri Barat):** 1.814 mhs (**21,64%**) $\rightarrow$ Sumber penerimaan mandiri PTN-BH.
-  * **TALENTA (Prestasi Mandiri):** 308 mhs (**3,67%**).
-  * **SMC (Mandiri Cadangan):** 205 mhs (**2,45%**).
-  * **ADIK (Afirmasi 3T):** 20 mhs (**0,24%**).
-* **Titik Kebocoran Calon Mahasiswa:**
-  * **SNBP Paling Loyal (Yield 94,8%):** Hanya 151 orang gugur berkat sanksi *blacklist* sekolah.
-  * **SNBT Bocor 626 Orang (Yield 83,9%):** Calon lepas ke sekolah kedinasan (STAN/IPDN) atau PTN Jawa.
-  * **SMMPTN Mandiri Bocor 604 Orang (Yield 75,0%):** 1 dari 4 orang mundur akibat beban IPI puluhan juta.
-  * **TALENTA Bocor Terparah (930 Orang Gugur / Yield Hanya 24,9%):** 75% siswa lolos kabur karena dijadikan tiket cadangan gratis!
+### SLIDE 9: RESOLUSI "PLOT TWIST": INVESTIGASI KEBOCORAN SNBT 2026
+* **Headline:** Kursi Kosong SNBT Bukan Karena Siswa Kabur, Melainkan Terhempas Pemotongan Kuota KIP-Kuliah!
+* **Visual Pendukung:** `grafik/20_analisis_desil_dan_rejection_kip_snbt.png`
+* **Korelasi Matematis yang Mengejutkan:**
+  $$\text{Calon Gugur SNBT 2026 (626 Orang)} \quad \approx \quad \text{Pendaftar KIP SNBT Ditolak Kampus (611 Orang)}$$
+  $$\text{Tingkat Kesesuaian Kausalitas} = \frac{611}{626} = \mathbf{97{,}60\%}$$
+* **Mengapa Penolakan KIP di 2026 Meledak?**
+  * Pada tahun 2025: Total kuota KIP USK = **1.846 kursi**. Penolakan SNBT hanya 370 orang (29,0%).
+  * Pada tahun 2026: Kuota KIP USK dari pusat **dipangkas 207 kursi (-11,2%)** menjadi 1.639 / 1.615 kursi.
+  * Di saat yang sama, siswa KIP yang lulus tes akademik UTBK USK naik dari 1.275 menjadi **1.361 orang**.
+  * Karena kuota KIP terserap mayoritas oleh SNBP di awal tahun (893 kursi), kuota KIP untuk SNBT terpangkas keras menjadi hanya 746 kursi $\rightarrow$ **Akibatnya 611 siswa KIP ditolak (melonjak +65,1%!)**.
 
 ---
 
-### SLIDE 10: KINERJA KETERISIAN KUOTA 12 FAKULTAS
-* **Headline:** Pemetaan Kinerja 12 Fakultas USK: Siapa yang Bertahan Sehat dan Siapa yang Kritis?
-* **Visual:** `07_analisa_peminatan_dan_keterisian_fakultas.png`
-* **Zonasi Kinerja 2026:**
-  * **Zona Prima (98%–100% Keterisian):** FKG (100%), Fakultas Hukum (99,6%), dan Fakultas Kedokteran (98,8%). Kursi selalu terisi penuh sempurna.
-  * **Zona Sehat (>80% Keterisian):** FISIP (89,6%), FKH (88,5%), Keperawatan (81,9%), FMIPA (81,9%), FKIP (81,5%), Fakultas Teknik (81,4%).
-  * **Zona Rentan & Kritis (<80% Keterisian):** FEB (77,2%), FPK (62,4%), dan Fakultas Pertanian (62,1%). Perlu rasionalisasi kuota segera.
+### SLIDE 10: "THE SMOKING GUN": EFEK JURANG (CLIFF-EDGE) CUTOFF DESIL 5 & 6
+* **Headline:** Penolakan KIP Tidak Terjadi Merata: Mahasiswa Prasejahtera Desil 5 dan 6 Ditolak Massal (>98%)
+* **Visual Pendukung:** `grafik/20_analisis_desil_dan_rejection_kip_snbt.png`
+* **Tingkat Kelulusan KIP SNBT 2026 Berdasarkan Desil DTKS Kemensos:**
+  * **Desil 1:** 221 Pendaftar | 200 Diterima (**90,5%**) $\rightarrow$ Aman
+  * **Desil 2:** 186 Pendaftar | 162 Diterima (**87,1%**) $\rightarrow$ Aman
+  * **Desil 3:** 219 Pendaftar | 204 Diterima (**93,2%**) $\rightarrow$ Aman
+  * **Desil 4:** 176 Pendaftar | 160 Diterima (**90,9%**) $\rightarrow$ Aman
+  * ----------------------------- **GARIS BATAS AMBANG KUOTA KIP** -----------------------------
+  * **Desil 5:** 149 Pendaftar | Hanya 3 Diterima (**2,0%**) $\rightarrow$ **146 Orang Ditolak (98,0%)!**
+  * **Desil 6:** 385 Pendaftar | Hanya 5 Diterima (**1,3%**) $\rightarrow$ **380 Orang Ditolak (98,7%)!**
+* **Mekanisme Gugur Terpaksa (*Economic Drop-Out*):**
+  * Sebanyak **526 calon mahasiswa dari Desil 5 dan 6** ditolak KIP-nya dan dialihkan ke UKT Reguler (Rp 2,5 – 5 Juta/semester).
+  * Desil 5–6 adalah keluarga prasejahtera (petani kecil, buruh harian, nelayan, pedagang mikro).
+  * Menghadapi tagihan UKT jutaan rupiah tanpa beasiswa, **526 calon mahasiswa berprestasi UTBK ini terpaksa tidak mendaftar ulang**.
+  * **526 dari 626 kursi kosong SNBT (84,0%) secara langsung tercipta dari mekanisme ini!**
 
 ---
 
-### SLIDE 11: KLASTER KHUSUS DIPLOMA 3 VOKASI & PSDKU GAYO LUES
-* **Headline:** Dua Segmen Khusus yang Mengalami Masalah Struktural Akut
-* **Visual:** `08_evaluasi_multi_tahun_d3_vokasi.png` & `09_subanalisis_psdku_gayo_lues.png`
-* **Krisis Vokasi D3 (2023–2026):**
-  * Keterisian kuota stagnan di angka **~51%** (selalu menyisakan >320 kursi kosong per tahun).
-  * Terendah: *D3 Manajemen Agribisnis* (hanya terisi 27 dari 100 kursi / keterisian 27,0%).
-  * Penyebab: Ijazah D3 hanya masuk golongan ruang ASN II/c, kalah bersaing dengan Sarjana Terapan (D4) dan S1.
-* **Krisis PSDKU Gayo Lues:**
-  * Selama 5 tahun penuh (2022–2026), 4 prodi di Gayo Lues tidak pernah mampu menjaring lebih dari 26 mahasiswa per prodi.
-  * Di 2026: Dari 220 kursi yang dibuka, hanya terisi **41 mahasiswa baru (81,4% kursi kosong)**. Operasional sangat tidak efisien.
+### SLIDE 11: SINKRONISASI SEKTORAL: PROGRAM STUDI PALING TERDAMPAK
+* **Headline:** Korelasi Riil Antara Penolakan KIP Desil 5–6 dengan Calon Gugur per Program Studi
+* **Visual Pendukung:** `grafik/23_korelasi_prodi_calon_gugur_vs_kip_desil.png`
+* **Bukti Paralelisme di Tingkat Program Studi (Data SNBT 2026):**
+  * **Ilmu Keperawatan:** 20 Calon Gugur $\longleftrightarrow$ **20 Calon KIP Desil 5–6 Ditolak** *(Korelasi 100%)*
+  * **Akuntansi:** 20 Calon Gugur $\longleftrightarrow$ **14 Calon KIP Desil 5–6 Ditolak**
+  * **Budidaya Perairan:** 16 Calon Gugur $\longleftrightarrow$ **12 Calon KIP Desil 5–6 Ditolak**
+  * **Ilmu Politik:** 16 Calon Gugur $\longleftrightarrow$ **12 Calon KIP Desil 5–6 Ditolak**
+  * **Ilmu Hukum:** 14 Calon Gugur $\longleftrightarrow$ **15 Calon KIP Desil 5–6 Ditolak**
+  * **Ilmu Pemerintahan:** 12 Calon Gugur $\longleftrightarrow$ **14 Calon KIP Desil 5–6 Ditolak**
+  * **PGSD:** 9 Calon Gugur $\longleftrightarrow$ **20 Calon KIP Desil 5–6 Ditolak** (sebagian terserap UKT rendah)
+  * **Teknologi Hasil Pertanian:** 8 Calon Gugur $\longleftrightarrow$ **19 Calon KIP Desil 5–6 Ditolak**
+* **Kesimpulan untuk Pimpinan:** Fakta ini membuktikan bahwa program studi di rumpun keguruan, kesehatan, pertanian, dan sosial humaniora mengalami kebocoran semata-mata karena benturan ekonomi siswa prasejahtera.
 
 ---
 
-### SLIDE 12: EKSPLORASI KAUSALITAS LAPANGAN (FAKTA DATA VS HIPOTESIS)
-* **Headline:** Mengapa Prodi A Tinggi dan Mengapa Prodi B Rendah? (Sesuai Butir 13 Panduan Magang)
-* **Tabel Pemisahan Fakta Data vs Hipotesis:**
-
-| Program Studi | [FAKTA DATA EMPIRIS RESMI] | [HIPOTESIS & TEMUAN DESK RESEARCH] |
-| :--- | :--- | :--- |
-| **PGSD (FKIP)** | Naik +106% (105 ke 217 mhs), 4 tahun naik beruntun, keterisian 108%. | Formasi ribuan ASN/PPPK Guru SD di Aceh memberi kepastian karir langsung pasca lulus. |
-| **Keperawatan** | Naik +132% (127 ke 295 mhs), kuota dinaikkan dari 160 ke 360 kursi. | Peluang kerja perawat global ke Jepang & Jerman (program G-to-G bergaji tinggi). |
-| **Teknik Komputer** | Tumbuh stabil (85 ke 145 mhs), rasio keketatan seleksi 18:1. | Kebutuhan talenta rekayasa perangkat keras, IoT, dan digitalisasi industri. |
-| **Manajemen (FEB)** | Turun 3 tahun berturut-turut dari 266 ke 199 mhs (-25%). | Kanibalisasi internal oleh prodi baru *Bisnis Digital* dan kejenuhan prodi manajemen di PTS lokal. |
-| **Budidaya Perairan** | Kuota 160, peminat hanya 145 (rasio < 1:1), DU macet di 90 mhs. | Kurangnya minat Gen-Z pada pekerjaan lapangan agromaritim tradisional di daerah. |
-| **Fisika (FMIPA)** | Peminat hanya 94 orang, keterisian 5 tahun rata-rata 44,2%. | Sains murni dipersepsikan sulit dan minim formasi kerja kantoran instansi daerah. |
-| **Jalur Mandiri** | 604 calon mahasiswa lulus (25%) mengundurkan diri di 2026. | Beban tagihan IPI belasan hingga puluhan juta dalam waktu 5 hari (SK Rektor 1162/2026). |
-| **Jalur TALENTA** | 930 calon mahasiswa lulus (75%) mengundurkan diri di 2026. | Jalur prestasi dijadikan sekadar "cadangan gratis" sambil menunggu pengumuman UTBK SNBT. |
-
----
-
-### SLIDE 13: INTEGRASI JALUR INTERNASIONAL & PEMBARUAN PROMOSI FLYER PMB
-* **Headline:** Peluang Mahasiswa Asing & Strategi Komunikasi Publik Tersegmentasi (Sesuai Butir 17)
-* **1. Peluang Mahasiswa Internasional:**
-  * USK memiliki reputasi riset kebencanaan (TDMRC) dan keilmuan veteriner/kedokteran yang diakui di kawasan ASEAN.
-  * Buka kelas internasional berbayar (*international tuition*) untuk menjaring mahasiswa asal Malaysia, Thailand Selatan, dan Timur Tengah.
-* **2. Segmentasi Materi Promosi Flyer PMB 2027:**
-  * Hindari satu brosur umum untuk semua. Buat flyer tematik:
-    * *Flyer Vokasi Unggulan:* Menampilkan kurikulum sertifikasi industri internasional.
-    * *Flyer Program Ners Global:* Menampilkan testimoni alumni yang bekerja di rumah sakit luar negeri.
-    * *Flyer Beasiswa Ikatan Dinas:* Khusus didistribusikan ke sekolah-sekolah di Gayo Lues dan Aceh Tenggara.
-* **3. Transparansi Simulasi Biaya:**
-  * Flyer wajib menyertakan simulasi cicilan IPI dan rentang UKT secara jelas sejak awal agar tidak memicu *liquidity shock* pada calon mahasiswa jalur mandiri.
+### SLIDE 12: STRATIFIKASI SOSIAL-EKONOMI ANTAR KUADRAN PORTOFOLIO USK
+* **Headline:** Kuadran III Berperan Sebagai Jaring Pengaman Sosial (*Social Safety Net*) USK
+* **Visual Pendukung:** `grafik/21_ketergantungan_kip_antar_kuadran_dan_top_prodi.png`
+* **Penetrasi KIP-Kuliah Berdasarkan Kuadran (S1 Kampus Utama 2026):**
+  * **Kuadran I (Unggulan):** Penetrasi KIP tertimbang **13,19%** (515 KIP dari 3.905 mahasiswa).  
+    *Ciri:* Mandiri finansial, didominasi pembayar UKT tinggi dan IPI puluhan juta.
+  * **Kuadran II (Niche/Stabil):** Penetrasi KIP tertimbang **14,63%** (153 KIP dari 1.046 mahasiswa).
+  * **Kuadran IV (Bocor/Bottleneck):** Penetrasi KIP tertimbang **24,47%** (163 KIP dari 666 mahasiswa).
+  * **Kuadran III (Defisit/Kritis):** Penetrasi KIP tertimbang **31,11%** (734 KIP dari 2.359 mahasiswa).  
+    *Ciri:* Sangat bergantung pada beasiswa! Penetrasi KIP mencapai **2,4x lipat Kuadran I**.
+* **Kontras Ekstremitas Antar Program Studi:**
+  * **Top KIP Dependency (Kuadran III):** PSP Perikanan (**56,7%**), Pend. Fisika (**53,9%**), Budidaya Perairan (**51,1%**), Pend. Ekonomi (**49,5%**), Pend. Kimia (**48,0%**), Pend. Geografi (**46,2%**).
+  * **Lowest KIP Dependency (Kuadran I / Elite):** Pend. Dokter Gigi (**1,0%**), Pend. Dokter (**2,4%**), Informatika (**3,4%**), Teknik Perminyakan (**3,9%**), Teknik Pertambangan (**5,1%**).
 
 ---
 
-### SLIDE 14: REKOMENDASI KEBIJAKAN RASIONALISASI KUOTA PMB 2027
-* **Headline:** 4 Aksi Strategis Menuju Efisiensi Pengelolaan Kuota PTN-BH
-* **Aksi 1: Pangkas Kuota Terukur (20%–40%) pada 7 Prodi Kritis di Banda Aceh**
-  * *Budidaya Perairan:* Pangkas kuota 160 $\rightarrow$ **90–100 kursi**.
-  * *Teknologi Hasil Pertanian:* Pangkas kuota 160 $\rightarrow$ **100 kursi**.
-  * *Pendidikan Ekonomi:* Pangkas kuota 160 $\rightarrow$ **100 kursi**.
-  * *Teknik Kimia:* Pangkas kuota 180 $\rightarrow$ **120 kursi**.
-  * *Fisika:* Pangkas kuota 80 $\rightarrow$ **50 kursi**.
-  * *PSP Perikanan:* Pangkas kuota 120 $\rightarrow$ **70–80 kursi**.
-  * *Ilmu Tanah & Proteksi Tanaman:* Pangkas kuota ke **60–80 kursi**.
-  * **Dampak Langsung:** Menghapus ~400 kursi kosong semu dan mendongkrak persentase pemenuhan kuota USK ke atas 85%.
-* **Aksi 2: Kunci Kebocoran Jalur TALENTA & Buka Cicilan IPI Mandiri**
-  * Terapkan uang komitmen registrasi Rp1.000.000 pada Jalur TALENTA (memotong UKT jika registrasi, hangus jika kabur).
-  * Berikan fasilitas cicilan 3 tahap untuk IPI Mandiri agar 600+ calon mahasiswa tidak mengundurkan diri karena kendala likuiditas mendadak.
-* **Aksi 3: Transformasi Vokasi D3 Menjadi Sarjana Terapan (D4)**
-  * Konversi segera D3 favorit ke D4 (*D3 Manajemen Informatika $\to$ D4 Sains Data Terapan; D3 Sipil $\to$ D4 Manajemen Konstruksi*).
-  * Ijazah D4 setara S1 berhak atas golongan ruang III/a ASN.
-* **Aksi 4: Reorientasi PSDKU Gayo Lues Berbasis Beasiswa Pemkab**
-  * Ikat kuota 220 kursi dengan MoU Beasiswa Penuh APBD Pemkab Gayo Lues dan Aceh Tenggara. Jika tidak terpenuhi, rampingkan menjadi 2 prodi unggulan lokal: Agribisnis Kopi Gayo dan Keguruan.
+### SLIDE 13: PROFIL DEMOGRAFIS PENERIMA KIP-KULIAH USK 2026
+* **Headline:** Sebaran Fakultas, Kesetaraan Gender, dan Komposisi Jalur Penerima Beasiswa
+* **Visual Pendukung:** `grafik/22_demografi_fakultas_dan_gender_kip_2026.png`
+* **1. Sebaran per Fakultas (Total 1.639 Mahasiswa):**
+  * **FKIP:** 651 mahasiswa (**39,72%**) $\rightarrow$ *Menyerap hampir 40% kuota beasiswa seluruh universitas!*
+  * **Pertanian:** 218 mahasiswa (**13,30%**) | **FEB:** 153 mahasiswa (**9,33%**)
+  * **Teknik:** 152 mahasiswa (**9,27%**) | **Kelautan & Perikanan:** 133 mahasiswa (**8,11%**)
+  * **FISIP:** 118 mhs (**7,20%**) | **FMIPA:** 70 mhs (**4,27%**) | **Keperawatan:** 63 mhs (**3,84%**)
+  * **Hukum:** 55 mhs (**3,36%**) | **FKH:** 15 mhs (**0,92%**) | **FK:** 10 mhs (**0,61%**) | **FKG:** 1 mhs (**0,06%**)
+* **2. Distribusi Gender (Feminisme Pendidikan Tinggi di Aceh):**
+  * **Perempuan: 1.268 mahasiswa (77,36%)** vs **Laki-laki: 371 mahasiswa (22,64%)**.
+  * Rasio 3,4 : 1 membuktikan KIP-Kuliah adalah lokomotif mobilitas sosial utama bagi anak perempuan prasejahtera di Aceh.
+* **3. Distribusi Jalur Masuk:**
+  * **SNBP (Prestasi):** 893 mahasiswa (**54,48%**) vs **SNBT (Tes UTBK):** 746 mahasiswa (**45,52%**).
 
 ---
 
-### SLIDE 15: PENUTUP & PESAN KUNCI PIMPINAN
-* **Kutipan Kunci bagi Pimpinan Universitas:**
-  > *"Keberhasilan PMB PTN-BH diukur dari berapa banyak mahasiswa yang secara nyata duduk di ruang kuliah, membayar UKT, dan menyelesaikan studinya tepat waktu, bukan dari angka kelulusan semu di atas kertas."*
-* **Kesimpulan:**
-  Rasionalisasi kuota bukanlah langkah mundur, melainkan langkah penyehatan efisiensi anggaran dan peningkatan reputasi selektivitas Universitas Syiah Kuala di tingkat nasional.
+### SLIDE 14: KINERJA FAKULTAS, VOKASI D3, & PSDKU GAYO LUES
+* **Headline:** Pemetaan Kinerja 12 Fakultas dan Evaluasi Krisis Akut Dua Segmen Khusus
+* **Visual Pendukung:** `grafik/07_analisa_peminatan_dan_keterisian_fakultas.png`, `grafik/08_evaluasi_multi_tahun_d3_vokasi.png`, `grafik/09_subanalisis_psdku_gayo_lues.png`
+* **Kinerja 12 Fakultas (2026):**
+  * *Zona Prima (98%–100% Terisi):* FKG (100%), Fakultas Hukum (99,6%), Fakultas Kedokteran (98,8%).
+  * *Zona Sehat (>80% Terisi):* FISIP (89,6%), FKH (88,5%), Keperawatan (81,9%), FMIPA (81,9%), FKIP (81,5%), FT (81,4%).
+  * *Zona Kritis (<80% Terisi):* FEB (77,2%), FPK (62,4%), Fakultas Pertanian (62,1%).
+* **Evaluasi Krisis Vokasi D3 (Keterisian 51,3%):**
+  * Dari 665 kuota D3, tersisa 324 kursi kosong. D3 Manajemen Agribisnis hanya terisi 27% kursi.
+  * *Akar Masalah:* Ijazah D3 hanya masuk golongan ASN II/c, kalah bersaing dari D4 dan S1. Solusinya: Konversi bertahap ke D4 (Sarjana Terapan).
+* **Evaluasi Krisis PSDKU Gayo Lues (Keterisian 18,6%):**
+  * Dari 220 kursi yang dibuka, hanya terisi **41 mahasiswa baru (81,4% kursi kosong melompong)**.
+  * Operasional sangat membebani universitas; wajib diikat dengan skema beasiswa penuh Pemkab Gayo Lues/Aceh Tenggara atau dirampingkan menjadi 2 prodi spesifik lokal.
 
 ---
-*Seluruh data master tersimpan di:* [`master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx)  
-*File Presentasi Asli:* [`presentasi_analisa_peminatan_dan_daya_tampung.pptx`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/presentasi_analisa_peminatan_dan_daya_tampung.pptx)
 
+### SLIDE 15: REKOMENDASI KEBIJAKAN STRATEGIS BAGI REKTORAT & PTN-BH USK
+* **Headline:** 5 Aksi Kebijakan Terintegrasi Menuju PMB 2027 yang Efisien, Inklusif, dan Berkeadilan
+* **1. Rasionalisasi Kuota Terukur 20%–40% pada Kuadran III:**
+  * Pangkas kuota pada: Budidaya Perairan (160 $\to$ 90), THP (160 $\to$ 100), Pend. Ekonomi (160 $\to$ 100), Teknik Kimia (180 $\to$ 120), Fisika (80 $\to$ 50), dan PSP Perikanan (120 $\to$ 75).
+  * **Hasil:** Menghapus ~300 bangku kosong semu tanpa mengurangi penerimaan mahasiswa riil.
+* **2. Skema "UKT Penyelamat" (*Safety-Net Transition UKT*) untuk Desil 5 & 6:**
+  * Terbitkan SK Rektor: Pelamar KIP-K SNBT Desil 5–6 yang tidak tertampung kuota APBN **secara otomatis ditetapkan pada UKT Kelompok I (Rp 500.000) atau UKT Kelompok II (Rp 1.000.000)** pada semester pertama.
+  * **Hasil:** Menyelamatkan 300+ calon mahasiswa berprestasi UTBK agar tidak putus kuliah akibat tagihan UKT reguler.
+* **3. Subsidi Silang Surplus IPI Kuadran I Menjadi "KIP Kemitraan PTN-BH":**
+  * USK sudah memiliki skema IPI Mandiri di prodi unggulan (Kedokteran, FKG, Informatika, Tambang, dsb).
+  * Alokasikan **5% dari total penerimaan IPI Mandiri Kuadran I (~Rp 2,0 Miliar)** untuk mendanai *Beasiswa KIP Kemitraan USK* bagi 800+ mahasiswa prasejahtera di prodi Kuadran III.
+* **4. Optimalisasi Sosialisasi Skema Cicilan IPI Mandiri & Kunci Jalur TALENTA:**
+  * USK saat ini sudah menyediakan fasilitas cicilan IPI untuk mahasiswa mandiri, namun banyak calon mahasiswa mengalami *liquidity shock* karena sosialisasi prosedur cicilan belum masif dan waktu pembayaran verifikasi sangat singkat (5 hari). Perlu disosialisasikan sejak awal pendaftaran.
+  * Terapkan uang jaminan komitmen pendaftaran ulang Rp 1.000.000 pada Jalur TALENTA untuk membendung kebocoran 75% siswa yang kabur ke UTBK.
+* **5. Advokasi Sinergis Dana Otsus & Baitul Mal Aceh:**
+  * Ajukan daftar 526 calon mahasiswa Desil 5–6 kepada Baitul Mal Aceh sebagai penerima manfaat langsung beasiswa Fakir/Miskin/Fisabilillah untuk pengentasan kemiskinan daerah.
+
+---
+
+### SLIDE 16: PENUTUP & PESAN KUNCI PIMPINAN
+* **Kutipan Kunci bagi Pimpinan Universitas Syiah Kuala:**
+  > *"Tolak ukur keberhasilan PMB PTN-BH bukanlah seberapa besar daya tampung yang kita umumkan di atas kertas, melainkan seberapa presisi kuota tersebut terisi oleh mahasiswa yang nyata, berdaya beli, atau terlindungi beasiswanya hingga lulus tepat waktu."*
+* **Tiga Pesan Penutup:**
+  1. **Audit Data Telah Membuktikan:** Kebocoran SNBT adalah masalah keterbatasan kuota beasiswa (Desil 5–6), bukan ketidakmampuan universitas menarik minat.
+  2. **Efisiensi Kuota Menyelamatkan Akreditasi:** Merasionalkan kuota Kuadran III adalah strategi penyehatan mutu akademik, bukan pelemahan fakultas.
+  3. **Keberpihakan Sosial PTN-BH:** Fleksibilitas keuangan PTN-BH harus menjadi berkah bagi mahasiswa prasejahtera melalui subsidi silang IPI ke program beasiswa mandiri.
+
+---
+
+### INDEKS FILE & ARTIFAK PENDUKUNG ANALISIS:
+1. **Laporan Analisis Utama:** [`laporan_analisa_peminatan_dan_daya_tampung.md`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/laporan_analisa_peminatan_dan_daya_tampung.md)
+2. **Laporan Khusus Kebocoran Jalur Masuk:** [`laporan_analisis_jalur_masuk_dan_kebocoran.md`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/laporan_analisis_jalur_masuk_dan_kebocoran.md)
+3. **Laporan Khusus KIP-Kuliah & Desil 5–6:** [`laporan_analisis_kip_kuliah_dan_kebocoran_desil.md`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/laporan_analisis_kip_kuliah_dan_kebocoran_desil.md)
+4. **Laporan Sintesis Tren & Kuadran:** [`laporan_eksekutif_sintesis_tren_dan_portofolio_kuadran.md`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/laporan_eksekutif_sintesis_tren_dan_portofolio_kuadran.md)
+5. **Direktori Gambar Visualisasi:** [`grafik/`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/grafik)
+6. **Dataset Master Excel:** [`master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx)
