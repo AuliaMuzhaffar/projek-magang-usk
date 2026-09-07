@@ -84,6 +84,8 @@ Untuk memahami ke mana 611 calon mahasiswa yang ditolak tersebut berasal, kita m
 | **Desil 6** | **385** | **5** | **380** | **1.30%** | **98.70%** | **62.19%** |
 | **TOTAL** | **1.361** | **750** | **611** | **55.11%** | **44.89%** | **100.00%** |
 
+![Investigasi Empiris Kebocoran Jalur SNBT dan Efek Jurang Desil KIP-Kuliah](grafik/20_analisis_desil_dan_rejection_kip_snbt.png)
+
 ```
 Tingkat Penerimaan KIP Berdasarkan Desil (SNBT 2026):
 Desil 1: [██████████████████░░] 90.5% Diterima
@@ -142,6 +144,8 @@ Di bawah ini adalah pemetaan 20 program studi di USK yang mengalami penolakan KI
 | **Pendidikan Dokter Hewan** | 92 | 84 | **8** | 19 | 9 | **10** | **10** |
 | **Pendidikan Sejarah** | 42 | 36 | **6** | 22 | 12 | **10** | **9** |
 
+![Sinkronisasi Data Kebocoran Program Studi dan Penolakan KIP-Kuliah USK SNBT 2026](grafik/23_korelasi_prodi_calon_gugur_vs_kip_desil.png)
+
 ### Analisis Kasus Spesifik:
 1. **Ilmu Keperawatan & PGSD:**
    Kedua prodi ini memiliki profil peminat yang luar biasa besar namun sangat sensitif terhadap biaya pendidikan. Di Keperawatan, terdapat 20 siswa gugur dan persis 20 siswa berasal dari Desil 5–6 yang ditolak KIP-nya. Di PGSD, 20 siswa Desil 5–6 ditolak KIP-nya, menyebabkan goncangan pengisian kursi.
@@ -165,6 +169,8 @@ Ketika data penerima KIP-Kuliah 2026 diintegrasikan ke dalam **Matriks 4 Kuadran
 | **Kuadran III (Defisit / Rentan)** | 25 | 2.359 | 734 | **32.92%** | **30.61%** | **31.11%** |
 | **Kuadran IV (Bocor / Bottleneck)** | 8 | 666 | 163 | **22.79%** | 19.78% | **24.47%** |
 | **TOTAL KAMPUS UTAMA** | **66** | **7.976** | **1.565** | **19.85%** | **17.50%** | **19.62%** |
+
+![Stratifikasi Sosial-Ekonomi Portofolio Program Studi USK 2026](grafik/21_ketergantungan_kip_antar_kuadran_dan_top_prodi.png)
 
 ```
 Perbandingan Ketergantungan KIP Antar Kuadran:
@@ -199,6 +205,8 @@ Kuadran III (Kritis)   : [███████████████░░░
 ## 6. PROFIL DEMOGRAFIS PENERIMA KIP-KULIAH USK 2026
 
 Berdasarkan analisis lembar kerja `KIP 2026` (1.639 mahasiswa penerima beasiswa):
+
+![Profil Demografis dan Sebaran Penerima KIP-Kuliah USK 2026](grafik/22_demografi_fakultas_dan_gender_kip_2026.png)
 
 ### 6.1. Distribusi per Fakultas
 
