@@ -1287,6 +1287,66 @@ Akibatnya, pada data master final:
 2. **Cut-off 100% Bersih:** Kebijakan seleksi KIP USK 2026 ternyata **sangat konsisten dan tegas**: kuota berhenti tepat di Desil 4. Semua pendaftar Desil 5 dan 6 (534 orang) ditolak beasiswanya tanpa terkecuali.
 3. **Data Final Mengunci Sempurna:** Tepat **746 mahasiswa diterima**, **615 ditolak**, dan **534 orang Desil 5 & 6 ditolak**.
 
+---
+
+## 24. REKAPITULASI DEFINITIF KIP-KULIAH TAHUN 2025 & MATRIKS TREN KOMPARATIF MULTI-TAHUN (2025 VS 2026)
+
+### A. Rekapitulasi Definitif KIP Kuliah 2025 (Master: DATA_KIP_2025-2026.xlsx Sheet 'KIP 2025')
+1. **Total Kuota Penerima Beasiswa KIP 2025:** **1.846 Mahasiswa**
+   * Jalur SNBP: **941 Mahasiswa** (51,0%)
+   * Jalur SNBT: **905 Mahasiswa** (49,0%)
+2. **Pendaftar KIP Lulus Seleksi Akademik SNBT 2025:** **1.275 Mahasiswa**
+3. **Hasil Seleksi KIP SNBT 2025 (Pencocokan No Ujian == KODE PESERTA):**
+   * **Diterima KIP:** **905 Mahasiswa** (100% Kuota SNBT Terpenuhi, Acceptance Rate: **70,98%**)
+   * **Ditolak KIP:** **370 Mahasiswa** (Rejection Rate: **29,02%**)
+4. **Karakteristik Data 2025:**
+   * Sheet draft `PENERIMA_KIP_FIX_2025` sudah memuat 1.846 baris lengkap dengan kolom `No Ujian`, identik 100% dengan Master KIP 2025.
+   * File pendaftar SNBT pusat 2025 belum menyertakan kolom Desil DTKS Kemensos. Penolakan 370 mahasiswa murni didasarkan pada alokasi kuota per program studi dan seleksi berkas administrasi.
+
+---
+
+### B. Matriks Perbandingan Tren KIP-Kuliah USK (2025 vs 2026)
+
+| Parameter Indikator | Realisasi 2025 | Realisasi 2026 | Perubahan / Delta ($\Delta$) | Makna Strategis & Analitis |
+| :--- | :---: | :---: | :---: | :--- |
+| **Total Kuota KIP (SK Rektor)** | **1.846** | **1.639** | **-207 kursi (-11,2%)** | Penurunan alokasi kuota beasiswa dari Puslapdik Kemendikbudristek |
+| - *Kuota Jalur SNBP* | 941 | 893 | -48 kursi (-5,1%) | Penyesuaian proporsi jalur prestasi |
+| - *Kuota Jalur SNBT* | 905 | 746 | **-159 kursi (-17,6%)** | Pemangkasan kuota tes tertulis cukup dalam |
+| **Pendaftar KIP Lolos UTBK SNBT** | **1.275** | **1.361** | **+86 mhs (+6,7%)** | Minat calon mahasiswa dari keluarga prasejahtera meningkat |
+| **Pendaftar SNBT Diterima KIP** | **905** | **746** | -159 mhs (-17,6%) | Terserap penuh sesuai kuota resmi kampus |
+| **Pendaftar SNBT Ditolak KIP** | **370** | **615** | **+245 mhs (+66,2%)** | **Lonjakan penolakan masif (efek ganda: peminat naik, kuota turun)** |
+| **Tingkat Penolakan (*Rejection Rate*)** | **29,02%** | **45,19%** | **+16,17% poin** | Peluang ditolak beasiswa meningkat drastis |
+| **Total Kursi Kosong Jalur SNBT** | **551 kursi** | **626 kursi** | **+75 kursi (+13,6%)** | Calon lulus SNBT yang batal registrasi ulang |
+| **Korelasi Penolakan KIP thd Kursi Kosong** | **67,15% (370/551)** | **98,24% (615/626)** | **+31,09% poin** | Di 2026 krisis kursi kosong nyaris 100% dipicu penolakan KIP |
+| **Penerapan Cut-off Desil** | Belum Ada (Tanpa Kolom Desil) | **Desil 5 & 6 (100% Ditolak)** | Cut-off Desil menyumbang **86,8% (534 orang)** dari penolakan 2026 |
+
+---
+
+### C. Sebaran Penolakan KIP SNBT 2025 per Fakultas
+* **FKIP:** 448 Pendaftar $\rightarrow$ 341 Diterima, **107 Ditolak (23,9%)**
+* **Teknik:** 157 Pendaftar $\rightarrow$ 101 Diterima, **56 Ditolak (35,7%)**
+* **Pertanian:** 157 Pendaftar $\rightarrow$ 112 Diterima, **45 Ditolak (28,7%)**
+* **Ekonomi & Bisnis:** 110 Pendaftar $\rightarrow$ 70 Diterima, **40 Ditolak (36,4%)**
+* **FISIP:** 83 Pendaftar $\rightarrow$ 57 Diterima, **26 Ditolak (31,3%)**
+* **FMIPA:** 90 Pendaftar $\rightarrow$ 65 Diterima, **25 Ditolak (27,8%)**
+* **Kelautan & Perikanan:** 101 Pendaftar $\rightarrow$ 79 Diterima, **22 Ditolak (21,8%)**
+* **Keperawatan:** 45 Pendaftar $\rightarrow$ 27 Diterima, **18 Ditolak (40,0%)**
+* **Kedokteran Hewan:** 20 Pendaftar $\rightarrow$ 7 Diterima, **13 Ditolak (65,0%)**
+* **PSDKU Gayo Lues:** 26 Pendaftar $\rightarrow$ 17 Diterima, **9 Ditolak (34,6%)**
+* **Hukum:** 36 Pendaftar $\rightarrow$ 27 Diterima, **9 Ditolak (25,0%)**
+* **Kedokteran:** 2 Pendaftar $\rightarrow$ 2 Diterima, **0 Ditolak (0,0%)**
+
+---
+
+### D. Top Program Studi dengan Penolakan KIP Tertinggi: 2025 vs 2026
+1. **Ilmu Keperawatan:** 18 Ditolak (40%) di 2025 $\rightarrow$ **22 Ditolak (47%) di 2026** (Konsisten menjadi episentrum krisis beban KIP).
+2. **Pendidikan Guru Sekolah Dasar (PGSD):** 12 Ditolak (32%) di 2025 $\rightarrow$ **22 Ditolak (47%) di 2026**.
+3. **Pendidikan Dokter Hewan:** 12 Ditolak (63%) di 2025 $\rightarrow$ Rejection rate sangat tinggi akibat kuota KIP yang sangat terbatas di FKH.
+4. **Teknologi Pangan / Hasil Pertanian:** 10 Ditolak di 2025 $\rightarrow$ **19 Ditolak (86%) di 2026**.
+5. **Budidaya Perairan:** 5 Ditolak di 2025 $\rightarrow$ **18 Ditolak (41%) di 2026**.
+6. **Ilmu Hukum:** 9 Ditolak (25%) di 2025 $\rightarrow$ **18 Ditolak (49%) di 2026**.
+
+
 
 
 

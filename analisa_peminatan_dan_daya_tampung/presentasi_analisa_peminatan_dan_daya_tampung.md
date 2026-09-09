@@ -146,7 +146,25 @@
 
 ---
 
-### SLIDE 9: RESOLUSI "PLOT TWIST": INVESTIGASI KEBOCORAN SNBT 2026
+### SLIDE 9: STUDI KOMPARASI MULTI-TAHUN KIP-KULIAH USK (2025 VS 2026)
+* **Headline:** Kontraksi Kuota Nasional (-11,2%) Memicu Lonjakan Penolakan Pendaftar SNBT (+66,2%)
+* **Visual Pendukung:** `grafik/24_komparasi_kuota_pendaftar_dan_rejection_2025_2026.png` & `grafik/26_tren_prodi_penolakan_kip_2025_vs_2026.png`
+* **Matriks Komparasi Dua Tahun (2025 vs 2026):**
+  * **Total Kuota KIP USK:** 1.846 kursi (2025) $\rightarrow$ **1.639 kursi (2026)** (Turun -207 kursi / -11,2%).
+  * **Alokasi Kuota KIP SNBT:** 905 kursi (2025) $\rightarrow$ **746 kursi (2026)** (Turun -159 kursi / -17,6%).
+  * **Pendaftar KIP Lolos Akademik SNBT:** 1.275 mhs (2025) $\rightarrow$ **1.361 mhs (2026)** (Naik +86 mhs / +6,7%).
+  * **Pendaftar Ditolak Beasiswa KIP:** 370 mhs (2025) $\rightarrow$ **615 mhs (2026)** (**Lonjakan +245 mhs / +66,2%!**).
+  * **Tingkat Penolakan KIP SNBT:** 29,0% (2025) $\rightarrow$ **45,2% (2026)** (Peluang penolakan naik +16,2% poin).
+* **Pergeseran Episentrum Program Studi Rentan:**
+  * *Ilmu Keperawatan:* 18 ditolak (40%) di 2025 $\rightarrow$ **22 ditolak (47%) di 2026**.
+  * *PGSD:* 12 ditolak (32%) di 2025 $\rightarrow$ **22 ditolak (47%) di 2026**.
+  * *Teknologi Hasil Pertanian:* 10 ditolak di 2025 $\rightarrow$ **19 ditolak (86%) di 2026**.
+  * *Budidaya Perairan:* 5 ditolak di 2025 $\rightarrow$ **18 ditolak (41%) di 2026**.
+  * *Ilmu Hukum:* 9 ditolak (25%) di 2025 $\rightarrow$ **18 ditolak (49%) di 2026**.
+
+---
+
+### SLIDE 10: RESOLUSI "PLOT TWIST": INVESTIGASI KEBOCORAN SNBT 2026
 * **Headline:** Kursi Kosong SNBT Bukan Karena Siswa Kabur, Melainkan Terhempas Pemotongan Kuota KIP-Kuliah!
 * **Visual Pendukung:** `grafik/20_analisis_desil_dan_rejection_kip_snbt.png`
 * **Korelasi Matematis yang Mengejutkan:**
@@ -160,7 +178,7 @@
 
 ---
 
-### SLIDE 10: "THE SMOKING GUN": EFEK JURANG (CLIFF-EDGE) CUTOFF DESIL 5 & 6
+### SLIDE 11: "THE SMOKING GUN": EFEK JURANG (CLIFF-EDGE) CUTOFF DESIL 5 & 6
 * **Headline:** Penolakan KIP Tidak Terjadi Merata: Mahasiswa Prasejahtera Desil 5 dan 6 Ditolak Mutlak (100%)
 * **Visual Pendukung:** `grafik/20_analisis_desil_dan_rejection_kip_snbt.png`
 * **Tingkat Kelulusan KIP SNBT 2026 Berdasarkan Desil DTKS Kemensos:**
@@ -179,7 +197,7 @@
 
 ---
 
-### SLIDE 11: SINKRONISASI SEKTORAL: PROGRAM STUDI PALING TERDAMPAK
+### SLIDE 12: SINKRONISASI SEKTORAL: PROGRAM STUDI PALING TERDAMPAK
 * **Headline:** Korelasi Riil Antara Penolakan KIP Desil 5–6 dengan Calon Gugur per Program Studi
 * **Visual Pendukung:** `grafik/23_korelasi_prodi_calon_gugur_vs_kip_desil.png`
 * **Bukti Paralelisme di Tingkat Program Studi (Data SNBT 2026):**
@@ -195,7 +213,7 @@
 
 ---
 
-### SLIDE 12: STRATIFIKASI SOSIAL-EKONOMI ANTAR KUADRAN PORTOFOLIO USK
+### SLIDE 13: STRATIFIKASI SOSIAL-EKONOMI ANTAR KUADRAN PORTOFOLIO USK
 * **Headline:** Kuadran III Berperan Sebagai Jaring Pengaman Sosial (*Social Safety Net*) USK
 * **Visual Pendukung:** `grafik/21_ketergantungan_kip_antar_kuadran_dan_top_prodi.png`
 * **Penetrasi KIP-Kuliah Berdasarkan Kuadran (S1 Kampus Utama 2026):**
@@ -211,7 +229,7 @@
 
 ---
 
-### SLIDE 13: PROFIL DEMOGRAFIS PENERIMA KIP-KULIAH USK 2026
+### SLIDE 14: PROFIL DEMOGRAFIS PENERIMA KIP-KULIAH USK 2026
 * **Headline:** Sebaran Fakultas, Kesetaraan Gender, dan Komposisi Jalur Penerima Beasiswa
 * **Visual Pendukung:** `grafik/22_demografi_fakultas_dan_gender_kip_2026.png`
 * **1. Sebaran per Fakultas (Total 1.639 Mahasiswa):**
@@ -228,7 +246,7 @@
 
 ---
 
-### SLIDE 14: KINERJA FAKULTAS, VOKASI D3, & PSDKU GAYO LUES
+### SLIDE 15: KINERJA FAKULTAS, VOKASI D3, & PSDKU GAYO LUES
 * **Headline:** Pemetaan Kinerja 12 Fakultas dan Evaluasi Krisis Akut Dua Segmen Khusus
 * **Visual Pendukung:** `grafik/07_analisa_peminatan_dan_keterisian_fakultas.png`, `grafik/08_evaluasi_multi_tahun_d3_vokasi.png`, `grafik/09_subanalisis_psdku_gayo_lues.png`
 * **Kinerja 12 Fakultas (2026):**
@@ -244,7 +262,7 @@
 
 ---
 
-### SLIDE 15: REKOMENDASI KEBIJAKAN STRATEGIS BAGI REKTORAT & PTN-BH USK
+### SLIDE 16: REKOMENDASI KEBIJAKAN STRATEGIS BAGI REKTORAT & PTN-BH USK
 * **Headline:** 5 Aksi Kebijakan Terintegrasi Menuju PMB 2027 yang Efisien, Inklusif, dan Berkeadilan
 * **1. Rasionalisasi Kuota Terukur 20%–40% pada Kuadran III:**
   * Pangkas kuota pada: Budidaya Perairan (160 $\to$ 90), THP (160 $\to$ 100), Pend. Ekonomi (160 $\to$ 100), Teknik Kimia (180 $\to$ 120), Fisika (80 $\to$ 50), dan PSP Perikanan (120 $\to$ 75).
@@ -259,11 +277,11 @@
   * USK saat ini sudah menyediakan fasilitas cicilan IPI untuk mahasiswa mandiri, namun banyak calon mahasiswa mengalami *liquidity shock* karena sosialisasi prosedur cicilan belum masif dan waktu pembayaran verifikasi sangat singkat (5 hari). Perlu disosialisasikan sejak awal pendaftaran.
   * Terapkan uang jaminan komitmen pendaftaran ulang Rp 1.000.000 pada Jalur TALENTA untuk membendung kebocoran 75% siswa yang kabur ke UTBK.
 * **5. Advokasi Sinergis Dana Otsus & Baitul Mal Aceh:**
-  * Ajukan daftar 526 calon mahasiswa Desil 5–6 kepada Baitul Mal Aceh sebagai penerima manfaat langsung beasiswa Fakir/Miskin/Fisabilillah untuk pengentasan kemiskinan daerah.
+  * Ajukan daftar 534 calon mahasiswa Desil 5–6 kepada Baitul Mal Aceh sebagai penerima manfaat langsung beasiswa Fakir/Miskin/Fisabilillah untuk pengentasan kemiskinan daerah.
 
 ---
 
-### SLIDE 16: PENUTUP & PESAN KUNCI PIMPINAN
+### SLIDE 17: PENUTUP & PESAN KUNCI PIMPINAN
 * **Kutipan Kunci bagi Pimpinan Universitas Syiah Kuala:**
   > *"Tolak ukur keberhasilan PMB PTN-BH bukanlah seberapa besar daya tampung yang kita umumkan di atas kertas, melainkan seberapa presisi kuota tersebut terisi oleh mahasiswa yang nyata, berdaya beli, atau terlindungi beasiswanya hingga lulus tepat waktu."*
 * **Tiga Pesan Penutup:**

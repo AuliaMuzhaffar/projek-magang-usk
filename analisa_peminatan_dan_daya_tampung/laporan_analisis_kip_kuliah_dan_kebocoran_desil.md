@@ -31,33 +31,94 @@ ditemukan **bukti kausalitas empiris (*smoking gun*)** yang membongkar bahwa fen
 
 ---
 
-## 2. ANALISIS KOMPARATIF MAKRO: KIP-KULIAH 2025 VS 2026
+## 2. STUDI KOMPARASI MULTI-TAHUN: DINAMIKA KIP-KULIAH USK (2025 VS 2026)
 
+Integrasi data historis tahun 2025 dari lembar kerja `KIP 2025` dan `DAFTAR_KIP_SNBT_2025` membuka pemahaman komparatif yang sangat mendalam mengenai perubahan kebijakan fiskal beasiswa dan dampaknya terhadap seleksi mahasiswa baru di USK.
+
+### 2.1. Dekonstruksi Alokasi Kuota dan Lonjakan Penolakan (+66.2%)
 Terjadi pergeseran makro yang signifikan antara tahun akademik 2025 dan 2026 yang memicu ketegangan likuiditas dan kuota di tingkat universitas.
 
-### Tabel 1: Perbandingan Metrik Makro KIP-Kuliah USK 2025 vs 2026 (Data Definitif Fix)
-*Sumber: Master Data Final `DATA_KIP_2025-2026.xlsx`*
+#### Tabel 1: Perbandingan Metrik Makro KIP-Kuliah USK 2025 vs 2026 (Data Definitif Fix)
+*Sumber: Master Data Final `DATA_KIP_2025-2026.xlsx` & `PENERIMA_KIP_2025-2026.xlsx`*
 
-| Parameter Metrik | Tahun 2025 (Fix) | Tahun 2026 (Fix) | Perubahan ($\Delta$) | Persentase Perubahan |
-| :--- | :---: | :---: | :---: | :---: |
-| **Total Kuota Penerima KIP Terverifikasi (Fix)** | **1.846** | **1.639** | **-207** | **-11.2%** |
-| - Alokasi Jalur SNBP | 941 (50.97%) | 893 (54.48%) | -48 | -5.1% |
-| - Alokasi Jalur SNBT | 905 (49.03%) | 746 (45.52%) | -159 | -17.6% |
-| **Pendaftar KIP Lolos Seleksi Akademik SNBT** | **1.275** | **1.361** | **+86** | **+6.7%** |
-| **Pendaftar KIP SNBT Diterima Beasiswa** | **905** | **746** | **-159** | **-17.6%** |
-| **Pendaftar KIP SNBT DITOLAK Status Beasiswa** | **370** | **615** | **+245** | **+66.2%** |
-| **Tingkat Penolakan KIP Jalur SNBT (*Rejection Rate*)** | **29.0%** | **45.2%** | **+16.2 pp** | **+55.8%** |
+| Parameter Metrik | Tahun 2025 (Definitif) | Tahun 2026 (Definitif) | Perubahan ($\Delta$) | Persentase Perubahan | Catatan Kebijakan |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Total Kuota Penerima KIP (SK Rektor)** | **1.846** | **1.639** | **-207** | **-11.21%** | Kontraksi alokasi kuota dari Puslapdik Kemendikbudristek |
+| - Alokasi Jalur SNBP | 941 (50.97%) | 893 (54.48%) | -48 | -5.10% | Penyesuaian proporsi jalur prestasi |
+| - Alokasi Jalur SNBT | 905 (49.03%) | 746 (45.52%) | -159 | **-17.57%** | Pemotongan kuota jalur tes tertulis nasional |
+| **Pendaftar KIP Lolos Seleksi SNBT** | **1.275** | **1.361** | **+86** | **+6.75%** | Minat calon mahasiswa prasejahtera terus meningkat |
+| **Pendaftar KIP SNBT Diterima Beasiswa** | **905** | **746** | **-159** | **-17.57%** | Kuota resmi terserap 100% tanpa sisa |
+| **Pendaftar KIP SNBT DITOLAK Kampus** | **370** | **615** | **+245** | **+66.22%** | **Lonjakan penolakan masif (efek ganda kuota turun & pendaftar naik)** |
+| **Tingkat Penolakan KIP SNBT (*Rejection Rate*)** | **29.02%** | **45.19%** | **+16.17 pp** | **+55.72%** | Peluang ditolak beasiswa meningkat tajam |
+| **Total Kursi Kosong Jalur SNBT (Calon Gugur)** | **551** | **626** | **+75** | **+13.61%** | Calon mahasiswa lulus seleksi yang tidak registrasi ulang |
+| **Rasio Korelasi Penolakan KIP thd Kursi Kosong** | **67.15%** (370/551) | **98.24%** (615/626) | **+31.09 pp** | **+46.30%** | Di 2026 nyaris seluruh kursi kosong didorong penolakan KIP |
+
+![Perbandingan Alokasi Kuota KIP dan Lonjakan Penolakan SNBT USK 2025 vs 2026](grafik/24_komparasi_kuota_pendaftar_dan_rejection_2025_2026.png)
 
 ```
-Tingkat Penolakan KIP-Kuliah SNBT di USK:
-Tahun 2025: [██████████░░░░░░░░░░░░░░░] 29.0% Ditolak
-Tahun 2026: [███████████████░░░░░░░░░░] 45.2% Ditolak (+66% Lonjakan Penolakan)
+Dinamika Penolakan KIP-Kuliah Jalur SNBT di USK:
+Tahun 2025 (Total Pendaftar 1.275): [██████████░░░░░░░░░░░░░░░] 29.02% Ditolak (370 mhs)
+Tahun 2026 (Total Pendaftar 1.361): [███████████████░░░░░░░░░░] 45.19% Ditolak (615 mhs) -> LONJAKAN +66.2%!
 ```
 
-### Sintesis Analisis:
-- **Tekanan Kuota Berkurang, Peminat Bertambah:** Di saat kuota KIP nasional untuk USK dipangkas 207 kursi (-11.2%), jumlah siswa pemegang kartu KIP yang berhasil menembus seleksi nasional SNBT USK justru meningkat dari 1.275 menjadi 1.361 orang (+6.7%).
-- **Jalur SNBT Menjadi "Korban" Pemangkasan Terbesar:** Karena jalur SNBP dilakukan lebih awal dan menyerap kuota mayoritas (893 kursi), sisa kuota untuk jalur SNBT terpangkas keras menjadi tepat 746 kursi (turun 17.6% dari tahun 2025 yang mencapai 905 kursi).
-- **Ledakan Penolakan:** Akibatnya, terjadi lonjakan dramatis calon mahasiswa yang ditolak KIP-nya pada jalur SNBT: dari 370 orang di 2025 melonjak menjadi **615 orang di 2026 (+66.2%)**.
+#### Sintesis Kunci:
+1. **Efek Gunting (*Scissor Effect*):** Di satu sisi minat siswa prasejahtera mengikuti UTBK SNBT USK tumbuh sebesar **+6.75% (1.275 menjadi 1.361)**, namun di sisi lain kuota beasiswa SNBT justru dipotong sebesar **-17.57% (905 menjadi 746)**. Kesenjangan inilah yang melipatgandakan jumlah siswa ditolak dari **370 menjadi 615 mahasiswa**.
+2. **Prioritas Alokasi SNBP Membebani SNBT:** Pada kedua tahun, alokasi KIP untuk jalur prestasi SNBP selalu diamankan terlebih dahulu (941 di 2025, 893 di 2026). Akibatnya, jalur SNBT menjadi penerima beban kontraksi terbesar.
+3. **Evolusi Kausalitas Kursi Kosong SNBT (67.15% $\rightarrow$ 98.24%):**
+   Pada tahun 2025, korelasi makro penolakan KIP terhadap kursi kosong SNBT tercatat **67.15%** (370 tolak KIP dari 551 kursi kosong), di mana masih terdapat 181 kursi kosong (32.85%) yang disebabkan oleh faktor non-KIP (seperti lolos sekolah kedinasan atau PTN Jawa). Namun pada tahun 2026, korelasinya melonjak drastis menjadi **98.24%** (615 tolak KIP dari 626 kursi kosong). Hal ini membuktikan bahwa pada tahun 2026, fenomena kursi kosong SNBT hampir secara mutlak (98.2%) merupakan krisis keterpaksaan ekonomi akibat penolakan beasiswa KIP.
+
+---
+
+### 2.2. Rekonstruksi Profil Demografi dan Penolakan KIP SNBT 2025
+Berbeda dengan tahun 2026 di mana data desil DTKS Kemensos sudah terintegrasi pada berkas pendaftar SNBT pusat, pada tahun 2025 format data ekspor nasional belum menyertakan kolom desil. Oleh karena itu, penolakan 370 mahasiswa di tahun 2025 murni berbasis kuota program studi dan verifikasi administrasi kampus.
+
+#### Tabel 1B: Sebaran Hasil Seleksi KIP SNBT 2025 Berdasarkan Fakultas
+*Sumber: Hasil Rekonsiliasi `No Ujian == KODE PESERTA` (2025)*
+
+| Fakultas | Total Pendaftar Lolos SNBT | Diterima KIP | Ditolak KIP | Tingkat Penolakan (%) | Porsi thd Total Ditolak |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **FKIP** | 448 | 341 | **107** | 23.88% | 28.92% |
+| **Teknik** | 157 | 101 | **56** | 35.67% | 15.14% |
+| **Pertanian** | 157 | 112 | **45** | 28.66% | 12.16% |
+| **Ekonomi & Bisnis** | 110 | 70 | **40** | 36.36% | 10.81% |
+| **FISIP** | 83 | 57 | **26** | 31.33% | 7.03% |
+| **FMIPA** | 90 | 65 | **25** | 27.78% | 6.76% |
+| **Kelautan & Perikanan** | 101 | 79 | **22** | 21.78% | 5.95% |
+| **Keperawatan** | 45 | 27 | **18** | **40.00%** | 4.86% |
+| **Kedokteran Hewan** | 20 | 7 | **13** | **65.00%** | 3.51% |
+| **PSDKU Gayo Lues** | 26 | 17 | **9** | 34.62% | 2.43% |
+| **Hukum** | 36 | 27 | **9** | 25.00% | 2.43% |
+| **Kedokteran** | 2 | 2 | **0** | **0.00%** | 0.00% |
+| **TOTAL USK (2025)** | **1.275** | **905** | **370** | **29.02%** | **100.00%** |
+
+![Analisis Demografi dan Sebaran Penolakan KIP SNBT USK 2025](grafik/25_analisis_demografi_dan_penolakan_kip_2025.png)
+
+#### Profil Demografi Peserta 2025:
+* **Gender:** Dari 1.275 pendaftar KIP SNBT 2025, sebanyak **925 orang (72.55%) adalah Perempuan** (658 diterima, 267 ditolak / 28.86%) dan **350 orang (27.45%) adalah Laki-laki** (247 diterima, 103 ditolak / 29.43%). Tingkat penolakan relatif seimbang antar gender (~29%).
+* **Jenjang:** Program S1 mencakup **1.187 pendaftar** (858 diterima, 329 ditolak / 27.72%), program D3 mencakup **84 pendaftar** (43 diterima, 41 ditolak / 48.81%), dan D4 mencakup **4 pendaftar** (4 diterima / 0.0% ditolak). Jenjang diploma D3 mengalami tingkat penolakan yang jauh lebih tinggi (48.8%) dibanding S1 (27.7%).
+
+---
+
+### 2.3. Pergeseran Episentrum Program Studi Rentan Penolakan KIP (2025 vs 2026)
+Membandingkan 10 program studi dengan jumlah calon mahasiswa ditolak beasiswanya terbanyak membuktikan bahwa beban sosial-ekonomi terkonsentrasi pada prodi-prodi tertentu.
+
+![Tren Program Studi dengan Penolakan KIP Terbanyak 2025 vs 2026](grafik/26_tren_prodi_penolakan_kip_2025_vs_2026.png)
+
+#### Tabel 1C: Matriks Pergeseran Top Program Studi Penolakan KIP (2025 vs 2026)
+
+| Program Studi | Pendaftar 2025 | Ditolak 2025 | Rejection Rate 2025 | Pendaftar 2026 | Ditolak 2026 | Rejection Rate 2026 | Tren Dinamika Penolakan |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Ilmu Keperawatan** | 45 | **18** | 40.00% | 47 | **22** | **46.81%** | Konsisten episentrum krisis beban KIP (+4 mhs) |
+| **Pendidikan Guru SD (PGSD)** | 37 | **12** | 32.43% | 47 | **22** | **46.81%** | Lonjakan penolakan drastis (+10 mhs ditolak) |
+| **Teknologi Pangan / Hasil Pertanian** | 22 | **10** | 45.45% | 22 | **19** | **86.36%** | Tingkat penolakan melonjak hampir 2x lipat |
+| **Budidaya Perairan** | 34 | **5** | 14.71% | 44 | **18** | **40.91%** | Peminat naik tajam, penolakan naik lebih dari 3x lipat |
+| **Ilmu Hukum** | 36 | **9** | 25.00% | 37 | **18** | **48.65%** | Penolakan berlipat ganda dari 25% ke 48.6% |
+| **Manajemen Agribisnis (D3)** | 20 | **7** | 35.00% | 20 | **17** | **85.00%** | Kerentanan vokasi: 85% pelamar ditolak beasiswanya |
+| **Pend. Jasmani Kesehatan & Rekreasi** | 36 | **7** | 19.44% | 28 | **16** | **57.14%** | Rejection rate naik dari 19.4% ke 57.1% |
+| **Akuntansi** | 21 | **8** | 38.10% | 22 | **15** | **68.18%** | Penolakan meningkat tajam (+7 mhs) |
+| **Ilmu Pemerintahan** | 24 | **7** | 29.17% | 28 | **14** | **50.00%** | 50% pelamar ditolak di 2026 |
+| **Agribisnis** | 24 | **7** | 29.17% | 28 | **14** | **50.00%** | Penolakan meningkat 2x lipat |
+| **Pendidikan Dokter Hewan** | 19 | **12** | **63.16%** | 19 | **10** | **52.63%** | Konsisten memiliki barrier penolakan sangat tinggi |
 
 ---
 
@@ -255,23 +316,23 @@ FKG          : [░░░░░░░░░░░░░░░░░░░░]  0
 
 ## 7. REKOMENDASI KEBIJAKAN STRATEGIS UNTUK REKTORAT & PTN-BH USK
 
-Penemuan bahwa **526 mahasiswa berprestasi UTBK dari Desil 5 & 6 gugur karena ketiadaan beasiswa** menuntut USK sebagai Perguruan Tinggi Negeri Berbadan Hukum (PTN-BH) untuk melakukan reformasi kebijakan pembiayaan. USK tidak boleh membiarkan kursi akademik kosong sementara calon mahasiswa berpotensi terhempas kemiskinan.
+Penemuan bahwa **534 mahasiswa berprestasi UTBK dari Desil 5 & 6 gugur karena ketiadaan beasiswa (100% ditolak)** menuntut USK sebagai Perguruan Tinggi Negeri Berbadan Hukum (PTN-BH) untuk melakukan reformasi kebijakan pembiayaan. USK tidak boleh membiarkan kursi akademik kosong sementara calon mahasiswa berpotensi terhempas kemiskinan.
 
 ### Kebijakan 1: Pembentukan Skema "UKT Penyelamat" (*Safety-Net Transition UKT*)
 - **Masalah:** Mahasiswa KIP Desil 5–6 yang ditolak langsung dikenakan UKT Reguler Kelompok III s.d. V (Rp 2.500.000 – Rp 4.500.000) yang tidak sanggup mereka bayar.
 - **Solusi:** Terbitkan Keputusan Rektor mengenai *Automatic Safety-Net UKT*. Semua pelamar KIP-K jalur SNBT yang berstatus Desil 5 dan 6 yang tidak tertampung kuota APBN **secara otomatis ditetapkan pada UKT Kelompok I (Rp 500.000) atau UKT Kelompok II (Rp 1.000.000)** pada semester pertama, disertai hak mencicil 2 tahap.
-- **Dampak Penyelamatan:** Skema ini diproyeksikan mampu menyelamatkan minimal **60% s.d. 70% (315 – 370 mahasiswa)** agar tetap mendaftar ulang di USK.
+- **Dampak Penyelamatan:** Skema ini diproyeksikan mampu menyelamatkan minimal **60% s.d. 70% (320 – 375 mahasiswa)** agar tetap mendaftar ulang di USK.
 
 ### Kebijakan 2: Subsidi Silang Surplus IPI Kuadran I ke "KIP Kemitraan PTN-BH"
 - **Masalah:** USK mengalami defisit kuota KIP dari kementerian (-207 kursi).
 - **Solusi:** Manfaatkan fleksibilitas keuangan PTN-BH. Alokasikan **5% s.d. 7.5% dari total penerimaan IPI Jalur Mandiri program studi kaya (Kedokteran, Kedokteran Gigi, Farmasi, Informatika, Pertambangan)** untuk membentuk dana abadi *Beasiswa KIP Kemitraan USK*.
 - **Kalkulasi Finansial:**
   $$\text{Dana IPI Kuadran I} \approx \text{Rp 40 Miliar} \times 5\% = \text{Rp 2,0 Miliar}$$
-  Dengan biaya SPP flat Rp 2.400.000/tahun per mahasiswa, dana Rp 2 Miliar ini dapat mendanai **833 beasiswa mandiri**, melampaui seluruh defisit Desil 5–6 di SNBT!
+  Dengan biaya SPP flat Rp 2.400.000/tahun per mahasiswa, dana Rp 2 Miliar ini dapat mendanai **833 beasiswa mandiri**, melampaui seluruh defisit 534 calon mahasiswa Desil 5–6 di SNBT!
 
 ### Kebijakan 3: Sinergi Dana Otonomi Khusus (Otsus) & Baitul Mal Aceh
 - **Masalah:** Keterbatasan ruang fiskal APBN Kemendiktisaintek.
-- **Solusi:** Pimpinan USK melakukan advokasi data mikro ini kepada Pemerintah Aceh dan Baitul Mal Provinsi Aceh. Sebanyak 526 nama calon mahasiswa Desil 5–6 yang terverifikasi miskin tetapi berprestasi diajukan sebagai penerima manfaat langsung *Beasiswa Senif Fisabilillah / Fakir Miskin Baitul Mal Aceh*.
+- **Solusi:** Pimpinan USK melakukan advokasi data mikro ini kepada Pemerintah Aceh dan Baitul Mal Provinsi Aceh. Sebanyak 534 nama calon mahasiswa Desil 5–6 yang terverifikasi miskin tetapi berprestasi diajukan sebagai penerima manfaat langsung *Beasiswa Senif Fisabilillah / Fakir Miskin Baitul Mal Aceh*.
 - **Narasi Advokasi:** Mengentaskan kemiskinan ekstrem di Aceh melalui jaminan pendidikan tinggi bagi anak petani dan nelayan lokal.
 
 ### Kebijakan 4: Sinkronisasi Kuota KIP dengan Penetapan Daya Tampung SNBT
@@ -285,13 +346,13 @@ Penemuan bahwa **526 mahasiswa berprestasi UTBK dari Desil 5 & 6 gugur karena ke
 Ketika mempresentasikan hasil temuan ini kepada mentor, dekan, atau tim pimpinan yang meragukan anomali data (*"merasa seperti plot twist yang tidak masuk akal"*), gunakan alur argumentasi berbasis data berikut:
 
 1. **Buka dengan Rekonsiliasi Matematika Sederhana:**
-   *"Pak/Ibu, data menunjukkan SNBT 2026 mengalami kursi kosong sebesar 626 orang. Selama ini kita menduga mereka kabur ke PTS. Namun ketika kita sandingkan dengan data verifikasi KIP, ada 611 calon mahasiswa KIP yang ditolak beasiswanya. Angkanya hampir 1 banding 1 (97.6% match)."*
+   *"Pak/Ibu, data menunjukkan SNBT 2026 mengalami kursi kosong sebesar 626 orang. Selama ini kita menduga mereka kabur ke PTS. Namun ketika kita sandingkan dengan data verifikasi KIP definitif (berdasarkan No Ujian UTBK), ada 615 calon mahasiswa KIP yang ditolak beasiswanya. Angkanya 98,24% identik (615 tolak KIP vs 626 kursi kosong)."*
 2. **Tunjukkan Bukti Hard Cutoff Desil:**
-   *"Bukan karena mereka tidak mau kuliah di USK. Pelamar Desil 1–4 diterima KIP-nya 90%. Tetapi pelamar Desil 5 dan 6 diterima hanya 1.5%. Ada 526 anak miskin dan rentan yang lulus tes UTBK USK, tapi saat verifikasi beasiswa mereka ditolak karena kuota KIP USK dari pusat turun 200 kursi."*
+   *"Bukan karena mereka tidak mau kuliah di USK. Pelamar Desil 1–4 diterima KIP-nya rata-rata 90,9%. Tetapi pelamar Desil 5 dan 6 diterima 0,0% (100% ditolak mutlak!). Ada 534 anak dari keluarga berpendapatan rendah yang lulus tes UTBK USK, tapi saat verifikasi beasiswa mereka ditolak total karena kuota KIP USK dari pusat turun 207 kursi."*
 3. **Jelaskan Beban Finansial:**
    *"Begitu KIP ditolak, mereka dialihkan ke UKT reguler jutaan rupiah. Karena orang tua mereka buruh dan petani Desil 5-6, mereka tidak sanggup membayar, sehingga terpaksa mundur. Jadi ini bukan fenomena 'peminat kabur', melainkan 'kegagalan daya beli'."*
 4. **Tutup dengan Solusi Institusional PTN-BH:**
-   *"Dengan memahami akar masalah ini, solusinya bukan menurunkan daya tampung atau menyalahkan peminat, melainkan USK sebagai PTN-BH harus menyiapkan skema UKT Penyelamat (Golongan 1-2) atau subsidi silang dari dana IPI prodi unggulan agar 500 calon mahasiswa ini terselamatkan."*
+   *"Dengan memahami akar masalah ini, solusinya bukan menurunkan daya tampung atau menyalahkan peminat, melainkan USK sebagai PTN-BH harus menyiapkan skema UKT Penyelamat (Golongan 1-2) atau subsidi silang dari dana IPI prodi unggulan agar 534 calon mahasiswa ini terselamatkan."*
 
 ---
 *Dokumen ini merupakan bagian dari Laporan Analisis Penerimaan Mahasiswa Baru Universitas Syiah Kuala (USK).*
