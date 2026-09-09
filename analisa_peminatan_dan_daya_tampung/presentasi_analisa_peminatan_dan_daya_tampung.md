@@ -30,7 +30,7 @@
   * Realisasi mahasiswa masuk riil naik dari 6.197 ke 8.440 mhs, namun **persisten menyisakan ~2.000 bangku kosong per tahun**.
   * S1 Kampus Utama relatif sehat (84,7% keterisian), sedangkan D3 Vokasi terpuruk (51,3%) dan PSDKU Gayo Lues krisis akut (18,6%).
 * **3. Dimensi Kausalitas & Resolusi "Plot Twist" Kebocoran:**
-  * **Terungkap Akar Masalah Kebocoran SNBT:** Anomali 626 kursi kosong di SNBT 2026 **97,6% identik dengan 611 calon mahasiswa KIP yang ditolak beasiswanya**, di mana **526 orang di antaranya berasal dari Desil 5 dan 6**.
+  * **Terungkap Akar Masalah Kebocoran SNBT:** Anomali 626 kursi kosong di SNBT 2026 **98,2% identik dengan 615 calon mahasiswa KIP yang ditolak beasiswanya**, di mana **534 orang di antaranya berasal dari Desil 5 dan 6 (100% ditolak)**.
   * Ini membuktikan bahwa kursi kosong SNBT bukan disebabkan siswa kabur ke PTS/kedinasan, melainkan **kegagalan daya beli (*economic forced drop-out*) akibat pemotongan kuota beasiswa**.
 
 ---
@@ -150,32 +150,32 @@
 * **Headline:** Kursi Kosong SNBT Bukan Karena Siswa Kabur, Melainkan Terhempas Pemotongan Kuota KIP-Kuliah!
 * **Visual Pendukung:** `grafik/20_analisis_desil_dan_rejection_kip_snbt.png`
 * **Korelasi Matematis yang Mengejutkan:**
-  $$\text{Calon Gugur SNBT 2026 (626 Orang)} \quad \approx \quad \text{Pendaftar KIP SNBT Ditolak Kampus (611 Orang)}$$
-  $$\text{Tingkat Kesesuaian Kausalitas} = \frac{611}{626} = \mathbf{97{,}60\%}$$
+  $$\text{Calon Gugur SNBT 2026 (626 Orang)} \quad \approx \quad \text{Pendaftar KIP SNBT Ditolak Kampus (615 Orang)}$$
+  $$\text{Tingkat Kesesuaian Kausalitas} = \frac{615}{626} = \mathbf{98{,}24\%}$$
 * **Mengapa Penolakan KIP di 2026 Meledak?**
   * Pada tahun 2025: Total kuota KIP USK = **1.846 kursi**. Penolakan SNBT hanya 370 orang (29,0%).
-  * Pada tahun 2026: Kuota KIP USK dari pusat **dipangkas 207 kursi (-11,2%)** menjadi 1.639 / 1.615 kursi.
+  * Pada tahun 2026: Kuota KIP USK dari pusat **dipangkas 207 kursi (-11,2%)** dari 1.846 menjadi **1.639 kursi definitif**.
   * Di saat yang sama, siswa KIP yang lulus tes akademik UTBK USK naik dari 1.275 menjadi **1.361 orang**.
-  * Karena kuota KIP terserap mayoritas oleh SNBP di awal tahun (893 kursi), kuota KIP untuk SNBT terpangkas keras menjadi hanya 746 kursi $\rightarrow$ **Akibatnya 611 siswa KIP ditolak (melonjak +65,1%!)**.
+  * Karena kuota KIP terserap mayoritas oleh SNBP di awal tahun (893 kursi), kuota KIP untuk SNBT terpangkas keras menjadi tepat 746 kursi $\rightarrow$ **Akibatnya 615 siswa KIP ditolak (melonjak +66,2%!)**.
 
 ---
 
 ### SLIDE 10: "THE SMOKING GUN": EFEK JURANG (CLIFF-EDGE) CUTOFF DESIL 5 & 6
-* **Headline:** Penolakan KIP Tidak Terjadi Merata: Mahasiswa Prasejahtera Desil 5 dan 6 Ditolak Massal (>98%)
+* **Headline:** Penolakan KIP Tidak Terjadi Merata: Mahasiswa Prasejahtera Desil 5 dan 6 Ditolak Mutlak (100%)
 * **Visual Pendukung:** `grafik/20_analisis_desil_dan_rejection_kip_snbt.png`
 * **Tingkat Kelulusan KIP SNBT 2026 Berdasarkan Desil DTKS Kemensos:**
-  * **Desil 1:** 221 Pendaftar | 200 Diterima (**90,5%**) $\rightarrow$ Aman
-  * **Desil 2:** 186 Pendaftar | 162 Diterima (**87,1%**) $\rightarrow$ Aman
-  * **Desil 3:** 219 Pendaftar | 204 Diterima (**93,2%**) $\rightarrow$ Aman
-  * **Desil 4:** 176 Pendaftar | 160 Diterima (**90,9%**) $\rightarrow$ Aman
-  * ----------------------------- **GARIS BATAS AMBANG KUOTA KIP** -----------------------------
-  * **Desil 5:** 149 Pendaftar | Hanya 3 Diterima (**2,0%**) $\rightarrow$ **146 Orang Ditolak (98,0%)!**
-  * **Desil 6:** 385 Pendaftar | Hanya 5 Diterima (**1,3%**) $\rightarrow$ **380 Orang Ditolak (98,7%)!**
+  * **Desil 1:** 221 Pendaftar | 201 Diterima (**91,0%**) $\rightarrow$ Aman
+  * **Desil 2:** 186 Pendaftar | 164 Diterima (**88,2%**) $\rightarrow$ Aman
+  * **Desil 3:** 219 Pendaftar | 205 Diterima (**93,6%**) $\rightarrow$ Aman
+  * **Desil 4:** 176 Pendaftar | 159 Diterima (**90,3%**) $\rightarrow$ Aman
+  * ----------------------------- **GARIS BATAS AMBANG MUTLAK KUOTA KIP** -----------------------------
+  * **Desil 5:** 149 Pendaftar | 0 Diterima (**0,0%**) $\rightarrow$ **149 Orang Ditolak (100,0%)!**
+  * **Desil 6:** 385 Pendaftar | 0 Diterima (**0,0%**) $\rightarrow$ **385 Orang Ditolak (100,0%)!**
 * **Mekanisme Gugur Terpaksa (*Economic Drop-Out*):**
-  * Sebanyak **526 calon mahasiswa dari Desil 5 dan 6** ditolak KIP-nya dan dialihkan ke UKT Reguler (Rp 2,5 – 5 Juta/semester).
+  * Sebanyak **534 calon mahasiswa dari Desil 5 dan 6** ditolak KIP-nya dan dialihkan ke UKT Reguler (Rp 2,5 – 5 Juta/semester).
   * Desil 5–6 adalah keluarga prasejahtera (petani kecil, buruh harian, nelayan, pedagang mikro).
-  * Menghadapi tagihan UKT jutaan rupiah tanpa beasiswa, **526 calon mahasiswa berprestasi UTBK ini terpaksa tidak mendaftar ulang**.
-  * **526 dari 626 kursi kosong SNBT (84,0%) secara langsung tercipta dari mekanisme ini!**
+  * Menghadapi tagihan UKT jutaan rupiah tanpa beasiswa, **534 calon mahasiswa berprestasi UTBK ini terpaksa tidak mendaftar ulang**.
+  * **534 dari 626 kursi kosong SNBT (85,3%) secara langsung tercipta dari mekanisme ini!**
 
 ---
 

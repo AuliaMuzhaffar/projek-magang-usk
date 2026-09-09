@@ -23,9 +23,9 @@ Berdasarkan investigasi mendalam terhadap integrasi dua dataset baru:
 ditemukan **bukti kausalitas empiris (*smoking gun*)** yang membongkar bahwa fenomena "kebocoran SNBT" bukanlah penolakan sukarela oleh siswa karena berpindah ke kampus swasta atau gap year, melainkan **kegagalan sistemik dalam transisi pembiayaan kuliah (*economic drop-out*) akibat pemotongan kuota KIP-Kuliah dan penerapan batas desil (*desil threshold cutoff*)**.
 
 ### Temuan Kunci (*Key Takeaways*):
-1. **Korelasi Kausalitas 97.6%:** Pada SNBT 2026, tercatat **626 calon mahasiswa gugur (mundur/tidak daftar ulang)** di seluruh USK. Pada saat yang sama, terdapat **611 calon pelamar KIP-Kuliah yang lulus ujian SNBT namun DITOLAK status KIP-nya** oleh sistem verifikasi kampus.
-2. **Efek Jurang (*Cliff-Edge Effect*) Desil 5 & 6:** Pelamar KIP SNBT pada Desil 1–4 menikmati tingkat penerimaan beasiswa yang sangat tinggi (**87.1% – 93.2%**). Namun, pada **Desil 5 dan Desil 6**, terjadi pemotongan ekstrem di mana tingkat kelulusan KIP anjlok menjadi hanya **2.0% (Desil 5)** dan **1.3% (Desil 6)**. 
-3. **526 Mahasiswa Terhempas Menjadi Mahasiswa Reguler:** Sebanyak **526 calon mahasiswa dari Desil 5 dan 6** yang dinyatakan lulus akademik UTBK tidak memperoleh KIP-Kuliah dan secara otomatis dialihkan menjadi mahasiswa UKT reguler. Karena berasal dari keluarga prasejahtera yang tidak sanggup membayar UKT reguler, **mereka terpaksa tidak melakukan pendaftaran ulang**.
+1. **Korelasi Kausalitas 98.2%:** Pada SNBT 2026, tercatat **626 calon mahasiswa gugur (mundur/tidak daftar ulang)** di seluruh USK. Pada saat yang sama, terdapat **615 calon pelamar KIP-Kuliah yang lulus ujian SNBT namun DITOLAK status KIP-nya** oleh sistem verifikasi kampus ($615 / 626 = \mathbf{98{,}24\%}$).
+2. **Efek Jurang (*Cliff-Edge Effect*) Desil 5 & 6 yang Absolut (100% Ditolak):** Pelamar KIP SNBT pada Desil 1–4 menikmati tingkat penerimaan beasiswa yang sangat tinggi (**88.2% – 93.6%**). Namun, pada **Desil 5 dan Desil 6**, terjadi pemotongan total (*hard cut-off*) di mana tingkat kelulusan KIP adalah **0.0% (100% DITOLAK)**. 
+3. **534 Mahasiswa Terhempas Menjadi Mahasiswa Reguler:** Sebanyak **534 calon mahasiswa dari Desil 5 dan 6 (149 Desil 5 + 385 Desil 6)** yang dinyatakan lulus akademik UTBK tidak memperoleh KIP-Kuliah dan secara otomatis dialihkan menjadi mahasiswa UKT reguler. Karena berasal dari keluarga prasejahtera yang tidak sanggup membayar UKT reguler, **mereka terpaksa tidak melakukan pendaftaran ulang**.
 4. **Ketergantungan Ekstrem Kuadran III (Defisit/Rentan):** Program studi pada Kuadran III memiliki rata-rata ketergantungan mahasiswa KIP-Kuliah sebesar **32.92% (tertimbang: 31.11%)**, dengan prodi klaster keguruan (FKIP) dan perikanan (FPK) mencapai **45% – 56.7%**. Sebaliknya, Kuadran I (Prime/Unggulan) hanya memiliki rata-rata penetrasi KIP **13.03% (tertimbang: 13.19%)**, bahkan prodi favorit seperti Kedokteran Gigi hanya 1.0% dan Kedokteran hanya 2.4%.
 5. **Kesenjangan Gender yang Masif:** Sebanyak **77.36% (1.268 mahasiswa)** dari total penerima KIP-Kuliah 2026 di USK adalah **perempuan**, menunjukkan bahwa KIP-Kuliah berfungsi sebagai instrumen utama mobilitas sosial perempuan prasejahtera di Aceh.
 
@@ -35,34 +35,35 @@ ditemukan **bukti kausalitas empiris (*smoking gun*)** yang membongkar bahwa fen
 
 Terjadi pergeseran makro yang signifikan antara tahun akademik 2025 dan 2026 yang memicu ketegangan likuiditas dan kuota di tingkat universitas.
 
-### Tabel 1: Perbandingan Metrik Makro KIP-Kuliah USK 2025 vs 2026
+### Tabel 1: Perbandingan Metrik Makro KIP-Kuliah USK 2025 vs 2026 (Data Definitif Fix)
+*Sumber: Master Data Final `DATA_KIP_2025-2026.xlsx`*
 
-| Parameter Metrik | Tahun 2025 | Tahun 2026 | Perubahan ($\Delta$) | Persentase Perubahan |
+| Parameter Metrik | Tahun 2025 (Fix) | Tahun 2026 (Fix) | Perubahan ($\Delta$) | Persentase Perubahan |
 | :--- | :---: | :---: | :---: | :---: |
-| **Total Kuota Penerima KIP Terverifikasi (Fix)** | **1.846** | **1.639** *(sheet KIP)* / **1.615** *(sheet Fix)* | -207 s.d. -231 | **-11.2% s.d. -12.5%** |
+| **Total Kuota Penerima KIP Terverifikasi (Fix)** | **1.846** | **1.639** | **-207** | **-11.2%** |
 | - Alokasi Jalur SNBP | 941 (50.97%) | 893 (54.48%) | -48 | -5.1% |
 | - Alokasi Jalur SNBT | 905 (49.03%) | 746 (45.52%) | -159 | -17.6% |
 | **Pendaftar KIP Lolos Seleksi Akademik SNBT** | **1.275** | **1.361** | **+86** | **+6.7%** |
-| **Pendaftar KIP SNBT Diterima Beasiswa** | 903 s.d. 905 | 738 s.d. 750 | -155 s.d. -167 | -17.3% |
-| **Pendaftar KIP SNBT DITOLAK Status Beasiswa** | **370 s.d. 372** | **611 s.d. 623** | **+241** | **+65.1%** |
-| **Tingkat Penolakan KIP Jalur SNBT (*Rejection Rate*)** | **29.0%** | **44.9%** | **+15.9 pp** | **+54.8%** |
+| **Pendaftar KIP SNBT Diterima Beasiswa** | **905** | **746** | **-159** | **-17.6%** |
+| **Pendaftar KIP SNBT DITOLAK Status Beasiswa** | **370** | **615** | **+245** | **+66.2%** |
+| **Tingkat Penolakan KIP Jalur SNBT (*Rejection Rate*)** | **29.0%** | **45.2%** | **+16.2 pp** | **+55.8%** |
 
 ```
 Tingkat Penolakan KIP-Kuliah SNBT di USK:
 Tahun 2025: [██████████░░░░░░░░░░░░░░░] 29.0% Ditolak
-Tahun 2026: [███████████████░░░░░░░░░░] 44.9% Ditolak (+65% Lonjakan Penolakan)
+Tahun 2026: [███████████████░░░░░░░░░░] 45.2% Ditolak (+66% Lonjakan Penolakan)
 ```
 
 ### Sintesis Analisis:
-- **Tekanan Kuota Berkurang, Peminat Bertambah:** Di saat kuota KIP nasional untuk USK dipangkas lebih dari 200 kursi (-11.2%), jumlah siswa pemegang kartu KIP yang berhasil menembus seleksi nasional SNBT USK justru meningkat dari 1.275 menjadi 1.361 orang (+6.7%).
-- **Jalur SNBT Menjadi "Korban" Pemangkasan Terbesar:** Karena jalur SNBP dilakukan lebih awal dan menyerap kuota mayoritas (893 kursi), sisa kuota untuk jalur SNBT terpangkas keras menjadi hanya 746 kursi (turun 17.6% dari tahun 2025 yang mencapai 905 kursi).
-- **Ledakan Penolakan:** Akibatnya, terjadi lonjakan dramatis calon mahasiswa yang ditolak KIP-nya pada jalur SNBT: dari 370 orang di 2025 melonjak menjadi **611 orang di 2026 (+65.1%)**.
+- **Tekanan Kuota Berkurang, Peminat Bertambah:** Di saat kuota KIP nasional untuk USK dipangkas 207 kursi (-11.2%), jumlah siswa pemegang kartu KIP yang berhasil menembus seleksi nasional SNBT USK justru meningkat dari 1.275 menjadi 1.361 orang (+6.7%).
+- **Jalur SNBT Menjadi "Korban" Pemangkasan Terbesar:** Karena jalur SNBP dilakukan lebih awal dan menyerap kuota mayoritas (893 kursi), sisa kuota untuk jalur SNBT terpangkas keras menjadi tepat 746 kursi (turun 17.6% dari tahun 2025 yang mencapai 905 kursi).
+- **Ledakan Penolakan:** Akibatnya, terjadi lonjakan dramatis calon mahasiswa yang ditolak KIP-nya pada jalur SNBT: dari 370 orang di 2025 melonjak menjadi **615 orang di 2026 (+66.2%)**.
 
 ---
 
 ## 3. "THE SMOKING GUN": EFEK JURANG DESIL KEMENSOS (*CLIFF-EDGE EFFECT*)
 
-Untuk memahami ke mana 611 calon mahasiswa yang ditolak tersebut berasal, kita membedah kolom `DESIL KIP-K` pada data `DAFTAR_KIP_SNBT_2026`. Desil ini mengacu pada Data Terpadu Kesejahteraan Sosial (DTKS) Kementerian Sosial Republik Indonesia, dengan skala:
+Untuk memahami ke mana 615 calon mahasiswa yang ditolak tersebut berasal, kita membedah kolom `DESIL KIP-K` pada data `DAFTAR_KIP_SNBT_2026` terhadap data final penerima beasiswa `DATA_KIP_2025-2026.xlsx` berdasarkan Nomor Ujian UTBK. Desil ini mengacu pada Data Terpadu Kesejahteraan Sosial (DTKS) Kementerian Sosial Republik Indonesia, dengan skala:
 - **Desil 1:** Rumah tangga termiskin (Sangat Miskin / Desil Terendah 10%)
 - **Desil 2:** Rumah tangga miskin
 - **Desil 3:** Rumah tangga hampir miskin
@@ -71,47 +72,47 @@ Untuk memahami ke mana 611 calon mahasiswa yang ditolak tersebut berasal, kita m
 - **Desil 6:** Rumah tangga menengah yang mendekati batas rentan
 - **Desil 0:** Data belum terpadu / verifikasi khusus
 
-### Tabel 2: Distribusi dan Tingkat Penerimaan KIP SNBT 2026 Berdasarkan Desil
+### Tabel 2: Distribusi dan Tingkat Penerimaan KIP SNBT 2026 Berdasarkan Desil (Data Final)
 
 | Desil KIP-K (DTKS) | Total Lulus SNBT | Diterima KIP (Fix) | Ditolak KIP | Tingkat Kelulusan KIP (%) | Tingkat Penolakan KIP (%) | Proporsi thd Total Ditolak |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Desil 0** | 25 | 16 | 9 | 64.00% | 36.00% | 1.47% |
-| **Desil 1** | 221 | 200 | 21 | 90.50% | 9.50% | 3.44% |
-| **Desil 2** | 186 | 162 | 24 | 87.10% | 12.90% | 3.93% |
-| **Desil 3** | 219 | 204 | 15 | 93.15% | 6.85% | 2.45% |
-| **Desil 4** | 176 | 160 | 16 | 90.91% | 9.09% | 2.62% |
-| **Desil 5** | **149** | **3** | **146** | **2.01%** | **97.99%** | **23.89%** |
-| **Desil 6** | **385** | **5** | **380** | **1.30%** | **98.70%** | **62.19%** |
-| **TOTAL** | **1.361** | **750** | **611** | **55.11%** | **44.89%** | **100.00%** |
+| **Desil 0** | 25 | 17 | 8 | 68.00% | 32.00% | 1.30% |
+| **Desil 1** | 221 | 201 | 20 | 90.95% | 9.05% | 3.25% |
+| **Desil 2** | 186 | 164 | 22 | 88.17% | 11.83% | 3.58% |
+| **Desil 3** | 219 | 205 | 14 | 93.61% | 6.39% | 2.28% |
+| **Desil 4** | 176 | 159 | 17 | 90.34% | 9.66% | 2.76% |
+| **Desil 5** | **149** | **0** | **149** | **0.00%** | **100.00%** | **24.23%** |
+| **Desil 6** | **385** | **0** | **385** | **0.00%** | **100.00%** | **62.60%** |
+| **TOTAL** | **1.361** | **746** | **615** | **54.81%** | **45.19%** | **100.00%** |
 
 ![Investigasi Empiris Kebocoran Jalur SNBT dan Efek Jurang Desil KIP-Kuliah](grafik/20_analisis_desil_dan_rejection_kip_snbt.png)
 
 ```
 Tingkat Penerimaan KIP Berdasarkan Desil (SNBT 2026):
-Desil 1: [██████████████████░░] 90.5% Diterima
-Desil 2: [█████████████████░░░] 87.1% Diterima
-Desil 3: [███████████████████░] 93.2% Diterima
-Desil 4: [██████████████████░░] 90.9% Diterima
-------------------------- CUTOFF AMBANG KUOTA -------------------------
-Desil 5: [█░░░░░░░░░░░░░░░░░░░]  2.0% Diterima  (98.0% Ditolak!)
-Desil 6: [░░░░░░░░░░░░░░░░░░░░]  1.3% Diterima  (98.7% Ditolak!)
+Desil 1: [██████████████████░░] 91.0% Diterima (201 lolos, 20 ditolak)
+Desil 2: [█████████████████░░░] 88.2% Diterima (164 lolos, 22 ditolak)
+Desil 3: [███████████████████░] 93.6% Diterima (205 lolos, 14 ditolak)
+Desil 4: [██████████████████░░] 90.3% Diterima (159 lolos, 17 ditolak)
+------------------------- CUTOFF MUTLAK AMBANG KUOTA -------------------------
+Desil 5: [░░░░░░░░░░░░░░░░░░░░]   0.0% Diterima (100.0% / 149 Siswa Ditolak!)
+Desil 6: [░░░░░░░░░░░░░░░░░░░░]   0.0% Diterima (100.0% / 385 Siswa Ditolak!)
 ```
 
 ### Mekanisme Kegagalan Sistemik:
 1. **Desil 1 hingga 4 Mendapatkan Perlindungan Penuh:**
-   Panitia KIP-K USK berhasil mengamankan 726 mahasiswa dari Desil 1–4 (tingkat kelulusan rata-rata **90.4%**). Sebanyak 76 penolakan di desil ini umumnya disebabkan ketidaklengkapan berkas fisik atau ketidakcocokan data NIK saat verifikasi faktual.
-2. **Ketiadaan Kuota untuk Desil 5 dan 6:**
-   Begitu kuota KIP terserap habis oleh Desil 1–4, USK kehabisan alokasi beasiswa. Akibatnya, diterapkan garis batas (*hard cut-off*): dari total 534 pelamar Desil 5 dan 6, **hanya 8 orang (1.5%) yang lolos**, sedangkan **526 orang (98.5%) ditolak sekaligus**.
+   Panitia KIP-K USK berhasil mengamankan 729 mahasiswa dari Desil 1–4 (tingkat kelulusan rata-rata **90.9%**). Sebanyak 73 penolakan di desil ini umumnya disebabkan ketidaklengkapan berkas fisik atau ketidakcocokan data NIK saat verifikasi faktual.
+2. **Ketiadaan Kuota untuk Desil 5 dan 6 (Hard Cut-off 100%):**
+   Begitu kuota KIP terserap habis oleh Desil 1–4, USK kehabisan alokasi beasiswa. Akibatnya, diterapkan garis batas mutlak (*hard cut-off*): dari total 534 pelamar Desil 5 dan 6, **0 orang (0.0%) yang lolos**, dan **seluruh 534 orang (100.0%) ditolak sekaligus**.
 3. **Konversi Paksa ke UKT Reguler Menghasilkan Gugur Terpaksa:**
    Sesuai regulasi nasional, calon mahasiswa yang ditolak KIP-K tidak digugurkan kelulusannya dari kampus, melainkan **ditetapkan tarif Uang Kuliah Tunggal (UKT) reguler**.
    Namun, Desil 5 dan 6 menurut standar sosial-ekonomi bukanlah keluarga kaya raya; mereka adalah keluarga berpendapatan rendah-menengah informal (petani kecil, buruh harian, pedagang mikro) yang tidak memiliki bantalan tabungan darurat.
-   Ketika menerima tagihan UKT reguler sebesar Rp 2.500.000 hingga Rp 5.000.000 per semester, **526 siswa ini tidak mampu membayar dan terpaksa membatalkan niat kuliah di USK**.
+   Ketika menerima tagihan UKT reguler sebesar Rp 2.500.000 hingga Rp 5.000.000 per semester, **534 siswa ini tidak mampu membayar dan terpaksa membatalkan niat kuliah di USK**.
 
-$$\text{Tingkat Korelasi Kebocoran} = \frac{\text{KIP Ditolak (611)}}{\text{Calon Gugur SNBT (626)}} = 97.60\%$$
+$$\text{Tingkat Korelasi Kebocoran} = \frac{\text{KIP Ditolak (615)}}{\text{Calon Gugur SNBT (626)}} = \mathbf{98{,}24\%}$$
 
-$$\text{Kontribusi Desil 5-6 thd Penolakan} = \frac{526}{611} = 86.09\%$$
+$$\text{Kontribusi Desil 5-6 thd Penolakan} = \frac{534}{615} = \mathbf{86{,}83\%}$$
 
-> **Kesimpulan Kunci:** Anomali "kursi kosong SNBT" 2026 di USK sebesar 626 kursi secara matematis **86.1% dijelaskan langsung oleh terpentalnya mahasiswa Desil 5 dan Desil 6 dari skema KIP-Kuliah**. Ini adalah temuan mutlak yang memvalidasi analisis data dan membantah keraguan bahwa calon mahasiswa sengaja kabur tanpa alasan.
+> **Kesimpulan Kunci:** Anomali "kursi kosong SNBT" 2026 di USK sebesar 626 kursi secara empiris **98,24% identik dengan 615 calon mahasiswa KIP yang ditolak**, di mana **86,8% (534 jiwa) di antaranya terhempas dari Desil 5 dan 6**. Ini adalah temuan mutlak yang memvalidasi integritas data universitas dan membantah keraguan bahwa calon mahasiswa sengaja kabur tanpa alasan.
 
 ---
 

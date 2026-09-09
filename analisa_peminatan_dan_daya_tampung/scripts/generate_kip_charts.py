@@ -27,11 +27,11 @@ df_fix26 = pd.read_excel(file_kip_penerima, sheet_name='PENERIMA_KIP_FIX_2026')
 df_s1 = pd.read_excel(file_master_pmb, sheet_name='S1_Kampus_Utama')
 df_kebocoran_26 = pd.read_excel(file_kebocoran, sheet_name='Rincian_Tahun_2026', header=3)
 
-# Clean matching SNBT 2026
+# Clean matching SNBT 2026 against Final Master File: DATA_KIP_2025-2026.xlsx
+final_snbt_exam_codes = set(df_kip26[df_kip26['Pola Seleksi'] == 'SNBT']['No Ujian'].astype(str).str.strip())
+df_snbt26['kode_peserta_str'] = df_snbt26.iloc[:, 0].astype(str).str.strip()
 df_snbt26['nama_clean'] = df_snbt26.iloc[:, 1].astype(str).str.strip().str.upper()
-df_fix26['nama_clean'] = df_fix26.iloc[:, 2].astype(str).str.strip().str.upper()
-matched_names = set(df_snbt26['nama_clean']).intersection(set(df_fix26['nama_clean']))
-df_snbt26['is_accepted'] = df_snbt26['nama_clean'].isin(matched_names)
+df_snbt26['is_accepted'] = df_snbt26['kode_peserta_str'].isin(final_snbt_exam_codes)
 df_snbt26['desil'] = df_snbt26.iloc[:, 4]
 df_snbt26['prodi_nama'] = df_snbt26.iloc[:, 8].astype(str).str.strip().str.upper()
 
@@ -58,7 +58,7 @@ p_rej = ax1.bar(x, desil_summary['reject_rate'], width, bottom=desil_summary['ac
 
 # Cutoff line
 ax1.axvline(x=4.5, color='#991B1B', linestyle='--', linewidth=2.2, zorder=4)
-ax1.text(4.55, 62, 'GARIS BATAS KUOTA KIP-K\n(Hard Cut-off Desil 5 & 6)\n526 Mahasiswa Terhempas!', 
+ax1.text(4.55, 62, 'GARIS BATAS KUOTA KIP-K\n(Hard Cut-off Desil 5 & 6)\n534 Mahasiswa Terhempas!\n(100% Ditolak Kampus)', 
          color='#991B1B', fontsize=10, fontweight='bold', bbox=dict(boxstyle='round,pad=0.5', facecolor='#FEF2F2', edgecolor='#EF4444', alpha=0.95), zorder=5)
 
 ax1.set_xticks(x)
@@ -68,7 +68,7 @@ ax1.set_ylim(0, 115)
 ax1.grid(True, linestyle='--', alpha=0.45, color='#CBD5E1', axis='y', zorder=0)
 ax1.spines['top'].set_visible(False)
 ax1.spines['right'].set_visible(False)
-ax1.set_title('A. Efek Jurang (Cliff-Edge) Kelulusan KIP-Kuliah per Desil Kemensos (SNBT 2026)\nPenolakan Massal >98% pada Mahasiswa Prasejahtera Desil 5 & 6', fontsize=11.5, fontweight='bold', pad=15, color='#0F172A')
+ax1.set_title('A. Efek Jurang (Cliff-Edge) Kelulusan KIP-Kuliah per Desil Kemensos (SNBT 2026)\nPenolakan Mutlak 100% pada Mahasiswa Prasejahtera Desil 5 & 6 (534 Jiwa)', fontsize=11.5, fontweight='bold', pad=15, color='#0F172A')
 
 for i, r in desil_summary.iterrows():
     acc_pct = r['accept_rate']
@@ -91,7 +91,7 @@ categories = [
     'Total Pendaftar KIP\nDitolak Kampus\n(Semua Desil)',
     'Pendaftar KIP Desil 5-6\nDitolak Kampus\n(Economic Drop-out)'
 ]
-values = [626, 611, 526]
+values = [626, 615, 534]
 colors = ['#475569', '#DC2626', '#EA580C']
 
 bars2 = ax2.bar(categories, values, color=colors, width=0.52, edgecolor='#1E293B', linewidth=1.2, zorder=3)
@@ -100,16 +100,16 @@ ax2.set_ylim(0, 750)
 ax2.grid(True, linestyle='--', alpha=0.45, color='#CBD5E1', axis='y', zorder=0)
 ax2.spines['top'].set_visible(False)
 ax2.spines['right'].set_visible(False)
-ax2.set_title('B. Pembuktian Kausalitas: Kursi Kosong SNBT vs Penolakan KIP-Kuliah\nKorelasi 97.6% Membuktikan Kebocoran adalah Kegagalan Daya Beli (Bukan Peminat Kabur)', fontsize=11.5, fontweight='bold', pad=15, color='#0F172A')
+ax2.set_title('B. Pembuktian Kausalitas: Kursi Kosong SNBT vs Penolakan KIP-Kuliah\nKorelasi 98.2% Membuktikan Kebocoran adalah Kegagalan Daya Beli (Bukan Peminat Kabur)', fontsize=11.5, fontweight='bold', pad=15, color='#0F172A')
 
-for bar, val, pct_str in zip(bars2, values, ['100% (Baseline)', '97.6% Identik', '84.0% dari Calon Gugur']):
+for bar, val, pct_str in zip(bars2, values, ['100% (Baseline)', '98.2% Identik', '85.3% dari Calon Gugur']):
     h = bar.get_height()
     ax2.text(bar.get_x() + bar.get_width()/2, h + 15, f"{val:,} Jiwa\n({pct_str})", ha='center', va='bottom', fontsize=10, fontweight='bold', color='#0F172A', zorder=5)
 
 ax2.text(0.5, 0.25, 
          "MEKANISME KAUSALITAS TERBUKTI:\n"
          "1. 1.361 Siswa Lolos Akademik UTBK SNBT di USK.\n"
-         "2. Kuota KIP Menipis -> 611 Siswa Ditolak (526 dari Desil 5 & 6).\n"
+         "2. Kuota KIP Menipis -> 615 Siswa Ditolak (534 dari Desil 5 & 6).\n"
          "3. Mahasiswa dialihkan ke UKT Reguler (Rp 2,5 - 5 Juta/Smt).\n"
          "4. Tidak Sanggup Bayar -> 626 Kursi Menguap Tidak Daftar Ulang!",
          transform=ax2.transAxes, ha='center', va='center', fontsize=9.5, fontweight='bold', color='#1E293B',

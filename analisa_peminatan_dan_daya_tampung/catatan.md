@@ -215,7 +215,7 @@ Jika ditanya oleh mentor: *"Dari mana kriteria ini didapatkan dan apa referensin
 #### 5. Kategori "Tren Fluktuatif":
 * **Kriteria:** Prodi yang tidak memenuhi keempat kondisi di atas (pergerakan naik-turun selang-seling).
 * **Justifikasi:**
-  * Menggambarkan fenomena psikologis calon pendaftar (*cyclical herd behavior*): saat prodi di tahun lalu terlihat ketat, peminat tahun berikutnya takut mendaftar (turun); saat peminat turun, tahun depannya diserbu kembali karena dianggap peluang lolos lebih mudah.
+  * Menggambarkan fenomena psikologis calon pendaftar (*cyclical herd behavior*): ![alt text](https://file%2B.vscode-resource.vscode-cdn.net/Users/auliamuzhaffar/Documents/maganghub/tugas-5/analisa_peminatan_dan_daya_tampung/grafik/13_matriks_4_kuadran_5_tahun_2022_2026.png?version%3D1788774526550)saat prodi di tahun lalu terlihat ketat, peminat tahun berikutnya takut mendaftar (turun); saat peminat turun, tahun depannya diserbu kembali karena dianggap peluang lolos lebih mudah.
 
 ---
 
@@ -1250,6 +1250,43 @@ File ini memiliki 8 sheet siap pakai:
 > 4. *Terkait kebocoran, kami menemukan **episentrum kebocoran Jalur TALENTA berada di Pendidikan Dokter (86,9% calon dokter yang lulus kabur/mundur, total 226 orang)** karena dijadikan tiket cadangan gratis. Sedangkan kebocoran Jalur Mandiri tertinggi terjadi di **Ilmu Keperawatan (48,2% calon mahasiswa mandiri gugur)** akibat syok biaya IPI.*
 > 
 > *Seluruh data per tahun (2022, 2023, 2024, 2025, 2026) dan pivot 5 tahun per prodi telah tersusun rapi per sheet di file Excel tersebut untuk kebutuhan telaah pimpinan. Terima kasih Pak/Bu."*
+
+---
+
+## 23. LOG AUDIT FORENSIK: 8 MAHASISWA DESIL 5 & 6 (SEMULA TERCENTANG DI DRAFT, DITOLAK DEFINITIF DI DATA FINAL MENTOR)
+
+### A. Latar Belakang Forensik
+Pada saat eksplorasi data awal menggunakan file draft `PENERIMA_KIP_FIX_2026` (yang hanya memuat kolom Nama dan NPM tanpa Nomor Ujian), pencocokan string nama sederhana (*exact name matching*) menghasilkan **8 mahasiswa dari Desil 5 dan 6 yang tampak "diterima beasiswa"** (3 orang di Desil 5, dan 5 orang di Desil 6).
+
+Namun, setelah diverifikasi terhadap **Master Data KIP Final (`DATA_KIP_2025-2026.xlsx`)** menggunakan **Nomor Ujian Nasional UTBK (`No Ujian` == `KODE PESERTA`)**, terbukti secara mutlak bahwa **kedelapan siswa ini sebenarnya DITOLAK KIP-nya**. Status mereka semula tercentang semata-mata karena memiliki **nama kembar (*homonim*)** dengan mahasiswa lain yang diterima di prodi/jalur berbeda.
+
+Akibatnya, pada data master final:
+* **Desil 5:** 149 Pendaftar $\rightarrow$ **0 Diterima, 149 Ditolak (100% Ditolak Mutlak)**
+* **Desil 6:** 385 Pendaftar $\rightarrow$ **0 Diterima, 385 Ditolak (100% Ditolak Mutlak)**
+* **Total Desil 5 & 6 Ditolak:** **534 Mahasiswa (100% Ditolak)**
+
+---
+
+### B. Tabel Daftar 8 Mahasiswa Desil 5 & 6 Tersebut
+
+| No | Nama Mahasiswa (Pendaftar SNBT) | Desil | Nomor Ujian SNBT | Program Studi Lulus SNBT | Mengapa Sempat Tercentang di Draft Lama? (Kasus Nama Kembar / Homonim) | Status Riil di Data Final Mentor |
+|:---:|---|:---:|:---:|---|---|:---:|
+| 1 | **BADRATUN NAFIS** | **5** | `261110030520` | Pendidikan Fisika (S1) | Tercentang karena ada nama sama yang diterima di **Pendidikan Sejarah** (SNBT Desil 1, No Ujian: `261110150147`) dan **PPKn** (SNBP, No Ujian: `426571824`). | **DITOLAK** |
+| 2 | **SALSABILLA** | **5** | `261110100521` | Pendidikan Geografi (S1) | Tercentang karena ada nama sama yang diterima di **Ilmu Politik** (NPM `261010301100001`), yang ternyata adalah mahasiswa **Jalur SNBP** (No Ujian: `426120417`). | **DITOLAK** |
+| 3 | **MARLINA** | **5** | `261210141604` | Pendidikan Biologi (PSDKU Gayo Lues) | Tercentang karena ada nama sama yang diterima di **Ilmu Hukum** (NPM `260310101100054`), yang ternyata adalah mahasiswa **Jalur SNBP** (No Ujian: `426209238`). | **DITOLAK** |
+| 4 | **ZIA ZAHRA** | **6** | `261110160061` | Pendidikan Guru PAUD (S1) | Tercentang karena ada nama sama yang diterima di **Ekonomi Pembangunan** (NPM `260110101100084`, No Ujian: `261110170436`, berasal dari **Desil 2**). | **DITOLAK** |
+| 5 | **MUHAMMAD LUTHFI** | **6** | `261110160421` | Penjaskesrek (S1) | Tercentang karena ada nama sama yang diterima di **Budidaya Perairan** (NPM `261110201100070`, No Ujian: `261110090186`, berasal dari **Desil 3**). | **DITOLAK** |
+| 6 | **MUHAMMAD IQBAL** | **6** | `261120070174` | Teknik Mesin (S1) | Tercentang karena ada nama sama yang diterima di **Pendidikan Geografi** (SNBT Desil 1, No Ujian: `261110040039`) dan **PGSD** (Jalur SNBP). | **DITOLAK** |
+| 7 | **ASMAUL HUSNA** | **6** | `261130160097` | Pendidikan Seni Drama Tari dan Musik (Sendratasik) | Tercentang karena ada nama sama yang diterima di **Pendidikan Bahasa Inggris** (NPM `260610202100077`, No Ujian: `261130070088`, berasal dari **Desil 3**). | **DITOLAK** |
+| 8 | **KHADIJAH** | **6** | `261140190057` | Pendidikan Geografi (S1) | Tercentang karena ada nama sama yang diterima di **Pendidikan Fisika** (NPM `260610303100058`, No Ujian: `261140160023`, berasal dari **Desil 4**). | **DITOLAK** |
+
+---
+
+### C. Kesimpulan untuk Log & Jawaban ke Mentor
+1. **Tidak Ada "Anomali Kebocoran":** Awalnya sempat terlihat 8 orang Desil 5–6 lolos KIP, yang tampak anomali karena kuota sudah habis di Desil 4. Ternyata 8 orang tersebut **100% false positive akibat nama kembar**.
+2. **Cut-off 100% Bersih:** Kebijakan seleksi KIP USK 2026 ternyata **sangat konsisten dan tegas**: kuota berhenti tepat di Desil 4. Semua pendaftar Desil 5 dan 6 (534 orang) ditolak beasiswanya tanpa terkecuali.
+3. **Data Final Mengunci Sempurna:** Tepat **746 mahasiswa diterima**, **615 ditolak**, dan **534 orang Desil 5 & 6 ditolak**.
+
 
 
 
