@@ -272,7 +272,7 @@ def main():
     prs.slide_height = SLIDE_H
     blank = prs.slide_layouts[6]  # blank layout
 
-    TOTAL = 24
+    TOTAL = 26
     sn = 0  # slide number counter
 
     # =================================================================
@@ -952,56 +952,123 @@ def main():
     print(f"  [OK] Slide {sn}: Pareto + D3/PSDKU (Two-Card Balanced Layout)")
 
     # =================================================================
-    # SLIDE 21: SECTION DIVIDER — REKOMENDASI STRATEGIS
+    # SLIDE 21: SECTION DIVIDER — KESIMPULAN & REKOMENDASI STRATEGIS
     # =================================================================
     sn += 1
-    add_section_divider(prs, blank, 4, "Rekomendasi Kebijakan Strategis", sn, TOTAL)
+    add_section_divider(prs, blank, 4, "Kesimpulan Eksekutif & Rekomendasi Kebijakan", sn, TOTAL)
     print(f"  [OK] Slide {sn}: Section Divider 04")
 
     # =================================================================
-    # SLIDE 22: 6 REKOMENDASI KEBIJAKAN
+    # SLIDE 22: SINTESIS KESIMPULAN EKSEKUTIF (3 PILAR UTAMA)
     # =================================================================
     sn += 1
     s22 = prs.slides.add_slide(blank)
-    create_header_v2(s22, "6 Rekomendasi Kebijakan Terintegrasi Menuju PMB 2027 yang Efisien & Berkeadilan")
+    create_header_v2(s22, "Sintesis Kesimpulan Eksekutif: Tiga Pilar Temuan Utama Audit PMB USK (2022–2026)")
+
+    cw22 = Inches(3.75)
+    ch22 = Inches(5.0)
+
+    # Pilar 1: Makro & Kuadran
+    _, tf22_1 = add_card_v2(s22, MARGIN_L, CONTENT_TOP, cw22, ch22,
+                             bg_color=RGBColor(240, 249, 255), border_color=RGBColor(186, 230, 253))
+    add_card_title(tf22_1, "1. OVER-EKSPANSI & 4 KUADRAN", ROYAL_BLUE, 11)
+    add_bullet_v2(tf22_1, "Tekanan Keterisian:", "Daya tampung naik +23,5% melampaui pendaftar ulang (+16,3%). Fill rate turun dari 87,4% ke 82,3% (1.776 kursi kosong 2026).", font_size=9.5, space_after=4)
+    add_bullet_v2(tf22_1, "Polarisasi 66 Prodi:", "• Kuadran I (31 Prodi Unggulan - 59% mhs): Keterisian >80%, pilar reputasi & revenue PTN-BH.\n• Kuadran III (22 Prodi Defisit - 23% mhs): Keterisian <70%, episentrum inefisiensi kelas.", font_size=9.5, space_after=4)
+    add_bullet_v2(tf22_1, "Over-Ekspansi Kuota:", "Penambahan daya tampung di Kuadran III (MFR mendekati nol) gagal diserap pasar dan hanya memicu kursi kosong semu.", font_size=9.5, space_after=2, bold_color=DEEP_RED)
+
+    # Pilar 2: Vokasi & Jalur Masuk
+    _, tf22_2 = add_card_v2(s22, Inches(4.75), CONTENT_TOP, cw22, ch22,
+                             bg_color=RGBColor(255, 251, 235), border_color=RGBColor(254, 240, 138))
+    add_card_title(tf22_2, "2. DISRUPSI VOKASI & JALUR MASUK", ORANGE_ACC, 11)
+    add_bullet_v2(tf22_2, "Krisis Vokasi D3:", "Keterisian hanya 51,3% (324 kursi kosong dari 665 kuota). Ijazah D3 kalah bersaing di formasi ASN (golongan II/c vs III/a).", font_size=9.5, space_after=4)
+    add_bullet_v2(tf22_2, "Krisis Akut PSDKU:", "Keterisian hanya 18,6% (81,4% kursi kosong melompong; hanya 41 mhs masuk dari 220 kuota), membebani biaya operasional.", font_size=9.5, space_after=4, bold_color=DEEP_RED)
+    add_bullet_v2(tf22_2, "Jebakan Jalur Masuk:", "• TALENTA bocor hingga 75% karena siswa kabur saat UTBK.\n• Mandiri terkendala batas waktu bayar sempit (5 hari) & sosialisasi cicilan lambat.", font_size=9.5, space_after=2)
+
+    # Pilar 3: KIP & Cascading
+    _, tf22_3 = add_card_v2(s22, Inches(8.7), CONTENT_TOP, cw22, ch22,
+                             bg_color=RGBColor(254, 242, 242), border_color=RGBColor(254, 202, 202))
+    add_card_title(tf22_3, "3. 'SMOKING GUN' KIP & DESIL 5-6", DEEP_RED, 11)
+    add_bullet_v2(tf22_3, "Kausalitas 98,24%:", "626 kursi kosong SNBT 2026 secara empiris 98,24% identik dengan 615 calon KIP ditolak beasiswanya.", font_size=9.5, space_after=4, bold_color=DEEP_RED)
+    add_bullet_v2(tf22_3, "Efek Jurang Desil:", "534 orang (86,8% tolak KIP) berasal dari Desil 5 & 6 yang terkena cut-off 100% akibat kuota KIP SNBT dipotong 159 kursi.", font_size=9.5, space_after=4)
+    add_bullet_v2(tf22_3, "Gugur Terpaksa:", "Bukan kabur ke kampus lain, tetapi tidak sanggup bayar UKT reguler. Mengalihkan ke Mandiri adalah salah resep bagi siswa miskin.", font_size=9.5, space_after=2)
+
+    add_footer(s22, sn, TOTAL)
+    print(f"  [OK] Slide {sn}: Sintesis Kesimpulan (3 Pilar)")
+
+    # =================================================================
+    # SLIDE 23: EVALUASI CASCADING QUOTA (PELUANG VS JEBAKAN)
+    # =================================================================
+    sn += 1
+    s23 = prs.slides.add_slide(blank)
+    create_header_v2(s23, "Evaluasi Kebijakan Cascading Quota (SNBP → SNBT → Mandiri): Peluang vs 3 Jebakan",
+                     "Konsekuensi Hukum Ketiadaan Mekanisme Waiting List pada Seleksi Serentak Nasional SNPMB")
+
+    cw23 = Inches(5.7)
+    ch23 = Inches(5.0)
+
+    # Peluang
+    _, tf23_1 = add_card_v2(s23, MARGIN_L, CONTENT_TOP, cw23, ch23,
+                             bg_color=RGBColor(240, 253, 244), border_color=RGBColor(187, 247, 208))
+    add_card_title(tf23_1, "✅ PELUANG REVENUE PTN-BH (PRODI KUADRAN I)", SUCCESS_GRN, 12)
+    add_bullet_v2(tf23_1, "Monetisasi Daya Saing Tinggi:", "Pada prodi favorit (Kedokteran, Farmasi, Hukum, Teknik Sipil, Informatika), sisa kuota yang dialihkan ke Mandiri langsung diperebutkan pendaftar berdaya beli tinggi.", font_size=10, space_after=6)
+    add_bullet_v2(tf23_1, "Surplus Penerimaan IPI:", "Iuran Pengembangan Institusi (IPI / Uang Pangkal) dari jalur Mandiri mendatangkan miliaran rupiah yang sangat vital bagi kas operasional kampus.", font_size=10, space_after=6, bold_color=SUCCESS_GRN)
+    add_bullet_v2(tf23_1, "Kapasitas Kelas Terisi:", "Mencegah fasilitas laboratorium dan rasio dosen prodi unggulan menganggur akibat calon SNBP/SNBT yang pindah ke kampus luar Aceh.", font_size=10, space_after=4)
+
+    # Jebakan
+    _, tf23_2 = add_card_v2(s23, Inches(6.8), CONTENT_TOP, cw23, ch23,
+                             bg_color=RGBColor(254, 242, 242), border_color=RGBColor(254, 202, 202))
+    add_card_title(tf23_2, "⚠️ TIGA JEBAKAN STRUKTURAL (KUADRAN III & KIP)", DEEP_RED, 12)
+    add_bullet_v2(tf23_2, "1. Salah Sasaran Bagi Korban KIP:", "98,2% kursi kosong SNBT adalah anak miskin tertolak KIP. Melempar kursi ke Mandiri mustahil menolong mereka karena Mandiri mewajibkan biaya tes dan IPI puluhan juta.", font_size=10, space_after=6, bold_color=DEEP_RED)
+    add_bullet_v2(tf23_2, "2. Kutukan Kursi Kosong Permanen:", "Prodi Kuadran III (Budidaya Perairan, THP, Fisika) di jalur tes nasional saja sepi. Dilempar ke Mandiri pendaftar mendekati nol → kursi kosong permanen!", font_size=10, space_after=6, bold_color=DEEP_RED)
+    add_bullet_v2(tf23_2, "3. Risiko Kompromi Mutu Akademik:", "Ketergantungan berlebih pada Mandiri di akhir kalender (Agustus) berisiko menurunkan passing grade demi memenuhi target kuantitas kursi.", font_size=10, space_after=4)
+
+    add_footer(s23, sn, TOTAL)
+    print(f"  [OK] Slide {sn}: Evaluasi Cascading Quota")
+
+    # =================================================================
+    # SLIDE 24: 6 REKOMENDASI KEBIJAKAN TERINTEGRASI
+    # =================================================================
+    sn += 1
+    s24 = prs.slides.add_slide(blank)
+    create_header_v2(s24, "6 Rekomendasi Kebijakan Terintegrasi Menuju PMB 2027 yang Efisien & Berkeadilan")
 
     # 3x2 grid
-    cw22 = Inches(3.75)
-    ch22 = Inches(2.4)
+    cw24 = Inches(3.75)
+    ch24 = Inches(2.4)
     gap_x = Inches(0.2)
     gap_y = Inches(0.15)
     y1 = CONTENT_TOP
-    y2 = CONTENT_TOP + ch22 + gap_y
+    y2 = CONTENT_TOP + ch24 + gap_y
 
     recs = [
         ("AKSI 1:\nRASIONALISASI KUOTA", ALERT_RED,
          "Pangkas 20–40% pada 22 prodi Kuadran III. Budidaya Perairan 160→90, THP 160→100, Pend. Ekonomi 160→100, T. Kimia 180→120, Fisika 80→50.",
-         "Hapus ~450 kursi kosong semu tanpa kehilangan mahasiswa riil."),
+         "Hapus ~300 bangku kosong semu tanpa mengurangi mahasiswa riil, dongkrak Fill Rate ke >88%."),
         ("AKSI 2:\nUKT PENYELAMAT DESIL 5&6", ORANGE_ACC,
-         "SK Rektor: Pelamar KIP SNBT Desil 5-6 yang tidak tertampung APBN otomatis ditetapkan UKT Kel.1 (Rp500rb) atau Kel.2 (Rp1jt) semester 1.",
-         "Menyelamatkan 300+ calon mahasiswa berprestasi UTBK."),
-        ("AKSI 3:\nSUBSIDI SILANG IPI", ROYAL_BLUE,
-         "Alokasikan 5% dari total penerimaan IPI Mandiri Kuadran I (~Rp2,0 Miliar) untuk KIP Kemitraan PTN-BH USK.",
-         "Mendanai 833 beasiswa mandiri bagi mahasiswa prasejahtera Kuadran III."),
-        ("AKSI 4:\nFINANCIAL ENGINEERING KD.IV", TEAL,
-         "Cicilan IPI 3 Tahap (50%-25%-25%). Fast-Track Auto-Call cadangan 48 jam. Commitment Fee Rp1jt untuk TALENTA.",
-         "Menyelamatkan penerimaan Rp4,5–6,0 Miliar/tahun yang selama ini hilang."),
-        ("AKSI 5:\nSINKRONISASI KIP × DT SNBT", RGBColor(139, 92, 246),
-         "Kuota kelulusan SNBT pada prodi Kuadran III disinkronkan dengan sisa kuota definitif KIP-K pasca-SNBP.",
-         "Mencegah over-promising kelulusan pada prodi padat KIP."),
-        ("AKSI 6:\nSINERGI BAITUL MAL & OTSUS", SUCCESS_GRN,
-         "Ajukan daftar 526 calon mahasiswa Desil 5-6 kepada Baitul Mal Aceh & Pemprov sebagai mustahik Fisabilillah.",
-         "Mengintegrasikan dana otonomi daerah dengan misi pengentasan kemiskinan via pendidikan tinggi."),
+         "SK Rektor: Calon KIP SNBT Desil 5-6 yang tertolak otomatis ditetapkan UKT Kel.1 (Rp500rb) atau Kel.2 (Rp1jt) semester pertama.",
+         "Menyelamatkan 500+ calon mahasiswa berprestasi UTBK agar tidak putus kuliah."),
+        ("AKSI 3:\nSUBSIDI SILANG IPI MANDIRI", ROYAL_BLUE,
+         "Alokasikan 5%–10% total penerimaan IPI Mandiri Kuadran I (~Rp2,0–3,0 Miliar) untuk program Beasiswa USK Berdikari.",
+         "Mendanai beasiswa mandiri dan jaring pengaman bagi mahasiswa prasejahtera di Kuadran III."),
+        ("AKSI 4:\nPROTEKSI JALUR TALENTA & MANDIRI", TEAL,
+         "Wajibkan commitment fee Rp1jt pada TALENTA (mengunci siswa agar tak kabur). Perpanjang masa sanggah UKT jadi 10 hari & masifkan cicilan IPI.",
+         "Membendung kebocoran 75% di TALENTA dan menyelamatkan penerimaan kas kampus."),
+        ("AKSI 5:\nINTERVENSI HULU & SEGMENTED CASCADING", RGBColor(139, 92, 246),
+         "SNPMB serentak tidak izinkan waiting list nasional. Penyelamatan wajib di hulu sebelum masa registrasi tutup (intervensi UKT), lalu kuota Kuadran I dialihkan ke Mandiri, Kuadran III ke Afirmasi.",
+         "Mencegah kursi SNBT hangus permanen dan menutup jebakan kursi kosong di Kuadran III."),
+        ("AKSI 6:\nSINERGI BAITUL MAL & DANA OTSUS", SUCCESS_GRN,
+         "Serahkan basis data 534 calon mahasiswa Desil 5-6 kepada Baitul Mal Aceh & Pemerintah Aceh sebagai penerima beasiswa fakir/miskin.",
+         "Mengintegrasikan potensi dana syariah dan otonomi daerah untuk pendidikan tinggi berkelanjutan."),
     ]
 
     positions = [
-        (MARGIN_L, y1), (MARGIN_L + cw22 + gap_x, y1), (MARGIN_L + 2*(cw22 + gap_x), y1),
-        (MARGIN_L, y2), (MARGIN_L + cw22 + gap_x, y2), (MARGIN_L + 2*(cw22 + gap_x), y2),
+        (MARGIN_L, y1), (MARGIN_L + cw24 + gap_x, y1), (MARGIN_L + 2*(cw24 + gap_x), y1),
+        (MARGIN_L, y2), (MARGIN_L + cw24 + gap_x, y2), (MARGIN_L + 2*(cw24 + gap_x), y2),
     ]
 
     for i, (title, color, desc, result) in enumerate(recs):
         x, y = positions[i]
-        _, tf_r = add_card_v2(s22, x, y, cw22, ch22)
+        _, tf_r = add_card_v2(s24, x, y, cw24, ch24)
         p_t = tf_r.paragraphs[0]
         p_t.text = title
         p_t.font.bold = True
@@ -1011,61 +1078,60 @@ def main():
         add_bullet_v2(tf_r, "", desc, font_size=9, space_after=4)
         add_bullet_v2(tf_r, "Hasil:", result, font_size=9, space_after=2, bold_color=color)
 
-    add_footer(s22, sn, TOTAL)
-    print(f"  [OK] Slide {sn}: 6 Rekomendasi")
+    add_footer(s24, sn, TOTAL)
+    print(f"  [OK] Slide {sn}: 6 Rekomendasi Kebijakan")
 
     # =================================================================
-    # SLIDE 23: RESTRUKTURISASI FEB + D3 + PSDKU
+    # SLIDE 25: RESTRUKTURISASI FEB + D3 + PSDKU
     # =================================================================
     sn += 1
-    s23 = prs.slides.add_slide(blank)
-    create_header_v2(s23, "Agenda Transformasi: Restrukturisasi FEB, Konversi D3→D4, dan Rasionalisasi PSDKU")
+    s25 = prs.slides.add_slide(blank)
+    create_header_v2(s25, "Agenda Transformasi Khusus: Restrukturisasi FEB, Konversi D3→D4, dan Rasionalisasi PSDKU")
 
-    # Three-column cards
-    cw23 = Inches(3.75)
-    ch23 = Inches(5.0)
+    cw25 = Inches(3.75)
+    ch25 = Inches(5.0)
 
     # FEB
-    _, tf23_1 = add_card_v2(s23, MARGIN_L, CONTENT_TOP, cw23, ch23,
+    _, tf25_1 = add_card_v2(s25, MARGIN_L, CONTENT_TOP, cw25, ch25,
                              bg_color=RGBColor(254, 242, 242), border_color=RGBColor(254, 202, 202))
-    add_card_title(tf23_1, "⚠️ ALARM SENAT FEB", DEEP_RED, 12)
-    add_bullet_v2(tf23_1, "Fakta Krisis:", "3 prodi utama (Manajemen, Eko Islam, Eko Pembangunan) kehilangan 144 mhs/angkatan (-24% dari basis 2022).", font_size=10, space_after=5)
-    add_bullet_v2(tf23_1, "Zero-Rebound:", "Manajemen & Eko Islam tidak pernah sekalipun naik dalam 4 transisi tahunan!", font_size=10, space_after=5, bold_color=DEEP_RED)
-    add_bullet_v2(tf23_1, "Kanibalisasi:", "S1 Bisnis Digital (baru 2024) menyedot 800+ peminat langsung dari Manajemen.", font_size=10, space_after=6)
-    add_bullet_v2(tf23_1, "Rekomendasi:", "Re-engineering kurikulum → Digital Marketing, Business Analytics, Islamic FinTech untuk membalikkan tren peminat Gen Z.",
+    add_card_title(tf25_1, "⚠️ ALARM SENAT FEB", DEEP_RED, 12)
+    add_bullet_v2(tf25_1, "Fakta Krisis:", "3 prodi utama (Manajemen, Eko Islam, Eko Pembangunan) kehilangan 144 mhs/angkatan (-24% dari basis 2022).", font_size=10, space_after=5)
+    add_bullet_v2(tf25_1, "Zero-Rebound:", "Manajemen & Eko Islam tidak pernah sekalipun naik dalam 4 transisi tahunan!", font_size=10, space_after=5, bold_color=DEEP_RED)
+    add_bullet_v2(tf25_1, "Kanibalisasi:", "S1 Bisnis Digital (baru 2024) menyedot 800+ peminat langsung dari Manajemen.", font_size=10, space_after=6)
+    add_bullet_v2(tf25_1, "Rekomendasi:", "Re-engineering kurikulum → Digital Marketing, Business Analytics, Islamic FinTech untuk membalikkan tren peminat Gen Z.",
                   font_size=10, space_after=3, bold_color=ORANGE_ACC)
 
     # D3→D4
-    _, tf23_2 = add_card_v2(s23, Inches(4.75), CONTENT_TOP, cw23, ch23,
+    _, tf25_2 = add_card_v2(s25, Inches(4.75), CONTENT_TOP, cw25, ch25,
                              bg_color=RGBColor(240, 253, 244), border_color=RGBColor(187, 247, 208))
-    add_card_title(tf23_2, "🔄 KONVERSI D3 → D4", SUCCESS_GRN, 12)
-    add_bullet_v2(tf23_2, "Akar Masalah:", "Lulusan D3 = Golongan II/c ASN, kalah dari D4/S1 = Golongan III/a. Kurikulum D3 hanya 'versi ringkas' S1 tanpa sertifikasi industri.", font_size=10, space_after=5)
-    add_bullet_v2(tf23_2, "Target Konversi:", "• D3 Manajemen Informatika → D4 Sains Data Terapan\n• D3 Teknik Sipil → D4 Manajemen Rekayasa Konstruksi\n• D3 Akuntansi → D4 Akuntansi Sektor Publik", font_size=10, space_after=5)
-    add_bullet_v2(tf23_2, "Moratorium:", "D3 Manajemen Agribisnis (keterisian 36,8%) dan D3 Budidaya Peternakan (32,0%).", font_size=10, space_after=5, bold_color=ALERT_RED)
-    add_bullet_v2(tf23_2, "Kurikulum Dual System:", "Magang industri 1 tahun penuh + sertifikasi kompetensi BNSP.", font_size=10, space_after=3)
+    add_card_title(tf25_2, "🔄 KONVERSI D3 → D4", SUCCESS_GRN, 12)
+    add_bullet_v2(tf25_2, "Akar Masalah:", "Lulusan D3 = Golongan II/c ASN, kalah dari D4/S1 = Golongan III/a. Kurikulum D3 hanya 'versi ringkas' S1 tanpa sertifikasi industri.", font_size=10, space_after=5)
+    add_bullet_v2(tf25_2, "Target Konversi:", "• D3 Manajemen Informatika → D4 Sains Data Terapan\n• D3 Teknik Sipil → D4 Manajemen Rekayasa Konstruksi\n• D3 Akuntansi → D4 Akuntansi Sektor Publik", font_size=10, space_after=5)
+    add_bullet_v2(tf25_2, "Moratorium:", "D3 Manajemen Agribisnis (keterisian 27,0%) dan D3 Budidaya Peternakan.", font_size=10, space_after=5, bold_color=ALERT_RED)
+    add_bullet_v2(tf25_2, "Kurikulum Dual System:", "Magang industri 1 tahun penuh + sertifikasi kompetensi BNSP.", font_size=10, space_after=3)
 
     # PSDKU
-    _, tf23_3 = add_card_v2(s23, Inches(8.7), CONTENT_TOP, cw23, ch23,
+    _, tf25_3 = add_card_v2(s25, Inches(8.7), CONTENT_TOP, cw25, ch25,
                              bg_color=RGBColor(255, 247, 237), border_color=RGBColor(253, 230, 138))
-    add_card_title(tf23_3, "📍 RASIONALISASI PSDKU", ORANGE_ACC, 12)
-    add_bullet_v2(tf23_3, "Fakta Inefisiensi:", "5 tahun: 1.050 kursi dibuka, hanya 267 mahasiswa masuk. 783 kursi (74,6%) terbuang sia-sia.", font_size=10, space_after=5)
-    add_bullet_v2(tf23_3, "Kendala Geografis:", "Blangkejeren berjarak 10–12 jam darat dari Banda Aceh/Medan. Isolated dari pasar pendaftar nasional.", font_size=10, space_after=5)
-    add_bullet_v2(tf23_3, "Downsizing 50%:", "Pangkas dari 220 → 100–110 kursi/tahun (rata-rata 25/prodi).", font_size=10, space_after=5, bold_color=ALERT_RED)
-    add_bullet_v2(tf23_3, "MoU Pemkab:", "Ikat kuota dengan beasiswa penuh APBD Gayo Lues / Aceh Tenggara.", font_size=10, space_after=3)
-    add_bullet_v2(tf23_3, "Fokus Niche Lokal:", "Kurikulum Agribisnis Kopi Gayo & Konservasi Ekosistem Leuser.", font_size=10, space_after=2)
+    add_card_title(tf25_3, "📍 RASIONALISASI PSDKU", ORANGE_ACC, 12)
+    add_bullet_v2(tf25_3, "Fakta Inefisiensi:", "5 tahun: 1.050 kursi dibuka, hanya 267 mahasiswa masuk. Di 2026, 81,4% kursi kosong (hanya 41 mhs masuk dari 220 kuota).", font_size=10, space_after=5)
+    add_bullet_v2(tf25_3, "Kendala Geografis:", "Blangkejeren berjarak 10–12 jam darat dari Banda Aceh/Medan. Terisolasi dari pasar pendaftar nasional.", font_size=10, space_after=5)
+    add_bullet_v2(tf25_3, "Downsizing 50%:", "Pangkas dari 220 → 100–110 kursi/tahun (rata-rata 25/prodi).", font_size=10, space_after=5, bold_color=ALERT_RED)
+    add_bullet_v2(tf25_3, "MoU Pemkab:", "Ikat kuota dengan beasiswa penuh APBD Gayo Lues / Aceh Tenggara.", font_size=10, space_after=3)
+    add_bullet_v2(tf25_3, "Fokus Niche Lokal:", "Kurikulum Agribisnis Kopi Gayo & Konservasi Ekosistem Leuser.", font_size=10, space_after=2)
 
-    add_footer(s23, sn, TOTAL)
+    add_footer(s25, sn, TOTAL)
     print(f"  [OK] Slide {sn}: Transformasi FEB/D3/PSDKU")
 
     # =================================================================
-    # SLIDE 24: CLOSING / PESAN KUNCI PIMPINAN
+    # SLIDE 26: CLOSING / PESAN KUNCI PIMPINAN
     # =================================================================
     sn += 1
-    s24 = prs.slides.add_slide(blank)
-    add_bg(s24, NAVY)
+    s26 = prs.slides.add_slide(blank)
+    add_bg(s26, NAVY)
 
     # Quote area
-    q_box = s24.shapes.add_textbox(Inches(1.2), Inches(0.6), Inches(10.9), Inches(2.5))
+    q_box = s26.shapes.add_textbox(Inches(1.2), Inches(0.6), Inches(10.9), Inches(2.5))
     q_tf = q_box.text_frame
     q_tf.word_wrap = True
 
@@ -1086,38 +1152,38 @@ def main():
     p_qt.alignment = PP_ALIGN.CENTER
 
     # Gold line
-    add_gold_line(s24, Inches(3.35), left=Inches(4.0), width=Inches(5.3))
+    add_gold_line(s26, Inches(3.35), left=Inches(4.0), width=Inches(5.3))
 
     # 3 Takeaway cards
-    col_w24 = Inches(3.45)
-    y24 = Inches(3.65)
-    h24 = Inches(3.1)
+    col_w26 = Inches(3.45)
+    y26 = Inches(3.65)
+    h26 = Inches(3.1)
 
-    _, t24_1 = add_card_v2(s24, Inches(1.2), y24, col_w24, h24,
+    _, t26_1 = add_card_v2(s26, Inches(1.2), y26, col_w26, h26,
                             bg_color=RGBColor(20, 42, 80), border_color=RGBColor(60, 80, 120))
-    add_card_title(t24_1, "1. AUDIT DATA MEMBUKTIKAN", GOLD, 12)
-    add_bullet_v2(t24_1, "Bukan Masalah Minat:", "Kebocoran SNBT = keterbatasan kuota beasiswa (cutoff Desil 5-6), bukan ketidakmampuan universitas menarik peminat.",
+    add_card_title(t26_1, "1. AUDIT DATA MEMBUKTIKAN", GOLD, 12)
+    add_bullet_v2(t26_1, "Bukan Masalah Minat:", "Kebocoran SNBT = keterbatasan kuota beasiswa (cutoff Desil 5-6), bukan ketidakmampuan universitas menarik peminat.",
                   font_size=10.5, space_after=5, bold_color=WARM_WHITE, norm_color=RGBColor(180, 190, 210))
-    add_bullet_v2(t24_1, "Kausalitas 97,6%:", "Siswa yang gugur adalah anak prasejahtera terhempas ketiadaan beasiswa.",
+    add_bullet_v2(t26_1, "Kausalitas 98,24%:", "615 calon tolak KIP ≈ 626 kursi kosong SNBT; 534 orang (86,8%) berasal murni dari Desil 5 & 6.",
                   font_size=10.5, space_after=3, bold_color=WARM_WHITE, norm_color=RGBColor(180, 190, 210))
 
-    _, t24_2 = add_card_v2(s24, Inches(4.94), y24, col_w24, h24,
+    _, t26_2 = add_card_v2(s26, Inches(4.94), y26, col_w26, h26,
                             bg_color=RGBColor(20, 42, 80), border_color=RGBColor(60, 80, 120))
-    add_card_title(t24_2, "2. EFISIENSI MENYELAMATKAN AKREDITASI", ORANGE_ACC, 12)
-    add_bullet_v2(t24_2, "Hapus Bangku Semu:", "Rasionalisasi kuota Kuadran III = penyehatan mutu akademik, bukan pelemahan fakultas.",
+    add_card_title(t26_2, "2. EFISIENSI MENYELAMATKAN AKREDITASI", ORANGE_ACC, 12)
+    add_bullet_v2(t26_2, "Hapus Bangku Semu:", "Rasionalisasi kuota Kuadran III = penyehatan mutu akademik, bukan pelemahan fakultas.",
                   font_size=10.5, space_after=5, bold_color=WARM_WHITE, norm_color=RGBColor(180, 190, 210))
-    add_bullet_v2(t24_2, "Rasio Optimal:", "Kapasitas yang pas menjaga rasio dosen-mahasiswa dan instrumen akreditasi unggul internasional.",
+    add_bullet_v2(t26_2, "Rasio Optimal:", "Kapasitas yang pas menjaga rasio dosen-mahasiswa dan instrumen akreditasi unggul internasional.",
                   font_size=10.5, space_after=3, bold_color=WARM_WHITE, norm_color=RGBColor(180, 190, 210))
 
-    _, t24_3 = add_card_v2(s24, Inches(8.68), y24, col_w24, h24,
+    _, t26_3 = add_card_v2(s26, Inches(8.68), y26, col_w26, h26,
                             bg_color=RGBColor(20, 42, 80), border_color=RGBColor(60, 80, 120))
-    add_card_title(t24_3, "3. KEBERPIHAKAN SOSIAL PTN-BH", SUCCESS_GRN, 12)
-    add_bullet_v2(t24_3, "Kemandirian Berkeadilan:", "Fleksibilitas finansial PTN-BH harus menjadi berkah bagi mahasiswa prasejahtera melalui subsidi silang IPI mandiri.",
+    add_card_title(t26_3, "3. KEBERPIHAKAN SOSIAL PTN-BH", SUCCESS_GRN, 12)
+    add_bullet_v2(t26_3, "Kemandirian Berkeadilan:", "Fleksibilitas finansial PTN-BH harus menjadi berkah bagi mahasiswa prasejahtera melalui subsidi silang IPI mandiri.",
                   font_size=10.5, space_after=5, bold_color=WARM_WHITE, norm_color=RGBColor(180, 190, 210))
-    add_bullet_v2(t24_3, "Jantong Hate Rakyat Aceh:", "Menjaga marwah USK sebagai benteng kesempatan pendidikan tinggi bagi seluruh lapisan masyarakat Aceh.",
+    add_bullet_v2(t26_3, "Jantong Hate Rakyat Aceh:", "Menjaga marwah USK sebagai benteng kesempatan pendidikan tinggi bagi seluruh lapisan masyarakat Aceh.",
                   font_size=10.5, space_after=3, bold_color=WARM_WHITE, norm_color=RGBColor(180, 190, 210))
 
-    add_footer(s24, sn, TOTAL)
+    add_footer(s26, sn, TOTAL)
     print(f"  [OK] Slide {sn}: Closing")
 
     # =================================================================

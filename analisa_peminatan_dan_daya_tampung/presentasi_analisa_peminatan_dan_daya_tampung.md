@@ -262,27 +262,85 @@
 
 ---
 
-### SLIDE 16: REKOMENDASI KEBIJAKAN STRATEGIS BAGI REKTORAT & PTN-BH USK
-* **Headline:** 5 Aksi Kebijakan Terintegrasi Menuju PMB 2027 yang Efisien, Inklusif, dan Berkeadilan
-* **1. Rasionalisasi Kuota Terukur 20%–40% pada Kuadran III:**
-  * Pangkas kuota pada: Budidaya Perairan (160 $\to$ 90), THP (160 $\to$ 100), Pend. Ekonomi (160 $\to$ 100), Teknik Kimia (180 $\to$ 120), Fisika (80 $\to$ 50), dan PSP Perikanan (120 $\to$ 75).
-  * **Hasil:** Menghapus ~300 bangku kosong semu tanpa mengurangi penerimaan mahasiswa riil.
-* **2. Skema "UKT Penyelamat" (*Safety-Net Transition UKT*) untuk Desil 5 & 6:**
-  * Terbitkan SK Rektor: Pelamar KIP-K SNBT Desil 5–6 yang tidak tertampung kuota APBN **secara otomatis ditetapkan pada UKT Kelompok I (Rp 500.000) atau UKT Kelompok II (Rp 1.000.000)** pada semester pertama.
-  * **Hasil:** Menyelamatkan 300+ calon mahasiswa berprestasi UTBK agar tidak putus kuliah akibat tagihan UKT reguler.
-* **3. Subsidi Silang Surplus IPI Kuadran I Menjadi "KIP Kemitraan PTN-BH":**
-  * USK sudah memiliki skema IPI Mandiri di prodi unggulan (Kedokteran, FKG, Informatika, Tambang, dsb).
-  * Alokasikan **5% dari total penerimaan IPI Mandiri Kuadran I (~Rp 2,0 Miliar)** untuk mendanai *Beasiswa KIP Kemitraan USK* bagi 800+ mahasiswa prasejahtera di prodi Kuadran III.
-* **4. Optimalisasi Sosialisasi Skema Cicilan IPI Mandiri & Kunci Jalur TALENTA:**
-  * USK saat ini sudah menyediakan fasilitas cicilan IPI untuk mahasiswa mandiri, namun banyak calon mahasiswa mengalami *liquidity shock* karena sosialisasi prosedur cicilan belum masif dan waktu pembayaran verifikasi sangat singkat (5 hari). Perlu disosialisasikan sejak awal pendaftaran.
-  * Terapkan uang jaminan komitmen pendaftaran ulang Rp 1.000.000 pada Jalur TALENTA untuk membendung kebocoran 75% siswa yang kabur ke UTBK.
-* **5. Advokasi Sinergis Dana Otsus & Baitul Mal Aceh:**
-  * Ajukan daftar 534 calon mahasiswa Desil 5–6 kepada Baitul Mal Aceh sebagai penerima manfaat langsung beasiswa Fakir/Miskin/Fisabilillah untuk pengentasan kemiskinan daerah.
+### SLIDE 16: KESIMPULAN EKSEKUTIF I — TREN MAKRO & PORTOFOLIO 4 KUADRAN (2022–2026)
+* **Headline:** Pertumbuhan Daya Tampung Agresif Tidak Diimbangi Pendaftar Ulang, Terjadi Polarisasi Ekstrem
+* **1. Tekanan Keterisian Makro (*Over-Capacity Pressure*):**
+  * Dalam 5 tahun (2022–2026), daya tampung USK meningkat **+23,5%** (8.115 $\to$ 10.025 kursi), namun mahasiswa daftar ulang hanya bertumbuh **+16,3%** (7.096 $\to$ 8.249 orang).
+  * Akibatnya, rasio keterisian (*Fill Rate*) universitas tertekan dari **87,4% (2022) menjadi 82,3% (2026)**, menyisakan **1.776 kursi kosong** di seluruh jenjang pada 2026.
+* **2. Polarisasi Ekstrem 66 Program Studi S1:**
+  * **Kuadran I (31 Prodi Unggulan - 59,2% Mahasiswa):** Peminat tinggi, kuota terisi penuh (>80%). Menjadi pilar utama reputasi akademik dan penerimaan IPI PTN-BH (Kedokteran, Farmasi, Hukum, Manajemen, Teknik Sipil, Informatika).
+  * **Kuadran III (22 Prodi Defisit/Kritis - 23,2% Mahasiswa):** Peminat rendah, keterisian rendah (<70%). Menjadi episentrum inefisiensi kelas dan beban finansial kampus (Budidaya Perairan, THP, Peternakan, Pend. Fisika/Kimia/Ekonomi).
+* **3. Fenomena Over-Ekspansi Kuota:**
+  * Penambahan kuota di prodi Kuadran III terbukti gagal diserap pasar (*Marginal Fill Rate* mendekati nol), yang hanya menciptakan **kursi kosong semu** dan merusak rasio akreditasi.
 
 ---
 
-### SLIDE 17: PENUTUP & PESAN KUNCI PIMPINAN
-* **Kutipan Kunci bagi Pimpinan Universitas Syiah Kuala:**
+### SLIDE 17: KESIMPULAN EKSEKUTIF II — KRISIS VOKASI D3, PSDKU GAYO LUES, & KEBOCORAN JALUR
+* **Headline:** Disrupsi Jenjang Diploma, Beban Operasional PSDKU, dan Jebakan Jalur Mandiri/TALENTA
+* **1. Disrupsi Struktural Vokasi D3 (Keterisian Hanya 51,3%):**
+  * Dari 665 kuota D3, tersisa **324 kursi kosong**. D3 Manajemen Agribisnis bahkan hanya terisi 27% kursi.
+  * *Akar Masalah:* Lulusan D3 kalah bersaing dari D4/S1 di pasar kerja dan jenjang karier ASN (hanya golongan II/c vs III/a).
+* **2. Krisis Akut PSDKU Gayo Lues (Keterisian Hanya 18,6%):**
+  * Dari 220 kuota yang dibuka, hanya terisi **41 mahasiswa baru (81,4% kursi kosong melompong)**. PSDKU menjadi beban operasional berat bagi universitas tanpa kepastian skema beasiswa penuh dari Pemkab setempat.
+* **3. Jebakan Kebocoran Jalur Masuk:**
+  * **Jalur TALENTA bocor hingga 75%** karena calon mahasiswa menjadikannya sekadar cadangan (*safety net*), lalu kabur saat diterima UTBK SNBT.
+  * **Jalur Mandiri Terkendala Likuiditas Waktu:** Jeda waktu verifikasi dan pembayaran UKT/IPI yang sangat sempit (5 hari) serta lambatnya sosialisasi skema cicilan memicu kegagalan bayar calon mahasiswa mandiri.
+
+---
+
+### SLIDE 18: KESIMPULAN EKSEKUTIF III — AUDIT KIP-KULIAH & EVALUASI CASCADING QUOTA
+* **Headline:** 98,2% Kursi Kosong SNBT Terbukti Disebabkan oleh Keterpaksaan Finansial Siswa Prasejahtera
+* **1. Kausalitas Mutlak Kursi Kosong SNBT (*The Smoking Gun*):**
+  * **626 kursi kosong SNBT 2026 secara empiris 98,24% identik dengan 615 calon mahasiswa KIP yang ditolak beasiswanya**.
+  * **534 orang (86,8%)** di antaranya berasal dari **Desil 5 dan 6** yang terkena *hard cut-off 100%* akibat kuota KIP dipangkas 159 kursi dari pusat. Mereka gugur karena **tidak mampu membayar UKT reguler**.
+* **2. Fungsi Jaring Pengaman Sosial (*Social Safety Net*):**
+  * Prodi Kuadran III memiliki ketergantungan KIP mencapai **31,1% (2,4x lipat Kuadran I)**. Pemotongan kuota beasiswa langsung melumpuhkan keterisian prodi-prodi ini.
+* **3. Evaluasi Kebijakan *Cascading Quota* (SNBP $\to$ SNBT $\to$ Mandiri):**
+  * Pengalihan kursi kosong ke Mandiri sangat berhasil meningkatkan kas PTN-BH pada prodi Kuadran I, tetapi **gagal total pada prodi Kuadran III** (kursi tetap kosong permanen) dan **salah resep bagi korban penolakan KIP SNBT** yang tidak memiliki kemampuan membayar uang pangkal (IPI).
+
+---
+
+### SLIDE 19: REKOMENDASI I — PENATAAN DAYA TAMPUNG & AKADEMIK (SUPPLY-SIDE)
+* **Headline:** Restrukturisasi Kuota untuk Menghapus Inefisiensi dan Menyehatkan Rasio Akreditasi
+* **1. Rasionalisasi Kuota 20%–40% pada Kuadran III (Defisit):**
+  * Pangkas kuota pada prodi defisit kronis: Budidaya Perairan (160 $\to$ 90), THP (160 $\to$ 100), Pend. Ekonomi (160 $\to$ 100), Teknik Kimia (180 $\to$ 120), Fisika (80 $\to$ 50).
+  * **Target Hasil:** Menghapus $\pm$300 kursi kosong semu tanpa mengurangi penerimaan riil, otomatis mendongkrak *Fill Rate* universitas ke >88%.
+* **2. Transformasi Vokasi: Konversi D3 Menjadi D4 (Sarjana Terapan):**
+  * Lakukan *upgrading* kurikulum dan izin program studi D3 vokasi yang sepi peminat menjadi Sarjana Terapan (D4) agar memiliki kesetaraan ijazah dengan S1 (Golongan ASN III/a) dan menerapkan sistem magang industri 1 tahun penuh.
+* **3. Penyelamatan PSDKU Gayo Lues via Kemitraan Penuh Pemda:**
+  * Terapkan skema *Co-Funding*: Buka kuota PSDKU hanya jika diikat kontrak beasiswa penuh dengan Pemkab Gayo Lues / Aceh Tenggara. Jika tidak ada kontrak, pangkas daya tampung 50% menjadi 100–110 kursi atau rampingkan menjadi 1–2 prodi unggulan lokal.
+
+---
+
+### SLIDE 20: REKOMENDASI II — REFORMASI JALUR MASUK & CEGAH KEBOCORAN (SELECTION-SIDE)
+* **Headline:** Mencegah Kebocoran Registrasi dan Menyempurnakan Tata Kelola Jalur Mandiri
+* **1. Proteksi Kebocoran Jalur TALENTA:**
+  * Wajibkan uang jaminan komitmen pendaftaran ulang sebesar **Rp 1.000.000** (dapat dipotongkan ke UKT jika mendaftar ulang) untuk menghentikan fenomena siswa menjadikan USK sekadar ban serep sebelum pengumuman UTBK.
+* **2. Diferensiasi Kebijakan Pengalihan Kuota (*Segmented Cascading*):**
+  * **Prodi Kuadran I (Favorit):** Teruskan pengalihan sisa kuota ke Mandiri (SMMPTN/Talenta) untuk memaksimalkan pendapatan IPI kampus.
+  * **Prodi Kuadran III (Rentan):** **Hentikan pengalihan ke Mandiri.** Alihkan ke jalur beasiswa kemitraan daerah atau langsung hapus kuota tersebut.
+* **3. Intervensi Registrasi Hulu (Pencegahan Gugur Sebelum Kuota Hangus):**
+  * Karena sistem seleksi serentak nasional SNPMB **tidak memungkinkan pemanggilan kuota cadangan (*waiting list*)** — sekali calon mahasiswa tidak daftar ulang, kursi otomatis hangus di tingkat nasional — maka penyelamatan harus dilakukan **di hulu sebelum masa registrasi ditutup**. Begitu verifikasi KIP keluar dan siswa Desil 5 & 6 tertolak, SK Rektor UKT Penyelamat langsung diterbitkan agar mereka tidak membatalkan niat kuliah.
+* **4. Perpanjangan Masa Sanggah UKT & Sosialisasi Masif Cicilan IPI:**
+  * Perpanjang batas verifikasi finansial dari 5 hari kerja menjadi 10 hari, dan sosialisasikan opsi skema cicilan pembayaran IPI sejak awal pembukaan jalur Mandiri.
+
+---
+
+### SLIDE 21: REKOMENDASI III — KEBIJAKAN FINANSIAL & SUBSIDI SILANG PTN-BH (FINANCIAL-SIDE)
+* **Headline:** Pemanfaatan Otonomi Keuangan PTN-BH untuk Melindungi Mahasiswa Prasejahtera
+* **1. Pembentukan "Beasiswa USK Berdikari" (Subsidi Silang Dana IPI Mandiri):**
+  * Alokasikan **5%–10% dari total penerimaan IPI Mandiri Kuadran I ($\pm$Rp 2,0 – 3,0 Miliar)** ke dalam dana abadi beasiswa universitas.
+  * Dana ini digunakan untuk membiayai beasiswa parsial/penuh bagi mahasiswa berprestasi di prodi Kuadran III.
+* **2. Skema "UKT Penyelamat" (*Safety-Net UKT*) bagi Korban KIP Desil 5 & 6:**
+  * Terbitkan SK Rektor: Calon mahasiswa jalur SNBT dari Desil 5 & 6 yang tidak tertampung kuota KIP nasional **secara otomatis ditetapkan pada UKT Kelompok I (Rp 500.000) atau Kelompok II (Rp 1.000.000)** pada semester pertama.
+  * **Hasil:** Menyelamatkan 500+ calon mahasiswa berprestasi agar tidak putus kuliah akibat tagihan UKT reguler.
+* **3. Kolaborasi Strategis Dana Otsus & Baitul Mal Aceh:**
+  * USK menyerahkan basis data 534 calon mahasiswa Desil 5–6 kepada Baitul Mal Aceh dan Pemerintah Aceh untuk didanai melalui pos beasiswa pengentasan kemiskinan daerah.
+
+---
+
+### SLIDE 22: PENUTUP & PESAN KUNCI PIMPINAN UNIVERSITAS SYIAH KUALA
+* **Kutipan Kunci bagi Rektorat & Senat Akademik:**
   > *"Tolak ukur keberhasilan PMB PTN-BH bukanlah seberapa besar daya tampung yang kita umumkan di atas kertas, melainkan seberapa presisi kuota tersebut terisi oleh mahasiswa yang nyata, berdaya beli, atau terlindungi beasiswanya hingga lulus tepat waktu."*
 * **Tiga Pesan Penutup:**
   1. **Audit Data Telah Membuktikan:** Kebocoran SNBT adalah masalah keterbatasan kuota beasiswa (Desil 5–6), bukan ketidakmampuan universitas menarik minat.
