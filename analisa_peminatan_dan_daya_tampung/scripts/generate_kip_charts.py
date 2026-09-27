@@ -1,4 +1,5 @@
 import os
+from typing import Any, cast
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -268,7 +269,7 @@ for i, v in enumerate(fak_series.values):
 # 2. Gender Donut Chart
 gen_counts = df_kip26['Jenis Kelamin'].value_counts()
 colors_gen = ['#EC4899', '#3B82F6']
-wedges_g, texts_g, autotexts_g = ax_gen.pie(
+wedges_g, texts_g, autotexts_g = cast(tuple[Any, Any, Any], ax_gen.pie(
     gen_counts.values, 
     labels=[f"Perempuan\n({gen_counts['Perempuan']:,} mhs)", f"Laki-laki\n({gen_counts['Laki-laki']:,} mhs)"],
     autopct='%1.1f%%',
@@ -277,17 +278,17 @@ wedges_g, texts_g, autotexts_g = ax_gen.pie(
     wedgeprops=dict(width=0.42, edgecolor='white', linewidth=2),
     pctdistance=0.75,
     textprops=dict(fontsize=10.5, fontweight='bold', color='#1E293B')
-)
+))
 for at in autotexts_g:
     at.set_fontsize(11)
-    at.set_fontweight='bold'
+    at.set_fontweight('bold')
     at.set_color('white')
 ax_gen.set_title('B. Proporsi Gender Penerima KIP-Kuliah 2026\nDominasi Perempuan (3.4 : 1) sebagai Pilar Mobilitas Sosial', fontsize=11, fontweight='bold', pad=10, color='#0F172A')
 
 # 3. Jalur Masuk Donut Chart
 sel_counts = df_kip26['Pola Seleksi'].value_counts()
 colors_sel = ['#10B981', '#F59E0B']
-wedges_s, texts_s, autotexts_s = ax_jal.pie(
+wedges_s, texts_s, autotexts_s = cast(tuple[Any, Any, Any], ax_jal.pie(
     sel_counts.values, 
     labels=[f"SNBP (Prestasi)\n({sel_counts['SNBP']:,} mhs)", f"SNBT (Tes UTBK)\n({sel_counts['SNBT']:,} mhs)"],
     autopct='%1.1f%%',
@@ -296,10 +297,10 @@ wedges_s, texts_s, autotexts_s = ax_jal.pie(
     wedgeprops=dict(width=0.42, edgecolor='white', linewidth=2),
     pctdistance=0.75,
     textprops=dict(fontsize=10.5, fontweight='bold', color='#1E293B')
-)
+))
 for at in autotexts_s:
     at.set_fontsize(11)
-    at.set_fontweight='bold'
+    at.set_fontweight('bold')
     at.set_color('white')
 ax_jal.set_title('C. Proporsi Jalur Masuk Penerima KIP-Kuliah 2026\nJalur SNBP Menyerap Lebih Separuh Kuota di Awal Tahun', fontsize=11, fontweight='bold', pad=10, color='#0F172A')
 
