@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import matplotlib.colors as mcolors
 from matplotlib.patches import Patch
+from matplotlib.lines import Line2D
 
 plt.rcParams['font.family'] = 'DejaVu Sans'
 plt.rcParams['font.size'] = 11
@@ -1253,37 +1254,43 @@ def main():
     # CHART 13: MATRIKS 4 KUADRAN STRATEGIS 5 TAHUN (2022–2026)
     # -------------------------------------------------------------
     print("[13/13] Generating 13_matriks_4_kuadran_5_tahun_2022_2026.png...")
-    fig = plt.figure(figsize=(24, 11.5), dpi=300)
-    gs = gridspec.GridSpec(1, 2, width_ratios=[1.75, 1.0], wspace=0.16)
+    fig = plt.figure(figsize=(24, 12), dpi=300, facecolor='#F8FAFC')
+    gs = gridspec.GridSpec(1, 2, width_ratios=[1.68, 1.0], wspace=0.14)
 
     ax = fig.add_subplot(gs[0])
     ax_cards = fig.add_subplot(gs[1])
     ax_cards.axis('off')
 
-    x_max = 48
-    y_min, y_max = 38, 108
+    ax.set_facecolor('#FFFFFF')
 
-    # Pastel Quadrant Backgrounds
-    ax.axvspan(4.0, x_max, ymin=(80 - y_min)/(y_max - y_min), ymax=1.0, color='#ECFDF5', alpha=0.55, zorder=0)
-    ax.axvspan(0.0, 4.0, ymin=(80 - y_min)/(y_max - y_min), ymax=1.0, color='#EFF6FF', alpha=0.55, zorder=0)
-    ax.axvspan(0.0, 4.0, ymin=0.0, ymax=(80 - y_min)/(y_max - y_min), color='#FEF2F2', alpha=0.55, zorder=0)
+    x_max = 48
+    y_min, y_max = 24, 106
+
+    # Gentle Pastel Quadrant Backgrounds
+    ax.axvspan(4.0, x_max, ymin=(80 - y_min)/(y_max - y_min), ymax=1.0, color='#F0FDF4', alpha=0.55, zorder=0)
+    ax.axvspan(0.0, 4.0, ymin=(80 - y_min)/(y_max - y_min), ymax=1.0, color='#F0F9FF', alpha=0.55, zorder=0)
+    ax.axvspan(0.0, 4.0, ymin=0.0, ymax=(80 - y_min)/(y_max - y_min), color='#FFF1F2', alpha=0.55, zorder=0)
     ax.axvspan(4.0, x_max, ymin=0.0, ymax=(80 - y_min)/(y_max - y_min), color='#FFFBEB', alpha=0.55, zorder=0)
 
-    # Dividing lines
-    ax.axvline(x=4.0, color='#64748B', linestyle='--', linewidth=2.0, zorder=1)
-    ax.axhline(y=80.0, color='#64748B', linestyle='--', linewidth=2.0, zorder=1)
+    # Subtle Threshold lines
+    ax.axvline(x=4.0, color='#64748B', linestyle='--', linewidth=1.5, alpha=0.85, zorder=1)
+    ax.axhline(y=80.0, color='#64748B', linestyle='--', linewidth=1.5, alpha=0.85, zorder=1)
 
-    # Subtle Quadrant Watermark Headers
-    ax.text(x_max - 2.5, 105.5, 'KUADRAN I: PRIMA & BINTANG KONSISTEN (28 Prodi)',
-            ha='right', va='top', fontsize=11, fontweight='bold', color='#065F46', alpha=0.85, zorder=2)
-    ax.text(0.5, 105.5, 'KUADRAN II: STABIL & EFISIEN (4 Prodi)',
-            ha='left', va='top', fontsize=11, fontweight='bold', color='#1E40AF', alpha=0.85, zorder=2)
-    ax.text(0.5, 40.0, 'KUADRAN III: KRITIS & DEFISIT KRONIS (26 Prodi)',
-            ha='left', va='bottom', fontsize=11, fontweight='bold', color='#991B1B', alpha=0.85, zorder=2)
-    ax.text(x_max - 2.5, 40.0, 'KUADRAN IV: DILEMA & BOCOR BERULANG (8 Prodi)',
-            ha='right', va='bottom', fontsize=11, fontweight='bold', color='#92400E', alpha=0.85, zorder=2)
+    # Badges on threshold lines
+    ax.text(4.25, 25.0, 'Ambang Keketatan (4,0 : 1)', fontsize=8.5, color='#475569', fontweight='bold', zorder=2)
+    ax.text(x_max - 0.5, 80.8, 'Standar Keterisian Kuota (80%)', ha='right', fontsize=8.5, color='#475569', fontweight='bold', zorder=2)
 
-    # Assign colors based on 5-year averages
+    # Subtle Quadrant Titles inside plot
+    ax.text(x_max - 2.0, 103.5, 'KUADRAN I: UNGGULAN\n28 Program Studi (42,4%)',
+            ha='right', va='top', fontsize=10.5, fontweight='bold', color='#047857', alpha=0.9, zorder=2, linespacing=1.2)
+    ax.text(0.6, 103.5, 'KUADRAN II: STABIL\n4 Program Studi (6,1%)',
+            ha='left', va='top', fontsize=10.5, fontweight='bold', color='#1D4ED8', alpha=0.9, zorder=2, linespacing=1.2)
+    ax.text(0.6, 26.5, 'KUADRAN III: KURANG DIMINATI\n26 Program Studi (39,4%)',
+            ha='left', va='bottom', fontsize=10.5, fontweight='bold', color='#B91C1C', alpha=0.9, zorder=2, linespacing=1.2)
+    ax.text(x_max - 2.0, 26.5, 'KUADRAN IV: SELEKTIF TAPI BOCOR\n8 Program Studi (12,1%)',
+            ha='right', va='bottom', fontsize=10.5, fontweight='bold', color='#B45309', alpha=0.9, zorder=2, linespacing=1.2)
+
+    # Scatter points
     pt_cols_5y = []
     for _, r in df_s1.iterrows():
         x = r['Rata_Keketatan_5Thn']
@@ -1293,130 +1300,156 @@ def main():
         elif x < 4.0 and y >= 80.0:
             pt_cols_5y.append('#2563EB') # Blue
         elif x < 4.0 and y < 80.0:
-            pt_cols_5y.append('#DC2626') # Red
+            pt_cols_5y.append('#E11D48') # Rose Red
         else:
             pt_cols_5y.append('#D97706') # Amber
 
     sizes_5y = 45 + (df_s1['Rata_DT_5Thn'] / 500.0) * 190
     ax.scatter(df_s1['Rata_Keketatan_5Thn'], df_s1['Rata_FillRate_5Thn_Persen'], s=sizes_5y, c=pt_cols_5y,
-               edgecolors='#0F172A', linewidths=1.1, alpha=0.88, zorder=4)
+               edgecolors='#0F172A', linewidths=1.0, alpha=0.88, zorder=4)
 
-    # Key representative annotations 5Y
-    key_annots_5y = [
-        # Kuadran I (Prima Konsisten)
-        ('Farmasi (FMIPA)', 44.06, 98.0, (-16, 12), 'right'),
-        ('Informatika (FMIPA)', 21.49, 95.1, (12, -10), 'left'),
-        ('Psikologi (FK)', 17.30, 91.7, (-10, -16), 'right'),
-        ('Pend. Dokter Gigi (FKG)', 17.25, 97.5, (12, 10), 'left'),
-        ('Pend. Dokter (FK)', 14.12, 98.6, (12, -8), 'left'),
-        ('Ilmu Hukum (FH)', 8.08, 97.4, (-12, 14), 'right'),
-        ('PGSD (FKIP)', 10.38, 93.3, (12, 6), 'left'),
-        ('Teknik Pertambangan (FT)', 13.19, 92.3, (-12, -14), 'right'),
-        
-        # Kuadran II (Stabil Konsisten)
-        ('Penjaskesrek (FKIP)', 3.50, 91.6, (12, 12), 'left'),
-        ('Sendratasik (FKIP)', 2.95, 83.3, (12, -8), 'left'),
-        ('Ilmu Politik (FISIP)', 2.86, 83.6, (12, 12), 'left'),
-        ('HI (FISIP)', 2.35, 91.2, (12, -8), 'left'),
-        
-        # Kuadran III (Kritis Kronis)
-        ('Budidaya Perairan (FPK)', 0.94, 57.5, (14, -12), 'left'),
-        ('Fisika (FMIPA)', 1.34, 56.4, (14, 10), 'left'),
-        ('PSP Perikanan (FPK)', 1.09, 58.4, (-8, 14), 'center'),
-        ('THP (FP)', 2.94, 63.8, (12, -8), 'left'),
-        ('Pend. Matematika (FKIP)', 3.65, 66.6, (-12, 10), 'right'),
-        ('Biologi (FMIPA)', 3.62, 71.9, (12, 10), 'left'),
-        ('Teknik Pertanian (FP)', 3.34, 67.0, (12, -12), 'left'),
-        ('Kehutanan (FP)', 3.30, 64.9, (-12, -12), 'right'),
-        
-        # Kuadran IV (Dilema Berulang)
-        ('Akuntansi Perpajakan (FEB)', 14.22, 58.8, (12, 10), 'left'),
-        ('Teknik Perminyakan (FT)', 8.64, 43.4, (12, 8), 'left'),
-        ('Pend. Bhs Indonesia (FKIP)', 6.49, 79.5, (12, 8), 'left'),
-        ('Pend. Guru PAUD (FKIP)', 5.46, 73.9, (-12, -14), 'right'),
-        ('Teknik Mesin (FT)', 4.62, 78.2, (12, -10), 'left'),
-        ('Agroteknologi (FP)', 4.14, 71.3, (12, 6), 'left')
+    # Representative Annotations - Perfectly tuned offsets (Zero overlap with axes)
+    annots_config_5y = [
+        # Kuadran I (Unggulan)
+        ('Farmasi (FMIPA)', 'FARMASI', (-16, 12), 'right'),
+        ('Informatika (FMIPA)', 'INFORMATIKA', (12, -10), 'left'),
+        ('Psikologi (FK)', 'PSIKOLOGI', (14, -12), 'left'),
+        ('Pend. Dokter Gigi (FKG)', 'DOKTER GIGI', (12, 10), 'left'),
+        ('Pend. Dokter (FK)', 'PENDIDIKAN DOKTER$', (-12, 12), 'right'),
+        ('Ilmu Hukum (FH)', 'ILMU HUKUM', (-12, 14), 'right'),
+        ('PGSD (FKIP)', 'GURU SEKOLAH DASAR', (-14, -14), 'right'),
+        ('Teknik Pertambangan (FT)', 'PERTAMBANGAN', (12, 12), 'left'),
+        # Kuadran II (Stabil & Spesifik - Semua mengarah ke kanan agar tidak menabrak sumbu Y)
+        ('Penjaskesrek (FKIP)', 'JASMANI', (12, 10), 'left'),
+        ('HI (FISIP)', 'HUBUNGAN INTERNASIONAL', (12, -12), 'left'),
+        ('Ilmu Politik (FISIP)', 'ILMU POLITIK', (12, 8), 'left'),
+        # Kuadran III (Kurang Diminati - Menampilkan 5 Prodi Terendah + Representatif)
+        ('Fisika (FMIPA)', '^FISIKA', (14, 6), 'left'),
+        ('Budidaya Perairan (FPK)', 'BUDIDAYA PERAIRAN', (14, -25), 'left'),
+        ('Pend. Fisika (FKIP)', 'PENDIDIKAN FISIKA', (46, -24), 'left'),
+        ('PSP Perikanan (FPK)', 'PEMANFAATAN SUMBERDAYA', (16, -4), 'left'),
+        ('Pend. Kimia (FKIP)', 'PENDIDIKAN KIMIA', (20, 8), 'left'),
+        ('THP (FP)', 'TEKNOLOGI HASIL PERTANIAN', (18, 4), 'left'),
+        ('Kehutanan (FP)', '^KEHUTANAN', (14, 14), 'left'),
+        ('Biologi (FMIPA)', '^BIOLOGI', (0, 22), 'center'),
+        # Kuadran IV (Selektif tapi Bocor)
+        ('Akuntansi Perpajakan (FEB)', 'AKUNTANSI PERPAJAKAN', (12, 10), 'left'),
+        ('Teknik Perminyakan (FT)', 'PERMINYAKAN', (12, 10), 'left'),
+        ('Pend. Bhs Indonesia (FKIP)', 'BAHASA INDONESIA', (12, 10), 'left'),
+        ('Pend. Guru PAUD (FKIP)', 'PAUD', (14, 10), 'left'),
+        ('Teknik Mesin (FT)', 'TEKNIK MESIN', (12, -12), 'left'),
+        ('Agroteknologi (FP)', 'AGROTEKNOLOGI', (14, -12), 'left')
     ]
 
-    for label, px, py, (ox, oy), ha_align in key_annots_5y:
-        ax.annotate(label, xy=(px, py), xytext=(ox, oy), textcoords='offset points',
-                    ha=ha_align, va='center', fontsize=8.2, fontweight='bold', color='#0F172A',
-                    bbox=dict(boxstyle='round,pad=0.2', facecolor='#FFFFFF', edgecolor='#CBD5E1', linewidth=0.8, alpha=0.94),
-                    arrowprops=dict(arrowstyle='->', color='#475569', lw=0.9, shrinkA=2, shrinkB=3),
-                    zorder=5)
+    for label, pat, (ox, oy), ha_align in annots_config_5y:
+        m = df_s1[df_s1['Program_Studi'].str.contains(pat, regex=True, na=False)]
+        if len(m) > 0:
+            px = float(m.iloc[0]['Rata_Keketatan_5Thn'])
+            py = float(m.iloc[0]['Rata_FillRate_5Thn_Persen'])
+            ax.annotate(label, xy=(px, py), xytext=(ox, oy), textcoords='offset points',
+                        ha=ha_align, va='center', fontsize=8.2, fontweight='bold', color='#1E293B',
+                        bbox=dict(boxstyle='round,pad=0.25', facecolor='#FFFFFF', edgecolor='#CBD5E1', linewidth=0.8, alpha=0.96),
+                        arrowprops=dict(arrowstyle='->', color='#475569', lw=0.9, shrinkA=2, shrinkB=3),
+                        zorder=5)
 
     ax.set_xlim(0, x_max)
     ax.set_ylim(y_min, y_max)
-    ax.set_xlabel('Rata-rata Rasio Keketatan Seleksi 5 Tahun (2022–2026: Peminat/Kursi) -> Daya Tarik Pasar Struktural', 
-                  fontsize=10.5, fontweight='bold', color='#0F172A', labelpad=10)
-    ax.set_ylabel('Rata-rata Capacity Fill Rate 5 Tahun (2022–2026: %) -> Realisasi Keterisian Kuota Riil Jangka Panjang', 
-                  fontsize=10.5, fontweight='bold', color='#0F172A', labelpad=10)
-    ax.set_title('Peta Sebaran Longitudinal 66 Program Studi S1 Kampus Utama USK (Rata-rata 5 Tahun: 2022–2026)\nUkuran Bubble = Rata-rata Kapasitas Kuota Daya Tampung 5 Tahun (50 s.d. 450 Kursi)', 
-                 fontsize=11.5, fontweight='bold', pad=12, color='#0F172A')
-    ax.grid(True, linestyle=':', alpha=0.55, color='#94A3B8', zorder=0)
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
+    ax.set_xlabel('Rasio Keketatan Seleksi (Peminat per 1 Kursi Daya Tampung)', fontsize=11, fontweight='bold', color='#1E293B', labelpad=10)
+    ax.set_ylabel('Persentase Keterisian Kuota / Fill Rate (%)', fontsize=11, fontweight='bold', color='#1E293B', labelpad=14)
+    ax.set_title('Peta Portofolio 66 Program Studi S1 Kampus Utama USK (Rata-rata 5 Tahun: 2022–2026)', fontsize=12, fontweight='bold', pad=12, color='#0F172A')
+
+    ax.grid(True, linestyle=':', alpha=0.45, color='#94A3B8', zorder=0)
+    for spine in ['top', 'right']:
+        ax.spines[spine].set_visible(False)
     ax.spines['left'].set_color('#94A3B8')
     ax.spines['bottom'].set_color('#94A3B8')
 
-    # Executive Cards 5Y
-    cards_data_5y = [
+    # Size legend inside plot
+    leg_dt = [60, 200, 500]
+    leg_sizes = [45 + (dt / 500.0) * 190 for dt in leg_dt]
+    leg_handles = [Line2D([0], [0], marker='o', color='w', label=f'{dt} kursi',
+                          markerfacecolor='#94A3B8', markersize=np.sqrt(s), markeredgecolor='#0F172A')
+                   for dt, s in zip(leg_dt, leg_sizes)]
+    leg = ax.legend(handles=leg_handles, loc='upper right', bbox_to_anchor=(0.985, 0.88),
+                    title='Kapasitas Kuota (Daya Tampung)', frameon=True, fontsize=8.5, title_fontsize=9.0)
+    leg.get_frame().set_facecolor('#FFFFFF')
+    leg.get_frame().set_edgecolor('#CBD5E1')
+    leg.get_frame().set_alpha(0.95)
+
+    # -----------------
+    # RIGHT PANEL: EXECUTIVE CARDS
+    # -----------------
+    rect_summary = FancyBboxPatch((0.02, 0.875), 0.96, 0.115, boxstyle='round,pad=0.02',
+                                  facecolor='#FFFFFF', edgecolor='#CBD5E1', linewidth=1.2,
+                                  transform=ax_cards.transAxes, zorder=2)
+    ax_cards.add_patch(rect_summary)
+
+    ax_cards.text(0.06, 0.965, 'RINGKASAN PORTOFOLIO S1 KAMPUS UTAMA (5 TAHUN)', fontsize=10, fontweight='bold', color='#0F172A', transform=ax_cards.transAxes)
+
+    kpi_items = [
+        ('66 Prodi', 'Total Dianalisis', 0.06),
+        ('6,3 : 1', 'Rata-rata Keketatan', 0.40),
+        ('77,4%', 'Rata-rata Keterisian', 0.72)
+    ]
+    for val, lbl, x_pos in kpi_items:
+        ax_cards.text(x_pos, 0.925, val, fontsize=13, fontweight='bold', color='#1E40AF', transform=ax_cards.transAxes)
+        ax_cards.text(x_pos, 0.895, lbl, fontsize=8.0, color='#64748B', transform=ax_cards.transAxes)
+
+    cards_clean = [
         {
-            'title': 'KUADRAN I: PRIMA & BINTANG KONSISTEN (28 PRODI | 42%)',
-            'color_border': '#10B981', 'color_bg': '#ECFDF5', 'color_text': '#065F46',
-            'desc': 'Demand Konsisten Tinggi (>=4,0x) & Kuota Penuh (>=80%)\nTahan banting terhadap fluktuasi kebijakan selama 5 tahun.',
-            'examples': 'Farmasi, Informatika, Kedokteran, FKG, Psikologi, Hukum, PGSD.',
-            'action': 'STRATEGI: Star Assets Berkelanjutan.\nInvestasi fasilitas laboratorium mutakhir,\nakreditasi internasional, dan ekspansi kelas internasional.'
+            'title': 'KUADRAN I: UNGGULAN',
+            'badge': '28 Prodi (42,4%)',
+            'badge_c': '#047857', 'bg': '#F0FDF4', 'border': '#10B981', 'title_c': '#065F46',
+            'kondisi': 'Peminat tinggi (\u2265 4,0x) dan kuota terisi optimal (\u2265 80%).',
+            'contoh': 'Farmasi, Kedokteran, Informatika, Psikologi, Hukum, PGSD.',
+            'rekomendasi': 'Pertahankan kapasitas dan buka peluang kelas internasional.'
         },
         {
-            'title': 'KUADRAN II: STABIL & EFISIEN (4 PRODI | 6%)',
-            'color_border': '#3B82F6', 'color_bg': '#EFF6FF', 'color_text': '#1E40AF',
-            'desc': 'Demand Moderat (<4,0x) tapi Konsisten Terisi Penuh (>=80%)\nNiche market yang solid dan tidak terpengaruh tren sesaat.',
-            'examples': 'Penjaskesrek, Pend. Sendratasik, Ilmu Politik, HI.',
-            'action': 'STRATEGI: Niche Market Protection.\nJangan memaksakan menaikkan kuota.\nJaga stabilitas rasio dosen-mahasiswa & mutu lulusan.'
+            'title': 'KUADRAN II: STABIL & SPESIFIK',
+            'badge': '4 Prodi (6,1%)',
+            'badge_c': '#1D4ED8', 'bg': '#F0F9FF', 'border': '#3B82F6', 'title_c': '#1E40AF',
+            'kondisi': 'Peminat moderat (< 4,0x) namun kuota selalu penuh (\u2265 80%).',
+            'contoh': 'Penjaskesrek, Seni Drama (Sendratasik), Ilmu Politik, HI.',
+            'rekomendasi': 'Pertahankan kuota tetap; jaga kualitas dan rasio dosen.'
         },
         {
-            'title': 'KUADRAN III: KRITIS & DEFISIT KRONIS (26 PRODI | 39%)',
-            'color_border': '#EF4444', 'color_bg': '#FEF2F2', 'color_text': '#991B1B',
-            'desc': 'Demand Lemah (<4,0x) & Kursi Kosong Kronis (<80%)\nBukan anomali 1 tahun! Terbukti defisit selama 5 tahun beruntun.',
-            'examples': 'Budidaya Perairan, Fisika, PSP, THP, Pend. Matematika, Kehutanan.',
-            'action': 'STRATEGI: Restrukturisasi / Pemangkasan Kuota Permanen.\nPangkas kuota 25%-40% secara permanen\nagar tidak terus menggerus akreditasi universitas.'
+            'title': 'KUADRAN III: KURANG DIMINATI',
+            'badge': '26 Prodi (39,4%)',
+            'badge_c': '#B91C1C', 'bg': '#FFF1F2', 'border': '#F43F5E', 'title_c': '#991B1B',
+            'kondisi': 'Peminat rendah (< 4,0x) dan kursi kosong konsisten (< 80%).',
+            'contoh': 'Fisika, Budidaya Perairan, Pend. Fisika, PSP Perikanan, Pend. Kimia (5 Terendah).',
+            'rekomendasi': 'Rasionalisasi kuota (pangkas 20%\u201340%) agar keterisian sehat.'
         },
         {
-            'title': 'KUADRAN IV: DILEMA & BOCOR BERULANG (8 PRODI | 12%)',
-            'color_border': '#F59E0B', 'color_bg': '#FFFBEB', 'color_text': '#92400E',
-            'desc': 'Demand Tinggi (>=4,0x) tapi Keterisian Bocor Terus (<80%)\nMinat besar namun konversi daftar ulang selalu rontok.',
-            'examples': 'Akuntansi Perpajakan, T. Perminyakan, PAUD, Sejarah, Agrotek.',
-            'action': 'STRATEGI: Reformasi Biaya Kuliah & Cadangan Cepat.\nPerbaiki skema biaya/IPI jalur Mandiri dan percepat pemanggilan kuota cadangan sebelum registrasi ditutup.'
+            'title': 'KUADRAN IV: SELEKTIF TAPI BOCOR',
+            'badge': '8 Prodi (12,1%)',
+            'badge_c': '#B45309', 'bg': '#FFFBEB', 'border': '#F59E0B', 'title_c': '#92400E',
+            'kondisi': 'Peminat banyak (\u2265 4,0x) namun calon mahasiswa batal daftar ulang (< 80%).',
+            'contoh': 'Teknik Perminyakan, Akuntansi Perpajakan, PAUD, Teknik Mesin.',
+            'rekomendasi': 'Optimasi konversi registrasi dan percepat pemanggilan cadangan.'
         }
     ]
 
-    y_positions = [0.77, 0.52, 0.27, 0.02]
-    box_height = 0.22
+    y_starts = [0.655, 0.440, 0.225, 0.010]
+    box_h = 0.200
 
-    for idx, c in enumerate(cards_data_5y):
-        y = y_positions[idx]
-        rect = FancyBboxPatch((0.01, y), 0.98, box_height, boxstyle='round,pad=0.025',
-                              facecolor=c['color_bg'], edgecolor=c['color_border'], linewidth=1.5,
+    for idx, c in enumerate(cards_clean):
+        y = y_starts[idx]
+        rect = FancyBboxPatch((0.02, y), 0.96, box_h, boxstyle='round,pad=0.02',
+                              facecolor=c['bg'], edgecolor=c['border'], linewidth=1.2,
                               transform=ax_cards.transAxes, zorder=2)
         ax_cards.add_patch(rect)
-        ax_cards.text(0.05, y + box_height - 0.032, c['title'],
-                      fontsize=9.5, fontweight='bold', color=c['color_text'],
-                      transform=ax_cards.transAxes, zorder=3)
-        ax_cards.text(0.05, y + box_height - 0.075, c['desc'],
-                      fontsize=8.3, color='#334155', linespacing=1.2,
-                      transform=ax_cards.transAxes, zorder=3)
-        ax_cards.text(0.05, y + box_height - 0.122, f"Prodi: {c['examples']}",
-                      fontsize=8.0, fontstyle='italic', color='#475569',
-                      transform=ax_cards.transAxes, zorder=3)
-        ax_cards.text(0.05, y + 0.022, c['action'],
-                      fontsize=8.3, fontweight='bold', color=c['color_text'], linespacing=1.2,
-                      transform=ax_cards.transAxes, zorder=3)
+        
+        ax_cards.text(0.06, y + box_h - 0.038, c['title'], fontsize=10, fontweight='bold', color=c['title_c'], transform=ax_cards.transAxes)
+        ax_cards.text(0.94, y + box_h - 0.038, c['badge'], fontsize=9, fontweight='bold', color=c['badge_c'], ha='right', transform=ax_cards.transAxes)
+        ax_cards.text(0.06, y + box_h - 0.078, f"Karakter: {c['kondisi']}", fontsize=8.4, color='#334155', transform=ax_cards.transAxes)
+        ax_cards.text(0.06, y + box_h - 0.120, f"Contoh: {c['contoh']}", fontsize=8.0, fontstyle='italic', color='#64748B', transform=ax_cards.transAxes)
+        ax_cards.text(0.06, y + 0.025, f"Rekomendasi: {c['rekomendasi']}", fontsize=8.5, fontweight='bold', color=c['title_c'], transform=ax_cards.transAxes)
 
-    fig.suptitle('MATRIKS 4 KUADRAN PORTOFOLIO STRATEGIS 5 TAHUN PROGRAM STUDI S1 USK (2022–2026)\nPemetaan Longitudinal Bebas Bias: Daya Tarik Pasar (Demand) vs Realisasi Keterisian Kuota (Supply)',
-                 fontsize=13.5, fontweight='bold', y=0.975, color='#0F172A')
+    # Main Title at Top
+    fig.suptitle('MATRIKS 4 KUADRAN: PORTOFOLIO PROGRAM STUDI S1 USK', fontsize=15, fontweight='bold', y=0.980, color='#0F172A')
 
-    fig.subplots_adjust(left=0.075, right=0.985, top=0.89, bottom=0.075, wspace=0.15)
+    fig.subplots_adjust(left=0.075, right=0.985, top=0.915, bottom=0.075, wspace=0.14)
     plt.savefig(os.path.join(chart_dir, "13_matriks_4_kuadran_5_tahun_2022_2026.png"), dpi=300)
     plt.close()
 

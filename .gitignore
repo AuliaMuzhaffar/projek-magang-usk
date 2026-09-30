@@ -3,6 +3,8 @@ UKT_USK_2022_2026/
 UKT_USK_2022_2026
 UKT USK 2022-2026.rar
 *.rar
+analisa_peminatan_dan_daya_tampung/ANALIS DAYA TAMPUNG_*.pdf
+analisa_peminatan_dan_daya_tampung/ANALIS DAYA TAMPUNG_20260923_094053_0000.pdf
 
 # File Sistem & Temp
 .DS_Store
@@ -11,3 +13,17 @@ Thumbs.db
 *.tmp
 __pycache__/
 *.pyc
+
+# Slide Ekstraksi & Asset Sementara (Diabaikan)
+analisa_peminatan_dan_daya_tampung/grafik/pdf_slides/
+analisa_peminatan_dan_daya_tampung/grafik/extracted_img_41.png
+analisa_peminatan_dan_daya_tampung/grafik/extracted_img_45.png
+analisa_peminatan_dan_daya_tampung/grafik/header_dots_trans.png
+analisa_peminatan_dan_daya_tampung/grafik/header_dots.png
+analisa_peminatan_dan_daya_tampung/grafik/header_logos_clean.png
+analisa_peminatan_dan_daya_tampung/grafik/header_logos_trans.png
+analisa_peminatan_dan_daya_tampung/grafik/logo_usk_maganghub.png
+analisa_peminatan_dan_daya_tampung/grafik/test_du_labels.png
+analisa_peminatan_dan_daya_tampung/grafik/test_dual_perfect.png
+analisa_peminatan_dan_daya_tampung/grafik/test_gugur_labels.png
+analisa_peminatan_dan_daya_tampung/grafik/test_small_bars.png
