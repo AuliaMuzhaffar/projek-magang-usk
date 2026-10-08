@@ -83,7 +83,7 @@ def generate_interactive_html():
             )
         else:
             kuadran = "IV"
-            kuadran_title = "KUADRAN IV: PERLU REVITALISASI"
+            kuadran_title = "KUADRAN IV: PERLU DITINGKATKAN"
             kuadran_desc = "Peminat Rendah & Kuota Kerap Tidak Terisi Penuh"
             color = "#E11D48" # Rose Red
             rekomendasi = (
@@ -153,15 +153,18 @@ def generate_interactive_html():
         tren_resmi = str(r.get('Klasifikasi Tren Resmi', 'Tren Stabil')).strip()
         klaster = str(r.get('Klaster Analisis', 'Vokasi')).strip()
 
-        # Seluruh 11 D3 berada di Kuadran IV secara formal (<80% & >=4.0x)
-        # Pengelompokan Berdasarkan 3 Tier Kelayakan Vokasi:
+        # Seluruh 11 D3 berada di Kuadran III secara formal (Keketatan >= 4.0x & Fill Rate < 80%)
+        # Diselaraskan 100% dengan standar S1: KUADRAN III: BELUM OPTIMAL
+        kuadran = "III"
+        kuadran_title = "KUADRAN III: BELUM OPTIMAL"
+        kuadran_desc = "Peminat Sangat Tinggi, Namun Terjadi Kebocoran Daftar Ulang"
+
+        # Sub-klasifikasi berdasarkan 3 Tier Kelayakan Vokasi:
         if fill_rate >= 60.0:
             tier = 1
             tier_title = "TIER 1: STANDOUT VOKASI"
-            tier_desc = "Bintang Vokasi: Fill Rate Tinggi (≥ 60%) & Peminat Membludak"
+            tier_desc = "Bintang Vokasi: Fill Rate Prima (≥ 60%) & Peminat Membludak"
             color = "#059669" # Emerald Green
-            kuadran_title = "KUADRAN IV (TIER 1: STANDOUT VOKASI)"
-            kuadran_desc = "Peminat Tertinggi Vokasi & Keterisian Kuota Stabil (≥ 60%)"
             rekomendasi = (
                 "Prioritas #1 untuk segera dikonversi dan dinaikkan statusnya menjadi Sarjana Terapan "
                 "(D4 Rekayasa Perangkat Lunak / TI). Animo pasar sangat tinggi (1.100 mhs/thn) dengan daya serap terbaik di vokasi USK (66,6%)."
@@ -171,8 +174,6 @@ def generate_interactive_html():
             tier_title = "TIER 2: RENTAN KONVERSI"
             tier_desc = "Keterisian Moderat (45%–55%), Di Bawah Standar Sehat 80%"
             color = "#D97706" # Amber
-            kuadran_title = "KUADRAN IV (TIER 2: RENTAN KONVERSI)"
-            kuadran_desc = "Peminat Cukup Tinggi (200–760 org), Namun Daftar Ulang Macet"
             rekomendasi = (
                 "Kandidat konversi ke Sarjana Terapan (D4) dengan restrukturisasi kurikulum berbasis kemitraan industri "
                 "(teaching factory). Perkuat skema ikatan kerja agar pendaftar tidak gugur massal saat tahap daftar ulang."
@@ -182,8 +183,6 @@ def generate_interactive_html():
             tier_title = "TIER 3: DEFISIT AKUT"
             tier_desc = "Di Bawah Batas Kritis Kelayakan Operasional (< 50%)"
             color = "#DC2626" # Crimson Red
-            kuadran_title = "KUADRAN IV (TIER 3: DEFISIT AKUT)"
-            kuadran_desc = "Kritis: Tingkat Keterisian Jebol (< 45%) & Bangku Kosong Masif"
             rekomendasi = (
                 "Evaluasi kelayakan operasional mendesak. Lakukan rasionalisasi daya tampung drastis (pangkas kuota 40%–50%) "
                 "untuk menghentikan akumulasi bangku kosong (>150 kursi/thn), atau pertimbangkan moratorium/merger prodi jika defisit terus berlanjut."
@@ -216,7 +215,7 @@ def generate_interactive_html():
             "nama": p_name,
             "fakultas": fak,
             "fakultas_abbr": fak_abbr,
-            "kuadran": "IV",
+            "kuadran": kuadran,
             "tier": tier,
             "tier_title": tier_title,
             "tier_desc": tier_desc,
@@ -664,6 +663,136 @@ def generate_interactive_html():
             margin-top: 3px;
         }}
 
+        /* D3 Sub-Tier Classification Legend Strip */
+        .d3-tier-legend-strip {{
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 12px;
+            background: #F8FAFC;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+        }}
+
+        .tier-guide-card {{
+            background: #FFFFFF;
+            border-radius: 10px;
+            padding: 9px 12px;
+            border: 1px solid #E2E8F0;
+            border-left-width: 4px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            user-select: none;
+        }}
+
+        .tier-guide-card:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border-color: #CBD5E1;
+        }}
+
+        .tier-guide-card.active {{
+            box-shadow: 0 0 0 2px var(--brand-navy), 0 4px 12px rgba(15,23,42,0.12);
+        }}
+
+        .tier-guide-card.tg-tier-1 {{
+            border-left-color: #059669;
+        }}
+        .tier-guide-card.tg-tier-1.active {{
+            background: #F0FDF4;
+            border-color: #86EFAC;
+            border-left-color: #059669;
+        }}
+
+        .tier-guide-card.tg-tier-2 {{
+            border-left-color: #D97706;
+        }}
+        .tier-guide-card.tg-tier-2.active {{
+            background: #FFFBEB;
+            border-color: #FDE68A;
+            border-left-color: #D97706;
+        }}
+
+        .tier-guide-card.tg-tier-3 {{
+            border-left-color: #DC2626;
+        }}
+        .tier-guide-card.tg-tier-3.active {{
+            background: #FFF1F2;
+            border-color: #FECDD3;
+            border-left-color: #DC2626;
+        }}
+
+        .tgc-header {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }}
+
+        .tgc-title-group {{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+        }}
+
+        .tg-tier-1 .tgc-title-group {{ color: #065F46; }}
+        .tg-tier-2 .tgc-title-group {{ color: #92400E; }}
+        .tg-tier-3 .tgc-title-group {{ color: #991B1B; }}
+
+        .tgc-badge {{
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: #F1F5F9;
+            color: #475569;
+        }}
+
+        .tgc-rule {{
+            font-size: 11px;
+            font-weight: 700;
+            color: #1E293B;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }}
+
+        .tgc-rule span.kriteria-tag {{
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 1px 4px;
+            border-radius: 4px;
+            letter-spacing: 0.3px;
+        }}
+        .tg-tier-1 .tgc-rule span.kriteria-tag {{ background: #DCFCE7; color: #166534; }}
+        .tg-tier-2 .tgc-rule span.kriteria-tag {{ background: #FEF3C7; color: #92400E; }}
+        .tg-tier-3 .tgc-rule span.kriteria-tag {{ background: #FFE4E6; color: #9F1239; }}
+
+        .tgc-prodi {{
+            font-size: 10.5px;
+            color: #475569;
+            line-height: 1.3;
+            margin-top: 1px;
+        }}
+
+        .tgc-action {{
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 2px;
+            padding-top: 3px;
+            border-top: 1px dashed rgba(0,0,0,0.08);
+        }}
+        .tg-tier-1 .tgc-action {{ color: #047857; }}
+        .tg-tier-2 .tgc-action {{ color: #B45309; }}
+        .tg-tier-3 .tgc-action {{ color: #B91C1C; }}
+
         .svg-wrapper {{
             position: relative;
             width: 100%;
@@ -1090,6 +1219,48 @@ def generate_interactive_html():
                 </div>
             </div>
 
+            <!-- D3 SUB-TIER CLASSIFICATION GUIDE STRIP (Visible only when currentLevel === 'd3') -->
+            <div id="d3-tier-legend-strip" class="d3-tier-legend-strip">
+                <div class="tier-guide-card tg-tier-1" data-tier="1" id="card-tier-1" title="Klik untuk memfilter Tier 1">
+                    <div class="tgc-header">
+                        <div class="tgc-title-group">
+                            <span>⭐</span>
+                            <span>Tier 1: Standout Vokasi</span>
+                        </div>
+                        <span class="tgc-badge">1 Prodi (9,1%)</span>
+                    </div>
+                    <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) ≥ 60%</div>
+                    <div class="tgc-prodi"><strong>D3 Manajemen Informatika</strong> (FR 66,6% • 1.100 mhs/thn)</div>
+                    <div class="tgc-action">💡 <strong>Arah:</strong> Prioritas #1 Konversi ke Sarjana Terapan (D4 TI)</div>
+                </div>
+
+                <div class="tier-guide-card tg-tier-2" data-tier="2" id="card-tier-2" title="Klik untuk memfilter Tier 2">
+                    <div class="tgc-header">
+                        <div class="tgc-title-group">
+                            <span>🔄</span>
+                            <span>Tier 2: Rentan Konversi</span>
+                        </div>
+                        <span class="tgc-badge">5 Prodi (45,5%)</span>
+                    </div>
+                    <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) 45% – 55%</div>
+                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Tek. Sipil, Mesin, Listrik, Pajak, Manaj. Prsh</div>
+                    <div class="tgc-action">💡 <strong>Arah:</strong> Restrukturisasi Kurikulum & Kemitraan Industri</div>
+                </div>
+
+                <div class="tier-guide-card tg-tier-3" data-tier="3" id="card-tier-3" title="Klik untuk memfilter Tier 3">
+                    <div class="tgc-header">
+                        <div class="tgc-title-group">
+                            <span>📉</span>
+                            <span>Tier 3: Defisit Akut</span>
+                        </div>
+                        <span class="tgc-badge">5 Prodi (45,5%)</span>
+                    </div>
+                    <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) &lt; 45% (Batas Kritis &lt; 50%)</div>
+                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Keu. Perbankan, Akuntansi, Peternakan, Keswan, Agribisnis</div>
+                    <div class="tgc-action">💡 <strong>Arah:</strong> Evaluasi Kelayakan & Rasionalisasi Kuota 40–50%</div>
+                </div>
+            </div>
+
             <div class="svg-wrapper" id="svg-container">
                 <!-- SVG injected dynamically -->
                 <svg id="matrix-svg" class="main-svg" viewBox="0 0 1000 580" preserveAspectRatio="xMidYMid meet"></svg>
@@ -1127,9 +1298,43 @@ def generate_interactive_html():
         <!-- RIGHT: EXECUTIVE INSPECTOR DRAWER -->
         <aside class="inspector-panel" id="inspector-panel">
             <div class="inspector-placeholder" id="ins-placeholder">
-                <img src="{usk_logo_b64}" alt="Logo USK" class="ins-placeholder-logo" />
-                <h3>Pilih Program Studi</h3>
-                <p>Klik salah satu lingkaran titik pada kanvas atau gunakan kotak pencarian untuk melihat rincian evaluasi 5 tahun, profil kebocoran kuota, dan rekomendasi kebijakan prodi.</p>
+                <div id="ins-placeholder-s1">
+                    <img src="{usk_logo_b64}" alt="Logo USK" class="ins-placeholder-logo" />
+                    <h3>Pilih Program Studi</h3>
+                    <p>Klik salah satu lingkaran titik pada kanvas atau gunakan kotak pencarian untuk melihat rincian evaluasi 5 tahun, profil kebocoran kuota, dan rekomendasi kebijakan prodi.</p>
+                </div>
+                <div id="ins-placeholder-d3" style="display:none; text-align:left;">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; border-bottom:1px solid var(--border-subtle); padding-bottom:10px;">
+                        <img src="{usk_logo_b64}" alt="Logo USK" style="width:36px; height:36px; object-fit:contain;" />
+                        <div>
+                            <h4 style="font-size:13px; font-weight:800; color:var(--text-main); margin:0;">STANDAR SUB-TIER VOKASI USK</h4>
+                            <span style="font-size:11px; color:var(--text-muted);">11 Program Studi D3 • Evaluasi 2022–2026</span>
+                        </div>
+                    </div>
+                    <p style="font-size:11.5px; color:var(--text-muted); line-height:1.45; margin-bottom:12px;">
+                        Seluruh 11 Prodi D3 Vokasi USK terkonsentrasi di <strong>Kuadran III: Belum Optimal</strong> (Keketatan 5,3×–17,7×, Fill Rate &lt; 80%). Untuk memberikan rekomendasi kebijakan terarah, prodi dikelompokkan ke dalam <strong>3 Tier Kelayakan Berbasis Fill Rate (FR)</strong>:
+                    </p>
+                    <div style="display:flex; flex-direction:column; gap:9px;">
+                        <div style="background:#F0FDF4; border-left:3.5px solid #059669; padding:8px 10px; border-radius:8px;">
+                            <div style="font-size:11.5px; font-weight:800; color:#065F46;">⭐ Tier 1: Standout Vokasi (FR ≥ 60%)</div>
+                            <div style="font-size:11px; color:#166534; margin-top:2px;">• <strong>1 Prodi:</strong> D3 Manajemen Informatika (FR 66,6% • 1.100 mhs/thn)</div>
+                            <div style="font-size:10px; color:#047857; margin-top:2px;"><strong>Arah:</strong> Prioritas #1 konversi ke Sarjana Terapan (D4 TI).</div>
+                        </div>
+                        <div style="background:#FFFBEB; border-left:3.5px solid #D97706; padding:8px 10px; border-radius:8px;">
+                            <div style="font-size:11.5px; font-weight:800; color:#92400E;">🔄 Tier 2: Rentan Konversi (FR 45%–55%)</div>
+                            <div style="font-size:11px; color:#B45309; margin-top:2px;">• <strong>5 Prodi:</strong> Tek. Sipil, Mesin, Listrik, Perpajakan, Manaj. Perusahaan</div>
+                            <div style="font-size:10px; color:#92400E; margin-top:2px;"><strong>Arah:</strong> Di bawah standar 80%. Restrukturisasi kurikulum industri.</div>
+                        </div>
+                        <div style="background:#FFF1F2; border-left:3.5px solid #DC2626; padding:8px 10px; border-radius:8px;">
+                            <div style="font-size:11.5px; font-weight:800; color:#991B1B;">📉 Tier 3: Defisit Akut (FR &lt; 45%)</div>
+                            <div style="font-size:11px; color:#9F1239; margin-top:2px;">• <strong>5 Prodi:</strong> Keu. Perbankan, Akuntansi, Peternakan, Keswan, Agribisnis</div>
+                            <div style="font-size:10px; color:#B91C1C; margin-top:2px;"><strong>Arah:</strong> Di bawah batas kritis 50%. Rekomendasi pangkas kuota 40–50%.</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:12px; font-size:11px; color:var(--text-muted); text-align:center; background:#F8FAFC; padding:8px; border-radius:8px; border:1px dashed #CBD5E1;">
+                        👆 Klik salah satu titik lingkaran pada kanvas atau kartu tier di samping untuk melihat rincian prodi.
+                    </div>
+                </div>
             </div>
 
             <div class="inspector-content" id="ins-content">
@@ -1210,9 +1415,10 @@ def generate_interactive_html():
         const DATA_BY_LEVEL = {json_data};
 
         // State Management
-        let currentLevel = "s1"; // "s1" or "d3"
+        let currentLevel = (window.location.hash === '#d3' || window.location.search.includes('d3')) ? "d3" : "s1";
         let currentFaculty = "ALL";
-        let currentFilterCard = "ALL"; // Quadrant in S1 or Tier in D3
+        let currentFilterCard = "ALL"; // Quadrant in S1 & D3 (I, II, III, IV)
+        let currentD3Tier = "ALL"; // Sub-tier filter for D3 (1, 2, 3)
         let searchQuery = "";
         let showAllLabels = false;
         let selectedProdiId = null;
@@ -1312,7 +1518,7 @@ def generate_interactive_html():
                     }},
                     {{
                         id: 'IV',
-                        label: 'Kuadran IV: Revitalisasi',
+                        label: 'Kuadran IV: Perlu Ditingkatkan',
                         icon: '🚨',
                         val: '26',
                         sub: 'Prodi (39,4%)',
@@ -1349,43 +1555,43 @@ def generate_interactive_html():
                     container.appendChild(card);
                 }});
             }} else {{
-                // D3 Cards (Anomali + 3 Tier Kelayakan)
+                // D3 Cards: Format, Desain, dan Nama Kuadran 100% Identik dengan S1
                 const cardsConfig = [
                     {{
-                        id: 'ALL_D3',
-                        label: 'Anomali Vokasi (100%)',
-                        icon: '🚨',
-                        val: '11',
-                        sub: 'Prodi Kuadran IV',
-                        note: 'Rata Keketatan 9,5x | Fill Rate 44,4%',
-                        class: 'c-amber'
-                    }},
-                    {{
-                        id: 'TIER_1',
-                        label: 'Tier 1: Standout Vokasi',
-                        icon: '⭐',
-                        val: '1',
-                        sub: 'Prodi (9,1%)',
-                        note: 'FR ≥ 60% • D3 Manajemen Informatika',
+                        id: 'I',
+                        label: 'Kuadran I: Unggulan',
+                        icon: '🏆',
+                        val: '0',
+                        sub: 'Prodi (0%)',
+                        note: 'Keketatan ≥ 4.0x & FR ≥ 80%',
                         class: 'c-emerald'
                     }},
                     {{
-                        id: 'TIER_2',
-                        label: 'Tier 2: Rentan Konversi',
-                        icon: '🔄',
-                        val: '5',
-                        sub: 'Prodi (45,5%)',
-                        note: 'FR 45%–55% • Konversi Selektif D4',
+                        id: 'II',
+                        label: 'Kuadran II: Stabil',
+                        icon: '⚖️',
+                        val: '0',
+                        sub: 'Prodi (0%)',
+                        note: 'Keketatan < 4.0x & FR ≥ 80%',
+                        class: 'c-blue'
+                    }},
+                    {{
+                        id: 'III',
+                        label: 'Kuadran III: Belum Optimal',
+                        icon: '⚠️',
+                        val: '11',
+                        sub: 'Prodi (100% Vokasi)',
+                        note: 'Peminat Tinggi tapi Bocor Daftar Ulang',
                         class: 'c-amber'
                     }},
                     {{
-                        id: 'TIER_3',
-                        label: 'Tier 3: Krisis Defisit Akut',
-                        icon: '📉',
-                        val: '5',
-                        sub: 'Prodi (45,5%)',
-                        note: 'FR < 45% • Rasionalisasi Kuota 40-50%',
-                        class: 'c-crimson'
+                        id: 'IV',
+                        label: 'Kuadran IV: Perlu Ditingkatkan',
+                        icon: '🚨',
+                        val: '0',
+                        sub: 'Prodi (0%)',
+                        note: 'Peminat Sepi & Kuota Kerap Kosong',
+                        class: 'c-rose'
                     }}
                 ];
 
@@ -1456,6 +1662,34 @@ def generate_interactive_html():
                 }});
                 container.appendChild(pill);
             }});
+
+            // If D3, append sub-tier filter pills
+            if (currentLevel === 'd3') {{
+                const sep = document.createElement('span');
+                sep.style.cssText = 'color:#94A3B8; font-weight:700; margin:0 6px; display:inline-flex; align-items:center; user-select:none;';
+                sep.textContent = '│';
+                container.appendChild(sep);
+
+                const tierConfigs = [
+                    {{ id: 'ALL', label: 'Semua Tier (11)' }},
+                    {{ id: 1, label: '⭐ Tier 1: Standout (FR ≥ 60% • 1)' }},
+                    {{ id: 2, label: '🔄 Tier 2: Rentan (FR 45%–55% • 5)' }},
+                    {{ id: 3, label: '📉 Tier 3: Defisit (FR < 45% • 5)' }}
+                ];
+                tierConfigs.forEach(t => {{
+                    const pill = document.createElement('span');
+                    pill.className = `filter-pill ${{currentD3Tier === t.id ? 'active' : ''}}`;
+                    pill.textContent = t.label;
+                    pill.title = `Filter ${{t.label}}`;
+                    pill.addEventListener('click', () => {{
+                        currentD3Tier = (currentD3Tier === t.id && t.id !== 'ALL') ? 'ALL' : t.id;
+                        updateTierGuideCardStates();
+                        renderFacultyFilters();
+                        renderChart();
+                    }});
+                    container.appendChild(pill);
+                }});
+            }}
         }}
 
         const fak_abbr_map_client = {json.dumps(fak_abbr_map)};
@@ -1465,14 +1699,11 @@ def generate_interactive_html():
             // Faculty filter
             if (currentFaculty !== "ALL" && d.fakultas !== currentFaculty) return false;
 
-            // Card Filter
-            if (currentLevel === 's1') {{
-                if (currentFilterCard !== "ALL" && d.kuadran !== currentFilterCard) return false;
-            }} else {{
-                if (currentFilterCard === 'TIER_1' && d.tier !== 1) return false;
-                if (currentFilterCard === 'TIER_2' && d.tier !== 2) return false;
-                if (currentFilterCard === 'TIER_3' && d.tier !== 3) return false;
-            }}
+            // Card Filter (Kuadran I, II, III, IV) - 100% seragam S1 & D3!
+            if (currentFilterCard !== "ALL" && d.kuadran !== currentFilterCard) return false;
+
+            // D3 Tier Filter
+            if (currentLevel === 'd3' && currentD3Tier !== 'ALL' && d.tier !== currentD3Tier) return false;
 
             // Search query
             if (searchQuery.trim() !== "") {{
@@ -1524,7 +1755,7 @@ def generate_interactive_html():
                 svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 22, 'end', '13', '800', '#059669', 0.85, 'KUADRAN I: UNGGULAN (28 Prodi)'));
                 svg.appendChild(createText(PLOT_X + 14, PLOT_Y + 22, 'start', '13', '800', '#2563EB', 0.85, 'KUADRAN II: STABIL (4 Prodi)'));
                 svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 14, 'end', '12.5', '800', '#D97706', 0.85, 'KUADRAN III: BELUM OPTIMAL (8 Prodi)'));
-                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + PLOT_H - 14, 'start', '13', '800', '#E11D48', 0.85, 'KUADRAN IV: REVITALISASI (26 Prodi)'));
+                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + PLOT_H - 14, 'start', '13', '800', '#E11D48', 0.85, 'KUADRAN IV: PERLU DITINGKATKAN (26 Prodi)'));
 
                 // Gridlines S1
                 const yTicks = [30, 40, 50, 60, 70, 80, 90, 100];
@@ -1609,28 +1840,39 @@ def generate_interactive_html():
                 svg.appendChild(createLine(PLOT_X, yThreshold50, PLOT_X + PLOT_W, yThreshold50, '#DC2626', 2.2, '3,4', 0.95));
 
                 // Badges D3
-                svg.appendChild(createPillBadge(xThreshold, PLOT_Y + PLOT_H - 16, 190, 22, '#475569', '#94A3B8', '#FFFFFF', '▲ AMBANG KEKETATAN: 4,0 : 1'));
+                svg.appendChild(createPillBadge(xThreshold, PLOT_Y + PLOT_H - 18, 190, 22, '#475569', '#94A3B8', '#FFFFFF', '▲ AMBANG KEKETATAN: 4,0 : 1'));
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 240, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR SEHAT: 80% KETERISIAN'));
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 145, yThreshold50, 270, 22, '#DC2626', '#F87171', '#FFFFFF', '⚠ BATAS KRITIS KELAYAKAN: 50%'));
 
-                // Callout Banner: Anomali Struktural Vokasi USK
-                const bannerGroup = createSVGElement('g', {{ transform: `translate(${{PLOT_X + PLOT_W / 2 + 50}}, ${{PLOT_Y + 45}})` }});
+                // Callout Banner: Anomali Struktural Vokasi USK (Posisikan di bawah watermark Kuadran I agar lapang & tidak tumpang tindih)
+                const bannerGroup = createSVGElement('g', {{ transform: `translate(${{PLOT_X + PLOT_W / 2 + 60}}, ${{PLOT_Y + 70}})` }});
                 const bannerRect = createSVGElement('rect', {{
-                    x: -240, y: -26, width: 480, height: 52, rx: 10,
+                    x: -240, y: -24, width: 480, height: 48, rx: 10,
                     fill: '#FFFBEB', stroke: '#F59E0B', 'stroke-width': 1.4, opacity: 0.96
                 }});
-                const bannerT1 = createText(0, -6, 'middle', '11.5', '800', '#92400E', 1, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:');
-                const bannerT2 = createText(0, 12, 'middle', '11', '700', '#B45309', 1, '100% (11 Prodi D3) Terkonsentrasi di Kuadran IV (Keketatan 5,3x–17,7x, FR < 80%)');
+                const bannerT1 = createText(0, -6, 'middle', '11', '800', '#92400E', 1, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:');
+                const bannerT2 = createText(0, 11, 'middle', '10.5', '700', '#B45309', 1, '100% (11 Prodi D3) Terkonsentrasi di Kuadran III: Belum Optimal (Keketatan 5,3x–17,7x, FR < 80%)');
                 bannerGroup.appendChild(bannerRect);
                 bannerGroup.appendChild(bannerT1);
                 bannerGroup.appendChild(bannerT2);
                 svg.appendChild(bannerGroup);
 
-                // Watermark Quadrant Titles D3
-                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 18, 'end', '11.5', '700', '#94A3B8', 0.70, 'KUADRAN I: UNGGULAN (0 Prodi / 0%)'));
-                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + 18, 'start', '11.5', '700', '#94A3B8', 0.70, 'KUADRAN II: STABIL (0 Prodi / 0%)'));
-                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + PLOT_H - 14, 'start', '11.5', '700', '#94A3B8', 0.70, 'KUADRAN III: KURANG DIMINATI (0 Prodi / 0%)'));
-                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 14, 'end', '12', '800', '#B45309', 0.95, 'KUADRAN IV: SELEKTIF TAPI BOCOR (11 Prodi / 100% Vokasi)'));
+                // Watermark Quadrant Titles D3 (Format & Desain Seragam 100% dengan S1, Rapi & Bebas Tumpang Tindih)
+                // Q1 (Top-Right): Di pojok kanan atas, di atas banner
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 18, 'end', '12', '800', '#059669', 0.85, 'KUADRAN I: UNGGULAN'));
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 32, 'end', '10', '600', '#64748B', 0.85, '(0 Prodi / 0%)'));
+
+                // Q2 (Top-Left): Tetap di dalam kolom kiri (x < 236), tidak menyeberang garis ambang
+                svg.appendChild(createText(PLOT_X + 8, PLOT_Y + 18, 'start', '11', '800', '#2563EB', 0.85, 'KUADRAN II: STABIL'));
+                svg.appendChild(createText(PLOT_X + 8, PLOT_Y + 32, 'start', '9.5', '600', '#64748B', 0.85, '(0 Prodi / 0%)'));
+
+                // Q3 (Bottom-Right): Di pojok kanan bawah
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 24, 'end', '12.5', '800', '#D97706', 0.95, 'KUADRAN III: BELUM OPTIMAL'));
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 10, 'end', '10.5', '700', '#B45309', 0.90, '(11 Prodi / 100% Vokasi)'));
+
+                // Q4 (Bottom-Left): Di bawah garis 80%, tetap di dalam kolom kiri (x < 236), bebas tabrakan dengan badge ambang bawah!
+                svg.appendChild(createText(PLOT_X + 8, yThreshold80 + 20, 'start', '10.5', '800', '#E11D48', 0.85, 'KUADRAN IV: PERLU DITINGKATKAN'));
+                svg.appendChild(createText(PLOT_X + 8, yThreshold80 + 34, 'start', '9.5', '600', '#64748B', 0.85, '(0 Prodi / 0%)'));
             }}
 
             // Axis Titles
@@ -1773,9 +2015,17 @@ def generate_interactive_html():
         }}
 
         function onDotClick(d) {{
-            selectedProdiId = d.id;
-            renderChart();
-            showInspector(d);
+            if (selectedProdiId === d.id) {{
+                selectedProdiId = null;
+                document.getElementById('ins-content').style.display = 'none';
+                document.getElementById('ins-placeholder').style.display = 'block';
+                updatePlaceholderView();
+                renderChart();
+            }} else {{
+                selectedProdiId = d.id;
+                renderChart();
+                showInspector(d);
+            }}
         }}
 
         function showInspector(d) {{
@@ -1789,7 +2039,11 @@ def generate_interactive_html():
             qTag.style.backgroundColor = d.color;
 
             document.getElementById('ins-name').textContent = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
-            document.getElementById('ins-quad-desc').textContent = d.kuadran_desc;
+            if (currentLevel === 'd3') {{
+                document.getElementById('ins-quad-desc').textContent = `${{d.kuadran_desc}} • ${{d.tier_title}} (${{d.tier_desc}})`;
+            }} else {{
+                document.getElementById('ins-quad-desc').textContent = d.kuadran_desc;
+            }}
 
             document.getElementById('ins-keketatan').textContent = `${{d.keketatan}} : 1`;
             document.getElementById('ins-keketatan-status').textContent = d.keketatan >= 4.0 ? 'Keketatan Selektif (>= 4x)' : 'Keketatan Rendah (< 4x)';
@@ -1827,6 +2081,50 @@ def generate_interactive_html():
             }});
         }}
 
+        // Sub-Tier Guide Card State & Visibility Handlers
+        function updateTierGuideCardStates() {{
+            [1, 2, 3].forEach(tierNum => {{
+                const card = document.getElementById(`card-tier-${{tierNum}}`);
+                if (card) {{
+                    card.classList.toggle('active', currentD3Tier === tierNum);
+                }}
+            }});
+        }}
+
+        function updateD3TierStripVisibility() {{
+            const strip = document.getElementById('d3-tier-legend-strip');
+            if (strip) {{
+                strip.style.display = (currentLevel === 'd3') ? 'grid' : 'none';
+            }}
+        }}
+
+        function updatePlaceholderView() {{
+            const phS1 = document.getElementById('ins-placeholder-s1');
+            const phD3 = document.getElementById('ins-placeholder-d3');
+            if (phS1 && phD3) {{
+                if (currentLevel === 'd3') {{
+                    phS1.style.display = 'none';
+                    phD3.style.display = 'block';
+                }} else {{
+                    phS1.style.display = 'block';
+                    phD3.style.display = 'none';
+                }}
+            }}
+        }}
+
+        // Click Event Handlers on Tier Guide Cards
+        [1, 2, 3].forEach(tierNum => {{
+            const card = document.getElementById(`card-tier-${{tierNum}}`);
+            if (card) {{
+                card.addEventListener('click', () => {{
+                    currentD3Tier = (currentD3Tier === tierNum) ? 'ALL' : tierNum;
+                    updateTierGuideCardStates();
+                    renderFacultyFilters();
+                    renderChart();
+                }});
+            }}
+        }});
+
         // Level Switcher Event Handlers
         document.querySelectorAll('.level-tab').forEach(tab => {{
             tab.addEventListener('click', () => {{
@@ -1840,6 +2138,7 @@ def generate_interactive_html():
                 // Reset filters on level switch
                 currentFaculty = "ALL";
                 currentFilterCard = "ALL";
+                currentD3Tier = "ALL";
                 searchQuery = "";
                 document.getElementById('prodi-search').value = "";
                 selectedProdiId = null;
@@ -1851,18 +2150,22 @@ def generate_interactive_html():
                     document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi S1: <strong>Keketatan 4,0 : 1</strong> | <strong>Keterisian Sehat 80%</strong>';
                 }} else {{
                     document.getElementById('header-main-title').textContent = 'PETA PORTOFOLIO STRATEGIS 11 PROGRAM STUDI DIPLOMA 3 VOKASI';
-                    document.getElementById('chart-sub-heading').textContent = 'Matriks Anomali Vokasi USK (Keketatan Seleksi vs Keterisian Kuota D3)';
+                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (Keketatan Seleksi vs Keterisian Kuota D3)';
                     document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Sehat 80%</strong> | <strong>Batas Kritis 50%</strong>';
                 }}
+
+                updateD3TierStripVisibility();
+                updateTierGuideCardStates();
 
                 renderKPIRibbon();
                 renderFacultyFilters();
                 renderChart();
 
-                // Pastikan panel inspector dan titik kembali bersih saat ganti level
+                // Pastikan panel inspector dan placeholder kembali bersih sesuai level
                 selectedProdiId = null;
                 document.getElementById('ins-content').style.display = 'none';
                 document.getElementById('ins-placeholder').style.display = 'block';
+                updatePlaceholderView();
             }});
         }});
 
@@ -1883,6 +2186,7 @@ def generate_interactive_html():
         document.getElementById('btn-reset-filters').addEventListener('click', () => {{
             currentFaculty = "ALL";
             currentFilterCard = "ALL";
+            currentD3Tier = "ALL";
             searchQuery = "";
             showAllLabels = false;
             selectedProdiId = null;
@@ -1890,8 +2194,11 @@ def generate_interactive_html():
             document.getElementById('prodi-search').value = "";
             document.getElementById('btn-toggle-labels').classList.remove('active');
 
+            updateTierGuideCardStates();
+
             document.getElementById('ins-content').style.display = 'none';
             document.getElementById('ins-placeholder').style.display = 'block';
+            updatePlaceholderView();
 
             renderKPIRibbon();
             renderFacultyFilters();
@@ -1899,6 +2206,18 @@ def generate_interactive_html():
         }});
 
         // Initial Load
+        if (currentLevel === 'd3') {{
+            document.querySelectorAll('.level-tab').forEach(t => {{
+                t.classList.toggle('active', t.getAttribute('data-level') === 'd3');
+            }});
+            document.getElementById('header-main-title').textContent = 'PETA PORTOFOLIO STRATEGIS 11 PROGRAM STUDI DIPLOMA 3 VOKASI';
+            document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (Keketatan Seleksi vs Keterisian Kuota D3)';
+            document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Sehat 80%</strong> | <strong>Batas Kritis 50%</strong>';
+        }}
+
+        updateD3TierStripVisibility();
+        updateTierGuideCardStates();
+
         renderKPIRibbon();
         renderFacultyFilters();
         renderChart();
@@ -1907,6 +2226,7 @@ def generate_interactive_html():
         selectedProdiId = null;
         document.getElementById('ins-content').style.display = 'none';
         document.getElementById('ins-placeholder').style.display = 'block';
+        updatePlaceholderView();
     </script>
 </body>
 </html>

@@ -1022,7 +1022,7 @@ def main():
             ha='left', va='top', fontsize=11, fontweight='bold', color='#1E40AF', alpha=0.85, zorder=2)
     ax.text(39.5, 45.5, 'KUADRAN III: BELUM OPTIMAL (7 Prodi)\n(Peminat Tinggi, Keterisian Belum Optimal)',
             ha='right', va='bottom', fontsize=9.5, fontweight='bold', color='#92400E', alpha=0.85, zorder=2)
-    ax.text(0.5, 45.5, 'KUADRAN IV: PERLU REVITALISASI (22 Prodi)',
+    ax.text(0.5, 45.5, 'KUADRAN IV: PERLU DITINGKATKAN (22 Prodi)',
             ha='left', va='bottom', fontsize=11, fontweight='bold', color='#991B1B', alpha=0.85, zorder=2)
 
     # Calculate quadrant colors and bubble sizes based on DT
@@ -1037,7 +1037,7 @@ def main():
         elif x >= 4.0 and y < 80.0:
             pt_cols.append('#D97706') # Amber (Q3: Belum Optimal)
         else:
-            pt_cols.append('#DC2626') # Red (Q4: Perlu Revitalisasi)
+            pt_cols.append('#DC2626') # Red (Q4: Perlu Ditingkatkan)
 
     sizes = 45 + (df_s1['DT_2026'] / 560.0) * 190
     ax.scatter(df_s1['Keketatan_2026'], df_s1['FillRate_2026_Persen'], s=sizes, c=pt_cols,
@@ -1122,7 +1122,7 @@ def main():
             'action': 'AKSI: Optimasi Konversi Registrasi.\nSediakan fasilitas cicilan uang pangkal\ndan percepat panggilan cadangan.'
         },
         {
-            'title': 'KUADRAN IV: PERLU REVITALISASI (22 PRODI | 33%)',
+            'title': 'KUADRAN IV: PERLU DITINGKATKAN (22 PRODI | 33%)',
             'color_border': '#EF4444', 'color_bg': '#FEF2F2', 'color_text': '#991B1B',
             'desc': 'Demand Lemah (<4,0x) & Kursi Banyak Bolong (<80%)\nPeminat terbatas dan kelas mengalami kursi kosong kronis.',
             'examples': 'Budidaya Perairan, Fisika, PSP, THP, Pend. Ekonomi, Kimia.',
@@ -1322,7 +1322,7 @@ def main():
             ha='left', va='top', fontsize=12, fontweight='bold', color='#1D4ED8', alpha=0.9, zorder=2, linespacing=1.2)
     ax.text(x_max - 1.5, 26.5, 'KUADRAN III: BELUM OPTIMAL\n(Peminat Tinggi, Keterisian Belum Optimal)\n8 Program Studi (12,1%)',
             ha='right', va='bottom', fontsize=11, fontweight='bold', color='#B45309', alpha=0.9, zorder=2, linespacing=1.2)
-    ax.text(0.6, 26.5, 'KUADRAN IV: PERLU REVITALISASI\n26 Program Studi (39,4%)',
+    ax.text(0.6, 26.5, 'KUADRAN IV: PERLU DITINGKATKAN\n26 Program Studi (39,4%)',
             ha='left', va='bottom', fontsize=12, fontweight='bold', color='#B91C1C', alpha=0.9, zorder=2, linespacing=1.2)
 
     # Colors
@@ -1337,7 +1337,7 @@ def main():
         elif x >= 4.0 and y < 80.0:
             pt_cols_5y.append('#D97706') # Amber (Q3: Belum Optimal)
         else:
-            pt_cols_5y.append('#E11D48') # Rose Red (Q4: Perlu Revitalisasi)
+            pt_cols_5y.append('#E11D48') # Rose Red (Q4: Perlu Ditingkatkan)
 
     # OPSI 1: Ukuran titik seragam (90 pt), sangat bersih dan fokus
     ax.scatter(df_s1['Rata_Keketatan_5Thn'], df_s1['Rata_FillRate_5Thn_Persen'], s=90, c=pt_cols_5y,
@@ -1398,7 +1398,7 @@ def main():
 
     ax.set_xlabel('Rasio Keketatan Seleksi (Peminat per 1 Kursi Daya Tampung)', fontsize=12, fontweight='bold', color='#1E293B', labelpad=12)
     ax.set_ylabel('Persentase Keterisian Kuota / Fill Rate (%)', fontsize=12, fontweight='bold', color='#1E293B', labelpad=14)
-    ax.set_title('Peta Portofolio 66 Program Studi S1 Kampus Utama USK (Rata-rata 5 Tahun: 2022–2026)', fontsize=14, fontweight='bold', pad=14, color='#0F172A')
+    ax.set_title('Peta Kuadran 66 Program Studi S1 Kampus Utama USK (Rata-rata 5 Tahun: 2022-2026)', fontsize=14, fontweight='bold', pad=14, color='#0F172A')
 
     ax.grid(True, linestyle=':', alpha=0.45, color='#94A3B8', zorder=0)
     for spine in ['top', 'right']:

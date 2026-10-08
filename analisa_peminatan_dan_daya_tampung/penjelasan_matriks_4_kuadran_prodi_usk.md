@@ -12,7 +12,7 @@ Dokumen ini disusun untuk memudahkan navigasi cepat saat presentasi atau tanya j
 3. [Daftar Lengkap Prodi Kuadran I: Unggulan (Star Assets)](#3-daftar-lengkap-prodi-kuadran-i-unggulan-star-assets)
 4. [Daftar Lengkap Prodi Kuadran II: Stabil (Core Equilibrium)](#4-daftar-lengkap-prodi-kuadran-ii-stabil-core-equilibrium)
 5. [Daftar Lengkap Prodi Kuadran III: Belum Optimal (High Demand, Low Conversion)](#5-daftar-lengkap-prodi-kuadran-iii-belum-optimal-high-demand-low-conversion)
-6. [Daftar Lengkap Prodi Kuadran IV: Perlu Revitalisasi (Under-Enrolled Assets)](#6-daftar-lengkap-prodi-kuadran-iv-perlu-revitalisasi-under-enrolled-assets)
+6. [Daftar Lengkap Prodi Kuadran IV: Perlu Ditingkatkan (Under-Enrolled Assets)](#6-daftar-lengkap-prodi-kuadran-iv-perlu-ditingkatkan-under-enrolled-assets)
 7. [Analisis Bebas Bias: Pergeseran Posisi Snapshot 2026 vs Rata-Rata 5 Tahun](#7-analisis-bebas-bias-pergeseran-posisi-snapshot-2026-vs-rata-rata-5-tahun)
 8. [Panduan Menjawab Pertanyaan Mentor (*Executive Talking Points*)](#8-panduan-menjawab-pertanyaan-mentor-executive-talking-points)
 
@@ -34,7 +34,7 @@ Matriks 4 Kuadran Portofolio Strategis (*Higher Education Strategic Portfolio Ma
                                         │
      ─────── GARIS AMBANG EFISIENSI ────┼──── FILL RATE = 80,0% ────────────────
                                         │
-           KUADRAN IV: REVITALISASI     │ KUADRAN III: BELUM OPTIMAL
+           KUADRAN IV: DITINGKATKAN     │ KUADRAN III: BELUM OPTIMAL
            (Peminat Terbatas, Kuota Sisa│ (Peminat Tinggi, Registrasi Belum Optimal)
            - Fill Rate < 80%            │ - Fill Rate < 80%
            - Keketatan < 4,0x           │ - Keketatan >= 4,0x
@@ -60,7 +60,7 @@ Matriks 4 Kuadran Portofolio Strategis (*Higher Education Strategic Portfolio Ma
 | **Kuadran I** | **Unggulan** | **30 Prodi** (45,5%) | **28 Prodi** (42,4%) | -2 Prodi | **Pertahankan & Ekspansi Terukur:** Naikkan kuota $+5\%$ s.d. $+10\%$ atau buka Kelas Internasional. |
 | **Kuadran II** | **Stabil** | **6 Prodi** (9,1%) | **4 Prodi** (6,1%) | -2 Prodi | **Lindungi & Pertahankan Equilibrium:** Jangan menaikkan kuota; jaga keseimbangan kapasitas saat ini. |
 | **Kuadran III** | **Belum Optimal** *(Peminat Tinggi, Keterisian Belum Optimal)* | **8 Prodi** (12,1%) | **8 Prodi** (12,1%) | Tetap | **Perbaiki Finansial & Konversi:** Peminat ada, perbaiki skema cicilan IPI jalur mandiri dan percepat cadangan. |
-| **Kuadran IV** | **Perlu Revitalisasi** | **22 Prodi** (33,3%) | **26 Prodi** (39,4%) | **+4 Prodi** | **WAJIB PANGKAS KUOTA SEGERA (20%–40%):** Hapus bangku kosong semu untuk selamatkan akreditasi prodi. |
+| **Kuadran IV** | **Perlu Ditingkatkan** | **22 Prodi** (33,3%) | **26 Prodi** (39,4%) | **+4 Prodi** | **WAJIB PANGKAS KUOTA SEGERA (20%–40%):** Hapus bangku kosong semu untuk selamatkan akreditasi prodi. |
 | **TOTAL** | **S1 Kampus Utama** | **66 Prodi** (100%) | **66 Prodi** (100%) | — | Seluruh 66 Program Studi Sarjana Kampus Utama USK di Banda Aceh. |
 
 ---
@@ -134,7 +134,7 @@ Matriks 4 Kuadran Portofolio Strategis (*Higher Education Strategic Portfolio Ma
 
 ---
 
-## 6. DAFTAR LENGKAP PRODI KUADRAN IV: PERLU REVITALISASI (UNDER-ENROLLED ASSETS)
+## 6. DAFTAR LENGKAP PRODI KUADRAN IV: PERLU DITINGKATKAN (UNDER-ENROLLED ASSETS)
 *Kriteria: Keketatan Seleksi $2026 < 4{,}0 : 1$ DAN Capacity Fill Rate $2026 < 80{,}0\%$ (Total: **22 Program Studi**).*  
 > **PERINGATAN MANAJERIAL:** Seluruh prodi di kuadran ini adalah **penyumbang utama bangku kosong semu universitas**. Rektorat direkomendasikan memangkas kuota sebesar 20% hingga 40% pada SPMB 2027.
 
@@ -175,7 +175,7 @@ Berikut adalah **tabel lengkap seluruh 9 Program Studi yang berpindah kuadran**:
 
 | No | Program Studi | Fakultas | Posisi Snapshot 2026 (Kek \| Fill Rate) | Posisi 5 Tahun Longitudinal (Kek \| Fill Rate) | Arah Pergeseran Kuadran | Makna Manajerial & Rekomendasi Bebas Bias |
 | :---: | :--- | :--- | :---: | :---: | :---: | :--- |
-| 1 | **BIOLOGI** | MIPA | **Kuadran I**<br>(6,06x \| 85,0%) | **Kuadran IV**<br>(3,62x \| 71,9%) | **I $\rightarrow$ IV**<br>*(Ilusi Bintang)* | **PERGESERAN PALING EKSTREM:** Di 2026 terlihat prima (Kuadran I), namun riwayat 5 tahunnya adalah Kuadran IV (revitalisasi). Jangan latah menambah kuota; amankan dulu stabilitas peminat. |
+| 1 | **BIOLOGI** | MIPA | **Kuadran I**<br>(6,06x \| 85,0%) | **Kuadran IV**<br>(3,62x \| 71,9%) | **I $\rightarrow$ IV**<br>*(Ilusi Bintang)* | **PERGESERAN PALING EKSTREM:** Di 2026 terlihat prima (Kuadran I), namun riwayat 5 tahunnya adalah Kuadran IV (perlu ditingkatkan). Jangan latah menambah kuota; amankan dulu stabilitas peminat. |
 | 2 | **ARSITEKTUR** | Teknik | **Kuadran II**<br>(3,14x \| 81,9%) | **Kuadran IV**<br>(3,96x \| 78,7%) | **II $\rightarrow$ IV**<br>*(Pemulihan Baru)* | Di 2026 berhasil menembus 81,9%, namun rata-rata 5 tahunnya berada di bawah ambang batas (78,7%). Pertahankan kuota 160, jangan dinaikkan. |
 | 3 | **TEKNIK SUMBER DAYA AIR (TSDA)** | Teknik | **Kuadran II**<br>(2,03x \| 86,7%) | **Kuadran IV**<br>(1,72x \| 75,2%) | **II $\rightarrow$ IV**<br>*(Rentan Fluktuasi)* | Kuota 60 terisi baik di 2026, tetapi historisnya defisit. Wajib jaga kuota tetap ramping di 60 kursi. |
 | 4 | **TEKNIK ELEKTRO** | Teknik | **Kuadran III**<br>(4,43x \| 70,0%) | **Kuadran IV**<br>(3,71x \| 67,8%) | **III $\rightarrow$ IV**<br>*(Peminat Semu)* | Di 2026 peminat sempat naik (4,4x), namun riwayat 5 tahun membuktikan keketatan hanya 3,7x dan kursi kosong mencapai 48 kursi. Kuota 160 terlalu besar, perlu dirasionalkan. |
@@ -198,7 +198,7 @@ Berikut adalah **tabel lengkap seluruh 9 Program Studi yang berpindah kuadran**:
 * **26 Prodi Konsisten di Kuadran I (Unggulan):** Farmasi, Informatika, Psikologi, Kedokteran Gigi, Kedokteran, Teknik Pertambangan, Manajemen, Akuntansi, PGSD, Teknik Komputer, Ilmu Hukum, Teknik Sipil, Keperawatan, dll.
 * **2 Prodi Konsisten di Kuadran II (Stabil):** Hubungan Internasional dan Sendratasik FKIP.
 * **6 Prodi Konsisten di Kuadran III (Belum Optimal / Kebocoran Konversi):** Akuntansi Perpajakan, Teknik Perminyakan, Pend. Guru PAUD, Pend. Sejarah, Pend. Biologi, dan Agroteknologi.
-* **23 Prodi Konsisten di Kuadran IV (Perlu Revitalisasi / Defisit Kronis):** Fisika, Budidaya Perairan, PSP Perikanan, THP, Pend. Ekonomi, Teknik Kimia, Pend. Kimia, Pend. Fisika, Ilmu Tanah, Pend. Matematika, Peternakan, Sosiologi, dll.
+* **23 Prodi Konsisten di Kuadran IV (Perlu Ditingkatkan / Defisit Kronis):** Fisika, Budidaya Perairan, PSP Perikanan, THP, Pend. Ekonomi, Teknik Kimia, Pend. Kimia, Pend. Fisika, Ilmu Tanah, Pend. Matematika, Peternakan, Sosiologi, dll.
 
 > **Temuan Kunci untuk Rektorat:**  
 > Fakta bahwa **86,4% prodi berposisi konsisten** membuktikan bahwa Matriks 4 Kuadran USK memiliki **stabilitas portofolio yang sangat tinggi**. Masalah kursi kosong 23 prodi di Kuadran IV adalah **defisit struktural jangka panjang**, bukan fluktuasi temporer!
@@ -210,12 +210,12 @@ Berikut adalah **tabel lengkap seluruh 9 Program Studi yang berpindah kuadran**:
 ### Pertanyaan 1: *"Bagaimana membedakan perlakuan antara Kuadran III dan Kuadran IV? Kan sama-sama punya bangku kosong?"*
 * **Jawaban:**  
   *"Sangat berbeda, Pak/Bu. 
-  * Pada **Kuadran IV (Perlu Revitalisasi)**, masalahnya ada di **hulu (Pasar/Peminat memang tidak ada)**, contohnya Budidaya Perairan peminatnya hanya 145 untuk 160 kursi (rasio $0{,}9\times$). Obatnya hanya satu: **pangkas kuotanya secara drastis (20%–40%)**.
+  * Pada **Kuadran IV (Perlu Ditingkatkan)**, masalahnya ada di **hulu (Pasar/Peminat memang tidak ada)**, contohnya Budidaya Perairan peminatnya hanya 145 untuk 160 kursi (rasio $0{,}9\times$). Obatnya hanya satu: **pangkas kuotanya secara drastis (20%–40%)**.
   * Pada **Kuadran III (Belum Optimal)**, masalahnya ada di **hilir (Konversi/Daftar Ulang)**. Peminatnya membludak (seperti Akuntansi Perpajakan $14\times$ dan Teknik Perminyakan $7\times$), tetapi mereka mundur karena kendala biaya IPI/UKT jalur mandiri atau keterlambatan daftar ulang. Obatnya bukan memangkas kuota, melainkan **memberikan fasilitas cicilan biaya IPI dan mempercepat pemanggilan cadangan**."*
 
 ### Pertanyaan 2: *"Kenapa kuota Kuadran II tidak boleh dinaikkan padahal selalu terisi penuh (> 80%)?"*
 * **Jawaban:**  
-  *"Karena rasio keketatannya moderat ($< 4{,}0 : 1$). Artinya daya serap pasarnya saat ini berada dalam **keseimbangan sempurna (equilibrium)**. Jika kuotanya dinaikkan secara gegabah, keketatannya akan anjlok ke bawah $1{,}5$ dan prodi tersebut akan terseret jatuh ke Kuadran IV (Perlu Revitalisasi)."*
+  *"Karena rasio keketatannya moderat ($< 4{,}0 : 1$). Artinya daya serap pasarnya saat ini berada dalam **keseimbangan sempurna (equilibrium)**. Jika kuotanya dinaikkan secara gegabah, keketatannya akan anjlok ke bawah $1{,}5$ dan prodi tersebut akan terseret jatuh ke Kuadran IV (Perlu Ditingkatkan)."*
 
 ### Pertanyaan 3: *"Berapa potensi kursi kosong yang bisa dihapus jika rekomendasi ini dijalankan?"*
 * **Jawaban:**  

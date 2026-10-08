@@ -277,7 +277,7 @@ def main():
     content_top_y4 = draw_card(
         x0=3.0, y0=3.5, width=45.5, height=44.5,
         bg_col='#FFF1F2', border_col='#FECDD3', header_col='#B91C1C',
-        title_text="KUADRAN IV: PERLU REVITALISASI",
+        title_text="KUADRAN IV: PERLU DITINGKATKAN",
         count_text="26 Program Studi (39,4%)",
         policy_text="WAJIB PANGKAS KUOTA (20%–40%) DI SPMB 2027"
     )

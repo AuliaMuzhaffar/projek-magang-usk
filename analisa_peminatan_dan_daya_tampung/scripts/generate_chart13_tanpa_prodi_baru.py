@@ -1,8 +1,18 @@
 """
-Script untuk meng-generate Chart 13 Versi Komparasi (Seluruh 66 Label Prodi):
-13_matriks_4_kuadran_5_tahun_2022_2026_all_labels.png
-Menerapkan Opsi 1: Ukuran titik seragam dan menghapus legenda kapasitas kuota (chartjunk removal)
-untuk visualisasi eksekutif yang bersih dan fokus pada 2 sumbu strategis.
+Script untuk meng-generate Chart 13 Versi 60 Program Studi Mapan (Tanpa Prodi Baru):
+13_matriks_4_kuadran_5_tahun_2022_2026_tanpa_prodi_baru.png
+
+Karakteristik Visual:
+- Mengecualikan 6 Program Studi Baru (Data Terbatas < 5 Tahun: Bisnis Digital, HI, Teknik Lingkungan,
+  Teknik Perminyakan, Teknik Sumber Daya Air, TIHP)
+- Memetakan 60 Program Studi Mapan dengan seluruh 60 label nama program studi (all labels)
+- Metrik kuadran diperbarui:
+  * Kuadran I (Unggulan): 26 Prodi (43,3%)
+  * Kuadran II (Stabil): 3 Prodi (5,0%)
+  * Kuadran III (Belum Optimal): 7 Prodi (11,7%)
+  * Kuadran IV (Perlu Revitalisasi): 24 Prodi (40,0%)
+- Skala X non-linear piecewise untuk keterbacaan optimal area padat kuadran IV & III
+- Garis ambang batas efisiensi 80% dan keketatan 4,0 : 1 dengan badge bergaya modern
 """
 
 import os
@@ -17,8 +27,13 @@ def main():
     chart_dir = os.path.join(base_dir, "tugas-5", "analisa_peminatan_dan_daya_tampung", "grafik")
     os.makedirs(chart_dir, exist_ok=True)
 
-    print("Loading data from Excel for all-labels comparison (Option 1)...")
-    df_s1 = pd.read_excel(excel_path, sheet_name="S1_Kampus_Utama")
+    print("Loading data from Excel for 60 Established Programs (Excluding New Programs)...")
+    df_raw = pd.read_excel(excel_path, sheet_name="S1_Kampus_Utama")
+    
+    # Eksklusi prodi baru (< 5 tahun data)
+    df_s1 = df_raw[df_raw['Klasifikasi Tren Resmi'] != 'Data Terbatas (Prodi Baru)'].copy()
+    print(f"Total prodi mapan dimuat: {len(df_s1)} program studi (dari {len(df_raw)} total S1).")
+
     rev_map = {
         'Nama Program Studi': 'Program_Studi',
         'Fakultas': 'Fakultas',
@@ -69,7 +84,7 @@ def main():
     ax.axvspan(0.0, 4.0, ymin=0.0, ymax=(80 - y_min)/(y_max - y_min), color='#FFF1F2', alpha=0.55, zorder=0)
     ax.axvspan(4.0, x_max, ymin=0.0, ymax=(80 - y_min)/(y_max - y_min), color='#FFFBEB', alpha=0.55, zorder=0)
 
-    # Benchmark Lines & Badges (Varian 1: Cool Slate Grey - Netral, Lembut, Non-Hitam)
+    # Benchmark Lines & Badges (Slate Grey - Netral, Lembut, Elegan)
     line_slate = '#64748B'
     bg_slate = '#475569'
     border_slate = '#94A3B8'
@@ -89,17 +104,31 @@ def main():
             bbox=dict(boxstyle='round,pad=0.35,rounding_size=0.5', facecolor=bg_slate, edgecolor=border_slate, linewidth=1.2, alpha=0.98),
             zorder=5)
 
-    # Quadrant titles
-    ax.text(x_max - 1.5, 104.0, 'KUADRAN I: UNGGULAN\n28 Program Studi (42,4%)',
+    # Hitung distribusi kuadran aktual dari 60 prodi
+    n_total = len(df_s1)
+    q1_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] >= 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] >= 80.0)])
+    q2_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] < 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] >= 80.0)])
+    q3_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] >= 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] < 80.0)])
+    q4_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] < 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] < 80.0)])
+
+    pct1 = (q1_count / n_total) * 100
+    pct2 = (q2_count / n_total) * 100
+    pct3 = (q3_count / n_total) * 100
+    pct4 = (q4_count / n_total) * 100
+
+    print(f"Distribusi 60 Prodi: Q1={q1_count} ({pct1:.1f}%), Q2={q2_count} ({pct2:.1f}%), Q3={q3_count} ({pct3:.1f}%), Q4={q4_count} ({pct4:.1f}%)")
+
+    # Quadrant titles with updated counts & percentages
+    ax.text(x_max - 1.5, 104.0, f'KUADRAN I: UNGGULAN\n{q1_count} Program Studi ({pct1:.1f}%)',
             ha='right', va='top', fontsize=12, fontweight='bold', color='#047857', alpha=0.9, zorder=2, linespacing=1.2)
-    ax.text(0.6, 104.0, 'KUADRAN II: STABIL\n4 Program Studi (6,1%)',
+    ax.text(0.6, 104.0, f'KUADRAN II: STABIL\n{q2_count} Program Studi ({pct2:.1f}%)',
             ha='left', va='top', fontsize=12, fontweight='bold', color='#1D4ED8', alpha=0.9, zorder=2, linespacing=1.2)
-    ax.text(x_max - 1.5, 26.5, 'KUADRAN III: BELUM OPTIMAL\n(Peminat Tinggi, Keterisian Belum Optimal)\n8 Program Studi (12,1%)',
+    ax.text(x_max - 1.5, 26.5, f'KUADRAN III: BELUM OPTIMAL\n(Peminat Tinggi, Keterisian Belum Optimal)\n{q3_count} Program Studi ({pct3:.1f}%)',
             ha='right', va='bottom', fontsize=11, fontweight='bold', color='#B45309', alpha=0.9, zorder=2, linespacing=1.2)
-    ax.text(0.6, 26.5, 'KUADRAN IV: PERLU DITINGKATKAN\n26 Program Studi (39,4%)',
+    ax.text(0.6, 26.5, f'KUADRAN IV: PERLU DITINGKATKAN\n{q4_count} Program Studi ({pct4:.1f}%)',
             ha='left', va='bottom', fontsize=12, fontweight='bold', color='#B91C1C', alpha=0.9, zorder=2, linespacing=1.2)
 
-    # Colors
+    # Colors for points
     pt_cols_5y = []
     for _, r in df_s1.iterrows():
         x = r['Rata_Keketatan_5Thn']
@@ -113,7 +142,7 @@ def main():
         else:
             pt_cols_5y.append('#E11D48') # Rose Red (Q4: Perlu Ditingkatkan)
 
-    # OPSI 1: Ukuran titik seragam (90 pt), sangat bersih dan proporsional
+    # Ukuran titik seragam (90 pt), sangat bersih dan proporsional
     ax.scatter(df_s1['Rata_Keketatan_5Thn'], df_s1['Rata_FillRate_5Thn_Persen'],
                s=90, c=pt_cols_5y, edgecolors='#0F172A', linewidths=1.2, alpha=0.90, zorder=4)
 
@@ -138,12 +167,10 @@ def main():
         'PENDIDIKAN SENI DRAMA TARI DAN MUSIK': 'Sendratasik',
         'PENDIDIKAN JASMANI KESEHATAN DAN REKREASI': 'Penjaskesrek',
         'PERENCANAAN WILAYAH DAN KOTA': 'PWK',
-        'TEKNOLOGI INDUSTRI HASIL PERIKANAN': 'TIHP',
         'PEMANFAATAN SUMBERDAYA PERIKANAN': 'PSP',
         'PENDIDIKAN GURU SEKOLAH DASAR': 'PGSD',
         'PENDIDIKAN GURU PENDIDIKAN ANAK USIA DINI': 'PAUD',
         'PENDIDIKAN GURU PAUD': 'PAUD',
-        'TEKNIK SUMBER DAYA AIR': 'TSDA',
         'TEKNOLOGI HASIL PERTANIAN': 'THP',
         'PENDIDIKAN DOKTER HEWAN': 'Dokter Hewan',
         'PENDIDIKAN BAHASA INGGRIS': 'Bhs Inggris',
@@ -158,7 +185,9 @@ def main():
         'PENDIDIKAN KIMIA': 'Pend. Kimia',
         'PENDIDIKAN FISIKA': 'Pend. Fisika',
         'PENDIDIKAN BIOLOGI': 'Pend. Biologi',
-        'PENDIDIKAN SEJARAH': 'Pend. Sejarah'
+        'PENDIDIKAN SEJARAH': 'Pend. Sejarah',
+        'AKUNTANSI PERPAJAKAN': 'Ak. Perpajakan',
+        'BUDIDAYA PERAIRAN': 'Budidaya Perairan'
     }
 
     texts = []
@@ -225,7 +254,7 @@ def main():
                     zorder=6)
         texts.append(t)
 
-    print(f"Mengoptimasi penempatan {len(texts)} label prodi dengan collision repulsion...")
+    print(f"Mengoptimasi penempatan {len(texts)} label prodi dengan collision repulsion adjust_text...")
     adjust_text(texts,
                 target_x=pts_x,
                 target_y=pts_y,
@@ -246,7 +275,12 @@ def main():
 
     ax.set_xlabel('Rasio Keketatan Seleksi (Peminat per 1 Kursi Daya Tampung)', fontsize=12, fontweight='bold', color='#1E293B', labelpad=12)
     ax.set_ylabel('Persentase Keterisian Kuota / Fill Rate (%)', fontsize=12, fontweight='bold', color='#1E293B', labelpad=14)
-    ax.set_title('Peta Kuadran 66 Program Studi S1 Kampus Utama USK (Rata-rata 5 Tahun: 2022-2026)', fontsize=14, fontweight='bold', pad=14, color='#0F172A')
+    ax.set_title('Peta Kuadran 60 Program Studi S1 Kampus Utama USK (Rata-rata 5 Tahun: 2022-2026)', fontsize=14, fontweight='bold', pad=14, color='#0F172A')
+
+    # Note footer eksklusi prodi baru ditaruh di bawah canvas agar rapi dan bebas tabrakan
+    fig.text(0.05, 0.015,
+             '*Catatan Metodologi: Mengecualikan 6 Program Studi Baru dengan data terbatas < 5 tahun (Bisnis Digital, Hubungan Internasional, Teknik Lingkungan, Teknik Perminyakan, TSDA, TIHP).',
+             fontsize=9.2, fontstyle='italic', color='#64748B', ha='left', va='bottom')
 
     ax.grid(True, linestyle=':', alpha=0.45, color='#94A3B8', zorder=0)
     for spine in ['top', 'right']:
@@ -254,12 +288,11 @@ def main():
     ax.spines['left'].set_color('#94A3B8')
     ax.spines['bottom'].set_color('#94A3B8')
 
-    # OPSI 1: Tidak ada legenda ukuran kuota (chartjunk dihapus!)
-    plt.tight_layout()
-    out_file = os.path.join(chart_dir, "13_matriks_4_kuadran_5_tahun_2022_2026_all_labels.png")
+    plt.tight_layout(rect=[0, 0.025, 1, 1])
+    out_file = os.path.join(chart_dir, "13_matriks_4_kuadran_5_tahun_2022_2026_tanpa_prodi_baru.png")
     plt.savefig(out_file, dpi=300)
     plt.close()
-    print(f"Berhasil membuat chart perbandingan (Opsi 1) di: {out_file}")
+    print(f"Berhasil membuat chart matriks 60 prodi mapan di: {out_file}")
 
 if __name__ == "__main__":
     main()
