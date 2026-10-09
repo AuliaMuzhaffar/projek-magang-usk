@@ -75,7 +75,7 @@ def generate_interactive_html():
         elif keketatan >= 4.0 and fill_rate < 80.0:
             kuadran = "III"
             kuadran_title = "KUADRAN III: BELUM OPTIMAL"
-            kuadran_desc = "Peminat Sangat Tinggi, Namun Terjadi Kebocoran Daftar Ulang"
+            kuadran_desc = "Peminat Sangat Tinggi, Namun Daftar Ulang Belum Optimal"
             color = "#D97706" # Amber
             rekomendasi = (
                 "Investigasi mendalam penyebab kebocoran registrasi ulang (yield loss). Evaluasi penyesuaian "
@@ -130,6 +130,7 @@ def generate_interactive_html():
             "sisa_5thn": sisa_kursi_5thn,
             "tren_resmi": tren_resmi,
             "klaster": klaster,
+            "is_prodi_baru": bool(tren_resmi == "Data Terbatas (Prodi Baru)"),
             "history": history
         })
 
@@ -157,13 +158,13 @@ def generate_interactive_html():
         # Diselaraskan 100% dengan standar S1: KUADRAN III: BELUM OPTIMAL
         kuadran = "III"
         kuadran_title = "KUADRAN III: BELUM OPTIMAL"
-        kuadran_desc = "Peminat Sangat Tinggi, Namun Terjadi Kebocoran Daftar Ulang"
+        kuadran_desc = "Peminat Sangat Tinggi, Namun Daftar Ulang Belum Optimal"
 
-        # Sub-klasifikasi berdasarkan 3 Tier Kelayakan Vokasi:
+        # Sub-klasifikasi berdasarkan 3 Klaster Evaluasi Vokasi:
         if fill_rate >= 60.0:
             tier = 1
-            tier_title = "TIER 1: STANDOUT VOKASI"
-            tier_desc = "Bintang Vokasi: Fill Rate Prima (≥ 60%) & Peminat Membludak"
+            tier_title = "KLASTER 1: KOMPETITIF"
+            tier_desc = "Daya Saing Tinggi: Fill Rate Prima (≥ 60%) & Peminat Membludak"
             color = "#059669" # Emerald Green
             rekomendasi = (
                 "Prioritas #1 untuk segera dikonversi dan dinaikkan statusnya menjadi Sarjana Terapan "
@@ -171,8 +172,8 @@ def generate_interactive_html():
             )
         elif fill_rate >= 45.0:
             tier = 2
-            tier_title = "TIER 2: RENTAN KONVERSI"
-            tier_desc = "Keterisian Moderat (45%–55%), Di Bawah Standar Sehat 80%"
+            tier_title = "KLASTER 2: PERLU PENDAMPINGAN"
+            tier_desc = "Keterisian Moderat (45%–55%), Memerlukan Pendampingan Strategis"
             color = "#D97706" # Amber
             rekomendasi = (
                 "Kandidat konversi ke Sarjana Terapan (D4) dengan restrukturisasi kurikulum berbasis kemitraan industri "
@@ -180,8 +181,8 @@ def generate_interactive_html():
             )
         else:
             tier = 3
-            tier_title = "TIER 3: DEFISIT AKUT"
-            tier_desc = "Di Bawah Batas Kritis Kelayakan Operasional (< 50%)"
+            tier_title = "KLASTER 3: EVALUASI KHUSUS"
+            tier_desc = "Keterisian Kritis (< 45%), Memerlukan Evaluasi Restrukturisasi"
             color = "#DC2626" # Crimson Red
             rekomendasi = (
                 "Evaluasi kelayakan operasional mendesak. Lakukan rasionalisasi daya tampung drastis (pangkas kuota 40%–50%) "
@@ -311,7 +312,7 @@ def generate_interactive_html():
         header.top-header {{
             background: #FFFFFF;
             border-bottom: 1px solid var(--border-subtle);
-            padding: 14px 28px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -320,43 +321,46 @@ def generate_interactive_html():
             z-index: 50;
             box-shadow: var(--shadow-sm);
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 10px;
         }}
 
         .brand-area {{
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
         }}
 
         .usk-header-logo {{
-            height: 48px;
+            height: 44px;
             width: auto;
-            max-width: 140px;
+            max-width: 130px;
             object-fit: contain;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
         }}
 
         .brand-divider {{
             width: 1px;
-            height: 38px;
+            height: 36px;
             background: var(--border-subtle);
         }}
 
         .brand-titles h1 {{
             font-family: 'Outfit', sans-serif;
-            font-size: 18px;
+            font-size: 15.5px;
             font-weight: 700;
             color: var(--text-main);
             line-height: 1.25;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.25px;
+            white-space: nowrap;
         }}
 
         .brand-titles p {{
-            font-size: 12px;
+            font-size: 10.8px;
+            letter-spacing: -0.15px;
             color: var(--text-muted);
             margin-top: 2px;
             font-weight: 500;
+            white-space: nowrap;
         }}
 
         /* LEVEL SWITCHER (Segmented Control Tabs) */
@@ -364,26 +368,26 @@ def generate_interactive_html():
             display: inline-flex;
             align-items: center;
             background: #F1F5F9;
-            padding: 4px;
+            padding: 3px;
             border-radius: 28px;
             border: 1px solid var(--border-subtle);
-            gap: 4px;
+            gap: 3px;
         }}
 
         .level-tab {{
             border: none;
             background: transparent;
-            padding: 8px 18px;
+            padding: 6px 14px;
             border-radius: 22px;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
             color: #475569;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }}
 
         .level-tab:hover {{
@@ -411,6 +415,59 @@ def generate_interactive_html():
             color: #FFFFFF;
         }}
 
+        /* S1 SUBSET SWITCHER */
+        .s1-subset-switcher {{
+            display: inline-flex;
+            align-items: center;
+            background: #F8FAFC;
+            padding: 3px;
+            border-radius: 24px;
+            border: 1px solid #CBD5E1;
+            gap: 4px;
+            transition: all 0.25s ease;
+        }}
+
+        .subset-tab {{
+            border: none;
+            background: transparent;
+            padding: 5px 12px;
+            border-radius: 18px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }}
+
+        .subset-tab:hover {{
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.85);
+        }}
+
+        .subset-tab.active {{
+            background: #0284C7;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.32);
+        }}
+
+        .canvas-footnote {{
+            padding: 10px 16px;
+            font-size: 11.5px;
+            font-style: italic;
+            color: #475569;
+            background: #F8FAFC;
+            border-top: 1px dashed #CBD5E1;
+            border-radius: 0 0 12px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }}
+
         .header-actions {{
             display: flex;
             align-items: center;
@@ -420,15 +477,16 @@ def generate_interactive_html():
         .btn {{
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            font-size: 12.5px;
+            gap: 5px;
+            padding: 6px 12px;
+            font-size: 12px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
             border: 1px solid transparent;
+            white-space: nowrap;
         }}
 
         .btn-outline {{
@@ -562,7 +620,7 @@ def generate_interactive_html():
 
         .search-box input {{
             width: 100%;
-            padding: 9px 14px 9px 38px;
+            padding: 9px 38px 9px 38px;
             border-radius: 10px;
             border: 1px solid var(--border-strong);
             background: #FFFFFF;
@@ -586,6 +644,140 @@ def generate_interactive_html():
             font-size: 14px;
             color: var(--text-subtle);
             pointer-events: none;
+        }}
+
+        .search-clear-btn {{
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #E2E8F0;
+            color: #64748B;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1;
+            transition: all 0.15s ease;
+            z-index: 2;
+        }}
+
+        .search-clear-btn:hover {{
+            background: #CBD5E1;
+            color: #0F172A;
+            transform: translateY(-50%) scale(1.08);
+        }}
+
+        /* Search Dropdown Popover */
+        .search-dropdown {{
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 12px;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14), 0 4px 10px rgba(15, 23, 42, 0.05);
+            max-height: 320px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            padding: 6px;
+        }}
+
+        .search-dropdown::-webkit-scrollbar {{
+            width: 6px;
+        }}
+        .search-dropdown::-webkit-scrollbar-track {{
+            background: #F8FAFC;
+            border-radius: 6px;
+        }}
+        .search-dropdown::-webkit-scrollbar-thumb {{
+            background: #CBD5E1;
+            border-radius: 6px;
+        }}
+        .search-dropdown::-webkit-scrollbar-thumb:hover {{
+            background: #94A3B8;
+        }}
+
+        .search-dropdown-item {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }}
+
+        .search-dropdown-item:hover,
+        .search-dropdown-item.active-item {{
+            background: #F1F5F9;
+        }}
+
+        .search-item-left {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            flex: 1;
+        }}
+
+        .search-item-dot {{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }}
+
+        .search-item-name {{
+            font-size: 12.5px;
+            font-weight: 700;
+            color: #0F172A;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }}
+
+        .search-item-badges {{
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }}
+
+        .search-badge-fak {{
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 6px;
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #E2E8F0;
+        }}
+
+        .search-badge-quad {{
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }}
+
+        .search-dropdown-empty {{
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 12px;
+            color: #94A3B8;
+            font-weight: 500;
         }}
 
         .filter-pills-row {{
@@ -678,25 +870,25 @@ def generate_interactive_html():
         .tier-guide-card {{
             background: #FFFFFF;
             border-radius: 10px;
-            padding: 9px 12px;
+            padding: 12px 14px;
             border: 1px solid #E2E8F0;
-            border-left-width: 4px;
+            border-left-width: 4.5px;
             cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
-            gap: 3px;
+            gap: 6px;
             user-select: none;
         }}
 
         .tier-guide-card:hover {{
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
             border-color: #CBD5E1;
         }}
 
         .tier-guide-card.active {{
-            box-shadow: 0 0 0 2px var(--brand-navy), 0 4px 12px rgba(15,23,42,0.12);
+            box-shadow: 0 0 0 2px var(--brand-navy), 0 6px 14px rgba(15,23,42,0.12);
         }}
 
         .tier-guide-card.tg-tier-1 {{
@@ -735,8 +927,8 @@ def generate_interactive_html():
         .tgc-title-group {{
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 12px;
+            gap: 6px;
+            font-size: 12.5px;
             font-weight: 800;
             font-family: 'Outfit', sans-serif;
         }}
@@ -748,7 +940,7 @@ def generate_interactive_html():
         .tgc-badge {{
             font-size: 10px;
             font-weight: 700;
-            padding: 2px 6px;
+            padding: 2.5px 7px;
             border-radius: 6px;
             background: #F1F5F9;
             color: #475569;
@@ -760,14 +952,14 @@ def generate_interactive_html():
             color: #1E293B;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }}
 
         .tgc-rule span.kriteria-tag {{
             font-size: 9px;
             font-weight: 800;
             text-transform: uppercase;
-            padding: 1px 4px;
+            padding: 2px 5px;
             border-radius: 4px;
             letter-spacing: 0.3px;
         }}
@@ -776,22 +968,150 @@ def generate_interactive_html():
         .tg-tier-3 .tgc-rule span.kriteria-tag {{ background: #FFE4E6; color: #9F1239; }}
 
         .tgc-prodi {{
-            font-size: 10.5px;
-            color: #475569;
-            line-height: 1.3;
-            margin-top: 1px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #334155;
+            line-height: 1.45;
+            margin-top: 2px;
         }}
 
-        .tgc-action {{
-            font-size: 10px;
-            font-weight: 600;
-            margin-top: 2px;
-            padding-top: 3px;
-            border-top: 1px dashed rgba(0,0,0,0.08);
+        /* D3 Sub-Tier Executive Sidebar Card Styles */
+        .d3-sidebar-card {{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }}
-        .tg-tier-1 .tgc-action {{ color: #047857; }}
-        .tg-tier-2 .tgc-action {{ color: #B45309; }}
-        .tg-tier-3 .tgc-action {{ color: #B91C1C; }}
+
+        .d3-sidebar-tier-block {{
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 11px 13px;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            cursor: pointer;
+        }}
+
+        .d3-sidebar-tier-block:hover {{
+            transform: translateY(-1.5px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.07);
+        }}
+
+        .d3-stb-tier-1 {{
+            border-left: 4.5px solid #059669;
+            background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 100%);
+        }}
+
+        .d3-stb-tier-2 {{
+            border-left: 4.5px solid #D97706;
+            background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 100%);
+        }}
+
+        .d3-stb-tier-3 {{
+            border-left: 4.5px solid #DC2626;
+            background: linear-gradient(180deg, #FFF1F2 0%, #FFFFFF 100%);
+        }}
+
+        .d3-stb-header {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }}
+
+        .d3-stb-title {{
+            font-size: 12px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }}
+
+        .d3-stb-tier-1 .d3-stb-title {{ color: #065F46; }}
+        .d3-stb-tier-2 .d3-stb-title {{ color: #92400E; }}
+        .d3-stb-tier-3 .d3-stb-title {{ color: #991B1B; }}
+
+        .d3-stb-badges {{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }}
+
+        .d3-stb-badge-fr {{
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }}
+
+        .d3-stb-tier-1 .d3-stb-badge-fr {{ background: #DCFCE7; color: #166534; }}
+        .d3-stb-tier-2 .d3-stb-badge-fr {{ background: #FEF3C7; color: #92400E; }}
+        .d3-stb-tier-3 .d3-stb-badge-fr {{ background: #FFE4E6; color: #9F1239; }}
+
+        .d3-stb-badge-count {{
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+            background: #F1F5F9;
+            color: #475569;
+        }}
+
+        .d3-prodi-chips {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }}
+
+        .d3-prodi-chip {{
+            display: inline-flex;
+            align-items: center;
+            font-size: 10.5px;
+            font-weight: 600;
+            padding: 3.5px 8.5px;
+            border-radius: 6px;
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            color: #334155;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }}
+
+        .d3-prodi-chip:hover {{
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }}
+
+        .d3-stb-tier-1 .d3-prodi-chip {{
+            background: #F0FDF4;
+            border-color: #A7F3D0;
+            color: #065F46;
+        }}
+        .d3-stb-tier-1 .d3-prodi-chip:hover {{
+            background: #DCFCE7;
+            border-color: #34D399;
+        }}
+
+        .d3-stb-tier-2 .d3-prodi-chip {{
+            background: #FFFDF5;
+            border-color: #FDE68A;
+            color: #78350F;
+        }}
+        .d3-stb-tier-2 .d3-prodi-chip:hover {{
+            background: #FEF3C7;
+            border-color: #FBBF24;
+        }}
+
+        .d3-stb-tier-3 .d3-prodi-chip {{
+            background: #FFF5F5;
+            border-color: #FECDD3;
+            color: #881337;
+        }}
+        .d3-stb-tier-3 .d3-prodi-chip:hover {{
+            background: #FFE4E6;
+            border-color: #FB7185;
+        }}
 
         .svg-wrapper {{
             position: relative;
@@ -829,12 +1149,39 @@ def generate_interactive_html():
             stroke-width: 4px !important;
         }}
 
-        .dot-label {{
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 9.5px;
-            font-weight: 700;
+        /* Anti-Collision Interactive Badges & Leader Lines */
+        .leader-line {{
             pointer-events: none;
-            transition: opacity 0.2s ease;
+            transition: stroke 0.15s ease, stroke-width 0.15s ease, opacity 0.15s ease;
+        }}
+
+        .label-badge {{
+            cursor: pointer;
+            transition: transform 0.12s ease;
+        }}
+
+        .label-badge .badge-rect {{
+            transition: stroke 0.15s ease, stroke-width 0.15s ease, filter 0.15s ease;
+            filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.08));
+        }}
+
+        .label-badge:hover .badge-rect,
+        .label-badge.highlighted .badge-rect {{
+            stroke-width: 1.8px !important;
+            filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.22));
+        }}
+
+        .label-badge.selected .badge-rect {{
+            stroke-width: 2.0px !important;
+            filter: drop-shadow(0 2px 8px rgba(15, 23, 42, 0.28));
+        }}
+
+        .label-badge .badge-text {{
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 8.5px;
+            font-weight: 700;
+            user-select: none;
+            pointer-events: none;
         }}
 
         /* Floating Tooltip */
@@ -843,29 +1190,43 @@ def generate_interactive_html():
             display: none;
             pointer-events: none;
             z-index: 100;
-            background: rgba(15, 23, 42, 0.94);
-            backdrop-filter: blur(8px);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
             color: #FFFFFF;
             padding: 12px 16px;
             border-radius: 12px;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-lg), 0 8px 24px rgba(15, 23, 42, 0.35);
             width: 260px;
             transform: translate(-50%, -100%);
             margin-top: -12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: opacity 0.12s ease;
         }}
 
         #interactive-tooltip::after {{
             content: '';
             position: absolute;
             bottom: -6px;
-            left: 50%;
+            left: var(--arrow-left, 50%);
             transform: translateX(-50%);
             border-width: 6px 6px 0;
             border-style: solid;
-            border-color: rgba(15, 23, 42, 0.94) transparent;
+            border-color: rgba(15, 23, 42, 0.95) transparent;
             display: block;
             width: 0;
+        }}
+
+        /* Smart Vertical Flipped Down Tooltip */
+        #interactive-tooltip.flipped-down {{
+            transform: translate(-50%, 0);
+            margin-top: 14px;
+        }}
+
+        #interactive-tooltip.flipped-down::after {{
+            bottom: auto;
+            top: -6px;
+            border-width: 0 6px 6px;
+            border-color: transparent transparent rgba(15, 23, 42, 0.95);
         }}
 
         .tt-badge-row {{
@@ -980,43 +1341,85 @@ def generate_interactive_html():
             border-bottom: 1px solid var(--border-subtle);
         }}
 
-        .ins-tag-row {{
+        .ins-top-bar {{
             display: flex;
-            gap: 8px;
             align-items: center;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 10px;
         }}
 
         .ins-fakultas-tag {{
             font-size: 11px;
             font-weight: 700;
-            padding: 3px 8px;
+            padding: 3px 9px;
             border-radius: 6px;
             background: #F1F5F9;
             color: #334155;
+            border: 1px solid #E2E8F0;
+        }}
+
+        .ins-close-btn {{
+            background: #F1F5F9;
+            border: 1px solid #CBD5E1;
+            color: #475569;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }}
+        .ins-close-btn:hover {{
+            background: #E2E8F0;
+            color: #0F172A;
+            border-color: #94A3B8;
+        }}
+
+        .ins-title {{
+            font-family: 'Outfit', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: -0.2px;
+        }}
+
+        .ins-badges-row {{
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
         }}
 
         .ins-kuadran-tag {{
             font-size: 11px;
             font-weight: 700;
-            padding: 3px 10px;
+            padding: 3.5px 10px;
             border-radius: 20px;
             color: #FFFFFF;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
         }}
 
-        .ins-title {{
-            font-family: 'Outfit', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            line-height: 1.25;
-            color: var(--text-main);
-            margin-bottom: 4px;
+        .ins-tier-tag {{
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3.5px 9px;
+            border-radius: 20px;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid transparent;
         }}
 
         .ins-sub {{
             font-size: 12px;
-            color: var(--text-muted);
+            color: #64748B;
+            line-height: 1.5;
+            font-weight: 500;
         }}
 
         .ins-kpi-grid {{
@@ -1160,19 +1563,31 @@ def generate_interactive_html():
             <img src="{usk_logo_b64}" alt="Logo Universitas Syiah Kuala" class="usk-header-logo" />
             <div class="brand-divider"></div>
             <div class="brand-titles">
-                <h1 id="header-main-title">PETA PORTOFOLIO STRATEGIS 66 PROGRAM STUDI S1</h1>
-                <p id="header-sub-title">Direktorat Akademik & Perencanaan • Universitas Syiah Kuala (2022–2026)</p>
+                <h1 id="header-main-title">PETA KUADRAN 60 PROGRAM STUDI S1 KAMPUS UTAMA USK</h1>
+                <p id="header-sub-title">Direktorat Pendidikan dan Administrasi Akademik • Universitas Syiah Kuala (2022–2026)</p>
             </div>
         </div>
 
-        <!-- LEVEL SWITCHER SEGMENTED TABS -->
-        <div class="level-switcher" id="level-switcher">
-            <button class="level-tab active" data-level="s1" id="tab-s1">
-                🎓 S1 Sarjana <span class="tab-badge">66 Prodi</span>
-            </button>
-            <button class="level-tab" data-level="d3" id="tab-d3">
-                🛠️ D3 Vokasi <span class="tab-badge">11 Prodi</span>
-            </button>
+        <!-- NAVIGATION & SUBSET SWITCHER GROUP -->
+        <div class="nav-controls-group" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <div class="level-switcher" id="level-switcher">
+                <button class="level-tab active" data-level="s1" id="tab-s1">
+                    🎓 S1 Sarjana <span class="tab-badge" id="tab-s1-badge">60 Prodi</span>
+                </button>
+                <button class="level-tab" data-level="d3" id="tab-d3">
+                    🛠️ D3 Vokasi <span class="tab-badge">11 Prodi</span>
+                </button>
+            </div>
+
+            <!-- S1 SUBSET SWITCHER (Hanya tampil saat Level S1 aktif) -->
+            <div class="s1-subset-switcher" id="s1-subset-switcher">
+                <button class="subset-tab" data-subset="all" id="subset-all" title="Tampilkan seluruh 66 program studi S1 termasuk prodi baru">
+                    🌐 Semua Prodi S1 (66)
+                </button>
+                <button class="subset-tab active" data-subset="established" id="subset-established" title="Tampilkan 60 program studi S1 tanpa 6 prodi baru (data lengkap 5 tahun)">
+                    🏛️ 60 Prodi S1 (Tanpa Prodi Baru)
+                </button>
+            </div>
         </div>
 
         <div class="header-actions">
@@ -1181,9 +1596,6 @@ def generate_interactive_html():
             </button>
             <button class="btn btn-outline" id="btn-reset-filters" title="Kembalikan semua filter ke kondisi awal">
                 🔄 Reset Tampilan
-            </button>
-            <button class="btn btn-primary" onclick="window.print()" title="Cetak laporan / simpan PDF">
-                🖨️ Cetak / PDF
             </button>
         </div>
     </header>
@@ -1195,9 +1607,11 @@ def generate_interactive_html():
 
     <!-- SEARCH & FACULTY FILTERS -->
     <section class="controls-strip">
-        <div class="search-box">
+        <div class="search-box" id="search-box-wrapper">
             <span class="search-icon">🔍</span>
-            <input type="text" id="prodi-search" placeholder="Cari nama prodi atau fakultas (cth: Farmasi, FT, Informatika)...">
+            <input type="text" id="prodi-search" placeholder="Cari nama prodi, fakultas, akronim (cth: Farmasi, FT, TI, PWK)..." autocomplete="off">
+            <button id="search-clear-btn" class="search-clear-btn" title="Bersihkan pencarian" type="button">✕</button>
+            <div id="search-dropdown" class="search-dropdown"></div>
         </div>
 
         <div class="filter-pills-row" id="faculty-filters">
@@ -1211,7 +1625,7 @@ def generate_interactive_html():
         <div class="chart-container">
             <div class="chart-header">
                 <div class="chart-title-group">
-                    <h2 id="chart-sub-heading">Matriks 4 Kuadran Interaktif (Keketatan Seleksi vs Tingkat Keterisian Kuota)</h2>
+                    <h2 id="chart-sub-heading">Matriks 4 Kuadran Interaktif (60 Prodi S1 Kampus Utama)</h2>
                     <p id="chart-sub-guide">Arahkan kursor ke titik prodi untuk ringkasan instan • Klik titik untuk membuka analisis detail</p>
                 </div>
                 <div class="canvas-toolbar">
@@ -1219,45 +1633,42 @@ def generate_interactive_html():
                 </div>
             </div>
 
-            <!-- D3 SUB-TIER CLASSIFICATION GUIDE STRIP (Visible only when currentLevel === 'd3') -->
+            <!-- D3 KLASTER EVALUASI CLASSIFICATION GUIDE STRIP (Visible only when currentLevel === 'd3') -->
             <div id="d3-tier-legend-strip" class="d3-tier-legend-strip">
-                <div class="tier-guide-card tg-tier-1" data-tier="1" id="card-tier-1" title="Klik untuk memfilter Tier 1">
+                <div class="tier-guide-card tg-tier-1" data-tier="1" id="card-tier-1" title="Klik untuk memfilter Klaster 1">
                     <div class="tgc-header">
                         <div class="tgc-title-group">
                             <span>⭐</span>
-                            <span>Tier 1: Standout Vokasi</span>
+                            <span>Klaster 1: Kompetitif</span>
                         </div>
                         <span class="tgc-badge">1 Prodi (9,1%)</span>
                     </div>
                     <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) ≥ 60%</div>
-                    <div class="tgc-prodi"><strong>D3 Manajemen Informatika</strong> (FR 66,6% • 1.100 mhs/thn)</div>
-                    <div class="tgc-action">💡 <strong>Arah:</strong> Prioritas #1 Konversi ke Sarjana Terapan (D4 TI)</div>
+                    <div class="tgc-prodi"><strong>D3 Manajemen Informatika</strong></div>
                 </div>
 
-                <div class="tier-guide-card tg-tier-2" data-tier="2" id="card-tier-2" title="Klik untuk memfilter Tier 2">
+                <div class="tier-guide-card tg-tier-2" data-tier="2" id="card-tier-2" title="Klik untuk memfilter Klaster 2">
                     <div class="tgc-header">
                         <div class="tgc-title-group">
                             <span>🔄</span>
-                            <span>Tier 2: Rentan Konversi</span>
+                            <span>Klaster 2: Perlu Pendampingan</span>
                         </div>
                         <span class="tgc-badge">5 Prodi (45,5%)</span>
                     </div>
                     <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) 45% – 55%</div>
-                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Tek. Sipil, Mesin, Listrik, Pajak, Manaj. Prsh</div>
-                    <div class="tgc-action">💡 <strong>Arah:</strong> Restrukturisasi Kurikulum & Kemitraan Industri</div>
+                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Akuntansi, Tek. Mesin, Keswan, Tek. Listrik, Sekretari</div>
                 </div>
 
-                <div class="tier-guide-card tg-tier-3" data-tier="3" id="card-tier-3" title="Klik untuk memfilter Tier 3">
+                <div class="tier-guide-card tg-tier-3" data-tier="3" id="card-tier-3" title="Klik untuk memfilter Klaster 3">
                     <div class="tgc-header">
                         <div class="tgc-title-group">
                             <span>📉</span>
-                            <span>Tier 3: Defisit Akut</span>
+                            <span>Klaster 3: Evaluasi Khusus</span>
                         </div>
                         <span class="tgc-badge">5 Prodi (45,5%)</span>
                     </div>
                     <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) &lt; 45% (Batas Kritis &lt; 50%)</div>
-                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Keu. Perbankan, Akuntansi, Peternakan, Keswan, Agribisnis</div>
-                    <div class="tgc-action">💡 <strong>Arah:</strong> Evaluasi Kelayakan & Rasionalisasi Kuota 40–50%</div>
+                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Manaj. Perusahaan, Tek. Sipil, Keu. Perbankan, Peternakan, Agribisnis</div>
                 </div>
             </div>
 
@@ -1293,6 +1704,11 @@ def generate_interactive_html():
                     <div class="tt-hint">👆 Klik titik untuk membedah data lengkap 5 tahun</div>
                 </div>
             </div>
+            <!-- CANVAS FOOTNOTE METODOLOGI (Muncul hanya saat mode 60 prodi aktif) -->
+            <div id="canvas-footnote-note" class="canvas-footnote" style="display:none;">
+                <span>📌</span>
+                <span><strong>Catatan Metodologi:</strong> Mengecualikan 6 Program Studi Baru dengan data terbatas &lt; 5 tahun (Bisnis Digital, Hubungan Internasional, Teknik Lingkungan, Teknik Perminyakan, TSDA, TIHP).</span>
+            </div>
         </div>
 
         <!-- RIGHT: EXECUTIVE INSPECTOR DRAWER -->
@@ -1304,46 +1720,91 @@ def generate_interactive_html():
                     <p>Klik salah satu lingkaran titik pada kanvas atau gunakan kotak pencarian untuk melihat rincian evaluasi 5 tahun, profil kebocoran kuota, dan rekomendasi kebijakan prodi.</p>
                 </div>
                 <div id="ins-placeholder-d3" style="display:none; text-align:left;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; border-bottom:1px solid var(--border-subtle); padding-bottom:10px;">
-                        <img src="{usk_logo_b64}" alt="Logo USK" style="width:36px; height:36px; object-fit:contain;" />
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; border-bottom:1px solid var(--border-subtle); padding-bottom:12px;">
+                        <img src="{usk_logo_b64}" alt="Logo USK" style="width:38px; height:38px; object-fit:contain;" />
                         <div>
-                            <h4 style="font-size:13px; font-weight:800; color:var(--text-main); margin:0;">STANDAR SUB-TIER VOKASI USK</h4>
-                            <span style="font-size:11px; color:var(--text-muted);">11 Program Studi D3 • Evaluasi 2022–2026</span>
+                            <h4 style="font-size:13.5px; font-weight:800; color:var(--text-main); margin:0; letter-spacing:-0.2px;">STANDAR KLASTER VOKASI USK</h4>
+                            <span style="font-size:11px; font-weight:600; color:var(--text-muted);">11 Program Studi D3 • Evaluasi Komparatif 2022–2026</span>
                         </div>
                     </div>
-                    <p style="font-size:11.5px; color:var(--text-muted); line-height:1.45; margin-bottom:12px;">
-                        Seluruh 11 Prodi D3 Vokasi USK terkonsentrasi di <strong>Kuadran III: Belum Optimal</strong> (Keketatan 5,3×–17,7×, Fill Rate &lt; 80%). Untuk memberikan rekomendasi kebijakan terarah, prodi dikelompokkan ke dalam <strong>3 Tier Kelayakan Berbasis Fill Rate (FR)</strong>:
+                    <p style="font-size:12px; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
+                        Seluruh 11 Program Studi D3 USK berada pada <strong>Kuadran III</strong> (Peminat Membludak, Keterisian &lt; 80%). Untuk analisis terarah, prodi diklasifikasikan ke dalam <strong>3 Klaster Evaluasi Keterisian Kuota (Fill Rate)</strong>:
                     </p>
-                    <div style="display:flex; flex-direction:column; gap:9px;">
-                        <div style="background:#F0FDF4; border-left:3.5px solid #059669; padding:8px 10px; border-radius:8px;">
-                            <div style="font-size:11.5px; font-weight:800; color:#065F46;">⭐ Tier 1: Standout Vokasi (FR ≥ 60%)</div>
-                            <div style="font-size:11px; color:#166534; margin-top:2px;">• <strong>1 Prodi:</strong> D3 Manajemen Informatika (FR 66,6% • 1.100 mhs/thn)</div>
-                            <div style="font-size:10px; color:#047857; margin-top:2px;"><strong>Arah:</strong> Prioritas #1 konversi ke Sarjana Terapan (D4 TI).</div>
+                    <div class="d3-sidebar-card">
+                        <!-- KLASTER 1 -->
+                        <div class="d3-sidebar-tier-block d3-stb-tier-1" onclick="toggleTierFilter(1)" title="Klik untuk memfilter Klaster 1">
+                            <div class="d3-stb-header">
+                                <div class="d3-stb-title">⭐ Klaster 1: Kompetitif</div>
+                                <div class="d3-stb-badges">
+                                    <span class="d3-stb-badge-fr">FR ≥ 60%</span>
+                                    <span class="d3-stb-badge-count">1 Prodi (9,1%)</span>
+                                </div>
+                            </div>
+                            <div class="d3-prodi-chips">
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('MANAJEMEN INFORMATIKA')" title="Klik untuk membedah data prodi">D3 Manajemen Informatika</span>
+                            </div>
                         </div>
-                        <div style="background:#FFFBEB; border-left:3.5px solid #D97706; padding:8px 10px; border-radius:8px;">
-                            <div style="font-size:11.5px; font-weight:800; color:#92400E;">🔄 Tier 2: Rentan Konversi (FR 45%–55%)</div>
-                            <div style="font-size:11px; color:#B45309; margin-top:2px;">• <strong>5 Prodi:</strong> Tek. Sipil, Mesin, Listrik, Perpajakan, Manaj. Perusahaan</div>
-                            <div style="font-size:10px; color:#92400E; margin-top:2px;"><strong>Arah:</strong> Di bawah standar 80%. Restrukturisasi kurikulum industri.</div>
+
+                        <!-- KLASTER 2 -->
+                        <div class="d3-sidebar-tier-block d3-stb-tier-2" onclick="toggleTierFilter(2)" title="Klik untuk memfilter Klaster 2">
+                            <div class="d3-stb-header">
+                                <div class="d3-stb-title">🔄 Klaster 2: Perlu Pendampingan</div>
+                                <div class="d3-stb-badges">
+                                    <span class="d3-stb-badge-fr">FR 45%–55%</span>
+                                    <span class="d3-stb-badge-count">5 Prodi (45,5%)</span>
+                                </div>
+                            </div>
+                            <div class="d3-prodi-chips">
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('AKUNTANSI')" title="Klik untuk membedah data prodi">D3 Akuntansi</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('TEKNIK MESIN')" title="Klik untuk membedah data prodi">D3 Teknik Mesin</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('KESEHATAN HEWAN')" title="Klik untuk membedah data prodi">D3 Kesehatan Hewan</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('TEKNIK LISTRIK')" title="Klik untuk membedah data prodi">D3 Teknik Listrik</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('SEKRETARI')" title="Klik untuk membedah data prodi">D3 Sekretari</span>
+                            </div>
                         </div>
-                        <div style="background:#FFF1F2; border-left:3.5px solid #DC2626; padding:8px 10px; border-radius:8px;">
-                            <div style="font-size:11.5px; font-weight:800; color:#991B1B;">📉 Tier 3: Defisit Akut (FR &lt; 45%)</div>
-                            <div style="font-size:11px; color:#9F1239; margin-top:2px;">• <strong>5 Prodi:</strong> Keu. Perbankan, Akuntansi, Peternakan, Keswan, Agribisnis</div>
-                            <div style="font-size:10px; color:#B91C1C; margin-top:2px;"><strong>Arah:</strong> Di bawah batas kritis 50%. Rekomendasi pangkas kuota 40–50%.</div>
+
+                        <!-- KLASTER 3 -->
+                        <div class="d3-sidebar-tier-block d3-stb-tier-3" onclick="toggleTierFilter(3)" title="Klik untuk memfilter Klaster 3">
+                            <div class="d3-stb-header">
+                                <div class="d3-stb-title">📉 Klaster 3: Evaluasi Khusus</div>
+                                <div class="d3-stb-badges">
+                                    <span class="d3-stb-badge-fr">FR &lt; 45%</span>
+                                    <span class="d3-stb-badge-count">5 Prodi (45,5%)</span>
+                                </div>
+                            </div>
+                            <div class="d3-prodi-chips">
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('MANAJEMEN PERUSAHAAN')" title="Klik untuk membedah data prodi">D3 Manajemen Perusahaan</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('TEKNIK SIPIL')" title="Klik untuk membedah data prodi">D3 Teknik Sipil</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('KEUANGAN')" title="Klik untuk membedah data prodi">D3 Keuangan &amp; Perbankan</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('PETERNAKAN')" title="Klik untuk membedah data prodi">D3 Budidaya Peternakan</span>
+                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('AGRIBISNIS')" title="Klik untuk membedah data prodi">D3 Manajemen Agribisnis</span>
+                            </div>
                         </div>
                     </div>
-                    <div style="margin-top:12px; font-size:11px; color:var(--text-muted); text-align:center; background:#F8FAFC; padding:8px; border-radius:8px; border:1px dashed #CBD5E1;">
-                        👆 Klik salah satu titik lingkaran pada kanvas atau kartu tier di samping untuk melihat rincian prodi.
+                    <div style="margin-top:14px; font-size:11.5px; color:#475569; text-align:center; background:#F8FAFC; padding:10px 12px; border-radius:8px; border:1px dashed #CBD5E1; line-height:1.45;">
+                        💡 Klik salah satu kartu klaster di atas atau titik prodi pada kanvas untuk memfilter dan membedah detail evaluasi prodi.
                     </div>
                 </div>
             </div>
 
             <div class="inspector-content" id="ins-content">
                 <div class="ins-header">
-                    <div class="ins-tag-row">
+                    <!-- Baris 1: Fakultas & Tombol Tutup -->
+                    <div class="ins-top-bar">
                         <span class="ins-fakultas-tag" id="ins-fak">FAKULTAS</span>
-                        <span class="ins-kuadran-tag" id="ins-quad-tag">KUADRAN I</span>
+                        <button class="ins-close-btn" onclick="closeInspector()" title="Tutup detail dan kembali">✕ Tutup</button>
                     </div>
+
+                    <!-- Baris 2: Nama Program Studi -->
                     <div class="ins-title" id="ins-name">Nama Program Studi</div>
+
+                    <!-- Baris 3: Badges Status (Kuadran & Tier Vokasi) -->
+                    <div class="ins-badges-row">
+                        <span class="ins-kuadran-tag" id="ins-quad-tag">KUADRAN I</span>
+                        <span class="ins-tier-tag" id="ins-tier-tag" style="display:none;">TIER 1</span>
+                    </div>
+
+                    <!-- Baris 4: Deskripsi Ringkas 1 Kalimat -->
                     <div class="ins-sub" id="ins-quad-desc">Deskripsi status kuadran strategis</div>
                 </div>
 
@@ -1415,13 +1876,36 @@ def generate_interactive_html():
         const DATA_BY_LEVEL = {json_data};
 
         // State Management
-        let currentLevel = (window.location.hash === '#d3' || window.location.search.includes('d3')) ? "d3" : "s1";
+        let currentLevel = (window.location.hash.includes('d3') || window.location.search.includes('d3')) ? "d3" : "s1";
+        let currentS1Subset = (window.location.hash.includes('60') || window.location.hash.includes('tanpa') || window.location.hash.includes('established') || window.location.search.includes('60')) ? "established" : "all";
         let currentFaculty = "ALL";
         let currentFilterCard = "ALL"; // Quadrant in S1 & D3 (I, II, III, IV)
         let currentD3Tier = "ALL"; // Sub-tier filter for D3 (1, 2, 3)
         let searchQuery = "";
         let showAllLabels = false;
         let selectedProdiId = null;
+
+        // Sinkronisasi Dinamis URL Hash
+        function syncUrlHash() {{
+            let hash = currentLevel;
+            if (currentLevel === 's1') {{
+                hash = (currentS1Subset === 'established') ? 's1-60' : 's1';
+            }}
+            if (window.history && window.history.replaceState) {{
+                window.history.replaceState(null, null, '#' + hash);
+            }} else {{
+                window.location.hash = hash;
+            }}
+        }}
+
+        // Helper Dataset List Dinamis
+        function getActiveList() {{
+            if (currentLevel === 'd3') return DATA_BY_LEVEL.d3;
+            if (currentS1Subset === 'established') {{
+                return DATA_BY_LEVEL.s1.filter(p => !p.is_prodi_baru);
+            }}
+            return DATA_BY_LEVEL.s1;
+        }}
 
         // Coordinate Transformation Settings
         const SVG_W = 1000;
@@ -1488,13 +1972,20 @@ def generate_interactive_html():
             container.innerHTML = '';
 
             if (currentLevel === 's1') {{
+                const activeList = getActiveList();
+                const totalCount = activeList.length;
+                const qCounts = {{ 'I': 0, 'II': 0, 'III': 0, 'IV': 0 }};
+                activeList.forEach(p => {{
+                    if (qCounts[p.kuadran] !== undefined) qCounts[p.kuadran]++;
+                }});
+
                 const cardsConfig = [
                     {{
                         id: 'I',
                         label: 'Kuadran I: Unggulan',
                         icon: '🏆',
-                        val: '28',
-                        sub: 'Prodi (42,4%)',
+                        val: qCounts['I'].toString(),
+                        sub: `Prodi (${{((qCounts['I'] / totalCount) * 100).toFixed(1).replace('.', ',')}}%)`,
                         note: 'Peminat Tinggi & Kuota Terpenuhi',
                         class: 'c-emerald'
                     }},
@@ -1502,8 +1993,8 @@ def generate_interactive_html():
                         id: 'II',
                         label: 'Kuadran II: Stabil',
                         icon: '⚖️',
-                        val: '4',
-                        sub: 'Prodi (6,1%)',
+                        val: qCounts['II'].toString(),
+                        sub: `Prodi (${{((qCounts['II'] / totalCount) * 100).toFixed(1).replace('.', ',')}}%)`,
                         note: 'Seleksi Moderat, Daya Serap Aman',
                         class: 'c-blue'
                     }},
@@ -1511,17 +2002,17 @@ def generate_interactive_html():
                         id: 'III',
                         label: 'Kuadran III: Belum Optimal',
                         icon: '⚠️',
-                        val: '8',
-                        sub: 'Prodi (12,1%)',
-                        note: 'Peminat Tinggi tapi Bocor Daftar Ulang',
+                        val: qCounts['III'].toString(),
+                        sub: `Prodi (${{((qCounts['III'] / totalCount) * 100).toFixed(1).replace('.', ',')}}%)`,
+                        note: 'Peminat Tinggi tapi Daftar Ulang Belum Optimal',
                         class: 'c-amber'
                     }},
                     {{
                         id: 'IV',
                         label: 'Kuadran IV: Perlu Ditingkatkan',
                         icon: '🚨',
-                        val: '26',
-                        sub: 'Prodi (39,4%)',
+                        val: qCounts['IV'].toString(),
+                        sub: `Prodi (${{((qCounts['IV'] / totalCount) * 100).toFixed(1).replace('.', ',')}}%)`,
                         note: 'Peminat Sepi & Kuota Kerap Kosong',
                         class: 'c-rose'
                     }}
@@ -1563,7 +2054,7 @@ def generate_interactive_html():
                         icon: '🏆',
                         val: '0',
                         sub: 'Prodi (0%)',
-                        note: 'Keketatan ≥ 4.0x & FR ≥ 80%',
+                        note: 'Peminat Tinggi & Kuota Terpenuhi',
                         class: 'c-emerald'
                     }},
                     {{
@@ -1572,7 +2063,7 @@ def generate_interactive_html():
                         icon: '⚖️',
                         val: '0',
                         sub: 'Prodi (0%)',
-                        note: 'Keketatan < 4.0x & FR ≥ 80%',
+                        note: 'Seleksi Moderat, Daya Serap Aman',
                         class: 'c-blue'
                     }},
                     {{
@@ -1581,7 +2072,7 @@ def generate_interactive_html():
                         icon: '⚠️',
                         val: '11',
                         sub: 'Prodi (100% Vokasi)',
-                        note: 'Peminat Tinggi tapi Bocor Daftar Ulang',
+                        note: 'Peminat Tinggi tapi Daftar Ulang Belum Optimal',
                         class: 'c-amber'
                     }},
                     {{
@@ -1630,7 +2121,7 @@ def generate_interactive_html():
             const container = document.getElementById('faculty-filters');
             container.innerHTML = '';
 
-            const currentList = DATA_BY_LEVEL[currentLevel];
+            const currentList = getActiveList();
             const fakCounts = {{}};
             currentList.forEach(p => {{
                 fakCounts[p.fakultas] = (fakCounts[p.fakultas] || 0) + 1;
@@ -1671,10 +2162,10 @@ def generate_interactive_html():
                 container.appendChild(sep);
 
                 const tierConfigs = [
-                    {{ id: 'ALL', label: 'Semua Tier (11)' }},
-                    {{ id: 1, label: '⭐ Tier 1: Standout (FR ≥ 60% • 1)' }},
-                    {{ id: 2, label: '🔄 Tier 2: Rentan (FR 45%–55% • 5)' }},
-                    {{ id: 3, label: '📉 Tier 3: Defisit (FR < 45% • 5)' }}
+                    {{ id: 'ALL', label: 'Semua Klaster (11)' }},
+                    {{ id: 1, label: '⭐ Klaster 1: Kompetitif (FR ≥ 60% • 1)' }},
+                    {{ id: 2, label: '🔄 Klaster 2: Pendampingan (FR 45%–55% • 5)' }},
+                    {{ id: 3, label: '📉 Klaster 3: Evaluasi Khusus (FR < 45% • 5)' }}
                 ];
                 tierConfigs.forEach(t => {{
                     const pill = document.createElement('span');
@@ -1694,8 +2185,74 @@ def generate_interactive_html():
 
         const fak_abbr_map_client = {json.dumps(fak_abbr_map)};
 
+        // Kamus Akronim & Singkatan Program Studi Populer USK
+        const ACRONYM_MAP = {{
+            'ti': ['informatika', 'teknologi informasi'],
+            'it': ['informatika', 'teknologi informasi'],
+            'pwk': ['perencanaan wilayah'],
+            'paud': ['pendidikan anak usia dini', 'paud'],
+            'pgsd': ['pendidikan guru sekolah dasar'],
+            'hi': ['hubungan internasional'],
+            'ilkom': ['ilmu komunikasi'],
+            'mi': ['manajemen informatika'],
+            'pko': ['kepelatihan olahraga'],
+            'pjkr': ['jasmani, kesehatan'],
+            'penjas': ['jasmani, kesehatan'],
+            'fk': ['pendidikan dokter'],
+            'fkg': ['dokter gigi'],
+            'fkh': ['kedokteran hewan']
+        }};
+
+        // Pencarian Cerdas Multi-Kategori (Nama, Akronim, Fakultas, Kuadran, Tier)
+        function matchSearchQuery(d, query) {{
+            if (!query || query.trim() === '') return true;
+            const q = query.trim().toLowerCase();
+
+            // 1. Pencarian nama prodi (parsial & lengkap)
+            const prodiName = (d.jenjang === 'D3' ? ('d3 ' + d.nama) : d.nama).toLowerCase();
+            if (prodiName.includes(q)) return true;
+
+            // 2. Pencarian nama fakultas atau singkatan resmi
+            if (d.fakultas && d.fakultas.toLowerCase().includes(q)) return true;
+            if (d.fakultas_abbr && d.fakultas_abbr.toLowerCase().includes(q)) return true;
+
+            // 3. Pencarian berbasis akronim populer
+            if (ACRONYM_MAP[q]) {{
+                const targetKeywords = ACRONYM_MAP[q];
+                for (let i = 0; i < targetKeywords.length; i++) {{
+                    if (prodiName.includes(targetKeywords[i])) return true;
+                }}
+            }}
+
+            // 4. Pencarian berbasis Kuadran
+            if (q === 'q1' || q === 'kuadran 1' || q === 'kuadran i' || q === 'unggulan') {{
+                if (d.kuadran === 'I') return true;
+            }}
+            if (q === 'q2' || q === 'kuadran 2' || q === 'kuadran ii' || q === 'stabil') {{
+                if (d.kuadran === 'II') return true;
+            }}
+            if (q === 'q3' || q === 'kuadran 3' || q === 'kuadran iii' || q === 'belum optimal' || q === 'optimal') {{
+                if (d.kuadran === 'III') return true;
+            }}
+            if (q === 'q4' || q === 'kuadran 4' || q === 'kuadran iv' || q === 'perlu ditingkatkan' || q === 'ditingkatkan') {{
+                if (d.kuadran === 'IV') return true;
+            }}
+
+            // 5. Pencarian berbasis Klaster Vokasi (Khusus D3)
+            if (currentLevel === 'd3') {{
+                if ((q === 'tier 1' || q === 'klaster 1' || q === 'kompetitif') && d.tier === 1) return true;
+                if ((q === 'tier 2' || q === 'klaster 2' || q === 'pendampingan' || q === 'perlu pendampingan') && d.tier === 2) return true;
+                if ((q === 'tier 3' || q === 'klaster 3' || q === 'evaluasi' || q === 'evaluasi khusus') && d.tier === 3) return true;
+            }}
+
+            return false;
+        }}
+
         // Filter Evaluation
         function isProdiVisible(d) {{
+            // S1 Subset Filter (Eksklusi penuh 6 prodi baru bila mode 'established')
+            if (currentLevel === 's1' && currentS1Subset === 'established' && d.is_prodi_baru) return false;
+
             // Faculty filter
             if (currentFaculty !== "ALL" && d.fakultas !== currentFaculty) return false;
 
@@ -1705,22 +2262,431 @@ def generate_interactive_html():
             // D3 Tier Filter
             if (currentLevel === 'd3' && currentD3Tier !== 'ALL' && d.tier !== currentD3Tier) return false;
 
-            // Search query
+            // Smart Search query
             if (searchQuery.trim() !== "") {{
-                const q = searchQuery.toLowerCase();
-                const matchName = d.nama.toLowerCase().includes(q);
-                const matchFak = d.fakultas.toLowerCase().includes(q) || (d.fakultas_abbr && d.fakultas_abbr.toLowerCase().includes(q));
-                if (!matchName && !matchFak) return false;
+                if (!matchSearchQuery(d, searchQuery)) return false;
             }}
             return true;
         }}
 
+        // ====================================================
+        // PRODI SHORT NAME DICTIONARY & TITLE CASE FORMATTING
+        // ====================================================
+        const PRODI_SHORT_NAMES = {{
+            'PENDIDIKAN PANCASILA DAN KEWARGANEGARAAN': 'PPKn',
+            'PENDIDIKAN KESEJAHTERAAN KELUARGA': 'PKK',
+            'PENDIDIKAN SENI DRAMA TARI DAN MUSIK': 'Sendratasik',
+            'PENDIDIKAN JASMANI KESEHATAN DAN REKREASI': 'Penjaskesrek',
+            'PERENCANAAN WILAYAH DAN KOTA': 'PWK',
+            'TEKNOLOGI INDUSTRI HASIL PERIKANAN': 'Tek. Ind. Perikanan',
+            'PEMANFAATAN SUMBERDAYA PERIKANAN': 'Pemanfaatan Perikanan',
+            'PENDIDIKAN GURU SEKOLAH DASAR': 'PGSD',
+            'PENDIDIKAN GURU PAUD': 'PG PAUD',
+            'PENDIDIKAN GURU PENDIDIKAN ANAK USIA DINI': 'PG PAUD',
+            'TEKNIK SUMBER DAYA AIR': 'Tek. SDA',
+            'TEKNOLOGI HASIL PERTANIAN': 'Tek. Hasil Pertanian',
+            'PENDIDIKAN DOKTER HEWAN': 'Dokter Hewan',
+            'PENDIDIKAN BAHASA INGGRIS': 'Pend. B. Inggris',
+            'PENDIDIKAN BAHASA INDONESIA': 'Pend. B. Indonesia',
+            'PENDIDIKAN DOKTER GIGI': 'Dokter Gigi',
+            'PENDIDIKAN DOKTER': 'Pend. Dokter',
+            'BIMBINGAN KONSELING': 'Bimb. Konseling',
+            'EKONOMI PEMBANGUNAN': 'Ek. Pembangunan',
+            'PENDIDIKAN MATEMATIKA': 'Pend. Matematika',
+            'PENDIDIKAN GEOGRAFI': 'Pend. Geografi',
+            'PENDIDIKAN EKONOMI': 'Pend. Ekonomi',
+            'PENDIDIKAN KIMIA': 'Pend. Kimia',
+            'PENDIDIKAN FISIKA': 'Pend. Fisika',
+            'PENDIDIKAN BIOLOGI': 'Pend. Biologi',
+            'PENDIDIKAN SEJARAH': 'Pend. Sejarah',
+            'ILMU ADMINISTRASI PUBLIK': 'Adm. Publik',
+            'ILMU ADMINISTRASI NEGARA': 'Adm. Negara',
+            'ILMU KOMUNIKASI': 'Ilmu Komunikasi',
+            'ILMU PEMERINTAHAN': 'Ilmu Pemerintahan',
+            'HUBUNGAN INTERNASIONAL': 'Hub. Internasional',
+            'ILMU POLITIK': 'Ilmu Politik',
+            'SOSIOLOGI': 'Sosiologi',
+            'ILMU HUKUM': 'Ilmu Hukum',
+            'TEKNIK INFORMATIKA': 'Informatika',
+            'INFORMATIKA': 'Informatika',
+            'SISTEM INFORMASI': 'Sistem Informasi',
+            'TEKNIK KOMPUTER': 'Tek. Komputer',
+            'TEKNIK SIPIL': 'Tek. Sipil',
+            'TEKNIK MESIN': 'Tek. Mesin',
+            'TEKNIK ELEKTRO': 'Tek. Elektro',
+            'TEKNIK KIMIA': 'Tek. Kimia',
+            'TEKNIK ARSITEKTUR': 'Arsitektur',
+            'ARSITEKTUR': 'Arsitektur',
+            'TEKNIK GEOFISIKA': 'Tek. Geofisika',
+            'TEKNIK GEOLOGI': 'Tek. Geologi',
+            'TEKNIK PERTAMBANGAN': 'Tek. Pertambangan',
+            'TEKNIK INDUSTRI': 'Tek. Industri',
+            'TEKNIK LINGKUNGAN': 'Tek. Lingkungan',
+            'TEKNIK PERTANIAN': 'Tek. Pertanian',
+            'AGRIBISNIS': 'Agribisnis',
+            'AGROTEKNOLOGI': 'Agroteknologi',
+            'PETERNAKAN': 'Peternakan',
+            'ILMU TANAH': 'Ilmu Tanah',
+            'PROTEKSI TANAMAN': 'Proteksi Tanaman',
+            'BUDIDAYA PERAIRAN': 'Budidaya Perairan',
+            'ILMU KELAUTAN': 'Ilmu Kelautan',
+            'KEDOKTERAN HEWAN': 'Dokter Hewan',
+            'FARMASI': 'Farmasi',
+            'KEPERAWATAN': 'Keperawatan',
+            'ILMU KEPERAWATAN': 'Keperawatan',
+            'KEDOKTERAN': 'Kedokteran',
+            'KEDOKTERAN GIGI': 'Kedokteran Gigi',
+            'STATISTIKA': 'Statistika',
+            'MATEMATIKA': 'Matematika',
+            'FISIKA': 'Fisika',
+            'KIMIA': 'Kimia',
+            'BIOLOGI': 'Biologi',
+            'MANAJEMEN': 'Manajemen',
+            'AKUNTANSI': 'Akuntansi',
+            'EKONOMI ISLAM': 'Ekonomi Islam',
+            'BISNIS DIGITAL': 'Bisnis Digital',
+            'AKUNTANSI PERPAJAKAN': 'Akun. Perpajakan',
+            'TEKNIK PERMINYAKAN': 'Tek. Perminyakan',
+            'PSIKOLOGI': 'Psikologi',
+            'KEHUTANAN': 'Kehutanan',
+            // D3 Vokasi
+            'KESEHATAN HEWAN': 'Kesehatan Hewan',
+            'MANAJEMEN AGRIBISNIS': 'Manaj. Agribisnis',
+            'TEKNIK LISTRIK': 'Tek. Listrik',
+            'BUDIDAYA PETERNAKAN': 'Budidaya Peternakan',
+            'MANAJEMEN PERUSAHAAN': 'Manaj. Perusahaan',
+            'KEUANGAN DAN PERBANKAN': 'Keuangan & Perbankan',
+            'MANAJEMEN INFORMATIKA': 'Manaj. Informatika',
+            'SEKRETARI': 'Sekretari'
+        }};
+
+        function formatShortProdiLabel(d) {{
+            const rawName = (d.nama || '').trim().toUpperCase();
+            let baseName = PRODI_SHORT_NAMES[rawName];
+            if (!baseName) {{
+                baseName = rawName
+                    .replace('PENDIDIKAN GURU ', 'PG ')
+                    .replace('PENDIDIKAN ', 'Pend. ')
+                    .replace('TEKNOLOGI ', 'Tek. ')
+                    .replace('TEKNIK ', 'Tek. ')
+                    .replace('ADMINISTRASI ', 'Adm. ')
+                    .toLowerCase()
+                    .split(' ')
+                    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                    .join(' ');
+            }}
+            const prefix = d.jenjang === 'D3' ? 'D3 ' : '';
+            const fAbbr = d.fakultas_abbr ? ` (${{d.fakultas_abbr}})` : '';
+            return `${{prefix}}${{baseName}}${{fAbbr}}`;
+        }}
+
+        // ====================================================
+        // ANTI-COLLISION REPULSION LAYOUT ENGINE
+        // ====================================================
+        function solveLabelLayout(items, bounds) {{
+            if (!items || items.length === 0) return [];
+            if (items.length === 1) {{
+                const it = items[0];
+                it.lx = it.x0 + it.w / 2 + 8;
+                it.ly = it.y0;
+                it.needsLeaderLine = false;
+                it.edgeX = it.lx;
+                it.edgeY = it.ly;
+                return items;
+            }}
+
+            // Urutkan item berdasarkan koordinat vertikal (cy) lalu horizontal (cx)
+            items.sort((a, b) => (a.y0 !== b.y0 ? a.y0 - b.y0 : a.x0 - b.x0));
+
+            // Inisialisasi posisi awal cerdas dengan Alternating Multi-Directional Staggering
+            items.forEach((it, idx) => {{
+                const d = it.d;
+                const side = (idx % 2 === 0) ? 1 : -1;
+                const nameUpper = d.nama.toUpperCase();
+
+                if (nameUpper.includes('FARMASI')) {{
+                    it.lx = it.x0 - it.w / 2 - 10;
+                    it.ly = it.y0;
+                }} else if (d.keketatan >= 4.0 && d.fill_rate >= 80.0) {{
+                    // Kuadran I (Unggulan)
+                    if (d.keketatan > 7.0) {{
+                        it.lx = it.x0 + it.w / 2 + 8;
+                        it.ly = it.y0 + (side * 6);
+                    }} else if (d.fill_rate > 92.0) {{
+                        it.lx = it.x0 + (side * 28);
+                        it.ly = it.y0 - 16 - ((idx % 3) * 6);
+                    }} else {{
+                        it.lx = it.x0 + (side * (it.w / 2 + 10));
+                        it.ly = it.y0 - 8 + (side * 6);
+                    }}
+                }} else if (d.keketatan < 4.0 && d.fill_rate >= 80.0) {{
+                    // Kuadran II (Stabil)
+                    it.lx = it.x0 - it.w / 2 - 8;
+                    it.ly = it.y0 + (side * 6);
+                }} else if (d.keketatan >= 4.0 && d.fill_rate < 80.0) {{
+                    // Kuadran III (Belum Optimal)
+                    it.lx = it.x0 + it.w / 2 + 8;
+                    it.ly = it.y0 + (side * 6);
+                }} else {{
+                    // Kuadran IV (Perlu Ditingkatkan)
+                    if (d.fill_rate < 58.0) {{
+                        // Sebar ke bawah dan horizontal (area bawah lapang)
+                        it.lx = it.x0 + ((idx % 5) - 2) * 22;
+                        it.ly = it.y0 + 18 + ((idx % 3) * 8);
+                    }} else if (d.keketatan < 1.4) {{
+                        // Hanya titik di tepi kiri ekstrim yang ke kiri
+                        it.lx = it.x0 - it.w / 2 - 8;
+                        it.ly = it.y0 + (side * 8);
+                    }} else {{
+                        // Manfaatkan area lapang di kanan titik (menuju garis ambang 4.0)
+                        it.lx = (side === 1) ? (it.x0 + it.w / 2 + 10) : (it.x0 - it.w / 2 - 8);
+                        it.ly = it.y0 + 8 + (side * 6);
+                    }}
+                }}
+            }});
+
+            const N = items.length;
+            const iterations = 150;
+
+            for (let step = 0; step < iterations; step++) {{
+                // 1. Box overlap repulsion (AABB)
+                for (let i = 0; i < N; i++) {{
+                    for (let j = i + 1; j < N; j++) {{
+                        const a = items[i];
+                        const b = items[j];
+                        const dx = b.lx - a.lx;
+                        const dy = b.ly - a.ly;
+                        const minDistX = (a.w + b.w) / 2 + 4.0;
+                        const minDistY = (a.h + b.h) / 2 + 2.5;
+                        const overlapX = minDistX - Math.abs(dx);
+                        const overlapY = minDistY - Math.abs(dy);
+
+                        if (overlapX > 0 && overlapY > 0) {{
+                            const sY = dy >= 0 ? 1 : -1;
+                            const sX = dx >= 0 ? 1 : -1;
+                            if (overlapY < 14.0 || (overlapY / minDistY) <= (overlapX / minDistX)) {{
+                                const shiftY = (overlapY / 2.0) + 0.6;
+                                a.ly -= sY * shiftY;
+                                b.ly += sY * shiftY;
+                            }} else {{
+                                const shiftX = (overlapX / 2.0) + 0.6;
+                                a.lx -= sX * shiftX;
+                                b.lx += sX * shiftX;
+                            }}
+                        }}
+                    }}
+                }}
+
+                // 2. Dots Repulsion (mencegah label menutupi titik data prodi)
+                for (let i = 0; i < N; i++) {{
+                    const a = items[i];
+                    for (let j = 0; j < N; j++) {{
+                        const pt = items[j];
+                        const nearX = Math.max(a.lx - a.w / 2, Math.min(a.lx + a.w / 2, pt.x0));
+                        const nearY = Math.max(a.ly - a.h / 2, Math.min(a.ly + a.h / 2, pt.y0));
+                        const dPoint = Math.hypot(nearX - pt.x0, nearY - pt.y0);
+                        if (dPoint < 8.5) {{
+                            const push = (8.5 - dPoint) * 0.5;
+                            let ang = Math.atan2(a.ly - pt.y0, a.lx - pt.x0);
+                            if (Math.abs(dPoint) < 0.001) {{
+                                ang = (a.id % 2 === 0) ? -Math.PI / 2 : Math.PI / 2;
+                            }}
+                            a.lx += Math.cos(ang) * push;
+                            a.ly += Math.sin(ang) * push;
+                        }}
+                    }}
+                }}
+
+                // 3. Batas kanvas (Clamping)
+                for (let i = 0; i < N; i++) {{
+                    const a = items[i];
+                    const hw = a.w / 2;
+                    const hh = a.h / 2;
+                    a.lx = Math.max(bounds.minX + hw, Math.min(bounds.maxX - hw, a.lx));
+                    a.ly = Math.max(bounds.minY + hh, Math.min(bounds.maxY - hh, a.ly));
+                }}
+            }}
+
+            // Helper minBound
+            function minBound(vMax, val) {{
+                return Math.min(vMax, val);
+            }}
+
+            // Tentukan leader line flag dan titik potong tepi box
+            items.forEach(it => {{
+                const dist = Math.hypot(it.lx - it.x0, it.ly - it.y0);
+                if (dist > 14.0) {{
+                    it.needsLeaderLine = true;
+                    it.edgeX = Math.max(it.lx - it.w / 2, Math.min(it.lx + it.w / 2, it.x0));
+                    it.edgeY = Math.max(it.ly - it.h / 2, Math.min(it.ly + it.h / 2, it.y0));
+                }} else {{
+                    it.needsLeaderLine = false;
+                    it.edgeX = it.lx;
+                    it.edgeY = it.ly;
+                }}
+            }});
+
+            return items;
+        }}
+
+        // ====================================================
+        // TOOLTIP & MUTUAL HIGHLIGHTING MANAGER
+        // ====================================================
+        const TooltipManager = {{
+            get tooltip() {{ return document.getElementById('interactive-tooltip'); }},
+            get svgContainer() {{ return document.getElementById('svg-container'); }},
+            activeProdiId: null,
+
+            show(e, d) {{
+                this.activeProdiId = d.id;
+                const tt = this.tooltip;
+                if (!tt) return;
+
+                document.getElementById('tt-fakultas').textContent = `${{d.fakultas_abbr}} • ${{d.fakultas}}`;
+                document.getElementById('tt-name').textContent = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
+
+                const qBadge = document.getElementById('tt-kuadran');
+                qBadge.textContent = d.kuadran_title;
+                qBadge.style.backgroundColor = d.color;
+                qBadge.style.color = '#FFFFFF';
+
+                document.getElementById('tt-keketatan').textContent = `${{d.keketatan}} : 1`;
+                document.getElementById('tt-fillrate').textContent = `${{clampFR(d.fill_rate).toFixed(1)}}%`;
+                document.getElementById('tt-peminat').textContent = `${{d.peminat_5thn.toLocaleString('id-ID')}} org`;
+                document.getElementById('tt-dt').textContent = `${{d.dt_5thn}} kursi`;
+
+                tt.style.display = 'block';
+                this.updatePosition(e.clientX, e.clientY);
+            }},
+
+            updatePosition(clientX, clientY) {{
+                const tt = this.tooltip;
+                const container = this.svgContainer;
+                if (!tt || tt.style.display === 'none' || !container) return;
+
+                const rect = container.getBoundingClientRect();
+                const mouseX = clientX - rect.left;
+                const mouseY = clientY - rect.top;
+
+                // Smart Vertical Flip: Jika kursor berada di dekat batas atas (< 185px dari tepi atas canvas), flip ke bawah kursor
+                const flipDown = (mouseY < 185);
+                tt.classList.toggle('flipped-down', flipDown);
+
+                const targetTop = mouseY;
+
+                // Horizontal Clamping agar tooltip tidak terpotong di tepi kiri/kanan SVG
+                const ttHalfWidth = 135;
+                let targetLeft = mouseX;
+                if (targetLeft < ttHalfWidth + 12) {{
+                    targetLeft = ttHalfWidth + 12;
+                }} else if (targetLeft > rect.width - ttHalfWidth - 12) {{
+                    targetLeft = rect.width - ttHalfWidth - 12;
+                }}
+
+                // Geser panah penunjuk (arrow) agar tetap menunjuk tepat ke titik kursor
+                const arrowOffset = Math.max(16, Math.min(260 - 16, 130 + (mouseX - targetLeft)));
+                tt.style.setProperty('--arrow-left', `${{arrowOffset}}px`);
+
+                tt.style.left = `${{targetLeft}}px`;
+                tt.style.top = `${{targetTop}}px`;
+            }},
+
+            hide() {{
+                if (this.activeProdiId !== null) {{
+                    this.clearHighlight(this.activeProdiId);
+                    this.activeProdiId = null;
+                }}
+                const tt = this.tooltip;
+                if (tt) {{
+                    tt.style.display = 'none';
+                    tt.classList.remove('flipped-down');
+                }}
+            }},
+
+            highlight(d) {{
+                const circle = document.querySelector(`.dot[data-id="${{d.id}}"]`);
+                if (circle) {{
+                    circle.setAttribute('r', '11.5');
+                }}
+
+                const lLine = document.querySelector(`.leader-line[data-id="${{d.id}}"]`);
+                if (lLine) {{
+                    lLine.setAttribute('stroke', d.color);
+                    lLine.setAttribute('stroke-width', '1.6');
+                    lLine.setAttribute('opacity', '1');
+                }}
+
+                const bBadge = document.querySelector(`.label-badge[data-id="${{d.id}}"]`);
+                if (bBadge) {{
+                    bBadge.classList.add('highlighted');
+                    const bRect = bBadge.querySelector('.badge-rect');
+                    if (bRect) {{
+                        bRect.setAttribute('stroke', d.color);
+                        bRect.setAttribute('stroke-width', '1.8');
+                    }}
+                }}
+            }},
+
+            clearHighlight(prodiId) {{
+                const circle = document.querySelector(`.dot[data-id="${{prodiId}}"]`);
+                if (circle) {{
+                    circle.setAttribute('r', selectedProdiId === prodiId ? '10.5' : '7.5');
+                }}
+
+                const lLine = document.querySelector(`.leader-line[data-id="${{prodiId}}"]`);
+                if (lLine) {{
+                    lLine.setAttribute('stroke', '#94A3B8');
+                    lLine.setAttribute('stroke-width', '0.85');
+                    lLine.setAttribute('opacity', '0.85');
+                }}
+
+                const bBadge = document.querySelector(`.label-badge[data-id="${{prodiId}}"]`);
+                if (bBadge) {{
+                    bBadge.classList.remove('highlighted');
+                    const bRect = bBadge.querySelector('.badge-rect');
+                    if (bRect) {{
+                        const isSel = (selectedProdiId === prodiId);
+                        const currentList = getActiveList();
+                        const p = currentList.find(x => x.id === prodiId);
+                        const c = (isSel && p) ? p.color : '#CBD5E1';
+                        bRect.setAttribute('stroke', c);
+                        bRect.setAttribute('stroke-width', isSel ? '1.8' : '0.85');
+                    }}
+                }}
+            }}
+        }};
+
+        function onDotHover(e, d) {{
+            if (TooltipManager.activeProdiId && TooltipManager.activeProdiId !== d.id) {{
+                TooltipManager.clearHighlight(TooltipManager.activeProdiId);
+            }}
+            TooltipManager.highlight(d);
+            TooltipManager.show(e, d);
+        }}
+
+        function onDotLeave(d) {{
+            TooltipManager.hide();
+        }}
+
+        function onBadgeHover(e, d) {{
+            if (TooltipManager.activeProdiId && TooltipManager.activeProdiId !== d.id) {{
+                TooltipManager.clearHighlight(TooltipManager.activeProdiId);
+            }}
+            TooltipManager.highlight(d);
+            TooltipManager.show(e, d);
+        }}
+
+        function onBadgeLeave(d) {{
+            TooltipManager.hide();
+        }}
+
         // Render Canvas
         function renderChart() {{
+            TooltipManager.hide();
             const svg = document.getElementById('matrix-svg');
             svg.innerHTML = '';
 
-            const currentList = DATA_BY_LEVEL[currentLevel];
+            const currentList = getActiveList();
             const xThreshold = mapX(4.0);
             const yThreshold80 = mapY(80.0);
 
@@ -1751,11 +2717,28 @@ def generate_interactive_html():
                     fill: '#FFFBEB', opacity: 0.65
                 }}));
 
-                // Watermark Quadrant Titles
-                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 22, 'end', '13', '800', '#059669', 0.85, 'KUADRAN I: UNGGULAN (28 Prodi)'));
-                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + 22, 'start', '13', '800', '#2563EB', 0.85, 'KUADRAN II: STABIL (4 Prodi)'));
-                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 14, 'end', '12.5', '800', '#D97706', 0.85, 'KUADRAN III: BELUM OPTIMAL (8 Prodi)'));
-                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + PLOT_H - 14, 'start', '13', '800', '#E11D48', 0.85, 'KUADRAN IV: PERLU DITINGKATKAN (26 Prodi)'));
+                // Hitung kuadran dinamis untuk Watermark S1
+                const qCounts = {{ 'I': 0, 'II': 0, 'III': 0, 'IV': 0 }};
+                currentList.forEach(p => {{
+                    if (qCounts[p.kuadran] !== undefined) qCounts[p.kuadran]++;
+                }});
+
+                // Watermark Quadrant Titles S1 (2 Baris Rapi, Bebas Tabrakan dengan Ambang Batas)
+                // Q1 (Top-Right)
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 18, 'end', '12', '800', '#059669', 0.85, 'KUADRAN I: UNGGULAN'));
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 32, 'end', '10.5', '700', '#059669', 0.85, `(${{qCounts['I']}} Prodi)`));
+
+                // Q2 (Top-Left)
+                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + 18, 'start', '12', '800', '#2563EB', 0.85, 'KUADRAN II: STABIL'));
+                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + 32, 'start', '10.5', '700', '#2563EB', 0.85, `(${{qCounts['II']}} Prodi)`));
+
+                // Q3 (Bottom-Right)
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 26, 'end', '12', '800', '#D97706', 0.85, 'KUADRAN III: BELUM OPTIMAL'));
+                svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 12, 'end', '10.5', '700', '#D97706', 0.85, `(${{qCounts['III']}} Prodi)`));
+
+                // Q4 (Bottom-Left: Bebas Tabrakan dengan Badge Ambang Tengah)
+                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + PLOT_H - 26, 'start', '12', '800', '#E11D48', 0.85, 'KUADRAN IV: PERLU DITINGKATKAN'));
+                svg.appendChild(createText(PLOT_X + 14, PLOT_Y + PLOT_H - 12, 'start', '10.5', '700', '#E11D48', 0.85, `(${{qCounts['IV']}} Prodi)`));
 
                 // Gridlines S1
                 const yTicks = [30, 40, 50, 60, 70, 80, 90, 100];
@@ -1844,33 +2827,33 @@ def generate_interactive_html():
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 240, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR SEHAT: 80% KETERISIAN'));
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 145, yThreshold50, 270, 22, '#DC2626', '#F87171', '#FFFFFF', '⚠ BATAS KRITIS KELAYAKAN: 50%'));
 
-                // Callout Banner: Anomali Struktural Vokasi USK (Posisikan di bawah watermark Kuadran I agar lapang & tidak tumpang tindih)
-                const bannerGroup = createSVGElement('g', {{ transform: `translate(${{PLOT_X + PLOT_W / 2 + 60}}, ${{PLOT_Y + 70}})` }});
+                // Callout Banner: Anomali Struktural Vokasi USK
+                const bannerGroup = createSVGElement('g', {{ transform: `translate(${{PLOT_X + PLOT_W / 2}}, ${{PLOT_Y + 49}})` }});
                 const bannerRect = createSVGElement('rect', {{
-                    x: -240, y: -24, width: 480, height: 48, rx: 10,
-                    fill: '#FFFBEB', stroke: '#F59E0B', 'stroke-width': 1.4, opacity: 0.96
+                    x: -290, y: -26, width: 580, height: 52, rx: 12,
+                    fill: '#FFFBEB', stroke: '#F59E0B', 'stroke-width': 1.5, opacity: 0.97
                 }});
-                const bannerT1 = createText(0, -6, 'middle', '11', '800', '#92400E', 1, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:');
-                const bannerT2 = createText(0, 11, 'middle', '10.5', '700', '#B45309', 1, '100% (11 Prodi D3) Terkonsentrasi di Kuadran III: Belum Optimal (Keketatan 5,3x–17,7x, FR < 80%)');
+                const bannerT1 = createText(0, -7, 'middle', '11.5', '800', '#92400E', 1, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:');
+                const bannerT2 = createText(0, 11, 'middle', '10', '700', '#B45309', 1, '100% (11 Prodi D3) Terkonsentrasi di Kuadran III: Belum Optimal (Keketatan 5,3×–17,7×, FR < 80%)');
                 bannerGroup.appendChild(bannerRect);
                 bannerGroup.appendChild(bannerT1);
                 bannerGroup.appendChild(bannerT2);
                 svg.appendChild(bannerGroup);
 
-                // Watermark Quadrant Titles D3 (Format & Desain Seragam 100% dengan S1, Rapi & Bebas Tumpang Tindih)
-                // Q1 (Top-Right): Di pojok kanan atas, di atas banner
+                // Watermark Quadrant Titles D3 (Format & Desain Seragam 100% dengan S1)
+                // Q1 (Top-Right)
                 svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 18, 'end', '12', '800', '#059669', 0.85, 'KUADRAN I: UNGGULAN'));
                 svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 32, 'end', '10', '600', '#64748B', 0.85, '(0 Prodi / 0%)'));
 
-                // Q2 (Top-Left): Tetap di dalam kolom kiri (x < 236), tidak menyeberang garis ambang
+                // Q2 (Top-Left)
                 svg.appendChild(createText(PLOT_X + 8, PLOT_Y + 18, 'start', '11', '800', '#2563EB', 0.85, 'KUADRAN II: STABIL'));
                 svg.appendChild(createText(PLOT_X + 8, PLOT_Y + 32, 'start', '9.5', '600', '#64748B', 0.85, '(0 Prodi / 0%)'));
 
-                // Q3 (Bottom-Right): Di pojok kanan bawah
+                // Q3 (Bottom-Right)
                 svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 24, 'end', '12.5', '800', '#D97706', 0.95, 'KUADRAN III: BELUM OPTIMAL'));
                 svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + PLOT_H - 10, 'end', '10.5', '700', '#B45309', 0.90, '(11 Prodi / 100% Vokasi)'));
 
-                // Q4 (Bottom-Left): Di bawah garis 80%, tetap di dalam kolom kiri (x < 236), bebas tabrakan dengan badge ambang bawah!
+                // Q4 (Bottom-Left)
                 svg.appendChild(createText(PLOT_X + 8, yThreshold80 + 20, 'start', '10.5', '800', '#E11D48', 0.85, 'KUADRAN IV: PERLU DITINGKATKAN'));
                 svg.appendChild(createText(PLOT_X + 8, yThreshold80 + 34, 'start', '9.5', '600', '#64748B', 0.85, '(0 Prodi / 0%)'));
             }}
@@ -1881,11 +2864,13 @@ def generate_interactive_html():
             yTitle.setAttribute('transform', 'rotate(-90)');
             svg.appendChild(yTitle);
 
-            // Render Dots & Labels
+            // Render Dots, Leader Lines & Interactive Badges
             const dotsGroup = createSVGElement('g', {{ id: 'dots-group' }});
+            const leaderLinesGroup = createSVGElement('g', {{ id: 'leader-lines-group' }});
             const labelsGroup = createSVGElement('g', {{ id: 'labels-group' }});
 
             let matchCount = 0;
+            const itemsToLabel = [];
 
             currentList.forEach(d => {{
                 const visible = isProdiVisible(d);
@@ -1893,8 +2878,6 @@ def generate_interactive_html():
 
                 const cx = mapX(d.keketatan);
                 const cy = mapY(clampFR(d.fill_rate));
-
-                // Uniform Circle Radius (7.5px) for all data points
                 const rRadius = 7.5;
 
                 const circle = createSVGElement('circle', {{
@@ -1910,36 +2893,119 @@ def generate_interactive_html():
                 }});
 
                 circle.addEventListener('mouseenter', (e) => onDotHover(e, d));
-                circle.addEventListener('mouseleave', onDotLeave);
+                circle.addEventListener('mousemove', (e) => TooltipManager.updatePosition(e.clientX, e.clientY));
+                circle.addEventListener('mouseleave', () => onDotLeave(d));
                 circle.addEventListener('click', () => onDotClick(d));
 
                 dotsGroup.appendChild(circle);
 
-                // Labels: HANYA tampil jika tombol Toggle Semua Label aktif ATAU titik tersebut sedang diklik
-                const showThisLabel = showAllLabels || (selectedProdiId === d.id);
+                // Labels: Tampil jika tombol Toggle Semua Label aktif ATAU titik sedang diklik ATAU cocok dengan pencarian
+                const isSearchHit = (searchQuery.trim() !== "" && matchSearchQuery(d, searchQuery));
+                const showThisLabel = showAllLabels || (selectedProdiId === d.id) || (isSearchHit && visible);
 
                 if (showThisLabel && visible) {{
-                    const labelText = createSVGElement('text', {{
-                        x: cx + rRadius + 4,
-                        y: cy + 3,
-                        class: 'dot-label',
-                        fill: '#1E293B'
+                    const shortText = formatShortProdiLabel(d);
+                    const estW = Math.max(38, Math.round(shortText.length * 5.2 + 10));
+                    itemsToLabel.push({{
+                        id: d.id,
+                        d: d,
+                        x0: cx,
+                        y0: cy,
+                        text: shortText,
+                        w: estW,
+                        h: 15.0,
+                        lx: cx,
+                        ly: cy
                     }});
-                    // Clean shortened label
-                    let shortName = d.nama.replace('PENDIDIKAN ', 'PEND. ').replace('KESEHATAN ', 'KES. ');
-                    if (currentLevel === 'd3') {{
-                        shortName = 'D3 ' + shortName;
-                    }}
-                    labelText.textContent = shortName;
-                    labelsGroup.appendChild(labelText);
                 }}
             }});
 
+            // Jalankan Anti-Collision Solver
+            const plotBounds = {{
+                minX: PLOT_X + 6,
+                maxX: PLOT_X + PLOT_W - 6,
+                minY: PLOT_Y + 6,
+                maxY: PLOT_Y + PLOT_H - 6
+            }};
+            const solvedLabels = solveLabelLayout(itemsToLabel, plotBounds);
+
+            // 1. Gambar Leader Lines (di bawah badges)
+            solvedLabels.forEach(it => {{
+                if (it.needsLeaderLine) {{
+                    const line = createSVGElement('line', {{
+                        x1: it.x0,
+                        y1: it.y0,
+                        x2: it.edgeX,
+                        y2: it.edgeY,
+                        stroke: '#94A3B8',
+                        'stroke-width': 0.85,
+                        'stroke-linecap': 'round',
+                        opacity: 0.85,
+                        class: 'leader-line',
+                        'data-id': it.id
+                    }});
+                    leaderLinesGroup.appendChild(line);
+                }}
+            }});
+
+            // 2. Gambar Badge Labels Interaktif
+            solvedLabels.forEach(it => {{
+                const isSelected = (selectedProdiId === it.d.id);
+                const badgeG = createSVGElement('g', {{
+                    class: `label-badge ${{isSelected ? 'selected' : ''}}`,
+                    'data-id': it.id,
+                    transform: `translate(${{it.lx}}, ${{it.ly}})`
+                }});
+
+                const rect = createSVGElement('rect', {{
+                    x: -it.w / 2,
+                    y: -it.h / 2,
+                    width: it.w,
+                    height: it.h,
+                    rx: 3.5,
+                    fill: '#FFFFFF',
+                    'fill-opacity': 0.95,
+                    stroke: isSelected ? it.d.color : '#CBD5E1',
+                    'stroke-width': isSelected ? 1.8 : 0.85,
+                    class: 'badge-rect'
+                }});
+
+                const txt = createSVGElement('text', {{
+                    x: 0,
+                    y: 0,
+                    'dominant-baseline': 'central',
+                    'text-anchor': 'middle',
+                    fill: '#1E293B',
+                    class: 'badge-text'
+                }});
+                txt.textContent = it.text;
+
+                badgeG.appendChild(rect);
+                badgeG.appendChild(txt);
+
+                // Event listener badge
+                badgeG.addEventListener('mouseenter', (e) => onBadgeHover(e, it.d));
+                badgeG.addEventListener('mousemove', (e) => TooltipManager.updatePosition(e.clientX, e.clientY));
+                badgeG.addEventListener('mouseleave', () => onBadgeLeave(it.d));
+                badgeG.addEventListener('click', () => onDotClick(it.d));
+
+                labelsGroup.appendChild(badgeG);
+            }});
+
+            // Urutan render SVG:
+            // Background & Grid -> Leader Lines -> Dots -> Label Badges
+            svg.appendChild(leaderLinesGroup);
             svg.appendChild(dotsGroup);
             svg.appendChild(labelsGroup);
 
             // Update match counter
             document.getElementById('match-counter').textContent = `Menampilkan: ${{matchCount}}/${{currentList.length}} Prodi`;
+
+            // Canvas Footnote Visibility (Hanya muncul saat mode 60 prodi aktif)
+            const fnEl = document.getElementById('canvas-footnote-note');
+            if (fnEl) {{
+                fnEl.style.display = (currentLevel === 's1' && currentS1Subset === 'established') ? 'flex' : 'none';
+            }}
         }}
 
         function createLine(x1, y1, x2, y2, stroke, width, dash = '', opacity = 1) {{
@@ -1976,45 +3042,35 @@ def generate_interactive_html():
             return g;
         }}
 
-        // Tooltip interaction
-        const tooltip = document.getElementById('interactive-tooltip');
-        const svgContainer = document.getElementById('svg-container');
-
-        function onDotHover(e, d) {{
-            const circle = e.target;
-            circle.setAttribute('r', '11.5');
-
-            document.getElementById('tt-fakultas').textContent = `${{d.fakultas_abbr}} • ${{d.fakultas}}`;
-            document.getElementById('tt-name').textContent = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
-
-            const qBadge = document.getElementById('tt-kuadran');
-            qBadge.textContent = d.kuadran_title;
-            qBadge.style.backgroundColor = d.color;
-            qBadge.style.color = '#FFFFFF';
-
-            document.getElementById('tt-keketatan').textContent = `${{d.keketatan}} : 1`;
-            document.getElementById('tt-fillrate').textContent = `${{clampFR(d.fill_rate).toFixed(1)}}%`;
-            document.getElementById('tt-peminat').textContent = `${{d.peminat_5thn.toLocaleString('id-ID')}} org`;
-            document.getElementById('tt-dt').textContent = `${{d.dt_5thn}} kursi`;
-
-            tooltip.style.display = 'block';
-
-            const rect = svgContainer.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
-
-            tooltip.style.left = `${{mouseX}}px`;
-            tooltip.style.top = `${{mouseY - 14}}px`;
+        // Boundary Safeguard: Sembunyikan tooltip saat kursor keluar canvas atau di ruang kosong
+        const svgContainerEl = document.getElementById('svg-container');
+        if (svgContainerEl) {{
+            svgContainerEl.addEventListener('mouseleave', () => {{
+                TooltipManager.hide();
+            }});
+            svgContainerEl.addEventListener('mousemove', (e) => {{
+                if (!e.target.closest('.dot, .label-badge') && TooltipManager.activeProdiId !== null) {{
+                    TooltipManager.hide();
+                }}
+            }});
         }}
 
-        function onDotLeave(e) {{
-            const circle = e.target;
-            const dId = parseInt(circle.getAttribute('data-id'));
-            circle.setAttribute('r', selectedProdiId === dId ? '10.5' : '7.5');
-            tooltip.style.display = 'none';
-        }}
+        window.addEventListener('scroll', () => {{
+            TooltipManager.hide();
+        }}, {{ passive: true }});
+        window.addEventListener('resize', () => {{
+            TooltipManager.hide();
+        }});
+        window.addEventListener('beforeprint', () => {{
+            TooltipManager.hide();
+        }});
+
+
+
+
 
         function onDotClick(d) {{
+            TooltipManager.hide();
             if (selectedProdiId === d.id) {{
                 selectedProdiId = null;
                 document.getElementById('ins-content').style.display = 'none';
@@ -2028,22 +3084,69 @@ def generate_interactive_html():
             }}
         }}
 
+        function selectD3ProdiByName(keyword) {{
+            const list = DATA_BY_LEVEL.d3;
+            const p = list.find(item => item.nama.toUpperCase().includes(keyword.toUpperCase()));
+            if (p) {{
+                if (currentD3Tier !== 'ALL' && p.tier !== currentD3Tier) {{
+                    currentD3Tier = 'ALL';
+                    updateD3TierControls();
+                }}
+                selectedProdiId = p.id;
+                renderChart();
+                showInspector(p);
+            }}
+        }}
+
+        function closeInspector() {{
+            TooltipManager.hide();
+            selectedProdiId = null;
+            document.getElementById('ins-content').style.display = 'none';
+            document.getElementById('ins-placeholder').style.display = 'block';
+            updatePlaceholderView();
+            renderChart();
+        }}
+
         function showInspector(d) {{
             document.getElementById('ins-placeholder').style.display = 'none';
             const content = document.getElementById('ins-content');
             content.style.display = 'block';
 
             document.getElementById('ins-fak').textContent = `${{d.fakultas_abbr}} • ${{d.fakultas}} (${{d.jenjang}})`;
+            
+            // Kuadran Tag (Tetap utuh satu baris tanpa wrap)
             const qTag = document.getElementById('ins-quad-tag');
             qTag.textContent = d.kuadran_title;
             qTag.style.backgroundColor = d.color;
 
-            document.getElementById('ins-name').textContent = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
+            // Tier Tag (Khusus D3, tampil sebagai badge mandiri yang proporsional)
+            const tierTag = document.getElementById('ins-tier-tag');
             if (currentLevel === 'd3') {{
-                document.getElementById('ins-quad-desc').textContent = `${{d.kuadran_desc}} • ${{d.tier_title}} (${{d.tier_desc}})`;
+                tierTag.style.display = 'inline-flex';
+                if (d.tier === 1) {{
+                    tierTag.textContent = '⭐ Klaster 1: Kompetitif';
+                    tierTag.style.background = '#DCFCE7';
+                    tierTag.style.color = '#166534';
+                    tierTag.style.borderColor = '#86EFAC';
+                }} else if (d.tier === 2) {{
+                    tierTag.textContent = '🔄 Klaster 2: Perlu Pendampingan';
+                    tierTag.style.background = '#FEF3C7';
+                    tierTag.style.color = '#92400E';
+                    tierTag.style.borderColor = '#FDE68A';
+                }} else {{
+                    tierTag.textContent = '📉 Klaster 3: Evaluasi Khusus';
+                    tierTag.style.background = '#FFE4E6';
+                    tierTag.style.color = '#9F1239';
+                    tierTag.style.borderColor = '#FECDD3';
+                }}
             }} else {{
-                document.getElementById('ins-quad-desc').textContent = d.kuadran_desc;
+                tierTag.style.display = 'none';
             }}
+
+            document.getElementById('ins-name').textContent = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
+            
+            // Subtitle deskripsi status kuadran ringkas 1 kalimat (Bersih & tidak ramai)
+            document.getElementById('ins-quad-desc').textContent = d.kuadran_desc;
 
             document.getElementById('ins-keketatan').textContent = `${{d.keketatan}} : 1`;
             document.getElementById('ins-keketatan-status').textContent = d.keketatan >= 4.0 ? 'Keketatan Selektif (>= 4x)' : 'Keketatan Rendah (< 4x)';
@@ -2125,6 +3228,47 @@ def generate_interactive_html():
             }}
         }});
 
+        // S1 Subset Switcher Event Handlers
+        document.querySelectorAll('.subset-tab').forEach(tab => {{
+            tab.addEventListener('click', () => {{
+                const targetSubset = tab.getAttribute('data-subset');
+                if (currentS1Subset === targetSubset) return;
+
+                currentS1Subset = targetSubset;
+                document.querySelectorAll('.subset-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Reset filter & seleksi
+                currentFaculty = "ALL";
+                currentFilterCard = "ALL";
+                searchQuery = "";
+                document.getElementById('prodi-search').value = "";
+                selectedProdiId = null;
+
+                // Update Header Titles & Badge
+                if (currentS1Subset === 'all') {{
+                    document.getElementById('header-main-title').textContent = 'PETA KUADRAN 66 PROGRAM STUDI S1 LENGKAP USK';
+                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (66 Prodi S1 Lengkap)';
+                    document.getElementById('tab-s1-badge').textContent = '66 Prodi';
+                }} else {{
+                    document.getElementById('header-main-title').textContent = 'PETA KUADRAN 60 PROGRAM STUDI S1 KAMPUS UTAMA USK';
+                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (60 Prodi S1 Kampus Utama)';
+                    document.getElementById('tab-s1-badge').textContent = '60 Prodi';
+                }}
+
+                document.getElementById('ins-content').style.display = 'none';
+                document.getElementById('ins-placeholder').style.display = 'block';
+                updatePlaceholderView();
+
+                renderKPIRibbon();
+                renderFacultyFilters();
+                renderChart();
+
+                // Sinkronisasi URL Hash
+                syncUrlHash();
+            }});
+        }});
+
         // Level Switcher Event Handlers
         document.querySelectorAll('.level-tab').forEach(tab => {{
             tab.addEventListener('click', () => {{
@@ -2141,16 +3285,31 @@ def generate_interactive_html():
                 currentD3Tier = "ALL";
                 searchQuery = "";
                 document.getElementById('prodi-search').value = "";
+                document.getElementById('search-clear-btn').style.display = 'none';
+                document.getElementById('search-dropdown').style.display = 'none';
                 selectedProdiId = null;
+
+                // Toggle S1 Subset Switcher visibility
+                const subsetSwitcher = document.getElementById('s1-subset-switcher');
+                if (subsetSwitcher) {{
+                    subsetSwitcher.style.display = (currentLevel === 's1') ? 'inline-flex' : 'none';
+                }}
 
                 // Update Header and Subtitles
                 if (currentLevel === 's1') {{
-                    document.getElementById('header-main-title').textContent = 'PETA PORTOFOLIO STRATEGIS 66 PROGRAM STUDI S1';
-                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (Keketatan Seleksi vs Keterisian Kuota S1)';
+                    if (currentS1Subset === 'all') {{
+                        document.getElementById('header-main-title').textContent = 'PETA KUADRAN 66 PROGRAM STUDI S1 LENGKAP USK';
+                        document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (66 Prodi S1 Lengkap)';
+                        document.getElementById('tab-s1-badge').textContent = '66 Prodi';
+                    }} else {{
+                        document.getElementById('header-main-title').textContent = 'PETA KUADRAN 60 PROGRAM STUDI S1 KAMPUS UTAMA USK';
+                        document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (60 Prodi S1 Kampus Utama)';
+                        document.getElementById('tab-s1-badge').textContent = '60 Prodi';
+                    }}
                     document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi S1: <strong>Keketatan 4,0 : 1</strong> | <strong>Keterisian Sehat 80%</strong>';
                 }} else {{
-                    document.getElementById('header-main-title').textContent = 'PETA PORTOFOLIO STRATEGIS 11 PROGRAM STUDI DIPLOMA 3 VOKASI';
-                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (Keketatan Seleksi vs Keterisian Kuota D3)';
+                    document.getElementById('header-main-title').textContent = 'PETA KUADRAN 11 PROGRAM STUDI D3 VOKASI USK';
+                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (11 Prodi D3 Vokasi)';
                     document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Sehat 80%</strong> | <strong>Batas Kritis 50%</strong>';
                 }}
 
@@ -2166,17 +3325,190 @@ def generate_interactive_html():
                 document.getElementById('ins-content').style.display = 'none';
                 document.getElementById('ins-placeholder').style.display = 'block';
                 updatePlaceholderView();
+
+                // Sinkronisasi URL Hash
+                syncUrlHash();
             }});
         }});
 
-        // Search Input
-        document.getElementById('prodi-search').addEventListener('input', (e) => {{
+        // Smart Search Dropdown & Keyboard Navigation
+        let activeDropdownIndex = -1;
+
+        function updateSearchDropdown() {{
+            const dropdown = document.getElementById('search-dropdown');
+            const clearBtn = document.getElementById('search-clear-btn');
+            const q = searchQuery.trim();
+
+            if (!q) {{
+                dropdown.style.display = 'none';
+                clearBtn.style.display = 'none';
+                activeDropdownIndex = -1;
+                return;
+            }}
+
+            clearBtn.style.display = 'flex';
+
+            // Filter active list by smart search
+            const activeList = getActiveList().filter(d => {{
+                if (currentLevel === 's1' && currentS1Subset === 'established' && d.is_prodi_baru) return false;
+                return matchSearchQuery(d, q);
+            }});
+
+            dropdown.innerHTML = '';
+            activeDropdownIndex = -1;
+
+            if (activeList.length === 0) {{
+                dropdown.innerHTML = '<div class="search-dropdown-empty">🔍 Tidak ada program studi yang cocok</div>';
+                dropdown.style.display = 'block';
+                return;
+            }}
+
+            const maxResults = activeList.slice(0, 15);
+            maxResults.forEach((d, idx) => {{
+                const item = document.createElement('div');
+                item.className = 'search-dropdown-item';
+                item.setAttribute('data-id', d.id);
+                item.setAttribute('data-idx', idx);
+
+                const prodiDisplay = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
+                const fakBadge = d.fakultas_abbr || d.fakultas;
+
+                let quadBadgeHtml = '';
+                if (currentLevel === 'd3') {{
+                    const tierColors = {{
+                        1: {{ bg: '#ECFDF5', text: '#059669', border: '#A7F3D0', label: '⭐ Klaster 1' }},
+                        2: {{ bg: '#EFF6FF', text: '#2563EB', border: '#BFDBFE', label: '🔄 Klaster 2' }},
+                        3: {{ bg: '#FEF2F2', text: '#DC2626', border: '#FECACA', label: '📉 Klaster 3' }}
+                    }};
+                    const tc = tierColors[d.tier] || tierColors[2];
+                    quadBadgeHtml = `<span class="search-badge-quad" style="background:${{tc.bg}}; color:${{tc.text}}; border:1px solid ${{tc.border}};">${{tc.label}}</span>`;
+                }} else {{
+                    const quadColors = {{
+                        'I': {{ bg: '#ECFDF5', text: '#059669', border: '#A7F3D0', label: 'Kuadran I' }},
+                        'II': {{ bg: '#EFF6FF', text: '#2563EB', border: '#BFDBFE', label: 'Kuadran II' }},
+                        'III': {{ bg: '#FFFBEB', text: '#D97706', border: '#FDE68A', label: 'Kuadran III' }},
+                        'IV': {{ bg: '#FEF2F2', text: '#E11D48', border: '#FECDD3', label: 'Kuadran IV' }}
+                    }};
+                    const qc = quadColors[d.kuadran] || quadColors['I'];
+                    quadBadgeHtml = `<span class="search-badge-quad" style="background:${{qc.bg}}; color:${{qc.text}}; border:1px solid ${{qc.border}};">${{qc.label}}</span>`;
+                }}
+
+                item.innerHTML = `
+                    <div class="search-item-left">
+                        <span class="search-item-dot" style="background: ${{d.color}};"></span>
+                        <span class="search-item-name" title="${{prodiDisplay}}">${{prodiDisplay}}</span>
+                    </div>
+                    <div class="search-item-badges">
+                        <span class="search-badge-fak">${{fakBadge}}</span>
+                        ${{quadBadgeHtml}}
+                    </div>
+                `;
+
+                item.addEventListener('click', () => {{
+                    selectSearchResult(d);
+                }});
+
+                dropdown.appendChild(item);
+            }});
+
+            dropdown.style.display = 'block';
+        }}
+
+        function selectSearchResult(d) {{
+            TooltipManager.hide();
+            const input = document.getElementById('prodi-search');
+            input.value = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
+            searchQuery = input.value;
+
+            document.getElementById('search-dropdown').style.display = 'none';
+            document.getElementById('search-clear-btn').style.display = 'flex';
+
+            // Reset conflicting filters if needed
+            if (currentLevel === 'd3' && currentD3Tier !== 'ALL' && d.tier !== currentD3Tier) {{
+                currentD3Tier = 'ALL';
+                updateD3TierControls();
+            }}
+            if (currentFilterCard !== 'ALL' && d.kuadran !== currentFilterCard) {{
+                currentFilterCard = 'ALL';
+                renderKPIRibbon();
+            }}
+            if (currentFaculty !== 'ALL' && d.fakultas !== currentFaculty) {{
+                currentFaculty = 'ALL';
+                renderFacultyFilters();
+            }}
+
+            selectedProdiId = d.id;
+            renderChart();
+            showInspector(d);
+        }}
+
+        // Search Input Handlers
+        const searchInput = document.getElementById('prodi-search');
+        searchInput.addEventListener('input', (e) => {{
+            TooltipManager.hide();
             searchQuery = e.target.value;
             renderChart();
+            updateSearchDropdown();
+        }});
+
+        searchInput.addEventListener('focus', () => {{
+            if (searchQuery.trim()) {{
+                updateSearchDropdown();
+            }}
+        }});
+
+        searchInput.addEventListener('keydown', (e) => {{
+            const dropdown = document.getElementById('search-dropdown');
+            if (dropdown.style.display === 'none') return;
+
+            const items = dropdown.querySelectorAll('.search-dropdown-item');
+            if (items.length === 0) return;
+
+            if (e.key === 'ArrowDown') {{
+                e.preventDefault();
+                activeDropdownIndex = (activeDropdownIndex + 1) % items.length;
+                items.forEach((it, i) => it.classList.toggle('active-item', i === activeDropdownIndex));
+                items[activeDropdownIndex]?.scrollIntoView({{ block: 'nearest' }});
+            }} else if (e.key === 'ArrowUp') {{
+                e.preventDefault();
+                activeDropdownIndex = (activeDropdownIndex - 1 + items.length) % items.length;
+                items.forEach((it, i) => it.classList.toggle('active-item', i === activeDropdownIndex));
+                items[activeDropdownIndex]?.scrollIntoView({{ block: 'nearest' }});
+            }} else if (e.key === 'Enter') {{
+                e.preventDefault();
+                if (activeDropdownIndex >= 0 && items[activeDropdownIndex]) {{
+                    items[activeDropdownIndex].click();
+                }} else if (items.length > 0) {{
+                    items[0].click();
+                }}
+            }} else if (e.key === 'Escape') {{
+                dropdown.style.display = 'none';
+            }}
+        }});
+
+        // Clear Search Button
+        document.getElementById('search-clear-btn').addEventListener('click', () => {{
+            TooltipManager.hide();
+            const input = document.getElementById('prodi-search');
+            input.value = '';
+            searchQuery = '';
+            document.getElementById('search-clear-btn').style.display = 'none';
+            document.getElementById('search-dropdown').style.display = 'none';
+            renderChart();
+            input.focus();
+        }});
+
+        // Dismiss dropdown on outside click
+        document.addEventListener('click', (e) => {{
+            const wrapper = document.getElementById('search-box-wrapper');
+            if (wrapper && !wrapper.contains(e.target)) {{
+                document.getElementById('search-dropdown').style.display = 'none';
+            }}
         }});
 
         // Toggle Labels
         document.getElementById('btn-toggle-labels').addEventListener('click', (e) => {{
+            TooltipManager.hide();
             showAllLabels = !showAllLabels;
             e.target.classList.toggle('active', showAllLabels);
             renderChart();
@@ -2184,6 +3516,7 @@ def generate_interactive_html():
 
         // Reset Filters Button
         document.getElementById('btn-reset-filters').addEventListener('click', () => {{
+            TooltipManager.hide();
             currentFaculty = "ALL";
             currentFilterCard = "ALL";
             currentD3Tier = "ALL";
@@ -2192,6 +3525,8 @@ def generate_interactive_html():
             selectedProdiId = null;
 
             document.getElementById('prodi-search').value = "";
+            document.getElementById('search-clear-btn').style.display = 'none';
+            document.getElementById('search-dropdown').style.display = 'none';
             document.getElementById('btn-toggle-labels').classList.remove('active');
 
             updateTierGuideCardStates();
@@ -2206,13 +3541,32 @@ def generate_interactive_html():
         }});
 
         // Initial Load
+        const subsetSwitcher = document.getElementById('s1-subset-switcher');
         if (currentLevel === 'd3') {{
             document.querySelectorAll('.level-tab').forEach(t => {{
                 t.classList.toggle('active', t.getAttribute('data-level') === 'd3');
             }});
-            document.getElementById('header-main-title').textContent = 'PETA PORTOFOLIO STRATEGIS 11 PROGRAM STUDI DIPLOMA 3 VOKASI';
-            document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (Keketatan Seleksi vs Keterisian Kuota D3)';
+            document.getElementById('header-main-title').textContent = 'PETA KUADRAN 11 PROGRAM STUDI D3 VOKASI USK';
+            document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (11 Prodi D3 Vokasi)';
             document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Sehat 80%</strong> | <strong>Batas Kritis 50%</strong>';
+            if (subsetSwitcher) subsetSwitcher.style.display = 'none';
+        }} else {{
+            if (subsetSwitcher) subsetSwitcher.style.display = 'inline-flex';
+            if (currentS1Subset === 'established') {{
+                document.querySelectorAll('.subset-tab').forEach(t => {{
+                    t.classList.toggle('active', t.getAttribute('data-subset') === 'established');
+                }});
+                document.getElementById('header-main-title').textContent = 'PETA KUADRAN 60 PROGRAM STUDI S1 KAMPUS UTAMA USK';
+                document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (60 Prodi S1 Kampus Utama)';
+                document.getElementById('tab-s1-badge').textContent = '60 Prodi';
+            }} else {{
+                document.querySelectorAll('.subset-tab').forEach(t => {{
+                    t.classList.toggle('active', t.getAttribute('data-subset') === 'all');
+                }});
+                document.getElementById('header-main-title').textContent = 'PETA KUADRAN 66 PROGRAM STUDI S1 LENGKAP USK';
+                document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (66 Prodi S1 Lengkap)';
+                document.getElementById('tab-s1-badge').textContent = '66 Prodi';
+            }}
         }}
 
         updateD3TierStripVisibility();
@@ -2227,6 +3581,24 @@ def generate_interactive_html():
         document.getElementById('ins-content').style.display = 'none';
         document.getElementById('ins-placeholder').style.display = 'block';
         updatePlaceholderView();
+
+        // Sinkronkan URL Hash pada pemuatan awal
+        syncUrlHash();
+
+        // Dengarkan navigasi browser back/forward melalui hashchange
+        window.addEventListener('hashchange', () => {{
+            const h = (window.location.hash || '').toLowerCase();
+            const newLevel = h.includes('d3') ? 'd3' : 's1';
+            const newSubset = (h.includes('60') || h.includes('tanpa') || h.includes('established')) ? 'established' : 'all';
+
+            if (newLevel !== currentLevel) {{
+                const targetTab = document.querySelector(`.level-tab[data-level="${{newLevel}}"]`);
+                if (targetTab) targetTab.click();
+            }} else if (newLevel === 's1' && newSubset !== currentS1Subset) {{
+                const targetSub = document.querySelector(`.subset-tab[data-subset="${{newSubset}}"]`);
+                if (targetSub) targetSub.click();
+            }}
+        }});
     </script>
 </body>
 </html>
