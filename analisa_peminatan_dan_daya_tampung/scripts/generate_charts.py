@@ -615,7 +615,7 @@ def main():
                          bbox=dict(boxstyle='round,pad=0.25', facecolor='#F8FAFC', edgecolor='#CBD5E1', linewidth=0.8, alpha=0.95),
                          zorder=4)
 
-        # Panel 2: Kebocoran Calon Mahasiswa (Gugur / Mundur) & Yield Rate
+        # Panel 2: Calon Mahasiswa Tidak Daftar Ulang & Yield Rate
         grp_leak = grp_yr.sort_values('Tidak_Daftar_Ulang', ascending=False).reset_index(drop=True)
         x2 = np.arange(len(grp_leak))
         leak_c = ['#EF4444' if r['Yield_Rate'] < 65.0 else '#F59E0B' if r['Yield_Rate'] < 80.0 else '#3B82F6' for _, r in grp_leak.iterrows()]
@@ -625,8 +625,8 @@ def main():
         ax2.set_xticklabels(grp_leak['Jalur_Penerimaan'], fontsize=11, fontweight='bold', color='#1E293B')
         max_leak = grp_leak['Tidak_Daftar_Ulang'].max()
         ax2.set_ylim(0, max_leak * 1.25)
-        ax2.set_ylabel('Jumlah Calon Mahasiswa Mengundurkan Diri (Orang)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
-        ax2.set_title(f'B. Tingkat Kebocoran & Konversi Pendaftaran per Jalur ({yr})\nTotal Gugur: {tot_gugur:,} Orang | Rata-rata Yield Rate: {overall_yield:.1f}%', 
+        ax2.set_ylabel('Jumlah Calon Mahasiswa Tidak Daftar Ulang (Orang)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
+        ax2.set_title(f'B. Dinamika Calon Mahasiswa Tidak Daftar Ulang per Jalur ({yr})\nTotal Tidak DU: {tot_gugur:,} Orang | Rata-rata Yield Rate: {overall_yield:.1f}%', 
                       fontsize=12.5, fontweight='bold', pad=12, color='#991B1B')
         ax2.grid(True, linestyle='--', alpha=0.4, color='#CBD5E1', zorder=0)
         ax2.spines['top'].set_visible(False)
@@ -639,12 +639,12 @@ def main():
             badge_border = '#EF4444' if yield_val < 65.0 else '#F59E0B' if yield_val < 80.0 else '#3B82F6'
             txt_c = '#991B1B' if yield_val < 65.0 else '#92400E' if yield_val < 80.0 else '#1E40AF'
             
-            ax2.annotate(f"{leak_val:,} gugur\n(Yield: {yield_val:.1f}%)", xy=(i, leak_val), xytext=(0, 7), textcoords='offset points',
+            ax2.annotate(f"{leak_val:,} Tidak DU\n(Yield: {yield_val:.1f}%)", xy=(i, leak_val), xytext=(0, 7), textcoords='offset points',
                          ha='center', va='bottom', fontsize=10, fontweight='bold', color=txt_c,
                          bbox=dict(boxstyle='round,pad=0.25', facecolor=badge_bg, edgecolor=badge_border, linewidth=0.9, alpha=0.95),
                          zorder=4)
 
-        plt.suptitle(f'DINAMIKA JALUR MASUK & KEBOCORAN PENERIMAAN MAHASISWA BARU USK ({yr})\nKomparasi Kontribusi Mahasiswa Masuk Riil vs Tingkat Kelulusan yang Mengundurkan Diri',
+        plt.suptitle(f'DINAMIKA JALUR MASUK & POLA REGISTRASI MAHASISWA BARU USK ({yr})\nKomparasi Kontribusi Mahasiswa Masuk Riil vs Tingkat Calon Mahasiswa Tidak Daftar Ulang',
                      fontsize=14, fontweight='bold', y=0.98, color='#0F172A')
         plt.tight_layout(rect=[0.01, 0.03, 0.99, 0.93])
         out_name = f"06_dinamika_jalur_masuk_dan_kebocoran_{yr}.png"
@@ -1695,23 +1695,23 @@ def main():
     ax2.axhline(80.0, color='#64748B', linestyle='--', linewidth=1.5, alpha=0.85, label='Batas Standar Sehat (80%)', zorder=2)
     ax2.set_xticks(years)
     ax2.set_xticklabels([str(y) for y in years], fontsize=11, fontweight='bold', color='#1E293B')
-    ax2.set_ylim(15, 105)
+    ax2.set_ylim(50, 102)
     ax2.set_ylabel('Tingkat Konversi Registrasi (Yield Rate %)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
-    ax2.set_title('B. Tren Efisiensi Konversi Pendaftaran (Yield Rate 2022–2026)\nSorotan: Anjloknya Jalur TALENTA 2026 ke Titik Kritis 24.9%', 
+    ax2.set_title('B. Tren Efisiensi Konversi Pendaftaran (Yield Rate 2022–2026)\nStabilitas Jalur Nasional (≥84%) vs Variabilitas Jalur Mandiri & Talenta (66.8%)', 
                   fontsize=12, fontweight='bold', pad=12, color='#065F46')
     ax2.grid(True, linestyle='--', alpha=0.4, color='#CBD5E1', zorder=0)
     ax2.spines['top'].set_visible(False)
     ax2.spines['right'].set_visible(False)
     ax2.legend(loc='lower left', frameon=True, fontsize=8.8, framealpha=0.92)
 
-    ax2.annotate('CRASH KONVERSI TALENTA:\n935 dari 1,238 Calon Mhs\nMengundurkan Diri (75.1% Bocor)',
-                 xy=(2026, 24.9), xytext=(2024.5, 34.0),
-                 arrowprops=dict(facecolor='#DC2626', edgecolor='#DC2626', shrink=0.08, width=1.5, headwidth=7),
-                 fontsize=8.5, fontweight='bold', color='#991B1B',
-                 bbox=dict(boxstyle='round,pad=0.3', facecolor='#FEE2E2', edgecolor='#EF4444', linewidth=1.2),
-                 zorder=6)
+    ax2.annotate('INSIGHT REALISASI TALENTA 2026:\n* 308 dari 461 Lulus Seleksi Daftar Ulang\n* Yield Rate: 66.8% (153 Tidak DU)\n* Butuh buffer kuota cadangan mitigasi',
+                 xy=(2026, 66.8), xytext=(2024.1, 55.5),
+                 arrowprops=dict(facecolor='#7C3AED', edgecolor='#7C3AED', shrink=0.08, width=1.5, headwidth=6),
+                 fontsize=8.2, fontweight='bold', color='#4C1D95',
+                 bbox=dict(boxstyle='round,pad=0.32', facecolor='#F5F3FF', edgecolor='#8B5CF6', linewidth=1.2, alpha=0.98),
+                 zorder=7)
 
-    # Panel 3: Eskalasi Kebocoran Calon Mhs Gugur 5 Tahun
+    # Panel 3: Dinamika Calon Mhs Tidak Daftar Ulang 5 Tahun
     bottoms_g = np.zeros(len(years))
     for j in jalurs_order:
         vals_g = np.array(data_gugur_5y[j])
@@ -1726,7 +1726,7 @@ def main():
         bottoms_g += vals_g
 
     for idx, tot in enumerate(tot_gugur_5y):
-        ax3.annotate(f"Gugur:\n{tot:,}", xy=(idx, tot), xytext=(0, 7), textcoords='offset points',
+        ax3.annotate(f"Tidak DU:\n{tot:,}", xy=(idx, tot), xytext=(0, 7), textcoords='offset points',
                      ha='center', va='bottom', fontsize=10.5, fontweight='bold', color='#991B1B',
                      bbox=dict(boxstyle='round,pad=0.25', facecolor='#FEF2F2', edgecolor='#EF4444', linewidth=1.0),
                      zorder=4)
@@ -1734,15 +1734,15 @@ def main():
     ax3.set_xticks(x_5y)
     ax3.set_xticklabels([str(y) for y in years], fontsize=11, fontweight='bold', color='#1E293B')
     ax3.set_ylim(0, max(tot_gugur_5y) * 1.25)
-    ax3.set_ylabel('Jumlah Calon Mahasiswa Mengundurkan Diri (Orang)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
-    ax3.set_title('C. Eskalasi Kebocoran Pendaftaran per Jalur (2022–2026)\nKebocoran Membengkak +94.9% (1,231 → 2,399 Calon Mhs)', 
+    ax3.set_ylabel('Jumlah Calon Mahasiswa Tidak Daftar Ulang (Orang)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
+    ax3.set_title('C. Dinamika Calon Mahasiswa Tidak Daftar Ulang per Jalur (2022–2026)\nTotal Tidak Registrasi: 1,231 (2022) → 1,617 (2026)', 
                   fontsize=12, fontweight='bold', pad=12, color='#991B1B')
     ax3.grid(True, linestyle='--', alpha=0.4, color='#CBD5E1', zorder=0)
     ax3.spines['top'].set_visible(False)
     ax3.spines['right'].set_visible(False)
     ax3.legend(loc='upper left', frameon=True, fontsize=9, framealpha=0.92)
 
-    plt.suptitle('PANORAMA DINAMIKA JALUR MASUK & ESKALASI KEBOCORAN PMB USK (2022–2026)\nAnalisis 5 Tahun: Pergeseran Kontribusi Intake Riil, Tren Yield Rate, dan Ledakan Calon Mahasiswa yang Mundur',
+    plt.suptitle('PANORAMA DINAMIKA JALUR MASUK & POLA REGISTRASI PMB USK (2022–2026)\nAnalisis 5 Tahun: Pergeseran Kontribusi Intake Riil, Tren Yield Rate, dan Calon Mahasiswa Tidak Daftar Ulang',
                  fontsize=14.5, fontweight='bold', y=0.985, color='#0F172A')
 
     fig.tight_layout(rect=[0.01, 0.03, 0.99, 0.93])

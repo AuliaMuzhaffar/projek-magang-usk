@@ -84,7 +84,7 @@ for yr in [2022, 2023, 2024, 2025, 2026]:
                      bbox=dict(boxstyle='round,pad=0.25', facecolor='#F8FAFC', edgecolor='#CBD5E1', linewidth=0.8, alpha=0.95),
                      zorder=4)
 
-    # Panel 2: Kebocoran Calon Mahasiswa (Gugur / Mundur) & Yield Rate
+    # Panel 2: Calon Mahasiswa Tidak Daftar Ulang & Yield Rate
     # Sort panel 2 by Mundur / Gugur descending
     grp_leak = grp.sort_values('Mundur / Gugur', ascending=False).reset_index(drop=True)
     x2 = np.arange(len(grp_leak))
@@ -95,8 +95,8 @@ for yr in [2022, 2023, 2024, 2025, 2026]:
     ax2.set_xticklabels(grp_leak['Jalur Penerimaan'], fontsize=11, fontweight='bold', color='#1E293B')
     max_leak = grp_leak['Mundur / Gugur'].max()
     ax2.set_ylim(0, max_leak * 1.25)  # Generous headroom (+25%)
-    ax2.set_ylabel('Jumlah Calon Mahasiswa Mengundurkan Diri (Orang)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
-    ax2.set_title(f'B. Tingkat Kebocoran & Konversi Pendaftaran per Jalur ({yr})\nTotal Gugur: {tot_gugur:,} Orang | Rata-rata Yield Rate: {overall_yield:.1f}%', 
+    ax2.set_ylabel('Jumlah Calon Mahasiswa Tidak Daftar Ulang (Orang)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
+    ax2.set_title(f'B. Dinamika Calon Mahasiswa Tidak Daftar Ulang per Jalur ({yr})\nTotal Tidak DU: {tot_gugur:,} Orang | Rata-rata Yield Rate: {overall_yield:.1f}%', 
                   fontsize=12.5, fontweight='bold', pad=12, color='#991B1B')
     ax2.grid(True, linestyle='--', alpha=0.4, color='#CBD5E1', zorder=0)
     ax2.spines['top'].set_visible(False)
@@ -109,12 +109,12 @@ for yr in [2022, 2023, 2024, 2025, 2026]:
         badge_border = '#EF4444' if yield_val < 65.0 else '#F59E0B' if yield_val < 80.0 else '#3B82F6'
         txt_c = '#991B1B' if yield_val < 65.0 else '#92400E' if yield_val < 80.0 else '#1E40AF'
         
-        ax2.annotate(f"{leak_val:,} gugur\n(Yield: {yield_val:.1f}%)", xy=(i, leak_val), xytext=(0, 7), textcoords='offset points',
+        ax2.annotate(f"{leak_val:,} Tidak DU\n(Yield: {yield_val:.1f}%)", xy=(i, leak_val), xytext=(0, 7), textcoords='offset points',
                      ha='center', va='bottom', fontsize=10, fontweight='bold', color=txt_c,
                      bbox=dict(boxstyle='round,pad=0.25', facecolor=badge_bg, edgecolor=badge_border, linewidth=0.9, alpha=0.95),
                      zorder=4)
 
-    plt.suptitle(f'DINAMIKA JALUR MASUK & KEBOCORAN PENERIMAAN MAHASISWA BARU USK ({yr})\nKomparasi Kontribusi Mahasiswa Masuk Riil vs Tingkat Kelulusan yang Mengundurkan Diri',
+    plt.suptitle(f'DINAMIKA JALUR MASUK & POLA REGISTRASI MAHASISWA BARU USK ({yr})\nKomparasi Kontribusi Mahasiswa Masuk Riil vs Tingkat Calon Mahasiswa Tidak Daftar Ulang',
                  fontsize=14, fontweight='bold', y=0.98, color='#0F172A')
     plt.tight_layout(rect=[0.01, 0.03, 0.99, 0.93])
     out_name = f"06_dinamika_jalur_masuk_dan_kebocoran_{yr}.png"

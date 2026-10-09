@@ -4,14 +4,23 @@
 
 ---
 
-## 1. REKONSILIASI DATA JALUR TALENTA 2026 (930 NETTO VS 935 BRUTO)
+## 1. REKONSILIASI DATA JALUR TALENTA 2026 (STANDAR RESMI: 153 TIDAK DAFTAR ULANG)
 
-### A. Latar Belakang Pertanyaan
-Saat memeriksa data Jalur TALENTA 2026 di file master Excel, terdapat dua angka terkait jumlah calon mahasiswa yang mengundurkan diri / tidak mendaftar ulang:
-1. **930 Orang** (pada ringkasan laporan makro universitas).
+> [!IMPORTANT]
+> **STANDAR RESMI LAPORAN PIMPINAN (FINAL):**  
+> Untuk Master Excel (`master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`), seluruh visualisasi grafik eksekutif (Chart 06 dan Chart 14), serta deck presentasi pimpinan, angka yang **resmi dibakukan** adalah:
+> - **Kelulusan Resmi:** **461 Orang**
+> - **Daftar Ulang Riil:** **308 Orang**
+> - **Tidak Daftar Ulang:** **153 Orang**
+> - **Yield Rate:** **66,8%**
+> - **Total Calon Mahasiswa Tidak Daftar Ulang Seluruh Jalur USK 2026:** **1.617 Orang**
+> 
+> *Uraian matematis 930 vs 935 di bawah ini disimpan sebagai dokumentasi teknis internal mengenai riwayat panggilan seleksi tahap awal.*
+
+### A. Latar Belakang Pertanyaan Teknis Internal
+Saat memeriksa riwayat komparasi seleksi awal Jalur TALENTA 2026 di file kerja lama, sempat muncul dua angka bruto/netto:
+1. **930 Orang** (pada ringkasan laporan makro seleksi awal: 1.238 lulus awal - 308 registrasi).
 2. **935 Orang** (pada hasil *Sum of Mundur/Gugur* saat menggunakan Pivot Table di sheet `Rincian_Jalur_Masuk_2026`).
-
-> **KEDUA ANGKA INI 100% BETUL**, perbedaannya murni akibat sudut pandang perhitungan: **Netto Kampus** vs **Bruto Akumulasi Baris Prodi**.
 
 ---
 
