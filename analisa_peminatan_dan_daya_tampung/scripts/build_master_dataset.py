@@ -78,6 +78,17 @@ def calculate_cagr(start_val, end_val, periods=4):
         return np.nan
     return round(((end_val / start_val) ** (1.0 / periods) - 1.0) * 100.0, 2)
 
+def get_kuadran_label(keketatan, fill_rate):
+    fr_capped = min(fill_rate, 100.0)
+    if keketatan >= 4.0 and fr_capped >= 80.0:
+        return "Kuadran I (Unggulan)"
+    elif keketatan < 4.0 and fr_capped >= 80.0:
+        return "Kuadran II (Stabil)"
+    elif keketatan >= 4.0 and fr_capped < 80.0:
+        return "Kuadran III (Belum Optimal)"
+    else:
+        return "Kuadran IV (Perlu Ditingkatkan)"
+
 def main():
     base_dir = "/Users/auliamuzhaffar/Documents/maganghub"
     file_old = os.path.join(base_dir, "tugas-5", "rekap data (fix).xlsx")
@@ -127,6 +138,13 @@ def main():
         la_23 = (float(r_old[26] or 0) + float(r_old[31] or 0) + float(r_old[35] or 0))
         du_23 = (float(r_old[27] or 0) + float(r_old[32] or 0) + float(r_old[36] or 0))
 
+        # Data Guard: S1 Teknik Lingkungan resmi baru aktif menerima mahasiswa di 2025 & 2026
+        if nm_prodi == "TEKNIK LINGKUNGAN":
+            pm_23 = 0.0
+            dt_23 = 0.0
+            la_23 = 0.0
+            du_23 = 0.0
+
         # ---------------- 2024 (Col 44 - 69 in rekap data (fix)) ----------------
         pm_24 = float(r_old[64]) if r_old[64] is not None else 0.0
         dt_24 = float(r_old[65]) if r_old[65] is not None else 0.0
@@ -139,11 +157,30 @@ def main():
         la_25 = (float(r_old[71] or 0) + float(r_old[75] or 0) + float(r_old[79] or 0) + float(r_old[83] or 0) + float(r_old[87] or 0) + float(r_old[90] or 0))
         du_25 = (float(r_old[72] or 0) + float(r_old[76] or 0) + float(r_old[80] or 0) + float(r_old[84] or 0) + float(r_old[88] or 0) + float(r_old[91] or 0))
 
+        # Data Guard: S1 Teknik Perminyakan 2025 menerima jalur Mandiri 120 orang (DT 120, Lulus 120, DU 120)
+        if nm_prodi == "TEKNIK PERMINYAKAN":
+            pm_25 = 143.0
+            dt_25 = 120.0
+            la_25 = 120.0
+            du_25 = 120.0
+
         # ---------------- 2026 (Col 99 - 127 in rekap data (fix)) ----------------
         pm_26 = float(r_old[122]) if r_old[122] is not None else 0.0
         dt_26 = float(r_old[125]) if r_old[125] is not None else 0.0
         la_26 = (float(r_old[100] or 0) + float(r_old[104] or 0) + float(r_old[108] or 0) + float(r_old[112] or 0) + float(r_old[116] or 0) + float(r_old[119] or 0))
         du_26 = (float(r_old[101] or 0) + float(r_old[105] or 0) + float(r_old[109] or 0) + float(r_old[113] or 0) + float(r_old[117] or 0) + float(r_old[120] or 0))
+
+        # Data Guard: Penyesuaian SK Rektor USK No. 121/UN11/KPT/2026 Final
+        SK_121_2026 = {
+            "PETERNAKAN": {"dt": 160.0, "snbp": 48.0, "snbt": 56.0, "smm": 56.0},
+            "ILMU POLITIK": {"dt": 180.0, "snbp": 54.0, "snbt": 63.0, "smm": 63.0},
+            "SOSIOLOGI": {"dt": 160.0, "snbp": 48.0, "snbt": 56.0, "smm": 56.0},
+            "TEKNIK LINGKUNGAN": {"dt": 80.0, "snbp": 24.0, "snbt": 28.0, "smm": 28.0},
+            "TEKNIK SUMBER DAYA AIR": {"dt": 80.0, "snbp": 24.0, "snbt": 28.0, "smm": 28.0},
+            "TEKNIK PERMINYAKAN": {"dt": 120.0, "snbp": 36.0, "snbt": 42.0, "smm": 42.0},
+        }
+        if nm_prodi in SK_121_2026:
+            dt_26 = SK_121_2026[nm_prodi]["dt"]
 
         # Helper to construct clean pathway record
         def make_jalur_row(yr, j_std, j_asli, j_pm, j_dt, j_la, j_du):
@@ -178,11 +215,18 @@ def main():
             jalur_records_all.append(row_dict)
 
         # 2. Jalur 2023 (SNBP, SNBT, SMMPTN)
-        j_2023_list = [
-            ("SNBP", "SNBP", float(r_old[24] or 0), float(r_old[25] or 0), float(r_old[26] or 0), float(r_old[27] or 0)),
-            ("SNBT", "SNBT", float(r_old[29] or 0), float(r_old[30] or 0), float(r_old[31] or 0), float(r_old[32] or 0)),
-            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[34] or 0), float(r_old[35] or 0), float(r_old[36] or 0))
-        ]
+        if nm_prodi == "TEKNIK LINGKUNGAN":
+            j_2023_list = [
+                ("SNBP", "SNBP", 0.0, 0.0, 0.0, 0.0),
+                ("SNBT", "SNBT", 0.0, 0.0, 0.0, 0.0),
+                ("SMMPTN", "SMMPTN Barat", 0.0, 0.0, 0.0, 0.0)
+            ]
+        else:
+            j_2023_list = [
+                ("SNBP", "SNBP", float(r_old[24] or 0), float(r_old[25] or 0), float(r_old[26] or 0), float(r_old[27] or 0)),
+                ("SNBT", "SNBT", float(r_old[29] or 0), float(r_old[30] or 0), float(r_old[31] or 0), float(r_old[32] or 0)),
+                ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[34] or 0), float(r_old[35] or 0), float(r_old[36] or 0))
+            ]
         for j_std, j_asli, pm, dt, la, du in j_2023_list:
             row_dict = make_jalur_row(2023, j_std, j_asli, pm, dt, la, du)
             jalur_records_2023.append(row_dict)
@@ -203,14 +247,24 @@ def main():
             jalur_records_all.append(row_dict)
 
         # 4. Jalur 2025 (SNBP, SNBT, SMMPTN, TALENTA, SMC, ADIK)
-        j_2025_list = [
-            ("SNBP", "SNBP", 0.0, float(r_old[70] or 0), float(r_old[71] or 0), float(r_old[72] or 0)),
-            ("SNBT", "SNBT", 0.0, float(r_old[74] or 0), float(r_old[75] or 0), float(r_old[76] or 0)),
-            ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[78] or 0), float(r_old[79] or 0), float(r_old[80] or 0)),
-            ("TALENTA", "TALENTA USK", 0.0, float(r_old[82] or 0), float(r_old[83] or 0), float(r_old[84] or 0)),
-            ("SMC", "SELEKSI MANDIRI CADANGAN", 0.0, float(r_old[86] or 0), float(r_old[87] or 0), float(r_old[88] or 0)),
-            ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, float(r_old[90] or 0), float(r_old[91] or 0))
-        ]
+        if nm_prodi == "TEKNIK PERMINYAKAN":
+            j_2025_list = [
+                ("SNBP", "SNBP", 0.0, 0.0, 0.0, 0.0),
+                ("SNBT", "SNBT", 0.0, 0.0, 0.0, 0.0),
+                ("SMMPTN", "SMMPTN Barat", 143.0, 120.0, 120.0, 120.0),
+                ("TALENTA", "TALENTA USK", 0.0, 0.0, 0.0, 0.0),
+                ("SMC", "SELEKSI MANDIRI CADANGAN", 0.0, 0.0, 0.0, 0.0),
+                ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, 0.0, 0.0)
+            ]
+        else:
+            j_2025_list = [
+                ("SNBP", "SNBP", 0.0, float(r_old[70] or 0), float(r_old[71] or 0), float(r_old[72] or 0)),
+                ("SNBT", "SNBT", 0.0, float(r_old[74] or 0), float(r_old[75] or 0), float(r_old[76] or 0)),
+                ("SMMPTN", "SMMPTN Barat", 0.0, float(r_old[78] or 0), float(r_old[79] or 0), float(r_old[80] or 0)),
+                ("TALENTA", "TALENTA USK", 0.0, float(r_old[82] or 0), float(r_old[83] or 0), float(r_old[84] or 0)),
+                ("SMC", "SELEKSI MANDIRI CADANGAN", 0.0, float(r_old[86] or 0), float(r_old[87] or 0), float(r_old[88] or 0)),
+                ("ADIK", "ADIK (Afirmasi)", 0.0, 0.0, float(r_old[90] or 0), float(r_old[91] or 0))
+            ]
         for j_std, j_asli, pm, dt, la, du in j_2025_list:
             row_dict = make_jalur_row(2025, j_std, j_asli, pm, dt, la, du)
             jalur_records_2025.append(row_dict)
@@ -231,6 +285,12 @@ def main():
         la_smm_26 = float(r_old[108] or 0)
         du_smm_26 = float(r_old[109] or 0)
         pm_smm_26 = float(r_26[48] or 0)
+
+        # Apply SK Rektor No. 121 kuota jalur masuk 2026
+        if nm_prodi in SK_121_2026:
+            dt_snbp_26 = SK_121_2026[nm_prodi]["snbp"]
+            dt_snbt_26 = SK_121_2026[nm_prodi]["snbt"]
+            dt_smm_26 = SK_121_2026[nm_prodi]["smm"]
 
         dt_tal_26 = float(r_old[111] or 0)
         la_tal_26 = float(r_old[112] or 0)
@@ -373,6 +433,8 @@ def main():
             kategori = "Tren Fluktuatif"
 
         rec["Kategori_Tren"] = kategori
+        rec["Kuadran_2026"] = get_kuadran_label(rec["Keketatan_2026"], rec["FillRate_2026_Persen"])
+        rec["Kuadran_5Thn"] = get_kuadran_label(rec["Rata_Keketatan_5Thn"], rec["Rata_FillRate_5Thn_Persen"])
         master_records.append(rec)
 
     df_master = pd.DataFrame(master_records)
@@ -507,6 +569,8 @@ def format_master_workbook(file_path):
         "Rata_FillRate_5Thn_Persen": "Rata Fill Rate 5-Thn (%)",
         "Rata_Keketatan_5Thn": "Rata Keketatan 5-Thn",
         "Kategori_Tren": "Klasifikasi Tren Resmi",
+        "Kuadran_2026": "Kuadran 2026",
+        "Kuadran_5Thn": "Kuadran 5-Tahun",
 
         # Rincian Jalur 2026
         "Jalur_Penerimaan": "Jalur Penerimaan",
@@ -593,7 +657,7 @@ def format_master_workbook(file_path):
                 cell.fill = FILL_2026
             elif any(k in raw_val for k in ["YoY", "Slope", "R2", "CAGR", "Marginal", "Transisi"]):
                 cell.fill = FILL_TREN
-            elif any(k in raw_val for k in ["Rata", "Kategori"]):
+            elif any(k in raw_val for k in ["Rata", "Kategori", "Kuadran"]):
                 cell.fill = FILL_RATA
             else:
                 cell.fill = FILL_BASE
@@ -628,6 +692,9 @@ def format_master_workbook(file_path):
                     cell.alignment = ALIGN_LEFT
                     if raw_h == "Program_Studi":
                         cell.font = FONT_DATA_BOLD
+                elif raw_h in ["Kuadran_2026", "Kuadran_5Thn"]:
+                    cell.alignment = ALIGN_CENTER
+                    cell.font = FONT_DATA_BOLD
                 elif raw_h == "Kategori_Tren":
                     cell.alignment = ALIGN_LEFT
                     cell.font = FONT_DATA_BOLD

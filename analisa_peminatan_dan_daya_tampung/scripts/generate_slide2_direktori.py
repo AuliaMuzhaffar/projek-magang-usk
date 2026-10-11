@@ -245,8 +245,9 @@ def main():
     ax.plot([subcol2_x, subcol2_x + subcol_w], [content_top_y1 - 0.9, content_top_y1 - 0.9], color='#A7F3D0', lw=0.7)
 
     row_h_q1 = 2.1
-    # Render 14 prodi di Sub-kolom 1
-    for i in range(14):
+    mid_q1 = (len(df_q1) + 1) // 2
+    # Render prodi di Sub-kolom 1
+    for i in range(min(mid_q1, len(df_q1))):
         r = df_q1.iloc[i]
         ry = content_top_y1 - 2.8 - (i * row_h_q1)
         bg = '#DCFCE7' if i % 2 == 0 else '#F0FDF4'
@@ -255,10 +256,10 @@ def main():
         ax.text(subcol1_x + 16.3, ry + 0.4, f"{r['Keketatan']:.1f}x", fontsize=7.5, color='#334155', ha='right', zorder=3)
         ax.text(subcol1_x + subcol_w - 0.3, ry + 0.4, f"{r['FillRate']:.1f}%", fontsize=7.6, fontweight='bold', color='#047857', ha='right', zorder=3)
 
-    # Render 14 prodi di Sub-kolom 2
-    for i in range(14, 28):
+    # Render prodi di Sub-kolom 2
+    for i in range(mid_q1, len(df_q1)):
         r = df_q1.iloc[i]
-        idx_sub = i - 14
+        idx_sub = i - mid_q1
         ry = content_top_y1 - 2.8 - (idx_sub * row_h_q1)
         bg = '#DCFCE7' if idx_sub % 2 == 0 else '#F0FDF4'
         ax.add_patch(patches.Rectangle((subcol2_x - 0.2, ry - 0.5), subcol_w + 0.4, row_h_q1, facecolor=bg, edgecolor='none', zorder=2))
@@ -268,21 +269,21 @@ def main():
 
     # Strip ringkasan bawah Q1
     ax.add_patch(patches.Rectangle((52.4, 51.2), 43.8, 1.8, facecolor='#ECFDF5', edgecolor='#A7F3D0', lw=0.8, zorder=2))
-    ax.text(74.3, 52.1, "Total 28 Prodi • Rata-rata Keketatan: 10,8x • Keterisian: 90,5% • Kuota Terbuka: 4.542 kursi/thn",
+    ax.text(74.3, 52.1, f"Total {len(df_q1)} Prodi • Rata-rata Keketatan: {df_q1['Keketatan'].mean():.1f}x • Keterisian: {df_q1['FillRate'].mean():.1f}% • Kuota Terbuka: {int(df_q1['DT'].sum()):,} kursi/thn",
             fontsize=7.8, fontweight='bold', color='#065F46', ha='center', va='center', zorder=3)
 
     # -------------------------------------------------------------------------
-    # 3. BOTTOM-LEFT: KUADRAN IV - PERLU REVITALISASI (26 Prodi | 39,4%)
+    # 3. BOTTOM-LEFT: KUADRAN IV - PERLU REVITALISASI
     # -------------------------------------------------------------------------
     content_top_y4 = draw_card(
         x0=3.0, y0=3.5, width=45.5, height=44.5,
         bg_col='#FFF1F2', border_col='#FECDD3', header_col='#B91C1C',
         title_text="KUADRAN IV: PERLU DITINGKATKAN",
-        count_text="26 Program Studi (39,4%)",
+        count_text=f"{len(df_q4)} Program Studi ({len(df_q4)/len(df)*100:.1f}%)",
         policy_text="WAJIB PANGKAS KUOTA (20%–40%) DI SPMB 2027"
     )
 
-    # Q4 dibagi menjadi 2 Sub-kolom (masing-masing 13 prodi)
+    # Q4 dibagi menjadi 2 Sub-kolom
     subcol1_x4 = 3.9
     subcol2_x4 = 26.3
 
@@ -299,8 +300,9 @@ def main():
     ax.plot([subcol2_x4, subcol2_x4 + subcol_w], [content_top_y4 - 0.9, content_top_y4 - 0.9], color='#FECDD3', lw=0.7)
 
     row_h_q4 = 2.4
-    # Render 13 prodi di Sub-kolom 1
-    for i in range(13):
+    mid_q4 = (len(df_q4) + 1) // 2
+    # Render prodi di Sub-kolom 1
+    for i in range(min(mid_q4, len(df_q4))):
         r = df_q4.iloc[i]
         ry = content_top_y4 - 3.1 - (i * row_h_q4)
         bg = '#FFE4E6' if i % 2 == 0 else '#FFF1F2'
@@ -309,10 +311,10 @@ def main():
         ax.text(subcol1_x4 + 16.3, ry + 0.4, f"{r['Keketatan']:.1f}x", fontsize=7.4, color='#334155', ha='right', zorder=3)
         ax.text(subcol1_x4 + subcol_w - 0.3, ry + 0.4, f"{r['FillRate']:.1f}%", fontsize=7.5, fontweight='bold', color='#B91C1C', ha='right', zorder=3)
 
-    # Render 13 prodi di Sub-kolom 2
-    for i in range(13, 26):
+    # Render prodi di Sub-kolom 2
+    for i in range(mid_q4, len(df_q4)):
         r = df_q4.iloc[i]
-        idx_sub = i - 13
+        idx_sub = i - mid_q4
         ry = content_top_y4 - 3.1 - (idx_sub * row_h_q4)
         bg = '#FFE4E6' if idx_sub % 2 == 0 else '#FFF1F2'
         ax.add_patch(patches.Rectangle((subcol2_x4 - 0.2, ry - 0.6), subcol_w + 0.4, row_h_q4, facecolor=bg, edgecolor='none', zorder=2))

@@ -1579,6 +1579,9 @@ def main():
         }
     ]
 
+    box_h = 0.185
+    y_starts = [0.665, 0.455, 0.245, 0.035]
+
     for idx, c in enumerate(cards_d3_data):
         y = y_starts[idx]
         rect = FancyBboxPatch((0.02, y), 0.96, box_h, boxstyle='round,pad=0.02',

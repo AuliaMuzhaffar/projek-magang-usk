@@ -358,13 +358,13 @@ Berdasarkan data resmi 2026, total 8.361 mahasiswa baru USK terdistribusi ke dal
 
 | Jalur Penerimaan | Target Kuota Jalur | Calon Lulus Seleksi | Mahasiswa Daftar Ulang | Calon Mundur (Gugur) | Porsi Terhadap Total Mhs | Tingkat Konversi (Yield Rate) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **SNBT (Tes Nasional)** | 3.659 | 3.886 | **3.260** | 626 | **38,99%** | **83,89%** |
-| **SNBP (Rapor Nasional)** | 3.136 | 2.905 | **2.754** | 151 | **32,94%** | **94,80%** |
-| **SMMPTN (Mandiri Reguler)** | 3.660 | 2.418 | **1.814** | 604 | **21,70%** | **75,02%** |
+| **SNBT (Tes Nasional)** | 3.678 | 3.886 | **3.260** | 626 | **38,99%** | **83,89%** |
+| **SNBP (Rapor Nasional)** | 3.150 | 2.905 | **2.754** | 151 | **32,94%** | **94,80%** |
+| **SMMPTN (Mandiri Reguler)** | 3.752 | 2.418 | **1.814** | 604 | **21,70%** | **75,02%** |
 | **TALENTA (Prestasi USK)**| — | 1.238 | **308** | **930** *(935 bruto)* | **3,68%** | **24,88%** |
 | **Seleksi Cadangan (SMC)** | — | 280 | **205** | 75 | **2,45%** | **73,21%** |
 | **ADIK (Afirmasi 3T)** | — | 28 | **20** | 8 | **0,24%** | **71,43%** |
-| **TOTAL UNIVERSITAS** | **10.455** | **10.755** | **8.361** | **2.394** | **100,0%** | **77,74%** |
+| **TOTAL UNIVERSITAS** | **10.580** | **10.755** | **8.361** | **2.394** | **100,0%** | **77,74%** |
 
 > **Catatan Rekonsiliasi Data Jalur TALENTA (Netto vs Bruto):**
 > * **930 Orang (Netto Universitas):** Dihitung dari selisih langsung total kelulusan dikurangi total daftar ulang ($1.238 - 308 = 930$).
@@ -860,7 +860,7 @@ Sesuai butir 17 panduan tugas, analisis ini menyertakan rekomendasi pembaruan me
 | 6 | TEKNIK ELEKTRO | S1 Utama | Teknik | 840 | 160 | 112 | 70,0% | 5,3 | +5,8 | +6,5% | Tren Fluktuatif |
 | 7 | AGROTEKNOLOGI | S1 Utama | Pertanian | 680 | 120 | 94 | 78,3% | 5,7 | +0,1 | +0,3% | Tren Stabil |
 | 8 | AGRIBISNIS | S1 Utama | Pertanian | 1.120 | 160 | 135 | 84,4% | 7,0 | +8,5 | +8,3% | Tren Meningkat |
-| 9 | PETERNAKAN | S1 Utama | Pertanian | 580 | 145 | 98 | 67,6% | 4,0 | +3,8 | +4,9% | Peminatan Relatif Rendah |
+| 9 | PETERNAKAN | S1 Utama | Pertanian | 580 | 160 | 98 | 61,3% | 3,6 | +3,8 | +4,9% | Peminatan Relatif Rendah |
 | 10 | TEKNOLOGI HASIL PERTANIAN | S1 Utama | Pertanian | 490 | 160 | 102 | 63,8% | 3,1 | +12,4 | +18,3% | Over-Ekspansi Kuota |
 | 11 | TEKNIK PERTANIAN | S1 Utama | Pertanian | 520 | 140 | 101 | 72,1% | 3,7 | +1,8 | +2,1% | Tren Stabil |
 | 12 | PENDIDIKAN BIOLOGI | S1 Utama | FKIP | 640 | 120 | 86 | 71,7% | 5,3 | +0,4 | +0,6% | Tren Stabil |
@@ -915,9 +915,9 @@ Sesuai butir 17 panduan tugas, analisis ini menyertakan rekomendasi pembaruan me
 | 61 | TEKNIK LINGKUNGAN | S1 Utama | Teknik | 680 | 80 | 77 | 96,3% | 8,5 | +3,6 | +5,6% | Tren Stabil |
 | 62 | PENDIDIKAN BIMBINGAN KONSELING| S1 Utama | FKIP | 690 | 90 | 87 | 96,7% | 7,7 | +4,8 | +6,8% | Tren Meningkat |
 | 63 | BISNIS DIGITAL | S1 Utama | FEB | 1.023 | 90 | 78 | 86,7% | 11,4 | 0,0 | — | Data Terbatas (Baru) |
-| 64 | TEKNIK PERMINYAKAN | S1 Utama | Teknik | 930 | 80 | 73 | 91,3% | 11,6 | 0,0 | — | Data Terbatas (Baru) |
-| 65 | HUBUNGAN INTERNASIONAL | S1 Utama | FISIP | 840 | 75 | 73 | 97,3% | 11,2 | 0,0 | — | Data Terbatas (Baru) |
-| 66 | TEKNIK SUMBER DAYA AIR | S1 Utama | Teknik | 310 | 40 | 36 | 90,0% | 7,8 | 0,0 | — | Data Terbatas (Baru) |
+| 64 | TEKNIK PERMINYAKAN | S1 Utama | Teknik | 930 | 120 | 52 | 43,3% | 7,8 | 0,0 | — | Data Terbatas (Baru) |
+| 65 | HUBUNGAN INTERNASIONAL | S1 Utama | FISIP | 840 | 80 | 73 | 91,3% | 10,5 | 0,0 | — | Data Terbatas (Baru) |
+| 66 | TEKNIK SUMBER DAYA AIR | S1 Utama | Teknik | 310 | 80 | 52 | 65,0% | 3,9 | 0,0 | — | Data Terbatas (Baru) |
 | 67 | KESEHATAN HEWAN (D3) | D3 Vokasi | Kedokteran Hewan | 180 | 30 | 15 | 50,0% | 6,0 | 0,0 | — | Diploma 3 Vokasi |
 | 68 | MANAJEMEN AGRIBISNIS (D3) | D3 Vokasi | Pertanian | 140 | 100 | 27 | 27,0% | 1,4 | 0,0 | — | Diploma 3 Vokasi |
 | 69 | TEKNIK LISTRIK (D3) | D3 Vokasi | Teknik | 160 | 40 | 22 | 55,0% | 4,0 | 0,0 | — | Diploma 3 Vokasi |

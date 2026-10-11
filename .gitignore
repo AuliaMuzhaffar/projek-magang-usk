@@ -34,3 +34,9 @@ analisa_peminatan_dan_daya_tampung/master_deck_presentasi_rkat.md
 planning-workflow.md
 analisa_peminatan_dan_daya_tampung/scripts/build_powerpoint_v2_corporate.py
 
+# File Cadangan & Dokumen SK SNPMB
+*.bak
+analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx.bak
+121UN11KPT2026 SK Daya Tampung AWAL 2026-2027  tte KIRIM SNPMB PUSAT (1).pdf
+121UN11KPT2026*.pdf
+
