@@ -9,9 +9,9 @@ Dokumen ini menjadi rujukan resmi mengenai arti setiap kolom, formula perhitunga
 
 | Nama Metrik | Formula / Rumus | Satuan | Makna Analitis |
 | :--- | :--- | :---: | :--- |
-| **Keketatan Seleksi** | `Peminat / Daya Tampung` | Rasio (`x : 1`) | Mengukur intensitas persaingan pasar di hulu. Semakin tinggi rasio, semakin bergengsi/diminati prodi tersebut. |
-| **Tingkat Keterisian (Fill Rate)** | `(Daftar Ulang / Daya Tampung) * 100` | Persen (`%`) | Mengukur efisiensi pemanfaatan kapasitas kuota universitas. Target sehat universitas adalah $\ge 80\%$. |
-| **Tingkat Konversi (Yield Rate)** | `(Daftar Ulang / Lulus Seleksi) * 100` | Persen (`%`) | Mengukur komitmen calon mahasiswa yang lulus seleksi untuk melakukan registrasi ulang (kebocoran kelulusan). |
+| **Keketatan Seleksi** | `Peminat / Daya Tampung` | Rasio&nbsp;`(x:1)` | Mengukur intensitas persaingan pasar di hulu. Semakin tinggi rasio, semakin bergengsi/diminati prodi tersebut. |
+| **Tingkat Keterisian (Fill Rate)** | `(Daftar Ulang / Daya Tampung) * 100` | Persen&nbsp;`(%)` | Mengukur efisiensi pemanfaatan kapasitas kuota universitas. Target sehat universitas adalah $\ge 80\%$. |
+| **Tingkat Konversi (Yield Rate)** | `(Daftar Ulang / Lulus Seleksi) * 100` | Persen&nbsp;`(%)` | Mengukur komitmen calon mahasiswa yang lulus seleksi untuk melakukan registrasi ulang (kebocoran kelulusan). |
 | **Defisit Bangku / Sisa Kursi** | `max(0, Daya Tampung - Daftar Ulang)` | Kursi / Orang | Jumlah kapasitas kuota yang terbuang sia-sia karena tidak terisi oleh mahasiswa baru. |
 | **Tingkat Mundur / Gugur** | `Lulus Seleksi - Daftar Ulang` | Orang | Jumlah calon mahasiswa yang lulus tetapi menolak/tidak mengambil kursi USK. |
 
@@ -51,7 +51,7 @@ Dalam analisis longitudinal 5 tahun (2022–2026), terdapat **6 program studi ba
 ---
 
 ## 4. Struktur Sheet File Master Excel
-File: `analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`
+File: `data/master/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`
 
 1. **`Master_Semua_Prodi`:** Gabungan seluruh jenjang (S1 Kampus Utama, D3 Vokasi, PSDKU Gayo Lues) dengan metrik komparatif.
 2. **`S1_Kampus_Utama`:** 66 program studi sarjana reguler kampus Banda Aceh (rujukan utama visualisasi Matriks 4 Kuadran).

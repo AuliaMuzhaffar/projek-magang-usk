@@ -1,42 +1,25 @@
-# File / Folder Besar yang Dikecualikan
-UKT_USK_2022_2026/
-UKT_USK_2022_2026
-UKT USK 2022-2026.rar
-*.rar
-analisa_peminatan_dan_daya_tampung/ANALIS DAYA TAMPUNG_*.pdf
-analisa_peminatan_dan_daya_tampung/ANALIS DAYA TAMPUNG_20260923_094053_0000.pdf
+# =============================================================================
+# .gitignore - Repositori Analisis Peminatan & Daya Tampung USK
+# =============================================================================
 
-# File Sistem & Temp
+# File / Folder Berkas Eksternal Berukuran Besar
+data/reference_sk/UKT_USK_2022_2026/
+data/reference_sk/*.rar
+*.rar
+
+# File Sistem & Cache Python
 .DS_Store
 Thumbs.db
 ~$*
 *.tmp
 __pycache__/
 *.pyc
-
-# Slide Ekstraksi & Asset Sementara (Diabaikan)
-analisa_peminatan_dan_daya_tampung/grafik/pdf_slides/
-analisa_peminatan_dan_daya_tampung/grafik/extracted_img_41.png
-analisa_peminatan_dan_daya_tampung/grafik/extracted_img_45.png
-analisa_peminatan_dan_daya_tampung/grafik/header_dots_trans.png
-analisa_peminatan_dan_daya_tampung/grafik/header_dots.png
-analisa_peminatan_dan_daya_tampung/grafik/header_logos_clean.png
-analisa_peminatan_dan_daya_tampung/grafik/header_logos_trans.png
-analisa_peminatan_dan_daya_tampung/grafik/logo_usk_maganghub.png
-analisa_peminatan_dan_daya_tampung/grafik/test_du_labels.png
-analisa_peminatan_dan_daya_tampung/grafik/test_dual_perfect.png
-analisa_peminatan_dan_daya_tampung/grafik/test_gugur_labels.png
-analisa_peminatan_dan_daya_tampung/grafik/test_small_bars.png
-
-# File Presentasi & Dokumen Workflow RKAT
-analisa_peminatan_dan_daya_tampung/presentasi_v2_corporate.pptx
-analisa_peminatan_dan_daya_tampung/master_deck_presentasi_rkat.md
-planning-workflow.md
-analisa_peminatan_dan_daya_tampung/scripts/build_powerpoint_v2_corporate.py
-
-# File Cadangan & Dokumen SK SNPMB
 *.bak
-analisa_peminatan_dan_daya_tampung/data/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx.bak
-121UN11KPT2026 SK Daya Tampung AWAL 2026-2027  tte KIRIM SNPMB PUSAT (1).pdf
-121UN11KPT2026*.pdf
+data/master/*.bak
 
+# Asset Sementara & Scratch Testing
+output/grafik/pdf_slides/
+output/grafik/extracted_img_*.png
+output/grafik/test_*.png
+output/grafik/header_*.png
+output/grafik/logo_usk_maganghub.png
