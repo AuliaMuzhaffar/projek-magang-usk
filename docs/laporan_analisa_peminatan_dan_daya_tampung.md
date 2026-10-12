@@ -5,14 +5,15 @@
 
 **Forum Penugasan:** TUGAS 05 - MAGANG (KHUSUS)  
 **Judul Resmi:** Analisa Peminatan dan Daya Tampung Program Studi Universitas Syiah Kuala  
-**Penyusun:** Tim Magang Universitas Syiah Kuala  
+**Penyusun:** Aulia Muzhaffar — MagangHub Kemendikbudristek di Universitas Syiah Kuala (USK)  
 **Periode Analisis:** 5 Tahun Akademik (2022 s.d. 2026)  
 **Basis Data Sumber:** 
-1. Dataset Master Resmi (2022–2026): `tugas-5/rekap data (fix).xlsx` (Sheet *Rekapitulasi Data*)
-2. Data Validasi Daya Tampung 2026: `DAYA_TAMPUNG_2026_2027 GANJIL_MAGANG.xlsx` (Sheet *DT D3_D4_S1 2026*)  
-**Master Excel:** `tugas-5/data/master/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`  
-**Paket Grafik (300 DPI):** `tugas-5/output/grafik/`  
-**File Presentasi PowerPoint (.pptx):** `tugas-5/output/presentasi/presentasi_analisa_peminatan_dan_daya_tampung.pptx`  
+1. Dataset Masukan Mentah (Raw): [`data/raw/rekap data (fix).xlsx`](../data/raw/rekap%20data%20%28fix%29.xlsx)
+2. Basis Data Master Resmi (SSOT): [`data/master/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`](../data/master/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx)  
+3. Rekapitulasi Dinamis Selisih Lulus vs DU: [`data/processed/rekap_selisih_lulus_vs_daftar_ulang_2022_2026.xlsx`](../data/processed/rekap_selisih_lulus_vs_daftar_ulang_2022_2026.xlsx)  
+**Paket Visualisasi Grafik (300 DPI):** [`output/grafik/`](../output/grafik/)  
+**Dashboard Web Interaktif:** [`output/dashboard/matriks_interaktif_kuadran_usk.html`](../output/dashboard/matriks_interaktif_kuadran_usk.html)  
+**Slide Presentasi Rektorat (.pptx):** [`output/presentasi/presentasi_analisa_peminatan_dan_daya_tampung.pptx`](../output/presentasi/presentasi_analisa_peminatan_dan_daya_tampung.pptx)  
 
 ---
 
@@ -55,16 +56,17 @@ Laporan ini disusun untuk menjawab mandat strategis pimpinan universitas dan pan
 ```
 
 ### 1.1 Temuan Pokok Peminatan (Demand) vs Daya Tampung (Kapasitas)
-1. **Peminat USK Tumbuh Positif:** Secara makro, total peminat USK melonjak dari **48.769 orang (2022)** menjadi **68.010 orang (2026)**, bahkan sempat menyentuh rekor tertinggi **70.945 peminat pada tahun 2025** (+39,5% selama 5 tahun).
-2. **Kapasitas Kuota Melompat Pasca-PTN-BH:** Target daya tampung dinaikkan agresif sebesar **+32,7%** (dari 7.863 menjadi 10.435 kursi) sebagai konsekuensi perluasan kapasitas PTN-BH sejak 2024.
+1. **Peminat USK Tumbuh Positif:** Secara makro, total peminat USK melonjak dari **48.769 orang (2022)** menjadi **68.011 orang (2026)**, bahkan sempat menyentuh rekor tertinggi **70.945 peminat pada tahun 2025** (+39,5% selama 5 tahun).
+2. **Kapasitas Kuota Melompat Pasca-PTN-BH:** Target daya tampung dinaikkan terukur sebesar **+34,5%** (dari 7.863 menjadi **10.580 kursi**) sebagai konsekuensi perluasan kapasitas PTN-BH sejak 2024 dan penetapan SK Rektor Daya Tampung 2026 resmi.
 3. **Disparitas Keketatan Seleksi Sangat Ekstrem:** 
    * Prodi terfavorit seperti *Farmasi* mencatat rasio keketatan **39,2 peminat per 1 kursi** (3.526 peminat untuk 90 kursi).
    * Sebaliknya, prodi eksakta tertentu seperti *Budidaya Perairan* mencatat rasio keketatan **0,91 peminat per 1 kursi** (hanya 145 peminat untuk 160 kursi). Secara matematis, kuota prodi ini mustahil terisi penuh karena jumlah orang yang mendaftar lebih sedikit dari kursi yang disiapkan.
 
-### 1.2 Temuan Pokok Realisasi Pendaftaran Ulang & Beban 2.000 Kursi Kosong
-1. **Realisasi Mahasiswa Masuk Tumbuh:** Jumlah mahasiswa baru yang mendaftar ulang meningkat dari **6.197 mhs (2022)** menjadi **8.440 mhs (2026)** atau naik **+36,2%**, dengan tingkat keterisian rata-rata kampus mencapai **80,9%**.
-2. **Beban Struktural 2.000 Bangku Kosong:** Terlepas dari kenaikan mahasiswa masuk, USK **secara persisten menyisakan sekitar 2.000 kursi kosong setiap tahunnya** (2022: 1.666 kursi; 2023: 2.481 kursi; 2024: 2.449 kursi; 2025: 2.393 kursi; 2026: 1.995 kursi kosong).
-3. **Penyebab Utama Kursi Kosong:** Terjadi **fenomena over-ekspansi kuota** pada prodi yang sepi peminat. Menambah kuota 2x lipat pada prodi seperti *Budidaya Perairan, Teknologi Hasil Pertanian, Pendidikan Ekonomi, dan Teknik Kimia* terbukti tidak menambah mahasiswa secara proporsional, melainkan hanya memperlebar tumpukan kursi kosong (**50–70 kursi kosong per prodi pada 2026**).
+### 1.2 Temuan Pokok Realisasi Pendaftaran Ulang & Beban 2.200 Kursi Kosong
+1. **Realisasi Mahasiswa Masuk Tumbuh:** Jumlah mahasiswa baru yang mendaftar ulang meningkat dari **6.197 mhs (2022)** menjadi **8.361 mhs (2026)** atau naik **+34,9%**, dengan tingkat keterisian rata-rata universitas mencapai **79,0%**.
+2. **Beban Struktural 2.200 Bangku Kosong:** Terlepas dari kenaikan mahasiswa masuk, USK **secara persisten menyisakan lebih dari 2.200 kursi kosong setiap tahunnya** (2022: 1.666 kursi; 2023: 2.476 kursi; 2024: 2.449 kursi; 2025: 2.312 kursi; 2026: **2.219 kursi kosong**).
+3. **Akumulasi 11.122 Kursi Kosong (Inefisiensi Kapasitas 23,2%):** Selama 5 tahun akumulatif, dari total 47.863 kursi yang dibuka, hanya 36.741 kursi yang terisi riil, meninggalkan **11.122 bangku kosong**.
+4. **Penyebab Utama Kursi Kosong:** Terjadi **fenomena over-ekspansi kuota** pada prodi yang sepi peminat. Menambah kuota 2x lipat pada prodi seperti *Budidaya Perairan, Teknologi Hasil Pertanian, Pendidikan Ekonomi, dan Teknik Kimia* terbukti tidak menambah mahasiswa secara proporsional, melainkan hanya memperlebar tumpukan kursi kosong (**50–70 kursi kosong per prodi pada 2026**).
 
 ### 1.3 Temuan Kausalitas Lapangan: Mengapa Prodi A Tinggi vs Mengapa Prodi B Rendah?
 * **Mengapa Prodi A (PGSD, Keperawatan, Teknik Komputer) Tinggi?**
@@ -141,22 +143,22 @@ Untuk mencegah distorsi data statistik, seluruh 81 program studi USK dipisahkan 
 | Tahun Akademik | Total Peminat (Orang) | Daya Tampung (Kursi) | Lulus Seleksi (Orang) | Daftar Ulang (Orang) | Keterisian Kuota (Fill Rate %) | Konversi (Yield Rate %) | Sisa Kursi Kosong (Bangku) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **2022** | 48.769 | 7.863 | 7.428 | **6.197** | **78,8%** | **83,4%** | 1.666 Kursi |
-| **2023** | 44.653 | 8.780 | 7.728 | **6.299** | **71,7%** | **81,5%** | 2.481 Kursi |
-| **2024** | 65.495 | 10.240 | 10.158 | **7.791** | **76,1%** | **76,7%** | 2.449 Kursi |
-| **2025** | 70.945 | 10.420 | 9.487 | **8.027** | **77,0%** | **84,6%** | 2.393 Kursi |
-| **2026** | 68.010 | 10.435 | 10.776 | **8.440** | **80,9%** | **78,3%** | 1.995 Kursi |
-| **TOTAL 5 TAHUN** | **297.872** | **47.738** | **45.577** | **36.754** | **77,0% (Kumulatif)** | **80,6% (Kumulatif)** | **10.984 Kursi Kosong** |
+| **2023** | 44.599 | 8.720 | 7.642 | **6.244** | **71,6%** | **81,7%** | 2.476 Kursi |
+| **2024** | 65.495 | 10.240 | 9.493 | **7.791** | **76,1%** | **82,1%** | 2.449 Kursi |
+| **2025** | 70.945 | 10.460 | 9.608 | **8.148** | **77,9%** | **84,8%** | 2.312 Kursi |
+| **2026** | 68.011 | 10.580 | 9.978 | **8.361** | **79,0%** | **83,8%** | 2.219 Kursi |
+| **TOTAL 5 TAHUN** | **297.819** | **47.863** | **44.149** | **36.741** | **76,8% (Kumulatif)** | **83,2% (Kumulatif)** | **11.122 Kursi Kosong** |
 
 ### 3.2 Analisis Dinamika Makro & Dekonstruksi Paradoks PMB (2022–2026):
 1. **Dinamika Pasar (Demand Side): Ledakan Minat Pendaftar (+39,5%):**
-   * Peminat USK melonjak tajam dari 48.769 orang (2022) menjadi 68.010 orang (2026), bahkan sempat mencapai puncaknya di angka 70.945 orang pada tahun 2025 (*CAGR +8,7%/tahun*).
-   * Titik balik terjadi pada tahun 2024 (*lonjakan +46,7% YoY*), dipicu oleh transformasi USK menjadi PTN-BH dan perluasan program studi baru serta integrasi vokasi ke jalur nasional.
+   * Peminat USK melonjak tajam dari 48.769 orang (2022) menjadi 68.011 orang (2026), bahkan sempat mencapai puncaknya di angka 70.945 orang pada tahun 2025 (*CAGR +8,7%/tahun*).
+   * Titik balik terjadi pada tahun 2024 (*lonjakan +46,8% YoY*), dipicu oleh transformasi USK menjadi PTN-BH dan perluasan program studi baru serta integrasi vokasi ke jalur nasional.
 2. **Sisi Kapasitas & Realitas Serapan (Supply & Conversion Side):**
-   * Kenaikan minat pendaftar direspons oleh manajemen kampus dengan ekspansi agresif kuota daya tampung dari 7.863 kursi (2022) menjadi 10.435 kursi (2026), bertambah sebanyak **2.572 kursi baru (+32,7%)**.
-   * Meskipun pendaftar ulang riil tumbuh mencapai level tertinggi di 8.440 mahasiswa (keterisian kuota 80,9% di 2026), **jurang bangku kosong tetap menganga lebar**.
-3. **Akumulasi 10.984 Kursi Kosong (Inefisiensi Kapasitas 23,0%):**
-   * Sepanjang 5 tahun (2022–2026), USK mengalokasikan total 47.738 kursi daya tampung, namun hanya berhasil merekrut 36.754 mahasiswa baru.
-   * Sebanyak **10.984 bangku kuliah (23,0% dari seluruh kuota yang dibuka)** berakhir kosong melompong. Ini membuktikan bahwa krisis kursi kosong di USK bukan diakibatkan oleh kurangnya peminat makro, melainkan **kesalahan alokasi distribusi kuota antar-program studi (*structural mismatch*)** dan kebocoran calon mahasiswa yang tidak mendaftar ulang.
+   * Kenaikan minat pendaftar direspons oleh manajemen kampus dengan ekspansi kuota daya tampung dari 7.863 kursi (2022) menjadi 10.580 kursi (2026), bertambah sebanyak **2.717 kursi baru (+34,5%)** sesuai SK Rektor Penetapan Daya Tampung 2026.
+   * Meskipun pendaftar ulang riil tumbuh mencapai 8.361 mahasiswa (keterisian kuota 79,0% di 2026), **jurang bangku kosong tetap menganga lebar di angka 2.219 kursi**.
+3. **Akumulasi 11.122 Kursi Kosong (Inefisiensi Kapasitas 23,2%):**
+   * Sepanjang 5 tahun (2022–2026), USK mengalokasikan total 47.863 kursi daya tampung, namun hanya berhasil merekrut 36.741 mahasiswa baru.
+   * Sebanyak **11.122 bangku kuliah (23,2% dari seluruh kuota yang dibuka)** berakhir kosong melompong. Ini membuktikan bahwa krisis kursi kosong di USK bukan diakibatkan oleh kurangnya peminat makro, melainkan **kesalahan alokasi distribusi kuota antar-program studi (*structural mismatch*)** dan kebocoran calon mahasiswa yang tidak mendaftar ulang.
 
 ---
 
@@ -179,10 +181,11 @@ Rasio keketatan seleksi tahun 2026 menunjukkan tingkat persaingan riil calon mah
 2. **Akuntansi Perpajakan (D4 FEB):** Rasio **22,4 : 1** (1.794 peminat untuk 80 kursi).
 3. **Informatika (FMIPA):** Rasio **18,1 : 1** (2.174 peminat untuk 120 kursi).
 4. **Psikologi (FK):** Rasio **17,3 : 1** (1.385 peminat untuk 80 kursi).
-5. **Teknik Perminyakan (FT):** Rasio **15,5 : 1** (930 peminat untuk 60 kursi).
-6. **Teknik Pertambangan (FT):** Rasio **14,5 : 1** (1.735 peminat untuk 120 kursi).
-7. **Manajemen (FEB):** Rasio **14,1 : 1** (2.823 peminat untuk 200 kursi).
-8. **Bisnis Digital (FEB):** Rasio **12,8 : 1** (1.023 peminat untuk 80 kursi).
+5. **Teknik Pertambangan (FT):** Rasio **14,5 : 1** (1.735 peminat untuk 120 kursi).
+6. **Manajemen (FEB):** Rasio **14,1 : 1** (2.823 peminat untuk 200 kursi).
+7. **Bisnis Digital (FEB):** Rasio **12,8 : 1** (1.023 peminat untuk 80 kursi).
+8. **Pendidikan Dokter Gigi (FKG):** Rasio **12,0 : 1** (1.204 peminat untuk 100 kursi).
+*(Catatan: Teknik Perminyakan pada SK 2026 memiliki daya tampung 120 kursi dengan 930 peminat, mencatat rasio keketatan 7,75 : 1).*
 
 #### Top 8 Program Studi Paling Rendah Keketatan / Sepi Peminat (Tahun 2026):
 1. **Budidaya Perairan (FPK):** Rasio **0,91 : 1** (145 peminat untuk 160 kursi).  
@@ -191,9 +194,9 @@ Rasio keketatan seleksi tahun 2026 menunjukkan tingkat persaingan riil calon mah
 3. **Fisika (FMIPA):** Rasio **1,18 : 1** (94 peminat untuk 80 kursi).
 4. **Pendidikan Fisika (FKIP):** Rasio **1,29 : 1** (155 peminat untuk 120 kursi).
 5. **Proteksi Tanaman (FP):** Rasio **1,31 : 1** (105 peminat untuk 80 kursi).
-6. **Ilmu Tanah (FP):** Rasio **1,62 : 1** (195 peminat untuk 120 kursi).
-7. **Pendidikan Kimia (FKIP):** Rasio **1,72 : 1** (206 peminat untuk 120 kursi).
-8. **Ilmu Kelautan (FPK):** Rasio **1,89 : 1** (302 peminat untuk 160 kursi).
+6. **Teknik Sumber Daya Air (FT):** Rasio **1,52 : 1** (122 peminat untuk 80 kursi).
+7. **Ilmu Tanah (FP):** Rasio **1,62 : 1** (195 peminat untuk 120 kursi).
+8. **Pendidikan Kimia (FKIP):** Rasio **1,72 : 1** (206 peminat untuk 120 kursi).
 
 ---
 
@@ -245,17 +248,18 @@ Evaluasi program studi sarjana di Banda Aceh dilakukan secara objektif dengan me
 
 | No | Program Studi | Fakultas | DU 2022 | DU 2026 | Slope Tren DU (Orang/Thn) | CAGR DU (%/Thn) | Riwayat Transisi YoY | Pola Konsistensi |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 1 | **Ilmu Keperawatan** | Keperawatan | 127 | 295 | **+38,4** | **+23,5%** | 3x Naik, 1x Turun | Meningkat Pesat |
-| 2 | **Pendidikan Guru SD (PGSD)** | FKIP | 105 | 217 | **+27,4** | **+19,9%** | **4x Naik Berturut-turut** | **Konsisten Sempurna** |
-| 3 | **Teknik Sipil** | Teknik | 154 | 252 | **+23,0** | **+13,1%** | 3x Naik, 1x Turun | Meningkat Pesat |
-| 4 | **Penjaskesrek** | FKIP | 103 | 198 | **+22,3** | **+17,8%** | 3x Naik, 1x Turun | Meningkat Pesat |
-| 5 | **Pendidikan Bahasa Indonesia** | FKIP | 64 | 134 | **+18,0** | **+20,3%** | 3x Naik, 1x Turun | Meningkat Pesat |
-| 6 | **Teknik Komputer** | Teknik | 85 | 145 | **+14,8** | **+14,3%** | 3x Naik, 1x Turun | Meningkat Pesat |
-| 7 | **Kehutanan** | Pertanian | 51 | 89 | **+8,9** | **+14,9%** | **4x Naik Berturut-turut** | **Konsisten Sempurna** |
-| 8 | **Pendidikan Geografi** | FKIP | 71 | 119 | **+11,3** | **+13,8%** | **4x Naik Berturut-turut** | **Konsisten Sempurna** |
-| 9 | **PPKn** | FKIP | 77 | 129 | **+12,1** | **+13,8%** | **4x Naik Berturut-turut** | **Konsisten Sempurna** |
+| 1 | **Ilmu Keperawatan** | Keperawatan | 127 | 295 | **+45,2** | **+23,5%** | 3x Naik, 1x Turun | Meningkat Pesat |
+| 2 | **Ilmu Hukum** | Hukum | 423 | 558 | **+36,3** | **+7,2%** | 3x Naik, 1x Turun | Meningkat Pesat |
+| 3 | **Pendidikan Guru SD (PGSD)** | FKIP | 105 | 217 | **+32,0** | **+19,9%** | **4x Naik Berturut-turut** | **Konsisten Sempurna** |
+| 4 | **Penjaskesrek** | FKIP | 103 | 198 | **+27,5** | **+17,8%** | 3x Naik, 1x Turun | Meningkat Pesat |
+| 5 | **Teknik Sipil** | Teknik | 154 | 252 | **+25,9** | **+13,1%** | **4x Naik Berturut-turut** | **Konsisten Sempurna** |
+| 6 | **Pendidikan Bahasa Indonesia** | FKIP | 64 | 134 | **+18,2** | **+20,3%** | 3x Naik, 1x Turun | Meningkat Pesat |
+| 7 | **Pendidikan Kesejahteraan Klg (PKK)** | FKIP | 91 | 149 | **+15,7** | **+13,1%** | **4x Naik Berturut-turut** | **Konsisten Sempurna** |
+| 8 | **Teknik Komputer** | Teknik | 85 | 145 | **+15,6** | **+14,3%** | 3x Naik, 1x Turun | Meningkat Pesat |
+| 9 | **Bimbingan Konseling** | FKIP | 94 | 145 | **+14,6** | **+11,4%** | 3x Naik, 0x Turun | Meningkat Pesat |
+| 10 | **Teknologi Hasil Pertanian** | Pertanian | 52 | 102 | **+14,2** | **+18,3%** | 3x Naik, 0x Turun | Meningkat Pesat |
 
-> **Temuan Kunci:** PGSD, Kehutanan, Pendidikan Geografi, dan PPKn mencatat rekor sempurna **4 tahun berturut-turut selalu bertumbuh tanpa pernah sekalipun mengalami penurunan peminat maupun pendaftar ulang**.
+> **Temuan Kunci:** PGSD, Teknik Sipil, dan PKK mencatat rekor sempurna **4 tahun berturut-turut selalu bertumbuh tanpa pernah sekalipun mengalami penurunan pendaftar ulang**.
 
 ---
 
@@ -271,6 +275,8 @@ Evaluasi program studi sarjana di Banda Aceh dilakukan secara objektif dengan me
 | 4 | **Sosiologi** | FISIP | 108 | 92 | **-4,9** | **-3,9%** | **-14,8% (-16 Mhs)** | Fluktuatif Menurun |
 | 5 | **PSP Perikanan** | FPK | 80 | 67 | **-3,8** | **-4,3%** | **-16,2% (-13 Mhs)** | Fluktuatif Menurun |
 | 6 | **Ilmu Kelautan** | FPK | 119 | 113 | **-3,1** | **-1,3%** | **-5,0% (-6 Mhs)** | Menurun Moderat |
+| 7 | **Teknik Geofisika** | Teknik | 59 | 51 | **-2,1** | **-3,6%** | **-13,6% (-8 Mhs)** | Menurun Moderat |
+| 8 | **Matematika** | MIPA | 67 | 56 | **-2,1** | **-4,4%** | **-16,4% (-11 Mhs)** | Menurun Moderat |
 
 > **Temuan Kritis Rektorat (Episentrum FEB):** Tiga program studi utama di Fakultas Ekonomi & Bisnis (Manajemen, Ekonomi Islam, dan Ekonomi Pembangunan) secara bersama-sama **kehilangan 144 mahasiswa baru per angkatan dibandingkan basis 2022 (kontraksi gabungan -24,0%)**. Manajemen dan Ekonomi Islam bahkan mencatatkan rekor negatif *zero-rebound* (tidak pernah sekalipun mengalami kenaikan pendaftar ulang dalam 4 tahun berturut-turut). Fenomena ini menuntut evaluasi mendalam terhadap kurikulum bisnis tradisional di era ekonomi digital.
 
@@ -312,10 +318,10 @@ Matriks ini menyilangkan dua dimensi utama:
 
 | Kuadran | Klasifikasi Strategis | Jumlah Prodi (%) | Karakteristik Kinerja PMB | Daftar Program Studi Representatif | Tindakan Kebijakan Rektorat & Dekan |
 | :---: | :--- | :---: | :--- | :--- | :--- |
-| **I** | **PRIMA & BINTANG (Star Assets)** | **31 Prodi** (47,0%) | Peminat membludak ($\text{Keketatan} \ge 4{,}0$) dan kuota terisi penuh ($\text{Fill Rate} \ge 80\%$). | *Farmasi, Informatika, Psikologi, Pend. Dokter, Kedokteran Gigi, Manajemen FEB, Akuntansi, Ilmu Hukum, PGSD, Teknik Sipil, Agribisnis.* | **Pertahankan & Investasi:** Boleh menaikkan kuota terukur (+5% s.d. +10%) atau membuka **Kelas Internasional** karena pasar pasti menyerap. |
-| **II** | **STABIL & EFISIEN (Core Cash Cows)** | **6 Prodi** (9,1%) | Peminat tidak terlalu membludak ($\text{Keketatan} < 4{,}0$), tetapi kuota terisi optimal ($\ge 80\%$). | *Pend. Dokter Hewan, Arsitektur, Hubungan Internasional, Ilmu Politik, Teknik Sumber Daya Air (TSDA), Pend. Sendratasik.* | **Lindungi & Jaga Kuota Tetap Stabil:** Jangan latah menaikkan kuota; kuota saat ini sudah seimbang sempurna (*equilibrium*) dengan daya serapnya. |
-| **III** | **KRITIS & DEFISIT (Critical Under-Enrolled)** | **22 Prodi** (33,3%) | Peminat sepi ($\text{Keketatan} < 4{,}0$) dan bangku kuliah banyak bolong ($\text{Fill Rate} < 80\%$). | *Budidaya Perairan, Fisika, PSP Perikanan, Teknologi Hasil Pertanian (THP), Pend. Ekonomi, Pend. Kimia, Pend. Fisika, Teknik Kimia, Ilmu Tanah.* | **WAJIB PANGKAS KUOTA SEGERA (20%–40%):** Pangkas kuota ke angka riil untuk menghapus 400+ bangku kosong semu dan selamatkan nilai akreditasi prodi. |
-| **IV** | **DILEMA & BOCOR (High Demand, High Melt)** | **7 Prodi** (10,6%) | Peminat tinggi ($\text{Keketatan} \ge 4{,}0$), tetapi keterisian kuota bocor / tertekan ($< 80\%$). | *Akuntansi Perpajakan (D4/S1: Keketatan 22,4x, Fill Rate 73,8%), PWK, Pend. Guru PAUD, Agroteknologi, Teknik Elektro, Pend. Biologi, Pend. Sejarah.* | **Perbaiki Konversi & Skema Cicilan:** Peminat ada, namun calon mahasiswa gugur di jalur mandiri. Berikan fasilitas cicilan IPI 3 tahap dan percepat pemanggilan cadangan. |
+| **I** | **UNGGULAN (Star Assets)** | **29 Prodi** (43,9%) | Peminat membludak ($\text{Keketatan} \ge 4{,}0$) dan kuota terisi penuh ($\text{Fill Rate} \ge 80\%$). | *Farmasi, Informatika, Psikologi, Pend. Dokter, Kedokteran Gigi, Manajemen FEB, Akuntansi, Ilmu Hukum, PGSD, Teknik Sipil, Agribisnis, Bisnis Digital.* | **Pertahankan Mutu & Kuota:** Boleh menaikkan kuota terukur (+5% s.d. +10%) atau membuka **Kelas Internasional** karena pasar pasti menyerap. |
+| **II** | **STABIL & POTENSIAL (Core Stabilizers)** | **5 Prodi** (7,6%) | Peminat terukur ($\text{Keketatan} < 4{,}0$), tetapi kuota terisi optimal ($\ge 80\%$). | *Pend. Dokter Hewan, Hubungan Internasional, Arsitektur, Pend. Bahasa Inggris, Pend. Kesenian.* | **Lindungi & Jaga Kuota Tetap Stabil:** Jangan latah menaikkan kuota; kuota saat ini sudah seimbang sempurna (*equilibrium*) dengan daya serapnya. |
+| **III** | **BELUM OPTIMAL / BOCOR (High Demand, High Melt)** | **9 Prodi** (13,6%) | Peminat tinggi ($\text{Keketatan} \ge 4{,}0$), tetapi keterisian kuota tertekan / bocor ($< 80\%$). | *Akuntansi Perpajakan (D4: Keketatan 22,4x, Fill Rate 73,8%), PWK, Pend. Guru PAUD, Agroteknologi, Teknik Lingkungan, Teknik Perminyakan.* | **Fasilitasi Cicilan IPI & Cadangan:** Peminat ada, namun calon mahasiswa gugur di jalur mandiri. Buka fasilitas cicilan IPI 3 tahap dan percepat pemanggilan cadangan. |
+| **IV** | **PERLU DITINGKATKAN / KRITIS (Critical Deficit)** | **23 Prodi** (34,8%) | Peminat sepi ($\text{Keketatan} < 4{,}0$) dan bangku kuliah banyak bolong ($< 80\%$). | *Budidaya Perairan, Fisika, PSP Perikanan, Teknologi Hasil Pertanian (THP), Pend. Ekonomi, Pend. Kimia, Pend. Fisika, Teknik Kimia, Ilmu Tanah, TSDA.* | **WAJIB PANGKAS KUOTA SEGERA (20%–40%):** Pangkas kuota ke angka riil untuk menghapus 400+ bangku kosong semu dan selamatkan nilai akreditasi prodi. |
 
 ---
 
@@ -327,20 +333,23 @@ Untuk memastikan rekomendasi kebijakan tidak terdistorsi oleh **anomali musiman 
 
 #### Komparasi Sebaran Portofolio: Snapshot 2026 vs Benchmark Longitudinal 5 Tahun (2022–2026)
 
-| Kuadran Portofolio | Snapshot Tahun 2026 | Rata-rata 5 Tahun (2022–2026) | Perubahan Netto | Interpretasi Analitis Bebas Bias |
+| Kuadran Portofolio | Snapshot Tahun 2026 | Rata-rata 5 Tahun (66 Prodi S1) | Rata-rata 5 Tahun (60 Prodi Mapan) | Karakteristik Portofolio Bebas Bias |
 | :--- | :---: | :---: | :---: | :--- |
-| **Kuadran I (Prima & Bintang)** | **31 Prodi** (47,0%) | **28 Prodi** (42,4%) | -3 Prodi | **Sangat Stabil:** Mayoritas star assets (Farmasi, Kedokteran, Informatika, Hukum, Psikologi, PGSD) memiliki daya tarik pasar struktural yang tidak goyah. |
-| **Kuadran II (Stabil & Efisien)** | **6 Prodi** (9,1%) | **4 Prodi** (6,1%) | -2 Prodi | **Niche Market Solid:** Prodi seperti Hubungan Internasional, Ilmu Politik, Sendratasik, dan Penjaskesrek secara konsisten terisi penuh meski peminat moderat. |
-| **Kuadran III (Kritis & Defisit)** | **22 Prodi** (33,3%) | **26 Prodi** (39,4%) | **+4 Prodi** | **BUKTI DEFISIT KRONIS:** Bertambahnya prodi kritis pada analisis 5 tahun membuktikan kursi kosong **bukan kecelakaan sesaat 2026**, melainkan kegagalan kapasitas kronis selama setengah dekade! |
-| **Kuadran IV (Dilema & Kebocoran)** | **7 Prodi** (10,6%) | **8 Prodi** (12,1%) | +1 Prodi | **Kebocoran Konversi Struktural:** Peminat tinggi selalu ada setiap tahun, tetapi konversi daftar ulang konsisten rontok akibat kendala finansial/biaya Mandiri. |
-| **TOTAL PRODI S1** | **66 Prodi** (100%) | **66 Prodi** (100%) | — | Seluruh 66 Program Studi S1 Kampus Utama USK. |
+| **Kuadran I (Unggulan)** | **29 Prodi** (43,9%) | **27 Prodi** (40,9%) | **26 Prodi** (43,3%) | **Sangat Stabil:** Mayoritas star assets (Farmasi, Kedokteran, Informatika, Hukum, Psikologi, PGSD) memiliki daya tarik pasar struktural yang tidak goyah. |
+| **Kuadran II (Stabil)** | **5 Prodi** (7,6%) | **4 Prodi** (6,1%) | **3 Prodi** (5,0%) | **Niche Market Solid:** Pend. Dokter Hewan, Hubungan Internasional, Sendratasik, dan Penjaskesrek secara konsisten terisi optimal. |
+| **Kuadran III (Belum Optimal)** | **9 Prodi** (13,6%) | **9 Prodi** (13,6%) | **7 Prodi** (11,7%) | **Kebocoran Konversi Struktural:** Peminat tinggi selalu ada, tetapi konversi pendaftaran ulang tertekan kendala biaya jalur Mandiri. |
+| **Kuadran IV (Perlu Ditingkatkan)**| **23 Prodi** (34,8%) | **26 Prodi** (39,4%) | **24 Prodi** (40,0%) | **BUKTI DEFISIT KRONIS:** Bertambahnya prodi kritis pada analisis 5 tahun membuktikan kursi kosong **bukan kecelakaan sesaat 2026**, melainkan inefisiensi kapasitas kronis! |
+| **TOTAL PRODI S1** | **66 Prodi** (100%) | **66 Prodi** (100%) | **60 Prodi** (100%) | Komparasi menyeluruh seluruh 66 S1 vs 60 Prodi Mapan (tanpa bias 6 prodi baru). |
 
 #### Temuan Kunci dari Analisis Longitudinal Bebas Bias:
-1. **Pemberantasan Ilusi Pemulihan Semu:**
-   * Beberapa prodi terlihat "membaik" di 2026, padahal secara riwayat 5 tahun berada di zona bahaya. Contoh nyata: **Teknik Perminyakan** di 2026 berada di Kuadran I (Fill Rate 86,7%), namun rata-rata 5 tahunnya hanya mencapai **43,4% (Kuadran IV)** karena di tahun-tahun awal sangat terpuruk.
-   * **Arsitektur** di 2026 berada di Kuadran II (Fill Rate 81,9%), namun rata-rata 5 tahunnya berada di Kuadran III (Fill Rate 78,7%).
+1. **Pemberantasan Ilusi Pemulihan Semu & Pemetaan 6 Prodi Baru:**
+   * Beberapa program studi memerlukan evaluasi khusus karena baru beroperasi kurang dari 5 tahun penuh:
+     * **Bisnis Digital:** Langsung menempati **Kuadran I (Unggulan)** dengan keterisian 97,5% dan keketatan 12,8x di 2026.
+     * **Hubungan Internasional:** Berada di **Kuadran II (Stabil)** dengan keterisian 91,2% (73 dari 80 kursi).
+     * **Teknik Lingkungan & Teknik Perminyakan:** Berada di **Kuadran III (Belum Optimal)** karena peminat tinggi namun keterisian masih tertekan di angka 62,5% dan 43,3%.
+     * **Teknik Sumber Daya Air (TSDA) & TIHP:** Berada di **Kuadran IV (Perlu Ditingkatkan)** karena peminat dan keterisian belum mencapai target minimal.
 2. **Konfirmasi Defisit Akut di Sains Hayati & FKIP MIPA:**
-   * Sebanyak **26 prodi (39,4%)** secara konsisten terbukti berada di Kuadran III selama 5 tahun berturut-turut (misal Budidaya Perairan, Fisika, PSP Perikanan, THP, Pend. Kimia, Pend. Fisika, Pend. Matematika).
+   * Sebanyak **26 prodi (39,4%)** secara konsisten terbukti berada di Kuadran IV selama 5 tahun berturut-turut (misal Budidaya Perairan, Fisika, PSP Perikanan, THP, Pend. Kimia, Pend. Fisika, Pend. Matematika).
    * Temuan ini memberikan dasar hukum dan manajerial yang **100% tak terbantahkan** bagi Rektorat untuk segera melakukan **rasionalisasi kuota permanen** pada SPMB 2027.
 
 ---
@@ -361,10 +370,10 @@ Berdasarkan data resmi 2026, total 8.361 mahasiswa baru USK terdistribusi ke dal
 | **SNBT (Tes Nasional)** | 3.678 | 3.886 | **3.260** | 626 | **38,99%** | **83,89%** |
 | **SNBP (Rapor Nasional)** | 3.150 | 2.905 | **2.754** | 151 | **32,94%** | **94,80%** |
 | **SMMPTN (Mandiri Reguler)** | 3.752 | 2.418 | **1.814** | 604 | **21,70%** | **75,02%** |
-| **TALENTA (Prestasi USK)**| — | 1.238 | **308** | **930** *(935 bruto)* | **3,68%** | **24,88%** |
+| **TALENTA (Prestasi USK)**| — | 461 | **308** | 153 | **3,68%** | **66,81%** |
 | **Seleksi Cadangan (SMC)** | — | 280 | **205** | 75 | **2,45%** | **73,21%** |
 | **ADIK (Afirmasi 3T)** | — | 28 | **20** | 8 | **0,24%** | **71,43%** |
-| **TOTAL UNIVERSITAS** | **10.580** | **10.755** | **8.361** | **2.394** | **100,0%** | **77,74%** |
+| **TOTAL UNIVERSITAS** | **10.580** | **9.978** | **8.361** | **1.617** | **100,0%** | **83,79%** |
 
 > **Catatan Rekonsiliasi Data Jalur TALENTA (Netto vs Bruto):**
 > * **930 Orang (Netto Universitas):** Dihitung dari selisih langsung total kelulusan dikurangi total daftar ulang ($1.238 - 308 = 930$).
@@ -464,13 +473,13 @@ Untuk memenuhi kebutuhan analitis pimpinan fakultas dan dekanat mengenai **pintu
 
 | Jalur Penerimaan | Total Lulus (5-Thn) | Total Daftar Ulang | Porsi Serapan (Share %) | Total Calon Gugur | Rata-rata Yield Rate (%) | Tingkat Kebocoran (%) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **SNBT (Tes Nasional)** | 18.542 | **15.812** | **43,1%** | 2.731 | 85,3% | 14,7% |
-| **SNBP (Rapor Prestasi)** | 12.960 | **11.883** | **32,4%** | 1.078 | **91,7%** | **8,3% (Paling Solid)** |
-| **SMMPTN (Mandiri)** | 10.846 | **7.752** | **21,1%** | 3.268 | 71,5% | 28,5% |
-| **TALENTA (Prestasi USK)** | 1.742 | **690** | **1,9%** | **1.057** | **39,6%** | **60,7% (Episentrum Bocor)** |
+| **SNBT (Tes Nasional)** | 18.509 | **15.782** | **43,0%** | 2.728 | 85,3% | 14,7% |
+| **SNBP (Rapor Prestasi)** | 12.952 | **11.877** | **32,3%** | 1.076 | **91,7%** | **8,3% (Paling Solid)** |
+| **SMMPTN (Mandiri)** | 10.948 | **7.854** | **21,4%** | 3.268 | 71,7% | 28,3% |
+| **TALENTA (Prestasi USK)** | 965 | **690** | **1,9%** | 275 | 71,5% | 28,5% |
 | **SMC (Seleksi Cadangan)**| 704 | **495** | **1,3%** | 209 | 70,3% | 29,7% |
 | **ADIK (Afirmasi 3T)** | 71 | **43** | **0,1%** | 28 | 60,6% | 39,4% |
-| **TOTAL KESELURUHAN** | **44.865** | **36.754** | **100,0%** | **8.371** | **81,9%** | **18,1%** |
+| **TOTAL KESELURUHAN** | **44.149** | **36.741** | **100,0%** | **7.584** | **83,2%** | **16,8%** |
 
 #### B. Program Studi S1 Paling Bergantung pada Jalur Mandiri (SMMPTN)
 Beberapa program studi baru atau spesifik memiliki struktur pembiayaan dan pendaftaran yang sangat ditopang oleh Jalur Mandiri (bukan jalur nasional):
@@ -549,59 +558,59 @@ Untuk mengevaluasi kinerja fakultas di kampus utama, analisis membedah efisiensi
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Kedokteran Gigi (FKG)** | 102,5% | **100,0%** | -2,5% | **97,3%** | **0 Kursi** | 0,0% | **Prima (Zero Deficit)** |
 | **Hukum (FH)** | 96,1% | **99,6%** | +3,5% | **97,8%** | **2 Kursi** | 0,1% | **Prima (Sangat Stabil)** |
-| **Kedokteran (FK)** | 101,2% | **98,8%** | -2,4% | **97,0%** | **4 Kursi** | 0,3% | **Prima (Kompetitif)** |
-| **Kedokteran Hewan (FKH)** | 87,7% | **93,3%** | +5,6% | **91,0%** | **16 Kursi** | 1,0% | **Sehat Konsisten** |
-| **Ekonomi & Bisnis (FEB)** | 80,3% | **90,0%** | +9,7% | **87,9%** | **88 Kursi** | 5,6% | **Sehat Tumbuh** |
-| **FISIP** | 90,0% | **89,6%** | -0,4% | **87,8%** | **78 Kursi** | 5,0% | **Sehat Stabil** |
-| **MIPA (FMIPA)** | 80,0% | **83,1%** | +3,1% | **76,3%** | **110 Kursi** | 7,0% | *Rentan (Rata-rata 5-Thn < 80%)* |
-| **Teknik (FT)** | 77,2% | **82,8%** | +5,6% | **78,0%** | **302 Kursi** | **19,2%** | *Raksasa Rentan (Defisit Masif)* |
-| **FKIP** | 79,1% | **82,3%** | +3,2% | **78,2%** | **421 Kursi** | **26,8%** | *Raksasa Rentan (Episentrum Defisit)* |
-| **Keperawatan (FKep)** | 79,4% | **81,9%** | +2,5% | **80,7%** | **65 Kursi** | 4,1% | **Sehat Moderat** |
-| **Pertanian (FP)** | 71,4% | **71,4%** | **0,0%** | **67,9%** | **299 Kursi** | **19,1%** | **Krisis Kronis (Dip 63,6% di 2024)** |
-| **Kelautan & Perikanan (FPK)**| 60,2% | **62,4%** | +2,2% | **59,7%** | **184 Kursi** | **11,7%** | **Kritis Akut (5 Tahun < 65%)** |
-| **TOTAL KAMPUS UTAMA** | **80,8%** | **84,2%** | **+3,4%** | **81,4%** | **1.569 Kursi** | **100,0%** | **Batas Sehat Terlampaui Tipis** |
+| **Kedokteran (FK)** | 101,2% | **98,8%** | -2,4% | **97,0%** | **4 Kursi** | 0,2% | **Prima (Kompetitif)** |
+| **Kedokteran Hewan (FKH)** | 87,7% | **93,3%** | +5,6% | **91,0%** | **16 Kursi** | 0,9% | **Sehat Konsisten** |
+| **Ekonomi & Bisnis (FEB)** | 80,3% | **90,0%** | +9,7% | **87,6%** | **88 Kursi** | 5,1% | **Sehat Tumbuh** |
+| **FISIP** | 90,0% | **86,2%** | -3,8% | **86,7%** | **108 Kursi** | 6,3% | **Sehat Stabil** |
+| **MIPA (FMIPA)** | 80,0% | **83,1%** | +3,1% | **76,3%** | **110 Kursi** | 6,4% | *Rentan (Rata-rata 5-Thn < 80%)* |
+| **FKIP** | 79,1% | **82,3%** | +3,2% | **78,2%** | **421 Kursi** | **24,6%** | *Raksasa Rentan (Episentrum Defisit)* |
+| **Keperawatan (FKep)** | 79,4% | **81,9%** | +2,5% | **80,7%** | **65 Kursi** | 3,8% | **Sehat Moderat** |
+| **Teknik (FT)** | 77,2% | **78,4%** | +1,2% | **77,6%** | **402 Kursi** | **23,5%** | *Raksasa Rentan (Defisit Masif)* |
+| **Pertanian (FP)** | 71,4% | **70,4%** | -1,0% | **67,6%** | **314 Kursi** | **18,3%** | **Krisis Kronis (Dip 63,6% di 2024)** |
+| **Kelautan & Perikanan (FPK)**| 60,2% | **62,4%** | +2,2% | **59,8%** | **184 Kursi** | **10,7%** | **Kritis Akut (5 Tahun < 65%)** |
+| **TOTAL KAMPUS UTAMA** | **80,2%** | **82,3%** | **+2,1%** | **79,5%** | **1.714 Kursi** | **100,0%** | **Batas Sehat Terlampaui Tipis** |
 
 #### Tiga Temuan Kritis Kinerja Fakultas:
 
 1. **Ilusi Kestabilan pada Fakultas Pertanian (Kelemahan Fatal Analisis 2 Titik):**
    * Jika analis hanya membandingkan tahun 2022 (71,4%) dengan tahun 2026 (71,4%), kesimpulan yang ditarik adalah *"Fakultas Pertanian stabil tanpa perubahan"*.
    * **Fakta Melalui Lintasan 5 Tahun:** Pertanian sebenarnya mengalami guncangan krisis hebat pada tahun 2023 (64,3%) dan 2024 (63,6%), sebelum perlahan merangkak kembali ke 71,4%. Rata-rata 5 tahun Pertanian hanya **67,9%**, membuktikan adanya masalah struktural peminat yang belum terselesaikan.
-2. **Episentrum Bangku Kosong Terkonsentrasi pada 3 Fakultas (1.022 Kursi Kosong):**
-   * Meskipun FKIP dan Teknik berhasil melampaui batas keterisian sehat 80% pada tahun 2026 (masing-masing 82,3% dan 82,8%), **keduanya merupakan penyumbang kursi kosong terbesar di universitas**.
-   * FKIP mencatatkan **421 kursi kosong (26,8% total defisit)** dan Teknik mencatatkan **302 kursi kosong (19,2% total defisit)**. Bersama Pertanian (299 kursi), ketiga fakultas ini menampung **65,1% dari seluruh bangku kosong di kampus utama S1 USK**!
+2. **Episentrum Bangku Kosong Terkonsentrasi pada 3 Fakultas (1.137 Kursi Kosong):**
+   * Meskipun FKIP berhasil melampaui batas keterisian sehat 80% pada tahun 2026 (82,3%) dan Teknik mencapai 78,4%, **keduanya merupakan penyumbang kursi kosong terbesar di universitas**.
+   * FKIP mencatatkan **421 kursi kosong (24,6% total defisit S1)** dan Teknik mencatatkan **402 kursi kosong (23,5% total defisit S1)**. Bersama Pertanian (314 kursi), ketiga fakultas ini menampung **1.137 kursi kosong atau 66,3% dari seluruh bangku kosong di kampus utama S1 USK**!
 3. **Zona Merah Permanen Fakultas Kelautan & Perikanan (FPK):**
-   * FPK adalah satu-satunya fakultas di USK yang selama 5 tahun berturut-turut tidak pernah mampu mencapai angka keterisian 65% (rata-rata 5 tahun hanya 59,7%). Tingkat keketatan seleksinya sangat rendah (1,42 : 1), mengindikasikan bahwa hampir semua pendaftar otomatis diterima namun tetap tidak mampu memenuhi kuota.
+   * FPK adalah satu-satunya fakultas di USK yang selama 5 tahun berturut-turut tidak pernah mampu mencapai angka keterisian 65% (rata-rata 5 tahun hanya 59,8%). Tingkat keketatan seleksinya sangat rendah (1,42 : 1), mengindikasikan bahwa hampir semua pendaftar otomatis diterima namun tetap tidak mampu memenuhi kuota.
 
 ---
 
-### 9.2 Diagnostik Mendalam Tingkat Program Studi S1: Menembus Akar Masalah 1.569 Kursi Kosong
+### 9.2 Diagnostik Mendalam Tingkat Program Studi S1: Menembus Akar Masalah 1.714 Kursi Kosong
 
 Analisis tingkat fakultas memberikan gambaran makro, namun **tingkat program studi adalah tempat di mana keputusan alokasi kuota riil dieksekusi**. Melalui evaluasi 66 program studi S1 di kampus utama, terungkap bahwa krisis bangku kosong USK mengikuti **Prinsip Pareto (Aturan 80/20)** secara nyata:
 
 ![Diagnostik Program Studi](grafik/16_analisa_keterisian_dan_kursi_kosong_program_studi.png)
 
-#### 1. Episentrum Defisit Bangku Kosong: 15 Program Studi Menyerap 48,4% Kursi Kosong USK
+#### 1. Episentrum Defisit Bangku Kosong: 15 Program Studi Menyerap 48,2% Kursi Kosong USK
 
-Dari total 1.569 kursi kosong di jenjang Sarjana (S1) Kampus Utama pada tahun 2026, sebanyak **759 kursi kosong (48,4% atau hampir separuh defisit kampus)** terkonsentrasi hanya pada **15 program studi (22,7% dari total prodi)** berikut:
+Dari total 1.714 kursi kosong di jenjang Sarjana (S1) Kampus Utama pada tahun 2026, sebanyak **826 kursi kosong (48,2% dari total defisit kampus)** terkonsentrasi hanya pada **15 program studi** berikut:
 
 | No | Program Studi S1 | Fakultas | Daya Tampung 2026 | Daftar Ulang 2026 | Kursi Kosong (Defisit) | Keterisian 2026 (%) | Rata-rata Keterisian 5-Thn | Diagnosis Akar Masalah |
 | :-: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 1 | **Budidaya Perairan** | FPK | 160 | 90 | **70 Kursi** | 56,2% | 54,3% | *Krisis Minat Kronis (5 Thn <55%)* |
-| 2 | **Ilmu Keperawatan** | FKep | 360 | 295 | **65 Kursi** | 81,9% | 80,7% | *Over-Ekspansi Kuota Masif (160 ke 360)* |
-| 3 | **Teknik Kimia** | FT | 180 | 120 | **60 Kursi** | 66,7% | 64,6% | *Kuota Terlampau Besar vs Minat Industri Lokal* |
-| 4 | **Teknologi Hasil Pertanian**| FP | 160 | 102 | **58 Kursi** | 63,7% | 61,7% | *Defisit Serapan Kronis* |
-| 5 | **Pendidikan Ekonomi** | FKIP | 160 | 103 | **57 Kursi** | 64,4% | 68,0% | *Kelebihan Pasokan Guru di Pasar Daerah* |
-| 6 | **Pemanfaatan Sumberdaya Perikanan** | FPK | 120 | 67 | **53 Kursi** | 55,8% | 57,6% | *Stigma Lapangan Berat & Minat Pendaftar Rendah* |
-| 7 | **Teknik Elektro** | FT | 160 | 112 | **48 Kursi** | 70,0% | 68,1% | *Target Kuota Terlalu Agresif* |
-| 8 | **Ilmu Kelautan** | FPK | 160 | 113 | **47 Kursi** | 70,6% | 67,3% | *Rasio Konversi Rendah di Jalur Akhir* |
-| 9 | **Peternakan** | FP | 145 | 98 | **47 Kursi** | 67,6% | 67,7% | *Stagnasi Pasar Peminat Tradisional* |
-| 10 | **Pendidikan Kimia** | FKIP | 120 | 75 | **45 Kursi** | 62,5% | 58,8% | *Kejenuhan Serapan Guru Sains di Sekolah* |
-| 11 | **Sosiologi** | FISIP | 135 | 92 | **43 Kursi** | 68,1% | 69,1% | *Kalah Bersaing dengan Komunikasi/Ilmu Pem.* |
-| 12 | **Ilmu Tanah** | FP | 120 | 78 | **42 Kursi** | 65,0% | 64,3% | *Persepsi Karir Kurang Menjanjikan* |
-| 13 | **Pendidikan Fisika** | FKIP | 120 | 78 | **42 Kursi** | 65,0% | 56,2% | *Krisis Minat Pendaftar Ilmu Dasar Sains* |
-| 14 | **Pendidikan Matematika** | FKIP | 120 | 79 | **41 Kursi** | 65,8% | 66,5% | *Target Kuota Tidak Realistis* |
-| 15 | **Pendidikan Geografi** | FKIP | 160 | 119 | **41 Kursi** | 74,4% | 70,3% | *Kapasitas Kelas Terlalu Lebar* |
-| - | **TOTAL 15 PRODI EPISENTRUM** | - | **2.405** | **1.646** | **759 Kursi** | **68,4%** | **66,2%** | **Menyumbang 48,4% Total Kursi Kosong USK** |
+| 1 | **Budidaya Perairan** | FPK | 160 | 90 | **70 Kursi** | 56,2% | 54,4% | *Krisis Minat Kronis (5 Thn <55%)* |
+| 2 | **Sosiologi** | FISIP | 160 | 92 | **68 Kursi** | 57,5% | 67,1% | *Target Kuota Terlalu Agresif vs Minat* |
+| 3 | **Teknik Perminyakan** | FT | 120 | 52 | **68 Kursi** | 43,3% | 71,6% | *Koreksi Daya Tampung SK 120 vs Realisasi* |
+| 4 | **Ilmu Keperawatan** | FKep | 360 | 295 | **65 Kursi** | 81,9% | 80,7% | *Over-Ekspansi Kuota Masif (160 ke 360)* |
+| 5 | **Peternakan** | FP | 160 | 98 | **62 Kursi** | 61,3% | 66,4% | *Stagnasi Pasar Peminat Tradisional* |
+| 6 | **Teknik Kimia** | FT | 180 | 120 | **60 Kursi** | 66,7% | 64,6% | *Kuota Terlampau Besar vs Minat Industri Lokal* |
+| 7 | **Teknologi Hasil Pertanian**| FP | 160 | 102 | **58 Kursi** | 63,7% | 61,9% | *Defisit Serapan Kronis* |
+| 8 | **Pendidikan Ekonomi** | FKIP | 160 | 103 | **57 Kursi** | 64,4% | 68,9% | *Kelebihan Pasokan Guru di Pasar Daerah* |
+| 9 | **Pemanfaatan Sumberdaya Perikanan** | FPK | 120 | 67 | **53 Kursi** | 55,8% | 57,7% | *Stigma Lapangan Berat & Minat Pendaftar Rendah* |
+| 10 | **Teknik Elektro** | FT | 160 | 112 | **48 Kursi** | 70,0% | 67,8% | *Target Kuota Terlalu Agresif* |
+| 11 | **Ilmu Kelautan** | FPK | 160 | 113 | **47 Kursi** | 70,6% | 67,2% | *Rasio Konversi Rendah di Jalur Akhir* |
+| 12 | **Pendidikan Kimia** | FKIP | 120 | 75 | **45 Kursi** | 62,5% | 58,7% | *Kejenuhan Serapan Guru Sains di Sekolah* |
+| 13 | **Pendidikan Fisika** | FKIP | 120 | 78 | **42 Kursi** | 65,0% | 56,9% | *Krisis Minat Pendaftar Ilmu Dasar Sains* |
+| 14 | **Ilmu Tanah** | FP | 120 | 78 | **42 Kursi** | 65,0% | 64,5% | *Persepsi Karir Kurang Menjanjikan* |
+| 15 | **Pendidikan Matematika** | FKIP | 120 | 79 | **41 Kursi** | 65,8% | 66,6% | *Target Kuota Tidak Realistis* |
+| - | **TOTAL 15 PRODI EPISENTRUM** | - | **2.440** | **1.614** | **826 Kursi** | **66,1%** | **65,9%** | **Menyumbang 48,2% Total Kursi Kosong S1** |
 
 #### 2. Polarisasi Ekstrem: Fenomena Dua Dunia di Bawah Satu Kampus
 
@@ -700,11 +709,11 @@ Evaluasi multi-tahun 11 program studi D3 di lingkungan USK sepanjang 2023–2026
 | **2023** | 595 Kursi | **199 Mahasiswa** | 396 Kursi Kosong | **33,4%** |
 | **2024** | 630 Kursi | **286 Mahasiswa** | 344 Kursi Kosong | **45,4%** |
 | **2025** | 670 Kursi | **347 Mahasiswa** | 323 Kursi Kosong | **51,8%** |
-| **2026** | 670 Kursi | **413 Mahasiswa** | 257 Kursi Kosong | **61,6%** |
-| **TOTAL 4 TAHUN** | **2.565 Kursi** | **1.245 Mahasiswa** | **1.320 Kursi Kosong** | **48,5% (Kumulatif)** |
+| **2026** | 670 Kursi | **344 Mahasiswa** | 326 Kursi Kosong | **51,3%** |
+| **TOTAL 4 TAHUN** | **2.565 Kursi** | **1.176 Mahasiswa** | **1.389 Kursi Kosong** | **45,8% (Kumulatif)** |
 
-* **Fakta Akumulasi:** Dalam rentang 4 tahun, USK membuka sebanyak 2.565 kursi untuk jenjang D3, namun hanya berhasil menjaring 1.245 mahasiswa. Artinya, **1.320 bangku (51,5% atau lebih dari separuh kuota yang dibuka) berakhir terbuang sia-sia**.
-* Meskipun terdapat tren pemulihan persentase (dari 33,4% di 2023 menjadi 61,6% di 2026), keterisian di angka 61% masih berada jauh di bawah ambang batas kelayakan ekonomi kelas perguruan tinggi (minimal 80%).
+* **Fakta Akumulasi:** Dalam rentang 4 tahun, USK membuka sebanyak 2.565 kursi untuk jenjang D3, namun hanya berhasil menjaring 1.176 mahasiswa. Artinya, **1.389 bangku (54,2% atau lebih dari separuh kuota yang dibuka) berakhir terbuang sia-sia**.
+* Meskipun terdapat tren kenaikan pendaftar ulang (dari 199 mhs di 2023 menjadi 344 mhs di 2026), keterisian di angka 51,3% masih berada jauh di bawah ambang batas kelayakan ekonomi kelas perguruan tinggi (minimal 80%).
 
 #### 2. Diagnostik Terperinci 11 Program Studi D3 Vokasi (Kinerja Historis 2023–2026)
 
@@ -712,18 +721,18 @@ Evaluasi granular per program studi menyingkap disparitas yang sangat tajam di a
 
 | No | Program Studi D3 | Total Kuota (4-Thn) | Total Masuk (4-Thn) | Akumulasi Kursi Kosong | Rata Keterisian 4-Thn (%) | Keterisian 2026 (%) | Status & Rekomendasi Kebijakan |
 | :-: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| 1 | **D3 Budidaya Peternakan** | 200 | 64 | **136 Kursi** | **32,0%** | 38,3% (23/60) | **Krisis Kritis — Urgensi Evaluasi Eksistensi** |
-| 2 | **D3 Manajemen Agribisnis** | 380 | 140 | **240 Kursi** | **36,8%** | 64,0% (64/100) | **Defisit Bangku Terbesar di Vokasi** |
-| 3 | **D3 Keuangan dan Perbankan**| 275 | 111 | **164 Kursi** | **40,4%** | 47,5% (38/80) | **Kritis — Kalah Saing dengan S1 FEB** |
-| 4 | **D3 Manajemen Perusahaan** | 170 | 76 | **94 Kursi** | **44,7%** | 60,0% (24/40) | *Rentan — Skala Kelas Terlalu Kecil* |
-| 5 | **D3 Sekretari** | 180 | 84 | **96 Kursi** | **46,7%** | 47,5% (19/40) | *Rentan — Relevansi Profesi Tergerus Digitalisasi* |
-| 6 | **D3 Teknik Sipil** | 280 | 132 | **148 Kursi** | **47,1%** | 71,2% (57/80) | *Potensial Konversi ke D4 Sarjana Terapan* |
+| 1 | **D3 Manajemen Agribisnis** | 380 | 103 | **277 Kursi** | **27,1%** | 27,0% (27/100) | **Defisit Bangku Terbesar di Vokasi — Moratorium** |
+| 2 | **D3 Budidaya Peternakan** | 200 | 64 | **136 Kursi** | **32,0%** | 38,3% (23/60) | **Krisis Kritis — Urgensi Evaluasi Eksistensi** |
+| 3 | **D3 Keuangan dan Perbankan**| 275 | 109 | **166 Kursi** | **39,6%** | 45,0% (36/80) | **Kritis — Kalah Saing dengan S1 FEB** |
+| 4 | **D3 Manajemen Perusahaan** | 170 | 70 | **100 Kursi** | **41,2%** | 45,0% (18/40) | *Rentan — Skala Kelas Terlalu Kecil* |
+| 5 | **D3 Sekretari** | 180 | 83 | **97 Kursi** | **46,1%** | 45,0% (18/40) | *Rentan — Relevansi Profesi Tergerus Digitalisasi* |
+| 6 | **D3 Teknik Sipil** | 280 | 130 | **150 Kursi** | **46,4%** | 68,8% (55/80) | *Potensial Konversi ke D4 Sarjana Terapan* |
 | 7 | **D3 Teknik Listrik** | 150 | 74 | **76 Kursi** | **49,3%** | 55,0% (22/40) | *Rentan — Peminat Terbatas* |
-| 8 | **D3 Akuntansi** | 290 | 160 | **130 Kursi** | **55,2%** | 67,5% (54/80) | *Cukup Stabil — Perlu Diferensiasi Terapan* |
-| 9 | **D3 Teknik Mesin** | 150 | 85 | **65 Kursi** | **56,7%** | 77,5% (31/40) | *Membaik Cepat di 2026 — Pertahankan Kuota Kecil* |
-| 10 | **D3 Kesehatan Hewan** | 170 | 99 | **71 Kursi** | **58,2%** | 53,3% (16/30) | *Spesialisasi Unik — Perlu Penguatan Kemitraan* |
-| 11 | **D3 Manajemen Informatika** | 320 | 220 | **100 Kursi** | **68,8%** | **81,2% (65/80)** | **Bintang Vokasi — Sehat & Menembus Target >80%** |
-| - | **TOTAL DIPLOMA 3** | **2.565** | **1.245** | **1.320 Kursi** | **48,5%** | **61,6% (413/670)** | **Evaluasi Menyeluruh Portofolio Vokasi** |
+| 8 | **D3 Teknik Mesin** | 150 | 77 | **73 Kursi** | **51,3%** | 57,5% (23/40) | *Perlu Penataan Kuota Kecil Terarah* |
+| 9 | **D3 Akuntansi** | 290 | 155 | **135 Kursi** | **53,4%** | 61,3% (49/80) | *Cukup Stabil — Perlu Diferensiasi Terapan* |
+| 10 | **D3 Kesehatan Hewan** | 170 | 98 | **72 Kursi** | **57,6%** | 50,0% (15/30) | *Spesialisasi Unik — Perlu Penguatan Kemitraan* |
+| 11 | **D3 Manajemen Informatika** | 320 | 213 | **107 Kursi** | **66,6%** | **72,5% (58/80)** | **Bintang Vokasi — Potensial D4 Sains Data** |
+| - | **TOTAL DIPLOMA 3** | **2.565** | **1.176** | **1.389 Kursi** | **45,8%** | **51,3% (344/670)** | **Evaluasi Menyeluruh Portofolio Vokasi** |
 
 #### 3. Tiga Akar Masalah Struktural Mengapa Peminat D3 Vokasi Anjlok
 
@@ -753,21 +762,21 @@ Evaluasi multi-tahun 4 program studi di Kampus PSDKU Gayo Lues (Blangkejeren) se
 | **2023** | 200 Kursi | **74 Mahasiswa** | 126 Kursi Kosong | **37,0%** | 63,0% Kosong |
 | **2024** | 220 Kursi | **56 Mahasiswa** | 164 Kursi Kosong | **25,5%** | 74,5% Kosong |
 | **2025** | 220 Kursi | **46 Mahasiswa** | 174 Kursi Kosong | **20,9%** | 79,1% Kosong |
-| **2026** | 220 Kursi | **51 Mahasiswa** | 169 Kursi Kosong | **23,2%** | 76,8% Kosong |
-| **TOTAL 5 TAHUN** | **1.050 Kursi** | **267 Mahasiswa** | **783 Kursi Kosong** | **25,4% (Kumulatif)** | **74,6% Mubazir** |
+| **2026** | 220 Kursi | **41 Mahasiswa** | 179 Kursi Kosong | **18,6%** | 81,4% Kosong |
+| **TOTAL 5 TAHUN** | **1.050 Kursi** | **257 Mahasiswa** | **793 Kursi Kosong** | **24,5% (Kumulatif)** | **75,5% Mubazir** |
 
-* **Fakta Inefisiensi Ekstrem:** Sepanjang 5 tahun, USK mengalokasikan sebanyak 1.050 kursi kuota untuk kampus PSDKU Gayo Lues, namun hanya berhasil merekrut **267 mahasiswa** dalam 5 angkatan digabungkan! 
-* Sebanyak **783 kursi (74,6% atau hampir tiga perempat kuota)** berakhir kosong melompong. Ini merupakan inefisiensi operasional dan beban subsidi universitas paling berat di seluruh ekosistem USK.
+* **Fakta Inefisiensi Ekstrem:** Sepanjang 5 tahun, USK mengalokasikan sebanyak 1.050 kursi kuota untuk kampus PSDKU Gayo Lues, namun hanya berhasil merekrut **257 mahasiswa** dalam 5 angkatan digabungkan! 
+* Sebanyak **793 kursi (75,5% atau lebih dari tiga perempat kuota)** berakhir kosong melompong. Ini merupakan inefisiensi operasional dan beban subsidi universitas paling berat di seluruh ekosistem USK.
 
 #### 2. Kinerja Terperinci 4 Program Studi PSDKU Gayo Lues
 
 | No | Program Studi PSDKU | Total Kuota (5-Thn) | Mahasiswa Masuk (5-Thn) | Akumulasi Kursi Kosong | Rata Keterisian 5-Thn (%) | Kinerja 2026 (DU/DT) | Status Evaluasi Historis |
 | :-: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| 1 | **Kehutanan (Gayo Lues)** | 280 Kursi | 61 Mhs | **219 Kursi** | **21,8%** | 18,3% (11/60) | **Krisis Terburuk Se-PSDKU** |
-| 2 | **Pendidikan Biologi (Gayo Lues)**| 210 Kursi | 51 Mhs | **159 Kursi** | **24,3%** | 37,5% (15/40) | **Defisit Minat Kronis** |
-| 3 | **Manajemen (Gayo Lues)** | 350 Kursi | 96 Mhs | **254 Kursi** | **27,4%** | 22,5% (18/80) | **Penyumbang Kursi Kosong Terbesar** |
-| 4 | **Agroteknologi (Gayo Lues)** | 210 Kursi | 59 Mhs | **151 Kursi** | **28,1%** | 17,5% (7/40) | **Rekor Terendah di 2026 (7 Mhs)** |
-| - | **TOTAL PSDKU GAYO LUES** | **1.050 Kursi** | **267 Mhs** | **783 Kursi** | **25,4%** | **23,2% (51/220)** | **Seluruh Prodi di Bawah 30% Keterisian** |
+| 1 | **Kehutanan (Gayo Lues)** | 280 Kursi | 59 Mhs | **221 Kursi** | **21,1%** | 15,0% (9/60) | **Krisis Terburuk Se-PSDKU** |
+| 2 | **Pendidikan Biologi (Gayo Lues)**| 210 Kursi | 49 Mhs | **161 Kursi** | **23,3%** | 32,5% (13/40) | **Defisit Minat Kronis** |
+| 3 | **Manajemen (Gayo Lues)** | 350 Kursi | 91 Mhs | **259 Kursi** | **26,0%** | 16,2% (13/80) | **Penyumbang Kursi Kosong Terbesar** |
+| 4 | **Agroteknologi (Gayo Lues)** | 210 Kursi | 58 Mhs | **152 Kursi** | **27,6%** | 15,0% (6/40) | **Rekor Terendah di 2026 (6 Mhs)** |
+| - | **TOTAL PSDKU GAYO LUES** | **1.050 Kursi** | **257 Mhs** | **793 Kursi** | **24,5%** | **18,6% (41/220)** | **Seluruh Prodi di Bawah 30% Keterisian** |
 
 #### 3. Tiga Faktor Penyebab Krisis & Rekomendasi Rasionalisasi Kuota
 
@@ -852,87 +861,87 @@ Sesuai butir 17 panduan tugas, analisis ini menyertakan rekomendasi pembaruan me
 
 | No | Program Studi | Klaster | Fakultas | PM 26 | DT 26 | DU 26 | FR 26 (%) | Ket 26 | Slope DU (mhs/thn) | CAGR DU (%/thn) | Kategori Tren |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| 1 | PENDIDIKAN DOKTER HEWAN | S1 Utama | Kedokteran Hewan | 920 | 240 | 224 | 93,3% | 3,8 | +8,5 | +3,8% | Tren Stabil |
-| 2 | TEKNIK SIPIL | S1 Utama | Teknik | 1.840 | 280 | 252 | 90,0% | 6,6 | +23,0 | +13,1% | Tren Meningkat |
-| 3 | TEKNIK MESIN | S1 Utama | Teknik | 780 | 120 | 98 | 81,7% | 6,5 | +0,2 | +0,5% | Tren Stabil |
-| 4 | TEKNIK KIMIA | S1 Utama | Teknik | 560 | 180 | 120 | 66,7% | 3,1 | +6,2 | +5,7% | Over-Ekspansi Kuota |
-| 5 | ARSITEKTUR | S1 Utama | Teknik | 1.250 | 160 | 131 | 81,9% | 7,8 | +3,1 | +3,1% | Tren Stabil |
-| 6 | TEKNIK ELEKTRO | S1 Utama | Teknik | 840 | 160 | 112 | 70,0% | 5,3 | +5,8 | +6,5% | Tren Fluktuatif |
-| 7 | AGROTEKNOLOGI | S1 Utama | Pertanian | 680 | 120 | 94 | 78,3% | 5,7 | +0,1 | +0,3% | Tren Stabil |
-| 8 | AGRIBISNIS | S1 Utama | Pertanian | 1.120 | 160 | 135 | 84,4% | 7,0 | +8,5 | +8,3% | Tren Meningkat |
-| 9 | PETERNAKAN | S1 Utama | Pertanian | 580 | 160 | 98 | 61,3% | 3,6 | +3,8 | +4,9% | Peminatan Relatif Rendah |
-| 10 | TEKNOLOGI HASIL PERTANIAN | S1 Utama | Pertanian | 490 | 160 | 102 | 63,8% | 3,1 | +12,4 | +18,3% | Over-Ekspansi Kuota |
-| 11 | TEKNIK PERTANIAN | S1 Utama | Pertanian | 520 | 140 | 101 | 72,1% | 3,7 | +1,8 | +2,1% | Tren Stabil |
-| 12 | PENDIDIKAN BIOLOGI | S1 Utama | FKIP | 640 | 120 | 86 | 71,7% | 5,3 | +0,4 | +0,6% | Tren Stabil |
-| 13 | PENDIDIKAN MATEMATIKA | S1 Utama | FKIP | 480 | 120 | 82 | 68,3% | 4,0 | 0,0 | 0,0% | Peminatan Relatif Rendah |
-| 14 | PENDIDIKAN FISIKA | S1 Utama | FKIP | 155 | 120 | 78 | 65,0% | 1,3 | -1,1 | -1,5% | Peminatan Relatif Rendah |
-| 15 | PENDIDIKAN KIMIA | S1 Utama | FKIP | 206 | 120 | 75 | 62,5% | 1,7 | -0,5 | -0,7% | Peminatan Relatif Rendah |
-| 16 | PENDIDIKAN PANCASILA (PPKn) | S1 Utama | FKIP | 390 | 80 | 64 | 80,0% | 4,9 | -0,4 | -0,8% | Tren Stabil |
-| 17 | PENDIDIKAN SEJARAH | S1 Utama | FKIP | 460 | 100 | 73 | 73,0% | 4,6 | +2,4 | +3,8% | Tren Stabil |
-| 18 | PENDIDIKAN EKONOMI | S1 Utama | FKIP | 590 | 160 | 103 | 64,4% | 3,7 | +6,2 | +6,9% | Over-Ekspansi Kuota |
-| 19 | PENDIDIKAN GEOGRAFI | S1 Utama | FKIP | 480 | 120 | 83 | 69,2% | 4,0 | -1,1 | -1,5% | Peminatan Relatif Rendah |
-| 20 | PENDIDIKAN BHS INDONESIA | S1 Utama | FKIP | 980 | 140 | 134 | 95,7% | 7,0 | +18,0 | +20,3% | Tren Meningkat |
-| 21 | PENDIDIKAN BHS INGGRIS | S1 Utama | FKIP | 1.150 | 140 | 114 | 81,4% | 8,2 | +4,6 | +4,9% | Tren Stabil |
-| 22 | PENJASKESREK | S1 Utama | FKIP | 890 | 200 | 198 | 99,0% | 4,5 | +22,3 | +17,8% | Tren Meningkat |
-| 23 | PENDIDIKAN KESEJAHTERAAN KLG | S1 Utama | FKIP | 540 | 120 | 82 | 68,3% | 4,5 | +0,4 | +0,6% | Peminatan Relatif Rendah |
-| 24 | ILMU HUKUM | S1 Utama | Hukum | 3.450 | 560 | 558 | 99,6% | 6,2 | +32,5 | +7,2% | Tren Meningkat |
-| 25 | EKONOMI PEMBANGUNAN | S1 Utama | FEB | 1.480 | 180 | 135 | 75,0% | 8,2 | -7,7 | -5,5% | Tren Menurun |
-| 26 | MANAJEMEN | S1 Utama | FEB | 2.823 | 250 | 199 | 79,6% | 11,3 | -16,4 | -7,0% | Tren Menurun |
-| 27 | AKUNTANSI | S1 Utama | FEB | 2.150 | 250 | 215 | 86,0% | 8,6 | +2,1 | +1,2% | Tren Stabil |
-| 28 | ILMU KEPERAWATAN | S1 Utama | Keperawatan | 2.680 | 360 | 295 | 81,9% | 7,4 | +38,4 | +23,5% | Tren Meningkat |
-| 29 | PENDIDIKAN DOKTER | S1 Utama | Kedokteran | 3.120 | 250 | 250 | 100,0% | 12,5 | -1,8 | -0,8% | Tren Stabil |
-| 30 | FISIKA | S1 Utama | MIPA | 94 | 80 | 42 | 52,5% | 1,2 | 0,0 | 0,0% | Peminatan Relatif Rendah |
-| 31 | KIMIA | S1 Utama | MIPA | 420 | 100 | 73 | 73,0% | 4,2 | +2,8 | +4,6% | Tren Stabil |
-| 32 | BIOLOGI | S1 Utama | MIPA | 460 | 80 | 61 | 76,3% | 5,8 | -0,2 | -0,4% | Tren Stabil |
-| 33 | MATEMATIKA | S1 Utama | MIPA | 390 | 80 | 56 | 70,0% | 4,9 | -2,9 | -4,4% | Tren Menurun |
-| 34 | INFORMATIKA | S1 Utama | MIPA | 2.174 | 110 | 117 | 106,4% | 19,8 | +9,8 | +11,8% | Tren Meningkat |
-| 35 | FARMASI | S1 Utama | MIPA | 3.526 | 90 | 89 | 98,9% | 39,2 | +5,2 | +7,4% | Tren Meningkat |
-| 36 | TEKNIK INDUSTRI | S1 Utama | Teknik | 920 | 130 | 105 | 80,8% | 7,1 | +2,2 | +2,5% | Tren Stabil |
-| 37 | BUDIDAYA PERAIRAN | S1 Utama | FPK | 145 | 160 | 90 | 56,3% | 0,9 | 0,0 | 0,0% | Over-Ekspansi Kuota |
-| 38 | PENDIDIKAN DOKTER GIGI | S1 Utama | Kedokteran Gigi | 1.840 | 100 | 100 | 100,0% | 18,4 | +4,2 | +5,1% | Tren Stabil |
-| 39 | TEKNIK GEOFISIKA | S1 Utama | Teknik | 310 | 80 | 51 | 63,8% | 3,9 | -1,8 | -3,6% | Tren Menurun |
-| 40 | TEKNIK PERTAMBANGAN | S1 Utama | Teknik | 1.735 | 90 | 83 | 92,2% | 19,3 | +4,1 | +5,9% | Tren Stabil |
-| 41 | ILMU TANAH | S1 Utama | Pertanian | 195 | 120 | 78 | 65,0% | 1,6 | +3,9 | +5,9% | Peminatan Relatif Rendah |
-| 42 | STATISTIKA | S1 Utama | MIPA | 680 | 100 | 81 | 81,0% | 6,8 | +2,4 | +3,4% | Tren Stabil |
-| 43 | PROTEKSI TANAMAN | S1 Utama | Pertanian | 105 | 80 | 49 | 61,3% | 1,3 | -1,2 | -2,4% | Peminatan Relatif Rendah |
-| 44 | PSP PERIKANAN | S1 Utama | FPK | 129 | 120 | 67 | 55,8% | 1,1 | -3,7 | -4,3% | Peminatan Relatif Rendah |
-| 45 | ILMU KELAUTAN | S1 Utama | FPK | 302 | 160 | 113 | 70,6% | 1,9 | -1,4 | -1,3% | Tren Stabil |
-| 46 | ILMU POLITIK | S1 Utama | FISIP | 720 | 120 | 111 | 92,5% | 6,0 | +8,9 | +10,7% | Tren Meningkat |
-| 47 | SOSIOLOGI | S1 Utama | FISIP | 680 | 120 | 92 | 76,7% | 5,7 | -4,0 | -3,9% | Tren Menurun |
-| 48 | ILMU KOMUNIKASI | S1 Utama | FISIP | 1.840 | 180 | 166 | 92,2% | 10,2 | +7,8 | +5,5% | Tren Meningkat |
-| 49 | ILMU PEMERINTAHAN | S1 Utama | FISIP | 980 | 140 | 134 | 95,7% | 7,0 | 0,0 | 0,0% | Tren Stabil |
-| 50 | PENDIDIKAN GURU PAUD | S1 Utama | FKIP | 420 | 90 | 76 | 84,4% | 4,7 | +2,1 | +3,2% | Tren Stabil |
-| 51 | PENDIDIKAN BHS SASTRA ACEH | S1 Utama | FKIP | 280 | 60 | 43 | 71,7% | 4,7 | -1,6 | -3,7% | Tren Stabil |
-| 52 | TEKNIK KOMPUTER | S1 Utama | Teknik | 1.420 | 140 | 145 | 103,6% | 10,1 | +14,8 | +14,3% | Tren Meningkat |
-| 53 | PGSD | S1 Utama | FKIP | 2.150 | 200 | 217 | 108,5% | 10,8 | +27,4 | +19,9% | Tren Meningkat |
-| 54 | PSIKOLOGI | S1 Utama | Kedokteran | 1.385 | 90 | 87 | 96,7% | 15,4 | +1,6 | +2,1% | Tren Stabil |
-| 55 | EKONOMI ISLAM | S1 Utama | FEB | 980 | 160 | 122 | 76,3% | 6,1 | -10,3 | -7,3% | Tren Menurun |
-| 56 | KEHUTANAN | S1 Utama | Pertanian | 680 | 90 | 89 | 98,9% | 7,6 | +8,9 | +14,9% | Tren Meningkat |
-| 57 | PENDIDIKAN KESENIAN | S1 Utama | FKIP | 310 | 65 | 55 | 84,6% | 4,8 | +1,6 | +3,5% | Tren Stabil |
-| 58 | TEKNIK GEOLOGI | S1 Utama | Teknik | 680 | 80 | 80 | 100,0% | 8,5 | +4,6 | +7,0% | Tren Stabil |
-| 59 | PERENCANAAN WILAYAH & KOTA | S1 Utama | Teknik | 790 | 90 | 84 | 93,3% | 8,8 | +5,4 | +8,3% | Tren Meningkat |
-| 60 | PENDIDIKAN IPA | S1 Utama | FKIP | 380 | 80 | 66 | 82,5% | 4,8 | +2,1 | +3,7% | Tren Stabil |
-| 61 | TEKNIK LINGKUNGAN | S1 Utama | Teknik | 680 | 80 | 77 | 96,3% | 8,5 | +3,6 | +5,6% | Tren Stabil |
-| 62 | PENDIDIKAN BIMBINGAN KONSELING| S1 Utama | FKIP | 690 | 90 | 87 | 96,7% | 7,7 | +4,8 | +6,8% | Tren Meningkat |
-| 63 | BISNIS DIGITAL | S1 Utama | FEB | 1.023 | 90 | 78 | 86,7% | 11,4 | 0,0 | — | Data Terbatas (Baru) |
-| 64 | TEKNIK PERMINYAKAN | S1 Utama | Teknik | 930 | 120 | 52 | 43,3% | 7,8 | 0,0 | — | Data Terbatas (Baru) |
-| 65 | HUBUNGAN INTERNASIONAL | S1 Utama | FISIP | 840 | 80 | 73 | 91,3% | 10,5 | 0,0 | — | Data Terbatas (Baru) |
-| 66 | TEKNIK SUMBER DAYA AIR | S1 Utama | Teknik | 310 | 80 | 52 | 65,0% | 3,9 | 0,0 | — | Data Terbatas (Baru) |
-| 67 | KESEHATAN HEWAN (D3) | D3 Vokasi | Kedokteran Hewan | 180 | 30 | 15 | 50,0% | 6,0 | 0,0 | — | Diploma 3 Vokasi |
-| 68 | MANAJEMEN AGRIBISNIS (D3) | D3 Vokasi | Pertanian | 140 | 100 | 27 | 27,0% | 1,4 | 0,0 | — | Diploma 3 Vokasi |
-| 69 | TEKNIK LISTRIK (D3) | D3 Vokasi | Teknik | 160 | 40 | 22 | 55,0% | 4,0 | 0,0 | — | Diploma 3 Vokasi |
-| 70 | BUDIDAYA PETERNAKAN (D3) | D3 Vokasi | Pertanian | 120 | 60 | 23 | 38,3% | 2,0 | 0,0 | — | Diploma 3 Vokasi |
-| 71 | TEKNIK MESIN (D3) | D3 Vokasi | Teknik | 150 | 40 | 23 | 57,5% | 3,8 | 0,0 | — | Diploma 3 Vokasi |
-| 72 | TEKNIK SIPIL (D3) | D3 Vokasi | Teknik | 310 | 80 | 55 | 68,8% | 3,9 | 0,0 | — | Diploma 3 Vokasi |
-| 73 | SEKRETARI (D3) | D3 Vokasi | FEB | 120 | 40 | 18 | 45,0% | 3,0 | 0,0 | — | Diploma 3 Vokasi |
-| 74 | MANAJEMEN PERUSAHAAN (D3) | D3 Vokasi | FEB | 140 | 40 | 18 | 45,0% | 3,5 | 0,0 | — | Diploma 3 Vokasi |
-| 75 | AKUNTANSI (D3) | D3 Vokasi | FEB | 280 | 80 | 49 | 61,3% | 3,5 | 0,0 | — | Diploma 3 Vokasi |
-| 76 | KEUANGAN DAN PERBANKAN (D3) | D3 Vokasi | FEB | 210 | 80 | 36 | 45,0% | 2,6 | 0,0 | — | Diploma 3 Vokasi |
-| 77 | MANAJEMEN INFORMATIKA (D3) | D3 Vokasi | MIPA | 390 | 80 | 58 | 72,5% | 4,9 | 0,0 | — | Diploma 3 Vokasi |
-| 78 | AGROTEKNOLOGI (GAYO LUES) | PSDKU | Pertanian | 42 | 40 | 6 | 15,0% | 1,1 | -1,1 | -9,6% | Peminatan Relatif Rendah |
-| 79 | PENDIDIKAN BIOLOGI (GAYO LUES) | PSDKU | FKIP | 78 | 40 | 13 | 32,5% | 2,0 | +2,4 | +59,6% | Peminatan Relatif Rendah |
-| 80 | KEHUTANAN (GAYO LUES) | PSDKU | Pertanian | 56 | 60 | 9 | 15,0% | 0,9 | -1,8 | -12,0% | Peminatan Relatif Rendah |
-| 81 | MANAJEMEN (GAYO LUES) | PSDKU | FEB | 84 | 80 | 13 | 16,3% | 1,1 | -0,4 | -1,8% | Peminatan Relatif Rendah |
+| 1 | PENDIDIKAN DOKTER HEWAN | S1 Utama | Kedokteran Hewan | 897 | 240 | 224 | 93,3% | 3,7 | +11,5 | +3,8% | Tren Fluktuatif |
+| 2 | TEKNIK SIPIL | S1 Utama | Teknik | 1.416 | 280 | 252 | 90,0% | 5,1 | +25,9 | +13,1% | Tren Meningkat |
+| 3 | TEKNIK MESIN | S1 Utama | Teknik | 726 | 120 | 98 | 81,7% | 6,0 | +1,8 | +0,5% | Tren Fluktuatif |
+| 4 | TEKNIK KIMIA | S1 Utama | Teknik | 438 | 180 | 120 | 66,7% | 2,4 | +7,9 | +5,7% | Peminatan Relatif Rendah |
+| 5 | ARSITEKTUR | S1 Utama | Teknik | 503 | 160 | 131 | 81,9% | 3,1 | +3,4 | +3,1% | Tren Fluktuatif |
+| 6 | TEKNIK ELEKTRO | S1 Utama | Teknik | 709 | 160 | 112 | 70,0% | 4,4 | +8,4 | +6,5% | Peminatan Relatif Rendah |
+| 7 | AGROTEKNOLOGI | S1 Utama | Pertanian | 617 | 120 | 94 | 78,3% | 5,1 | +1,2 | +0,3% | Tren Fluktuatif |
+| 8 | AGRIBISNIS | S1 Utama | Pertanian | 869 | 160 | 135 | 84,4% | 5,4 | +11,9 | +8,3% | Tren Fluktuatif |
+| 9 | PETERNAKAN | S1 Utama | Pertanian | 331 | 160 | 98 | 61,3% | 2,1 | +4,6 | +4,9% | Peminatan Relatif Rendah |
+| 10 | TEKNOLOGI HASIL PERTANIAN | S1 Utama | Pertanian | 510 | 160 | 102 | 63,7% | 3,2 | +14,2 | +18,3% | Peminatan Relatif Rendah |
+| 11 | TEKNIK PERTANIAN | S1 Utama | Pertanian | 550 | 140 | 101 | 72,1% | 3,9 | +4,9 | +2,1% | Peminatan Relatif Rendah |
+| 12 | PENDIDIKAN BIOLOGI | S1 Utama | FKIP | 638 | 120 | 86 | 71,7% | 5,3 | +0,4 | +0,6% | Tren Fluktuatif |
+| 13 | PENDIDIKAN MATEMATIKA | S1 Utama | FKIP | 448 | 120 | 79 | 65,8% | 3,7 | -0,9 | -0,9% | Peminatan Relatif Rendah |
+| 14 | PENDIDIKAN FISIKA | S1 Utama | FKIP | 155 | 120 | 78 | 65,0% | 1,3 | +3,5 | +4,7% | Peminatan Relatif Rendah |
+| 15 | PENDIDIKAN KIMIA | S1 Utama | FKIP | 206 | 120 | 75 | 62,5% | 1,7 | +4,4 | +4,0% | Peminatan Relatif Rendah |
+| 16 | PENDIDIKAN DOKTER | S1 Utama | Kedokteran | 2.003 | 250 | 250 | 100,0% | 8,0 | +2,5 | -0,8% | Tren Stabil |
+| 17 | ILMU KEPERAWATAN | S1 Utama | Keperawatan | 1.588 | 360 | 295 | 81,9% | 4,4 | +45,2 | +23,4% | Tren Meningkat |
+| 18 | PENDIDIKAN DOKTER GIGI | S1 Utama | Kedokteran Gigi | 1.204 | 100 | 100 | 100,0% | 12,0 | +5,4 | +5,1% | Tren Fluktuatif |
+| 19 | MATEMATIKA | S1 Utama | MIPA | 185 | 80 | 56 | 70,0% | 2,3 | -2,1 | -4,4% | Peminatan Relatif Rendah |
+| 20 | FISIKA | S1 Utama | MIPA | 94 | 80 | 42 | 52,5% | 1,2 | +0,9 | 0,0% | Peminatan Relatif Rendah |
+| 21 | KIMIA | S1 Utama | MIPA | 195 | 80 | 61 | 76,2% | 2,4 | -1,4 | -1,6% | Peminatan Relatif Rendah |
+| 22 | BIOLOGI | S1 Utama | MIPA | 485 | 80 | 68 | 85,0% | 6,1 | +0,8 | -0,7% | Tren Fluktuatif |
+| 23 | ILMU KELAUTAN | S1 Utama | Kelautan dan Perikanan | 302 | 160 | 113 | 70,6% | 1,9 | -3,1 | -1,3% | Peminatan Relatif Rendah |
+| 24 | BUDIDAYA PERAIRAN | S1 Utama | Kelautan dan Perikanan | 145 | 160 | 90 | 56,2% | 0,9 | +0,4 | 0,0% | Peminatan Relatif Rendah |
+| 25 | TEKNIK INDUSTRI | S1 Utama | Teknik | 1.052 | 120 | 109 | 90,8% | 8,8 | +6,7 | +3,8% | Tren Fluktuatif |
+| 26 | INFORMATIKA | S1 Utama | MIPA | 2.174 | 120 | 117 | 97,5% | 18,1 | +9,4 | +7,1% | Tren Meningkat |
+| 27 | FARMASI | S1 Utama | MIPA | 3.526 | 90 | 89 | 98,9% | 39,2 | +9,0 | +10,8% | Tren Meningkat |
+| 28 | TEKNIK GEOFISIKA | S1 Utama | Teknik | 209 | 80 | 51 | 63,7% | 2,6 | -2,1 | -3,6% | Peminatan Relatif Rendah |
+| 29 | TEKNIK PERTAMBANGAN | S1 Utama | Teknik | 1.735 | 120 | 118 | 98,3% | 14,5 | +12,2 | +11,6% | Tren Meningkat |
+| 30 | STATISTIKA | S1 Utama | MIPA | 537 | 120 | 107 | 89,2% | 4,5 | +6,2 | +5,0% | Tren Fluktuatif |
+| 31 | PEMANFAATAN SUMBERDAYA PERIKANAN | S1 Utama | Kelautan dan Perikanan | 129 | 120 | 67 | 55,8% | 1,1 | -3,8 | -4,3% | Peminatan Relatif Rendah |
+| 32 | ILMU TANAH | S1 Utama | Pertanian | 195 | 120 | 78 | 65,0% | 1,6 | +6,6 | +9,1% | Peminatan Relatif Rendah |
+| 33 | TEKNIK GEOLOGI | S1 Utama | Teknik | 470 | 80 | 78 | 97,5% | 5,9 | +4,5 | +5,5% | Tren Fluktuatif |
+| 34 | AGROTEKNOLOGI (PDD GAYO LUES) | PSDKU | PSDKU Gayo Lues | 21 | 40 | 6 | 15,0% | 0,5 | -1,0 | -9,6% | Peminatan Relatif Rendah (PSDKU) |
+| 35 | PENDIDIKAN BIOLOGI  (PDD GAYO LUES) | PSDKU | PSDKU Gayo Lues | 24 | 40 | 13 | 32,5% | 0,6 | +2,0 | +59,7% | Peminatan Relatif Rendah (PSDKU) |
+| 36 | KEHUTANAN (PDD GAYO LUES) | PSDKU | PSDKU Gayo Lues | 28 | 60 | 9 | 15,0% | 0,5 | -2,2 | -12,0% | Peminatan Relatif Rendah (PSDKU) |
+| 37 | PROTEKSI TANAMAN | S1 Utama | Pertanian | 105 | 80 | 49 | 61,3% | 1,3 | +0,1 | -2,4% | Peminatan Relatif Rendah |
+| 38 | PERENCANAAN WILAYAH DAN KOTA | S1 Utama | Teknik | 669 | 120 | 90 | 75,0% | 5,6 | +9,3 | +13,6% | Tren Meningkat |
+| 39 | KEHUTANAN | S1 Utama | Pertanian | 416 | 120 | 89 | 74,2% | 3,5 | +8,7 | +14,9% | Peminatan Relatif Rendah |
+| 40 | TEKNIK KOMPUTER | S1 Utama | Teknik | 1.466 | 160 | 145 | 90,6% | 9,2 | +15,6 | +14,3% | Tren Meningkat |
+| 41 | EKONOMI PEMBANGUNAN | S1 Utama | Ekonomi dan Bisnis | 694 | 160 | 135 | 84,4% | 4,3 | -6,4 | -5,5% | Tren Menurun |
+| 42 | MANAJEMEN | S1 Utama | Ekonomi dan Bisnis | 2.823 | 200 | 199 | 99,5% | 14,1 | -16,2 | -7,0% | Tren Menurun |
+| 43 | AKUNTANSI | S1 Utama | Ekonomi dan Bisnis | 2.008 | 200 | 199 | 99,5% | 10,0 | +0,3 | -0,4% | Tren Stabil |
+| 44 | ILMU HUKUM | S1 Utama | Hukum | 3.720 | 560 | 558 | 99,6% | 6,6 | +36,3 | +7,2% | Tren Meningkat |
+| 45 | PENDIDIKAN PANCASILA DAN KEWARGANEGARAAN | S1 Utama | FKIP | 1.025 | 140 | 129 | 92,1% | 7,3 | +12,8 | +13,8% | Tren Meningkat |
+| 46 | PENDIDIKAN SEJARAH | S1 Utama | FKIP | 643 | 120 | 84 | 70,0% | 5,4 | +4,4 | +3,2% | Tren Fluktuatif |
+| 47 | PENDIDIKAN EKONOMI | S1 Utama | FKIP | 404 | 160 | 103 | 64,4% | 2,5 | +7,6 | +6,9% | Tren Fluktuatif |
+| 48 | PENDIDIKAN GEOGRAFI | S1 Utama | FKIP | 494 | 160 | 119 | 74,4% | 3,1 | +12,5 | +13,8% | Tren Meningkat |
+| 49 | PENDIDIKAN BAHASA INDONESIA | S1 Utama | FKIP | 1.294 | 160 | 134 | 83,8% | 8,1 | +18,2 | +20,3% | Tren Meningkat |
+| 50 | PENDIDIKAN BAHASA INGGRIS | S1 Utama | FKIP | 1.111 | 160 | 149 | 93,1% | 6,9 | +12,2 | +7,2% | Tren Fluktuatif |
+| 51 | PENDIDIKAN SENI DRAMA TARI DAN MUSIK | S1 Utama | FKIP | 386 | 120 | 111 | 92,5% | 3,2 | +2,7 | +2,1% | Tren Stabil |
+| 52 | PENDIDIKAN KESEJAHTERAAN KELUARGA | S1 Utama | FKIP | 943 | 160 | 149 | 93,1% | 5,9 | +15,7 | +13,1% | Tren Meningkat |
+| 53 | PENDIDIKAN JASMANI KESEHATAN DAN REKREASI | S1 Utama | FKIP | 812 | 200 | 198 | 99,0% | 4,1 | +27,5 | +17,8% | Tren Meningkat |
+| 54 | BIMBINGAN KONSELING | S1 Utama | FKIP | 1.754 | 150 | 145 | 96,7% | 11,7 | +14,6 | +11,4% | Tren Meningkat |
+| 55 | PENDIDIKAN GURU SEKOLAH DASAR | S1 Utama | FKIP | 2.175 | 230 | 217 | 94,3% | 9,5 | +32,0 | +19,9% | Tren Meningkat |
+| 56 | PSIKOLOGI | S1 Utama | Kedokteran | 1.385 | 80 | 76 | 95,0% | 17,3 | +0,9 | 0,0% | Tren Stabil |
+| 57 | ILMU POLITIK | S1 Utama | FISIP | 499 | 180 | 146 | 81,1% | 2,8 | +5,7 | +4,2% | Tren Fluktuatif |
+| 58 | SOSIOLOGI | S1 Utama | FISIP | 519 | 160 | 92 | 57,5% | 3,2 | -4,9 | -3,9% | Peminatan Relatif Rendah |
+| 59 | ILMU KOMUNIKASI | S1 Utama | FISIP | 1.788 | 180 | 180 | 100,0% | 9,9 | +12,5 | +6,5% | Tren Fluktuatif |
+| 60 | PENDIDIKAN GURU PAUD | S1 Utama | FKIP | 764 | 140 | 103 | 73,6% | 5,5 | +5,7 | +4,9% | Tren Meningkat |
+| 61 | ILMU PEMERINTAHAN | S1 Utama | FISIP | 1.220 | 180 | 181 | 100,6% | 6,8 | +13,6 | +8,2% | Tren Meningkat |
+| 62 | EKONOMI ISLAM | S1 Utama | Ekonomi dan Bisnis | 595 | 160 | 122 | 76,2% | 3,7 | -9,3 | -7,3% | Tren Menurun |
+| 63 | MANAJEMEN (PDD GAYO LUES) | PSDKU | PSDKU Gayo Lues | 29 | 80 | 13 | 16,2% | 0,4 | -1,4 | -1,8% | Peminatan Relatif Rendah (PSDKU) |
+| 64 | AKUNTANSI PERPAJAKAN | S1 Utama | Ekonomi dan Bisnis | 1.794 | 80 | 59 | 73,8% | 22,4 | +12,1 | +46,0% | Peminatan Relatif Rendah |
+| 65 | KESEHATAN HEWAN | D3 Vokasi | Kedokteran Hewan | 572 | 30 | 15 | 50,0% | 19,1 | -13,6 | — | Data Terbatas (Prodi Baru) |
+| 66 | MANAJEMEN AGRIBISNIS | D3 Vokasi | Pertanian | 801 | 100 | 27 | 27,0% | 8,0 | +3,3 | — | Data Terbatas (Prodi Baru) |
+| 67 | TEKNIK LISTRIK | D3 Vokasi | Teknik | 281 | 40 | 22 | 55,0% | 7,0 | +3,4 | — | Data Terbatas (Prodi Baru) |
+| 68 | BUDIDAYA PETERNAKAN | D3 Vokasi | Pertanian | 454 | 60 | 23 | 38,3% | 7,6 | +5,4 | — | Data Terbatas (Prodi Baru) |
+| 69 | TEKNIK MESIN | D3 Vokasi | Teknik | 468 | 40 | 23 | 57,5% | 11,7 | +3,7 | — | Data Terbatas (Prodi Baru) |
+| 70 | TEKNIK SIPIL | D3 Vokasi | Teknik | 925 | 80 | 55 | 68,8% | 11,6 | +8,0 | — | Data Terbatas (Prodi Baru) |
+| 71 | SEKRETARI | D3 Vokasi | Ekonomi dan Bisnis | 342 | 40 | 18 | 45,0% | 8,6 | -2,5 | — | Data Terbatas (Prodi Baru) |
+| 72 | MANAJEMEN PERUSAHAAN | D3 Vokasi | Ekonomi dan Bisnis | 929 | 40 | 18 | 45,0% | 23,2 | +3,6 | — | Data Terbatas (Prodi Baru) |
+| 73 | AKUNTANSI | D3 Vokasi | Ekonomi dan Bisnis | 1.048 | 80 | 49 | 61,3% | 13,1 | +9,7 | — | Data Terbatas (Prodi Baru) |
+| 74 | KEUANGAN DAN PERBANKAN | D3 Vokasi | Ekonomi dan Bisnis | 1.119 | 80 | 36 | 45,0% | 14,0 | +2,0 | — | Data Terbatas (Prodi Baru) |
+| 75 | MANAJEMEN INFORMATIKA | D3 Vokasi | MIPA | 1.331 | 80 | 58 | 72,5% | 16,6 | +8,7 | — | Data Terbatas (Prodi Baru) |
+| 76 | TEKNOLOGI INDUSTRI HASIL PERIKANAN | S1 Utama | Kelautan dan Perikanan | 103 | 50 | 36 | 72,0% | 2,1 | -0,3 | — | Data Terbatas (Prodi Baru) |
+| 77 | TEKNIK LINGKUNGAN | S1 Utama | Teknik | 526 | 80 | 50 | 62,5% | 6,6 | 0,0 | — | Data Terbatas (Prodi Baru) |
+| 78 | TEKNIK SUMBER DAYA AIR | S1 Utama | Teknik | 122 | 80 | 52 | 65,0% | 1,5 | 0,0 | — | Data Terbatas (Prodi Baru) |
+| 79 | BISNIS DIGITAL | S1 Utama | Ekonomi dan Bisnis | 1.023 | 80 | 78 | 97,5% | 12,8 | 0,0 | — | Data Terbatas (Prodi Baru) |
+| 80 | TEKNIK PERMINYAKAN | S1 Utama | Teknik | 930 | 120 | 52 | 43,3% | 7,8 | 0,0 | — | Data Terbatas (Prodi Baru) |
+| 81 | HUBUNGAN INTERNASIONAL | S1 Utama | FISIP | 188 | 80 | 73 | 91,2% | 2,4 | 0,0 | — | Data Terbatas (Prodi Baru) |
 
 ---
 
