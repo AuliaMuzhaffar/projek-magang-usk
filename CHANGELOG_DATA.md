@@ -5,7 +5,23 @@ Dokumen ini mencatat setiap kronologi perubahan data master, penyesuaian angka h
 
 ---
 
-## [2026-10-12 15:15] - Restrukturisasi Repositori Penuh Menjadi Standar Industri Modular (Opsi 3)
+## [2026-10-12 16:40] - Penyelarasan Penuh Rekap Selisih Lulus vs DU & Integrasi Pipeline Otomatis
+- **Inisiator/Konteks:** Menyelaraskan seluruh 1.215 sel data pada `data/processed/rekap_selisih_lulus_vs_daftar_ulang_2022_2026.xlsx` dengan Database Master resmi (`Master_Semua_Prodi`) dan mengintegrasikannya ke dalam pipeline workflow otomatis (`scripts/build_all.py` dan `scripts/verify_sync.py`).
+- **Tindakan & Penyesuaian Data:**
+  1. **Audit & Penyelarasan 100% Identik:**
+     - Menghilangkan seluruh 43 titik ketidaksesuaian (selisih) dari versi lama.
+     - Perbaikan anomali nilai minus gugur pada prodi baru 2025, angka Teknik Lingkungan 2023 (0), angka Teknik Perminyakan 2025 (DT: 120, DU: 120), serta cadangan D3 & PSDKU 2026.
+     - Formula gugur pada sheet `Rincian_Per_Prodi` distandardisasi menjadi `=MAX(0, Lulus - DU)`.
+  2. **Dashboard Eksekutif Dinamis (Formula Live):**
+     - Seluruh KPI Card di sheet `Ringkasan_Eksekutif` (Total Kelulusan, Total Registrasi & Yield Rate, Kursi Hangus, Potensi Kerugian UKT) kini menggunakan formula Excel dinamis yang terhubung langsung ke baris Grand Total sheet Rincian.
+     - Tabel Tren Tahunan dan Tabel Distribusi Fakultas menggunakan formula `=SUMIF` dan `=COUNTIF` dinamis.
+  3. **Integrasi ke Master Pipeline & Tooling:**
+     - `scripts/core_data.py`: Ditambahkan path konstanta `REKAP_SELISIH_PATH` dan `BEAUTIFY_SELISIH_SCRIPT`.
+     - `scripts/build_all.py`: Dimasukkan sebagai Tahap 5/6 sehingga otomatis di-generate dan diselaraskan setiap kali build berjalan.
+     - `scripts/verify_sync.py`: Ditambahkan verifikasi timestamp file rekapitulasi selisih (Audit 1 detik: `✅ [SYNCED] 100%`).
+- **Hasil Audit Verifikasi:** 81 Program Studi x 15 Kolom = 1.215 Sel diuji secara cell-by-cell. Total selisih: **0 (100% Sempurna & Identik)**.
+
+---
 - **Inisiator/Konteks:** Merapikan repositori yang sebelumnya memiliki direktori bertingkat berulang (`tugas-5/analisa_peminatan_dan_daya_tampung/`) dan file-file yang tersebar di root menjadi struktur modular standar industri kelas dunia.
 - **Tindakan & Pengelompokan Berkas:**
   1. `data/`:

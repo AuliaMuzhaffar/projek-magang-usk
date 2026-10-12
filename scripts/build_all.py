@@ -95,15 +95,16 @@ def main():
 
     if not html_only:
         steps.extend([
-            ("Tahap 1/5: Generate Charts Reguler (1-17)", os.path.join(scripts_dir, "generate_charts.py")),
-            ("Tahap 2/5: Generate Matriks All Labels (66 Prodi)", os.path.join(scripts_dir, "generate_chart13_all_labels.py")),
-            ("Tahap 3/5: Generate Matriks 60 Prodi Mapan", os.path.join(scripts_dir, "generate_chart13_tanpa_prodi_baru.py")),
-            ("Tahap 4/5: Generate Direktori Roster Kuadran", os.path.join(scripts_dir, "generate_slide2_direktori.py")),
+            ("Tahap 1/6: Generate Charts Reguler (1-17)", os.path.join(scripts_dir, "generate_charts.py")),
+            ("Tahap 2/6: Generate Matriks All Labels (66 Prodi)", os.path.join(scripts_dir, "generate_chart13_all_labels.py")),
+            ("Tahap 3/6: Generate Matriks 60 Prodi Mapan", os.path.join(scripts_dir, "generate_chart13_tanpa_prodi_baru.py")),
+            ("Tahap 4/6: Generate Direktori Roster Kuadran", os.path.join(scripts_dir, "generate_slide2_direktori.py")),
+            ("Tahap 5/6: Generate & Sinkronkan Rekap Selisih Lulus vs DU", os.path.join(scripts_dir, "beautify_selisih_excel.py")),
         ])
 
     if not charts_only:
         steps.append(
-            ("Tahap 5/5: Generate Dashboard Interaktif HTML", os.path.join(scripts_dir, "build_interactive_matrix_html.py"))
+            ("Tahap 6/6: Generate Dashboard Interaktif HTML", os.path.join(scripts_dir, "build_interactive_matrix_html.py"))
         )
 
     # Eksekusi seluruh tahapan

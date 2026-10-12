@@ -151,8 +151,11 @@ data/raw/rekap data (fix).xlsx       <-- Anda & Rekan mengedit file ini
            ├─ 1. Otomatis Deteksi: Mendeteksi bahwa file raw lebih baru dari master
            ├─ 2. Auto-Snapshot   : Membuat backup master lama ke data/snapshots/
            ├─ 3. ETL Master      : Menjalankan build_master_dataset.py (hitung OLS slope, CAGR, kuadran)
-           ├─ 4. Re-Generate All : Memperbarui seluruh grafik PNG dan HTML interaktif
-           └─ 5. Verifikasi      : Melakukan audit sinkronisasi otomatis
+           ├─ 4. Visualisasi     : Render ulang grafik PNG (1-17, All Labels, 60 Prodi, Direktori)
+           ├─ 5. Rekap Selisih   : Generate rekap_selisih_lulus_vs_daftar_ulang_2022_2026.xlsx
+           │                       (KPI Card, Tren Tahunan, Fakultas berbasis Formula Live Dinamis)
+           ├─ 6. Dashboard Web   : Kompilasi matriks_interaktif_kuadran_usk.html
+           └─ 7. Verifikasi      : scripts/verify_sync.py (Audit 1 detik: 100% SYNCED)
 ```
 
 ### Cara Eksekusi:
@@ -161,7 +164,7 @@ data/raw/rekap data (fix).xlsx       <-- Anda & Rekan mengedit file ini
    ```bash
    python3 scripts/build_all.py
    ```
-   Pipeline akan mendeteksi perbedaan *timestamp* secara otomatis dan melakukan *full refresh* dari data mentah.
+   Pipeline akan mendeteksi perbedaan *timestamp* secara otomatis dan melakukan *full refresh* dari data mentah hingga seluruh visualisasi dan Excel olahan.
 
 2. **Cara Eksplisit / Paksa (*Force Refresh*):**
    Jika ingin memastikan Master Excel dibangun ulang dari awal dari data mentah:

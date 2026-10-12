@@ -31,12 +31,13 @@ graph TD
     D["📖 4. BUKU RESEP UTAMA<br><code>scripts/core_data.py</code><br><i>Ambang Batas 4.0x & 80%, Kamus Prodi</i>"]:::coreStyle
 
     %% 5. Master Orchestrator
-    E["🚀 5. ONE-CLICK ORCHESTRATOR<br><code>scripts/build_all.py</code><br><i>Menjalankan 5 tahap build serentak (~17s)</i>"]:::buildStyle
+    E["🚀 5. ONE-CLICK ORCHESTRATOR<br><code>scripts/build_all.py</code><br><i>Menjalankan 6 tahap build serentak (~17s)</i>"]:::buildStyle
 
     %% 6. Output Layer
     F1["📊 6a. Visualisasi Grafik<br><code>output/grafik/</code><br><i>35+ Gambar PNG Resolusi Tinggi</i>"]:::outStyle
     F2["🌐 6b. Dashboard Interaktif<br><code>output/dashboard/</code><br><i>matriks_interaktif_kuadran_usk.html</i>"]:::outStyle
     F3["📑 6c. Slide Deck Eksekutif<br><code>output/presentasi/</code><br><i>Presentasi Rektorat & Dekan (.pptx)</i>"]:::outStyle
+    F4["📗 6d. Rekapitulasi Dinamis<br><code>data/processed/rekap_selisih_*.xlsx</code><br><i>Formula Live: KPI Card, Tren & Fakultas</i>"]:::outStyle
 
     %% 7. Quality Control
     G["🔍 7. QUALITY CONTROL (QC 1 DETIK)<br><code>scripts/verify_sync.py</code><br><i>Audit timestamp otomatis: SYNCED 100%</i>"]:::qcStyle
@@ -50,6 +51,7 @@ graph TD
     E -->|"Render grafik PNG"| F1
     E -->|"Kompilasi web standalone"| F2
     E -->|"Update deck pimpinan"| F3
+    E -->|"Sinkronkan rekap selisih"| F4
     
     E -->|"Verifikasi otomatis di akhir"| G
 ```
@@ -64,8 +66,8 @@ graph TD
 | **2** | **ETL Engine** | [`scripts/build_master_dataset.py`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/scripts/build_master_dataset.py) | Mengolah data mentah menjadi data saintifik: menghitung slope tren (OLS), CAGR 5 tahun, persentase keterisian, dan klasifikasi kuadran. |
 | **3** | **Single Source of Truth** | [`data/master/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/data/master/master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx) | **Satu-satunya sumber data sah**. Seluruh grafik dan dokumen mengacu ke file ini agar tidak ada angka yang berbeda di tempat lain. |
 | **4** | **Buku Resep Utama** | [`scripts/core_data.py`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/scripts/core_data.py) | Modul Python yang menyimpan aturan bisnis (keketatan $\ge 4.0\text{x}$, keterisian $\ge 80\%$, daftar prodi baru, dan pemetaan nama prodi). |
-| **5** | **One-Click Orchestrator** | [`scripts/build_all.py`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/scripts/build_all.py) | Perintah komando utama. Cukup jalankan satu baris ini, seluruh proses build berjalan otomatis secara berurutan. |
-| **6** | **Output Siap Pakai** | `output/grafik/`, `output/dashboard/`, `output/presentasi/` | Hasil akhir visual yang siap dipresentasikan ke Rektor, Wakil Rektor, atau Dekanat dalam rapat pimpinan. |
+| **5** | **One-Click Orchestrator** | [`scripts/build_all.py`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/scripts/build_all.py) | Perintah komando utama. Cukup jalankan satu baris ini, 6 proses build berjalan otomatis secara berurutan. |
+| **6** | **Output Siap Pakai** | `output/grafik/`, `output/dashboard/`, `data/processed/rekap_selisih_*.xlsx` | Hasil akhir visual PNG, dashboard HTML, dan lembar kerja Excel interaktif formula live dengan KPI Card dinamis. |
 | **7** | **Quality Control** | [`scripts/verify_sync.py`](file:///Users/auliamuzhaffar/Documents/maganghub/tugas-5/scripts/verify_sync.py) | Pemeriksaan instan (kurang dari 1 detik) untuk memastikan semua file output sudah memakai data master terbaru. |
 
 ---

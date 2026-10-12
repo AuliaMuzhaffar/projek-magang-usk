@@ -36,8 +36,10 @@ PRESENTASI_DIR = os.path.join(OUTPUT_DIR, "presentasi")
 
 MASTER_EXCEL_PATH = os.path.join(DATA_MASTER_DIR, "master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx")
 RAW_EXCEL_PATH = os.path.join(DATA_RAW_DIR, "rekap data (fix).xlsx")
+REKAP_SELISIH_PATH = os.path.join(DATA_PROCESSED_DIR, "rekap_selisih_lulus_vs_daftar_ulang_2022_2026.xlsx")
 INTERACTIVE_HTML_PATH = os.path.join(DASHBOARD_DIR, "matriks_interaktif_kuadran_usk.html")
 BUILD_MASTER_SCRIPT = os.path.join(os.path.dirname(__file__), "build_master_dataset.py")
+BEAUTIFY_SELISIH_SCRIPT = os.path.join(os.path.dirname(__file__), "beautify_selisih_excel.py")
 
 # ---------------------------------------------------------------------------
 # 2. PARAMETER STANDAR & AMBANG BATAS KUADRAN (BENCHMARK)
