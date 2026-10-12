@@ -89,14 +89,25 @@ def main():
             bbox=dict(boxstyle='round,pad=0.35,rounding_size=0.5', facecolor=bg_slate, edgecolor=border_slate, linewidth=1.2, alpha=0.98),
             zorder=5)
 
+    # Hitung distribusi kuadran aktual dari seluruh 66 prodi S1
+    n_total = len(df_s1)
+    q1_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] >= 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] >= 80.0)])
+    q2_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] < 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] >= 80.0)])
+    q3_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] >= 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] < 80.0)])
+    q4_count = len(df_s1[(df_s1['Rata_Keketatan_5Thn'] < 4.0) & (df_s1['Rata_FillRate_5Thn_Persen'] < 80.0)])
+    pct1 = (q1_count / n_total) * 100
+    pct2 = (q2_count / n_total) * 100
+    pct3 = (q3_count / n_total) * 100
+    pct4 = (q4_count / n_total) * 100
+
     # Quadrant titles
-    ax.text(x_max - 1.5, 104.0, 'KUADRAN I: UNGGULAN\n28 Program Studi (42,4%)',
+    ax.text(x_max - 1.5, 104.0, f'KUADRAN I: UNGGULAN\n{q1_count} Program Studi ({pct1:.1f}%)',
             ha='right', va='top', fontsize=12, fontweight='bold', color='#047857', alpha=0.9, zorder=2, linespacing=1.2)
-    ax.text(0.6, 104.0, 'KUADRAN II: STABIL\n4 Program Studi (6,1%)',
+    ax.text(0.6, 104.0, f'KUADRAN II: STABIL\n{q2_count} Program Studi ({pct2:.1f}%)',
             ha='left', va='top', fontsize=12, fontweight='bold', color='#1D4ED8', alpha=0.9, zorder=2, linespacing=1.2)
-    ax.text(x_max - 1.5, 26.5, 'KUADRAN III: BELUM OPTIMAL\n(Peminat Tinggi, Keterisian Belum Optimal)\n8 Program Studi (12,1%)',
+    ax.text(x_max - 1.5, 26.5, f'KUADRAN III: BELUM OPTIMAL\n(Peminat Tinggi, Keterisian Belum Optimal)\n{q3_count} Program Studi ({pct3:.1f}%)',
             ha='right', va='bottom', fontsize=11, fontweight='bold', color='#B45309', alpha=0.9, zorder=2, linespacing=1.2)
-    ax.text(0.6, 26.5, 'KUADRAN IV: PERLU DITINGKATKAN\n26 Program Studi (39,4%)',
+    ax.text(0.6, 26.5, f'KUADRAN IV: PERLU DITINGKATKAN\n{q4_count} Program Studi ({pct4:.1f}%)',
             ha='left', va='bottom', fontsize=12, fontweight='bold', color='#B91C1C', alpha=0.9, zorder=2, linespacing=1.2)
 
     # Colors

@@ -172,7 +172,7 @@ def main():
         x0=3.0, y0=50.5, width=45.5, height=41.0,
         bg_col='#F0F9FF', border_col='#BAE6FD', header_col='#1D4ED8',
         title_text="KUADRAN II: STABIL",
-        count_text="4 Program Studi (6,1%)",
+        count_text=f"{len(df_q2)} Program Studi ({len(df_q2)/len(df)*100:.1f}%)",
         policy_text="Lindungi & Pertahankan Kapasitas (Equilibrium)"
     )
 
@@ -223,7 +223,7 @@ def main():
         x0=51.5, y0=50.5, width=45.5, height=41.0,
         bg_col='#F0FDF4', border_col='#A7F3D0', header_col='#047857',
         title_text="KUADRAN I: UNGGULAN",
-        count_text="28 Program Studi (42,4%)",
+        count_text=f"{len(df_q1)} Program Studi ({len(df_q1)/len(df)*100:.1f}%)",
         policy_text="Pertahankan Mutu & Buka Kelas Internasional"
     )
 
@@ -334,7 +334,7 @@ def main():
         x0=51.5, y0=3.5, width=45.5, height=44.5,
         bg_col='#FFFBEB', border_col='#FDE68A', header_col='#B45309',
         title_text="KUADRAN III: BELUM OPTIMAL",
-        count_text="8 Program Studi (12,1%)",
+        count_text=f"{len(df_q3)} Program Studi ({len(df_q3)/len(df)*100:.1f}%)",
         policy_text="Fasilitasi Cicilan IPI & Percepat Cadangan Mandiri",
         sublabel="(Peminat Tinggi, Keterisian Belum Optimal)"
     )
@@ -349,18 +349,18 @@ def main():
     y_curr3 -= 1.2
     ax.plot([52.5, 96.0], [y_curr3 + 0.4, y_curr3 + 0.4], color='#FDE68A', lw=0.7)
 
-    # Render 8 Prodi Q3 dengan tinggi baris rapat agar tidak menabrak box diagnostik
-    row_h_q3 = 1.95
+    # Render 9 Prodi Q3 dengan tinggi baris rapat agar tidak menabrak box diagnostik
+    row_h_q3 = 1.85
     for idx, r in df_q3.iterrows():
         y_curr3 -= row_h_q3
         bg_row = '#FEF3C7' if idx % 2 == 0 else '#FFFBEB'
         ax.add_patch(patches.Rectangle((52.5, y_curr3 - 0.5), 43.5, row_h_q3, facecolor=bg_row, edgecolor='none', zorder=2))
         defisit_kursi = int(r['DT'] - r['DU'])
-        ax.text(53.0, y_curr3 + 0.3, f"{idx+1}", fontsize=8.4, fontweight='bold', color='#1E293B', zorder=3)
-        ax.text(55.3, y_curr3 + 0.3, f"{r['Prodi_Label']} ({r['Fak_Abbr']})", fontsize=8.4, fontweight='bold', color='#0F172A', zorder=3)
-        ax.text(81.0, y_curr3 + 0.3, f"{r['Keketatan']:.2f}x", fontsize=8.4, color='#1E293B', ha='right', zorder=3)
-        ax.text(88.5, y_curr3 + 0.3, f"{r['FillRate']:.1f}%", fontsize=8.4, fontweight='bold', color='#B45309', ha='right', zorder=3)
-        ax.text(95.5, y_curr3 + 0.3, f"-{defisit_kursi} kursi", fontsize=8.4, fontweight='bold', color='#DC2626', ha='right', zorder=3)
+        ax.text(53.0, y_curr3 + 0.3, f"{idx+1}", fontsize=8.2, fontweight='bold', color='#1E293B', zorder=3)
+        ax.text(55.3, y_curr3 + 0.3, f"{r['Prodi_Label']} ({r['Fak_Abbr']})", fontsize=8.2, fontweight='bold', color='#0F172A', zorder=3)
+        ax.text(81.0, y_curr3 + 0.3, f"{r['Keketatan']:.2f}x", fontsize=8.2, color='#1E293B', ha='right', zorder=3)
+        ax.text(88.5, y_curr3 + 0.3, f"{r['FillRate']:.1f}%", fontsize=8.2, fontweight='bold', color='#B45309', ha='right', zorder=3)
+        ax.text(95.5, y_curr3 + 0.3, f"-{defisit_kursi} kursi", fontsize=8.2, fontweight='bold', color='#DC2626', ha='right', zorder=3)
 
     # Box Diagnostik Kunci Q3 (Ditempatkan di bagian bawah dengan ruang bebas di atasnya)
     box_q3_y = 4.3
