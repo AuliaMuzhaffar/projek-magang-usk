@@ -21,7 +21,7 @@ Dokumen ini disusun untuk membantu menjawab pertanyaan mentor/dosen mengenai asa
 
 ### A. Konteks RKAT PTN-BH (Tahun Anggaran 2023–2026)
 * **Dasar Hukum:** **PP No. 38 Tahun 2022** tentang *Statuta Universitas Syiah Kuala PTN-BH* jo. **PP No. 26 Tahun 2015** tentang *Bentuk dan Mekanisme Pendanaan PTN Badan Hukum*.
-* **Penjelasan:** Sebagai PTN-BH sejak akhir 2022, USK menyusun RKAT tahunan berbasis target penerimaan PNBP mandiri. Pos penerimaan UKT dihitung dari proyeksi kuota daya tampung dengan asumsi keterisian sehat minimal **80%–85%**. Keterisian di bawah target memicu defisit operasional (*revenue shortfall*).
+* **Penjelasan:** Sebagai PTN-BH sejak akhir 2022, USK menyusun RKAT tahunan berbasis target penerimaan PNBP mandiri. Pos penerimaan UKT dihitung dari proyeksi kuota daya tampung dengan asumsi keterisian ideal minimal **80%–85%**. Keterisian di bawah target memicu defisit operasional (*revenue shortfall*).
 
 ### B. Formula Biaya dan Ambang Batas 80% (Kemendikbudristek)
 * **Dasar Hukum:** **Permendikbudristek No. 2 Tahun 2024** (dan pendahulunya **Permendikbud No. 25 Tahun 2020**) tentang *Standar Satuan Biaya Operasional Pendidikan Tinggi (SSBOPT)*.
@@ -44,4 +44,4 @@ Agar tidak menimbulkan kesan bahwa tim mengutip lembar dokumen rahasia RKAT inte
   > *"Berdasarkan Rencana Kerja dan Anggaran Tahunan (RKAT) dari PTN-BH, keterisian kuota daya tampung ditargetkan minimal 80-85% untuk mengoptimalkan penerimaan UKT dan pencapaian PNBP."*
 
 * **Teks Rekomendasi (Lebih Kuat & Akademis):**
-  > *"Berdasarkan standar efisiensi tata kelola anggaran PTN-BH (PP 38/2022) dan regulasi SSBOPT (Permendikbudristek 2/2024), ambang batas keterisian kuota sehat ditargetkan minimal **80%–85%** untuk menjaga titik impas operasional (BEP) dan optimalisasi penerimaan PNBP."*
+  > *"Berdasarkan standar efisiensi tata kelola anggaran PTN-BH (PP 38/2022) dan regulasi SSBOPT (Permendikbudristek 2/2024), ambang batas keterisian kuota ideal ditargetkan minimal **80%–85%** untuk menjaga titik impas operasional (BEP) dan optimalisasi penerimaan PNBP."*

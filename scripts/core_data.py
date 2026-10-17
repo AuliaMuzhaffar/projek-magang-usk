@@ -37,15 +37,17 @@ PRESENTASI_DIR = os.path.join(OUTPUT_DIR, "presentasi")
 MASTER_EXCEL_PATH = os.path.join(DATA_MASTER_DIR, "master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx")
 RAW_EXCEL_PATH = os.path.join(DATA_RAW_DIR, "rekap data (fix).xlsx")
 REKAP_SELISIH_PATH = os.path.join(DATA_PROCESSED_DIR, "rekap_selisih_lulus_vs_daftar_ulang_2022_2026.xlsx")
+REKAP_DAYA_TAMPUNG_PATH = os.path.join(DATA_PROCESSED_DIR, "rekap_daya_tampung_peminat_dan_sisa_kuota_2022_2026.xlsx")
 INTERACTIVE_HTML_PATH = os.path.join(DASHBOARD_DIR, "matriks_interaktif_kuadran_usk.html")
 BUILD_MASTER_SCRIPT = os.path.join(os.path.dirname(__file__), "build_master_dataset.py")
 BEAUTIFY_SELISIH_SCRIPT = os.path.join(os.path.dirname(__file__), "beautify_selisih_excel.py")
+BUILD_REKAP_DT_SCRIPT = os.path.join(os.path.dirname(__file__), "build_rekap_daya_tampung_excel.py")
 
 # ---------------------------------------------------------------------------
 # 2. PARAMETER STANDAR & AMBANG BATAS KUADRAN (BENCHMARK)
 # ---------------------------------------------------------------------------
 KEKETATAN_BENCHMARK = 4.0      # Rasio Peminat per 1 Kursi Daya Tampung (>= 4.0 = Ketat)
-FILLRATE_BENCHMARK = 80.0      # Persentase Keterisian Kuota (>= 80% = Sehat/Optimal)
+FILLRATE_BENCHMARK = 80.0      # Persentase Keterisian Kuota (>= 80% = Ideal/Optimal)
 
 # Daftar 6 Program Studi Baru (Data Terbatas < 5 Tahun Penuh)
 PRODI_BARU_LIST = [
@@ -102,6 +104,95 @@ PRODI_SHORT_NAMES = {
     'PENDIDIKAN FISIKA': 'Pend. Fisika',
     'PENDIDIKAN BIOLOGI': 'Pend. Biologi',
     'PENDIDIKAN SEJARAH': 'Pend. Sejarah'
+}
+
+# Singkatan Nama Prodi Khusus Dashboard HTML Interaktif (Lebih Deskriptif untuk Layar)
+PRODI_HTML_SHORT_NAMES = {
+    'PENDIDIKAN PANCASILA DAN KEWARGANEGARAAN': 'PPKn',
+    'PENDIDIKAN KESEJAHTERAAN KELUARGA': 'PKK',
+    'PENDIDIKAN SENI DRAMA TARI DAN MUSIK': 'Sendratasik',
+    'PENDIDIKAN JASMANI KESEHATAN DAN REKREASI': 'Penjaskesrek',
+    'PERENCANAAN WILAYAH DAN KOTA': 'PWK',
+    'TEKNOLOGI INDUSTRI HASIL PERIKANAN': 'Tek. Ind. Perikanan',
+    'PEMANFAATAN SUMBERDAYA PERIKANAN': 'Pemanfaatan Perikanan',
+    'PENDIDIKAN GURU SEKOLAH DASAR': 'PGSD',
+    'PENDIDIKAN GURU PAUD': 'PG PAUD',
+    'PENDIDIKAN GURU PENDIDIKAN ANAK USIA DINI': 'PG PAUD',
+    'TEKNIK SUMBER DAYA AIR': 'Tek. SDA',
+    'TEKNOLOGI HASIL PERTANIAN': 'Tek. Hasil Pertanian',
+    'PENDIDIKAN DOKTER HEWAN': 'Dokter Hewan',
+    'PENDIDIKAN BAHASA INGGRIS': 'Pend. B. Inggris',
+    'PENDIDIKAN BAHASA INDONESIA': 'Pend. B. Indonesia',
+    'PENDIDIKAN DOKTER GIGI': 'Dokter Gigi',
+    'PENDIDIKAN DOKTER': 'Pend. Dokter',
+    'BIMBINGAN KONSELING': 'Bimb. Konseling',
+    'EKONOMI PEMBANGUNAN': 'Ek. Pembangunan',
+    'PENDIDIKAN MATEMATIKA': 'Pend. Matematika',
+    'PENDIDIKAN GEOGRAFI': 'Pend. Geografi',
+    'PENDIDIKAN EKONOMI': 'Pend. Ekonomi',
+    'PENDIDIKAN KIMIA': 'Pend. Kimia',
+    'PENDIDIKAN FISIKA': 'Pend. Fisika',
+    'PENDIDIKAN BIOLOGI': 'Pend. Biologi',
+    'PENDIDIKAN SEJARAH': 'Pend. Sejarah',
+    'ILMU ADMINISTRASI PUBLIK': 'Adm. Publik',
+    'ILMU ADMINISTRASI NEGARA': 'Adm. Negara',
+    'ILMU KOMUNIKASI': 'Ilmu Komunikasi',
+    'ILMU PEMERINTAHAN': 'Ilmu Pemerintahan',
+    'HUBUNGAN INTERNASIONAL': 'Hub. Internasional',
+    'ILMU POLITIK': 'Ilmu Politik',
+    'SOSIOLOGI': 'Sosiologi',
+    'ILMU HUKUM': 'Ilmu Hukum',
+    'TEKNIK INFORMATIKA': 'Informatika',
+    'INFORMATIKA': 'Informatika',
+    'SISTEM INFORMASI': 'Sistem Informasi',
+    'TEKNIK KOMPUTER': 'Tek. Komputer',
+    'TEKNIK SIPIL': 'Tek. Sipil',
+    'TEKNIK MESIN': 'Tek. Mesin',
+    'TEKNIK ELEKTRO': 'Tek. Elektro',
+    'TEKNIK KIMIA': 'Tek. Kimia',
+    'TEKNIK ARSITEKTUR': 'Arsitektur',
+    'ARSITEKTUR': 'Arsitektur',
+    'TEKNIK GEOFISIKA': 'Tek. Geofisika',
+    'TEKNIK GEOLOGI': 'Tek. Geologi',
+    'TEKNIK PERTAMBANGAN': 'Tek. Pertambangan',
+    'TEKNIK INDUSTRI': 'Tek. Industri',
+    'TEKNIK LINGKUNGAN': 'Tek. Lingkungan',
+    'TEKNIK PERTANIAN': 'Tek. Pertanian',
+    'AGRIBISNIS': 'Agribisnis',
+    'AGROTEKNOLOGI': 'Agroteknologi',
+    'PETERNAKAN': 'Peternakan',
+    'ILMU TANAH': 'Ilmu Tanah',
+    'PROTEKSI TANAMAN': 'Proteksi Tanaman',
+    'BUDIDAYA PERAIRAN': 'Budidaya Perairan',
+    'ILMU KELAUTAN': 'Ilmu Kelautan',
+    'KEDOKTERAN HEWAN': 'Dokter Hewan',
+    'FARMASI': 'Farmasi',
+    'KEPERAWATAN': 'Keperawatan',
+    'ILMU KEPERAWATAN': 'Keperawatan',
+    'KEDOKTERAN': 'Kedokteran',
+    'KEDOKTERAN GIGI': 'Kedokteran Gigi',
+    'STATISTIKA': 'Statistika',
+    'MATEMATIKA': 'Matematika',
+    'FISIKA': 'Fisika',
+    'KIMIA': 'Kimia',
+    'BIOLOGI': 'Biologi',
+    'MANAJEMEN': 'Manajemen',
+    'AKUNTANSI': 'Akuntansi',
+    'EKONOMI ISLAM': 'Ekonomi Islam',
+    'BISNIS DIGITAL': 'Bisnis Digital',
+    'AKUNTANSI PERPAJAKAN': 'Akun. Perpajakan',
+    'TEKNIK PERMINYAKAN': 'Tek. Perminyakan',
+    'PSIKOLOGI': 'Psikologi',
+    'KEHUTANAN': 'Kehutanan',
+    # D3 Vokasi
+    'KESEHATAN HEWAN': 'Kesehatan Hewan',
+    'MANAJEMEN AGRIBISNIS': 'Manaj. Agribisnis',
+    'TEKNIK LISTRIK': 'Tek. Listrik',
+    'BUDIDAYA PETERNAKAN': 'Budidaya Peternakan',
+    'MANAJEMEN PERUSAHAAN': 'Manaj. Perusahaan',
+    'KEUANGAN DAN PERBANKAN': 'Keuangan & Perbankan',
+    'MANAJEMEN INFORMATIKA': 'Manaj. Informatika',
+    'SEKRETARI': 'Sekretari'
 }
 
 # ---------------------------------------------------------------------------

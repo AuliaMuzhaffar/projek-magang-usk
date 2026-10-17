@@ -10,7 +10,7 @@ Dokumen ini menjadi rujukan resmi mengenai arti setiap kolom, formula perhitunga
 | Nama Metrik | Formula / Rumus | Satuan | Makna Analitis |
 | :--- | :--- | :---: | :--- |
 | **Keketatan Seleksi** | `Peminat / Daya Tampung` | Rasio&nbsp;`(x:1)` | Mengukur intensitas persaingan pasar di hulu. Semakin tinggi rasio, semakin bergengsi/diminati prodi tersebut. |
-| **Tingkat Keterisian (Fill Rate)** | `(Daftar Ulang / Daya Tampung) * 100` | Persen&nbsp;`(%)` | Mengukur efisiensi pemanfaatan kapasitas kuota universitas. Target sehat universitas adalah $\ge 80\%$. |
+| **Tingkat Keterisian (Fill Rate)** | `(Daftar Ulang / Daya Tampung) * 100` | Persen&nbsp;`(%)` | Mengukur efisiensi pemanfaatan kapasitas kuota universitas. Target ideal universitas adalah $\ge 80\%$. |
 | **Tingkat Konversi (Yield Rate)** | `(Daftar Ulang / Lulus Seleksi) * 100` | Persen&nbsp;`(%)` | Mengukur komitmen calon mahasiswa yang lulus seleksi untuk melakukan registrasi ulang (kebocoran kelulusan). |
 | **Defisit Bangku / Sisa Kursi** | `max(0, Daya Tampung - Daftar Ulang)` | Kursi / Orang | Jumlah kapasitas kuota yang terbuang sia-sia karena tidak terisi oleh mahasiswa baru. |
 | **Tingkat Mundur / Gugur** | `Lulus Seleksi - Daftar Ulang` | Orang | Jumlah calon mahasiswa yang lulus tetapi menolak/tidak mengambil kursi USK. |
@@ -44,7 +44,7 @@ Dalam analisis longitudinal 5 tahun (2022–2026), terdapat **6 program studi ba
 | Kuadran | Ambang Batas Keketatan & Fill Rate | Warna Standar | Makna Posisi Pasar | Rekomendasi Kebijakan untuk Pimpinan |
 | :---: | :---: | :---: | :--- | :--- |
 | **Kuadran I<br>(Unggulan)** | Keketatan $\ge 4.0\text{x}$<br>Fill Rate $\ge 80.0\%$ | `#059669`<br>(Emerald Green) | **PRIMA & POPULER**<br>Peminat sangat tinggi dan kuota selalu terserap penuh. | Pertahankan kualitas akreditasi internasional, perkuat fasilitas laboratorium, dan buka kelas internasional / kerjasama industri. |
-| **Kuadran II<br>(Stabil)** | Keketatan $< 4.0\text{x}$<br>Fill Rate $\ge 80.0\%$ | `#2563EB`<br>(Royal Blue) | **EQUILIBRIUM SEHAT**<br>Peminat moderat (niche market), namun kursi terisi penuh. | **JANGAN NAIKKAN KUOTA**. Pertahankan kapasitas saat ini agar keseimbangan pasar tidak terganggu. |
+| **Kuadran II<br>(Stabil)** | Keketatan $< 4.0\text{x}$<br>Fill Rate $\ge 80.0\%$ | `#2563EB`<br>(Royal Blue) | **EQUILIBRIUM IDEAL**<br>Peminat moderat (niche market), namun kursi terisi penuh. | **JANGAN NAIKKAN KUOTA**. Pertahankan kapasitas saat ini agar keseimbangan pasar tidak terganggu. |
 | **Kuadran III<br>(Belum Optimal)** | Keketatan $\ge 4.0\text{x}$<br>Fill Rate $< 80.0\%$ | `#D97706`<br>(Amber / Orange) | **KEBOCORAN HILIR**<br>Peminat sangat tinggi, namun banyak yang tidak daftar ulang. | **JANGAN PANGKAS KUOTA**. Buka fasilitas cicilan Uang Pangkal (IPI) dan percepat sistem pemanggilan cadangan mandiri. |
 | **Kuadran IV<br>(Perlu Ditingkatkan)** | Keketatan $< 4.0\text{x}$<br>Fill Rate $< 80.0\%$ | `#E11D48`<br>(Rose Red) | **KRISIS KRONIS**<br>Peminat rendah dan kursi banyak terbuang kosong. | **WAJIB PANGKAS KUOTA 20%–40%** di SPMB 2027 untuk menaikkan rasio keketatan dan melindungi akreditasi prodi. |
 

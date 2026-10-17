@@ -148,7 +148,7 @@ def main():
     p.space_after = Pt(12)
     add_bullet(tf2, "Ekspansi Kuota PTN-BH:", "Daya tampung dinaikkan agresif sebesar +32,7% (dari 7.863 menjadi 10.435 kursi) pasca transformasi PTN-BH.")
     add_bullet(tf2, "Realisasi Pendaftar Ulang:", "Realisasi mahasiswa riil naik dari 6.197 ke 8.440 mhs, namun persisten menyisakan beban ~2.000 bangku kosong per tahun.")
-    add_bullet(tf2, "Disparitas Antar Segmen:", "S1 Kampus Utama relatif sehat (84,7% keterisian), namun Vokasi D3 terpuruk (51,3%) dan PSDKU Gayo Lues krisis akut (18,6%).")
+    add_bullet(tf2, "Disparitas Antar Segmen:", "S1 Kampus Utama relatif ideal (84,7% keterisian), namun Vokasi D3 terpuruk (51,3%) dan PSDKU Gayo Lues krisis akut (18,6%).")
 
     # Card 3: Resolusi Plot Twist KIP
     _, tf3 = add_card(s2, Inches(8.88), card_y, col_w, card_h)
@@ -467,7 +467,7 @@ def main():
     p.font.color.rgb = RGBColor(27, 59, 111)
     p.space_after = Pt(8)
     add_bullet(tf14_t, "Zona Prima (98-100%):", "FKG (100%), Fakultas Hukum (99,6%), dan Kedokteran (98,8%). Kursi terisi penuh sempurna.", font_size=10.5, space_after=5, bold_color=RGBColor(22, 101, 52))
-    add_bullet(tf14_t, "Zona Sehat (>80%):", "FISIP (89,6%), FKH (88,5%), Keperawatan (81,9%), FMIPA (81,9%), FKIP (81,5%), FT (81,4%).", font_size=10.5, space_after=5)
+    add_bullet(tf14_t, "Zona Keterisian Ideal (>80%):", "FISIP (89,6%), FKH (88,5%), Keperawatan (81,9%), FMIPA (81,9%), FKIP (81,5%), FT (81,4%).", font_size=10.5, space_after=5)
     add_bullet(tf14_t, "Zona Kritis (<80%):", "FEB (77,2%), FPK (62,4%), Fakultas Pertanian (62,1%). Perlu rasionalisasi kuota.", font_size=10.5, space_after=6, bold_color=RGBColor(220, 38, 38))
     add_bullet(tf14_t, "Krisis Vokasi D3 (51,3%):", "Dari 665 kuota tersisa 324 kursi kosong. Lulusan terbentur golongan II/c ASN. Solusi: Konversi bertahap ke D4 Sarjana Terapan (Golongan III/a).", font_size=10.5, space_after=6)
     add_bullet(tf14_t, "Krisis PSDKU Gayo Lues (18,6%):", "Dari 220 kuota hanya terisi 41 mhs (81,4% kosong melompong). Wajib diikat MoU beasiswa Pemkab atau dirampingkan ke 2 prodi lokal.", font_size=10.5, space_after=2)

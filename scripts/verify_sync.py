@@ -18,6 +18,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(__file__))
 from core_data import (
     MASTER_EXCEL_PATH, GRAFIK_DIR, INTERACTIVE_HTML_PATH, REKAP_SELISIH_PATH,
+    REKAP_DAYA_TAMPUNG_PATH,
     load_s1_master, get_quadrant_summary, PRODI_BARU_LIST
 )
 
@@ -80,6 +81,7 @@ def main():
         ("Grafik Slide 2 Direktori Roster", os.path.join(GRAFIK_DIR, "13_companion_direktori_66_prodi_4_kuadran.png")),
         ("Grafik Matriks 5 Tahun Standar", os.path.join(GRAFIK_DIR, "13_matriks_4_kuadran_5_tahun_2022_2026.png")),
         ("Rekap Selisih Lulus vs DU (Excel)", REKAP_SELISIH_PATH),
+        ("Rekap Daya Tampung & Sisa Kuota (Excel)", REKAP_DAYA_TAMPUNG_PATH),
         ("Dashboard HTML Interaktif", INTERACTIVE_HTML_PATH)
     ]
 

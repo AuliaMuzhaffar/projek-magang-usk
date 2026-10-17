@@ -94,7 +94,7 @@ Untuk menghindari kesalahan penarikan kesimpulan strategis, seluruh 81 program s
 
 ### Alasan Ilmiah Pemisahan:
 1. **S1 Kampus Utama (Banda Aceh) - 66 Prodi:**  
-   Merupakan inti bisnis universitas (*core academic*). Memiliki ekosistem fasilitas lengkap, akreditasi mapan, dan jalur masuk nasional penuh. Rata-rata keterisian kuotanya sehat (**84,7%**).
+   Merupakan inti bisnis universitas (*core academic*). Memiliki ekosistem fasilitas lengkap, akreditasi mapan, dan jalur masuk nasional penuh. Rata-rata keterisian kuotanya ideal (**84,7%**).
 2. **Diploma 3 Vokasi - 11 Prodi:**  
    Memiliki karakteristik kurikulum terapan dan masa studi 3 tahun. Di Indonesia, D3 sedang menghadapi disrupsi struktural karena sistem kepegawaian ASN lebih mengistimewakan Sarjana Terapan (D4) dan S1 (golongan III/a vs golongan II/c untuk D3). Rata-rata keterisian kuotanya hanya **~51%**. Jika dicampur dengan S1, angka S1 akan terdistorsi turun secara tidak adil.
 3. **PSDKU Gayo Lues - 4 Prodi:**  
@@ -117,7 +117,7 @@ Berikut adalah seluruh indikator pengukuran yang digunakan dalam laporan, lengka
   Jika $\text{Rasio} = 18{,}1$, artinya **1 kursi diperebutkan oleh 18 orang pendaftar**.
 * **Interpretasi Bisnis:**
   * $\text{Rasio} \ge 10{,}0$: **Sangat Favorit / Sangat Ketat**. Persaingan sangat tinggi (misal: Farmasi $39{,}2 : 1$, Informatika $18{,}1 : 1$).
-  * $3{,}0 \le \text{Rasio} < 10{,}0$: **Sehat / Moderat**. Rasio seleksi ideal bagi perguruan tinggi negeri.
+  * $3{,}0 \le \text{Rasio} < 10{,}0$: **Ideal / Moderat**. Rasio seleksi kompetitif bagi perguruan tinggi negeri.
   * $1{,}0 < \text{Rasio} < 3{,}0$: **Rentan / Kurang Kompetitif**. Kualitas seleksi menurun karena hampir semua pendaftar harus diluluskan untuk memenuhi kuota.
   * $\text{Rasio} < 1{,}0$: **Anomali Kritis (Sepi Peminat Ekstrem)**. Peminat lebih sedikit dari kursi yang dibuka (misal: Budidaya Perairan rasio $0{,}91 : 1$). Secara matematis kuota mustahil terisi penuh.
 
@@ -132,7 +132,7 @@ Berikut adalah seluruh indikator pengukuran yang digunakan dalam laporan, lengka
   Jika $\text{Fill Rate} = 80{,}9\%$, artinya dari setiap 100 kursi yang disediakan USK, sebanyak 81 kursi terisi dan 19 kursi kosong.
 * **Interpretasi Bisnis:**
   * $\text{Fill Rate} \ge 95\%$: **Kapasitas Optimal / Sempurna** (Aset ruang kelas dan dosen termanfaatkan maksimal).
-  * $80\% \le \text{Fill Rate} < 95\%$: **Sehat / Efisien**.
+  * $80\% \le \text{Fill Rate} < 95\%$: **Ideal / Efisien**.
   * $60\% \le \text{Fill Rate} < 80\%$: **Inefisiensi Kapasitas Moderat**.
   * $\text{Fill Rate} < 60\%$: **Krisis Keterisian (Pemborosan Kapasitas Operasional)**. Terjadi di prodi seperti Budidaya Perairan ($56{,}3\%$) dan seluruh D3 Vokasi ($51{,}3\%$).
 
@@ -269,7 +269,7 @@ di mana:
 
 #### Penentuan Garis Ambang Batas (*Thresholds*):
 1. **Garis Ambang Batas Keketatan ($x_0 = 4{,}0 : 1$):**  
-   Berdasarkan standar benchmarking PTN-BH nasional, rasio $4{,}0 : 1$ (artinya 1 kursi diperebutkan oleh 4 pelamar) merupakan batas minimal selektivitas sehat perguruan tinggi negeri bermutu. Di bawah $4{,}0 : 1$, kualitas saringan seleksi mulai menurun drastis.
+   Berdasarkan standar benchmarking PTN-BH nasional, rasio $4{,}0 : 1$ (artinya 1 kursi diperebutkan oleh 4 pelamar) merupakan batas minimal selektivitas ideal perguruan tinggi negeri bermutu. Di bawah $4{,}0 : 1$, kualitas saringan seleksi mulai menurun drastis.
 2. **Garis Ambang Batas Keterisian ($y_0 = 80{,}0\%$):**  
    Angka $80{,}0\%$ adalah standar utilisasi aset minimum agar biaya operasional program studi (gaji dosen, beban laboratorium, utilitas) tertutupi secara efisien oleh pendapatan UKT (*break-even threshold*).
 
@@ -387,7 +387,7 @@ Berikut adalah panduan praktis untuk menjawab pertanyaan kritis jika mentor atau
 
 ### Pertanyaan 5: "Kenapa kuota di Gayo Lues dan D3 Vokasi harus dipisahkan dari S1 Utama?"
 * **Jawaban Anda:**  
-  > *"Untuk menghindari **Simpson's Paradox**. Karakteristik pasar D3 Vokasi tertekan oleh regulasi kepegawaian ASN yang membatasi ijazah D3 di golongan II/c, sementara PSDKU Gayo Lues memiliki hambatan akses geografis 10–12 jam dari Banda Aceh. Jika data Gayo Lues (keterisian 18,6%) dan D3 Vokasi (keterisian 51,3%) digabungkan dengan S1 Utama, angka keterisian S1 Utama yang sebenarnya sehat (84,7%) akan terseret turun dan menghasilkan diagnosis kebijakan yang keliru bagi pimpinan universitas."*
+  > *"Untuk menghindari **Simpson's Paradox**. Karakteristik pasar D3 Vokasi tertekan oleh regulasi kepegawaian ASN yang membatasi ijazah D3 di golongan II/c, sementara PSDKU Gayo Lues memiliki hambatan akses geografis 10–12 jam dari Banda Aceh. Jika data Gayo Lues (keterisian 18,6%) dan D3 Vokasi (keterisian 51,3%) digabungkan dengan S1 Utama, angka keterisian S1 Utama yang sebenarnya ideal (84,7%) akan terseret turun dan menghasilkan diagnosis kebijakan yang keliru bagi pimpinan universitas."*
 
 ---
 

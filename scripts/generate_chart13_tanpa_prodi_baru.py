@@ -19,7 +19,16 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from adjustText import adjust_text
+try:
+    from adjustText import adjust_text
+except ImportError:
+    import sys
+    sys.path.append('/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/site-packages')
+    try:
+        from adjustText import adjust_text
+    except ImportError:
+        def adjust_text(*args, **kwargs):
+            pass
 
 def main():
     repo_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -93,7 +102,7 @@ def main():
     ax.axhline(y=80.0, color=line_slate, linestyle='--', linewidth=1.9, alpha=0.9, zorder=2)
 
     # Badge Horizontal 80% (Pill solid non-black, anchor kanan rapi)
-    ax.text(49.5, 80.0, ' STANDAR KETERISIAN: 80% (TARGET SEHAT) ',
+    ax.text(49.5, 80.0, ' STANDAR KETERISIAN: 80% (TARGET IDEAL) ',
             ha='right', va='center', fontsize=9.0, color='#FFFFFF', fontweight='bold',
             bbox=dict(boxstyle='round,pad=0.35,rounding_size=0.5', facecolor=bg_slate, edgecolor=border_slate, linewidth=1.2, alpha=0.98),
             zorder=5)

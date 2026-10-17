@@ -47,7 +47,7 @@ Matriks 4 Kuadran Portofolio Strategis (*Higher Education Strategic Portfolio Ma
 
 ### Justifikasi Angka Ambang Batas:
 * **Garis Sumbu X (Keketatan $= 4{,}0 : 1$):**  
-  Berdasarkan standar akreditasi BAN-PT (Instrumen IAPS 4.0 Kriteria 3), rasio seleksi PTN yang sehat adalah minimal $1 : 3$ hingga $1 : 5$. Rasio $4{,}0$ peminat per 1 kursi menjadi batas demarkasi prodi berkategori *"Tinggi/Favorit"* vs *"Moderat/Rendah"*.
+  Berdasarkan standar akreditasi BAN-PT (Instrumen IAPS 4.0 Kriteria 3), rasio seleksi PTN yang ideal adalah minimal $1 : 3$ hingga $1 : 5$. Rasio $4{,}0$ peminat per 1 kursi menjadi batas demarkasi prodi berkategori *"Tinggi/Favorit"* vs *"Moderat/Rendah"*.
 * **Garis Sumbu Y (Capacity Fill Rate $= 80{,}0\%$):**  
   Berdasarkan Permendikbudristek Standar Biaya Operasional (SSBOPT), efisiensi rombongan belajar (rombel) dan titik impas (*break-even point*) operasional kelas universitas tercapai pada tingkat utilisasi minimal **80%**. Di bawah 80%, terjadi pemborosan kapasitas (*idle capacity*).
 

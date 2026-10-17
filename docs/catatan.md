@@ -1,6 +1,6 @@
 # CATATAN KHUSUS & CHEAT SHEET ANALISIS DATA PMB USK (2022–2026)
 **Dokumen Pendamping & Referensi Cepat untuk Presentasi dan Ujian Magang**  
-*Penulis: Data Analyst Trainee — MagangHub Kemendikbudristek di Universitas Syiah Kuala (USK)*
+*Penulis: Aulia Muzhaffar — MagangHub Kemendikbudristek di Universitas Syiah Kuala (USK)*
 
 ---
 
@@ -187,7 +187,7 @@ Jika ditanya oleh mentor: *"Dari mana kriteria ini didapatkan dan apa referensin
 1. **Mandat Resmi Dokumen Tugas Magang (Tahap 6):**
    * Pimpinan unit penerimaan mahasiswa baru (PMB) memberikan mandat khusus untuk mengelompokkan prodi ke dalam 5 kelompok: *Tren Meningkat*, *Tren Menurun*, *Tren Stabil*, *Tren Fluktuatif*, dan *Peminatan Relatif Rendah*.
 2. **Standar Regulasi Nasional Akreditasi Pendidikan Tinggi (BAN-PT / Kemendikbudristek):**
-   * **Instrumen Akreditasi Program Studi (IAPS 4.0 BAN-PT) Kriteria 3 (Mahasiswa):** Menilai mutu seleksi berdasarkan rasio pendaftar terhadap daya tampung. Rasio seleksi yang sehat bagi PTN adalah minimal $1 : 3$ hingga $1 : 5$. Jika rasio di bawah $1 : 1{,}5$, seleksi kehilangan fungsi penyaringannya (*zero selectivity*).
+   * **Instrumen Akreditasi Program Studi (IAPS 4.0 BAN-PT) Kriteria 3 (Mahasiswa):** Menilai mutu seleksi berdasarkan rasio pendaftar terhadap daya tampung. Rasio seleksi yang ideal bagi PTN adalah minimal $1 : 3$ hingga $1 : 5$. Jika rasio di bawah $1 : 1{,}5$, seleksi kehilangan fungsi penyaringannya (*zero selectivity*).
    * **Standar Utilisasi Fasilitas Kampus PTN-BH:** Tingkat keterisian kuota (*Capacity Fill Rate*) standar efisiensi operasional kelas adalah minimal $\ge 80\%$. Di bawah $68\%$, prodi dinyatakan mengalami *idle capacity* (pemborosan anggaran dan ruang kelas).
 3. **Literatur Akademik & Teori Ekonometrika:**
    * **Analisis Tren Waktu (Time Series & OLS Regression):** *Box, G. E., Jenkins, G. M., Reinsel, G. C., & Ljung, G. M. (2015). Time Series Analysis: Forecasting and Control.* Penggunaan Slope OLS bertujuan menghindari *endpoint bias* (bias perbandingan tahun awal dan akhir saja).
@@ -219,7 +219,7 @@ Jika ditanya oleh mentor: *"Dari mana kriteria ini didapatkan dan apa referensin
 * **Kriteria:** Nilai Slope berada di kisaran netral ($-3{,}0 \le \text{Slope} \le +3{,}0$) DAN Keterisian Rata-rata $\ge 80\%$.
 * **Justifikasi:**
   * Fluktuasi di rentang $\pm 3$ mahasiswa per tahun adalah batas deviasi variansi normal (kurang dari setengah kelompok belajar kecil).
-  * Syarat Keterisian $\ge 80\%$ adalah mutlak: prodi disebut "stabil" hanya jika kuotanya memang terisi penuh secara sehat (seperti Kedokteran, Farmasi, Arsitektur), bukan prodi sepi yang terus-menerus kosong.
+  * Syarat Keterisian $\ge 80\%$ adalah mutlak: prodi disebut "stabil" hanya jika kuotanya memang terisi penuh secara ideal (seperti Kedokteran, Farmasi, Arsitektur), bukan prodi sepi yang terus-menerus kosong.
 
 #### 5. Kategori "Tren Fluktuatif":
 * **Kriteria:** Prodi yang tidak memenuhi keempat kondisi di atas (pergerakan naik-turun selang-seling).
@@ -268,7 +268,7 @@ Jika mentor meminta rujukan hukum, manajerial, atau akademis untuk angka **80%**
 | :---: | :---: | :---: | :---: | :--- | :--- |
 | **Kuartil 1 (Q1)** | **43,4% s.d. 67,9%** | **21 Prodi** | **31,8%** | **Kritis / Idle Capacity Berat** | **Pangkas kuota 20%–40% segera** |
 | **Kuartil 2 (Q2)** | **68,0% s.d. 79,9%** | **12 Prodi** | **18,2%** | **Moderat / Rentan Inefisiensi** | Evaluasi daya tampung & marketing |
-| **Kuartil 3 (Q3)** | **80,0% s.d. 90,9%** | **16 Prodi** | **24,2%** | **Sehat / Efisien (Target PTN-BH)** | Pertahankan kuota & jaga mutu |
+| **Kuartil 3 (Q3)** | **80,0% s.d. 90,9%** | **16 Prodi** | **24,2%** | **Ideal / Efisien (Target PTN-BH)** | Pertahankan kuota & jaga mutu |
 | **Kuartil 4 (Q4)** | **91,0% s.d. 98,6%** | **17 Prodi** | **25,8%** | **Prima / Sangat Kompetitif** | Tambah kuota selektif / kelas inter |
 
 ---
@@ -318,7 +318,7 @@ Jika mentor meminta rujukan hukum, manajerial, atau akademis untuk angka **80%**
 | 10 | **Teknik Mesin** | Teknik | **78,2%** | Teknik tradisional, kuota mendekati seimbang |
 | 11 | **Ekonomi Islam** | Ekonomi dan Bisnis | **78,4%** | Tren menurun pasca-2023, perlu perbaikan kurikulum |
 | 12 | **Arsitektur** | Teknik | **78,7%** | Peminat sangat selektif, kuota pas |
-| 13 | **Pendidikan Bahasa Indonesia** | FKIP | **79,5%** | Sangat mendekati ambang batas sehat 80% |
+| 13 | **Pendidikan Bahasa Indonesia** | FKIP | **79,5%** | Sangat mendekati ambang batas ideal 80% |
 
 ---
 
@@ -377,7 +377,7 @@ Jika Anda ingin menyampaikan analisis ini ke mentor, dosen, atau pimpinan univer
 ### 1. Jangan Tampilkan 66 Nama Sekaligus di Slide Utama (*Avoid Data Dumping*)
 * Tampilkan **1 Slide Ringkasan Eksekutif (Distribution Overview)**:  
   Perlihatkan diagram 4 Kuartil (Grafik 11):
-  * **50% Prodi (32 Prodi di Q3 & Q4)** beroperasi sangat sehat (keterisian $\ge 80\%$).
+  * **50% Prodi (32 Prodi di Q3 & Q4)** beroperasi pada tingkat ideal (keterisian $\ge 80\%$).
   * **50% Prodi (34 Prodi di Q1 & Q2)** membutuhkan perhatian manajemen (keterisian $< 80\%$).
 * Simpan tabel 66 nama prodi sebagai **Slide Cadangan (Appendix / Backup Slide)**. Begitu ada audiens/dekan yang bertanya: *"Prodi saya masuk kuartil mana?"*, Anda bisa langsung melompat ke tabel rincian ini.
 
@@ -390,7 +390,7 @@ Jika Anda ingin menyampaikan analisis ini ke mentor, dosen, atau pimpinan univer
   * Untuk **Kuartil 1 (Critical):** *"Wajib rasionalisasi dan pangkas kuota 20%–40% untuk menghentikan subsidi pemborosan operasional."*
 
 ### 3. Kalimat Pembuka yang Elegan Jika Ditanya Mentor:
-> *"Izin Bapak/Ibu Mentor, untuk memetakan kesehatan seluruh 66 program studi S1 secara objektif dan adil, kami membaginya ke dalam **4 Kuartil Portofolio Akademik** berdasarkan tingkat keterisian rata-rata 5 tahun.*  
+> *"Izin Bapak/Ibu Mentor, untuk memetakan kinerja keterisian seluruh 66 program studi S1 secara objektif dan adil, kami membaginya ke dalam **4 Kuartil Portofolio Akademik** berdasarkan tingkat keterisian rata-rata 5 tahun.*  
 > *Hasilnya sangat menarik: **tepat separuh prodi USK (32 prodi) sudah beroperasi prima di atas standar efisiensi 80%**, sementara **separuh lainnya (34 prodi) memerlukan intervensi kebijakan**, di mana 21 prodi di antaranya berada di kuartil bawah (Q1 < 68%) yang menjadi penyumbang utama 2.000 kursi kosong setiap tahunnya."*
 
 ---
@@ -489,7 +489,7 @@ Sebagai *Senior Data Analyst*, mengandalkan data satu tahun tunggal (2026 saja) 
 * **Metrik Pendukung:**
   1. Rata-rata Peminat Tahunan (Volume pasar riil).
   2. Trajektori Perubahan Rasio dari 2022 ke 2026 ($K_{2022} \rightarrow K_{2026}$ beserta tanda panah tren naik/turun).
-  3. Tiga garis batas ambang referensi: Garis Kritis Mutlak ($1{,}0 : 1$), Garis Minimal BAN-PT ($1{,}5 : 1$), dan Garis Standar Sehat PTN ($3{,}0 : 1$).
+  3. Tiga garis batas ambang referensi: Garis Kritis Mutlak ($1{,}0 : 1$), Garis Minimal BAN-PT ($1{,}5 : 1$), dan Garis Standar Ideal PTN ($3{,}0 : 1$).
 
 ### C. Temuan Kunci untuk Disampaikan ke Mentor:
 1. **Kategori Favorit (Top 10):**
@@ -531,7 +531,7 @@ $$\text{Marginal Fill Rate (MFR)} = \frac{\Delta \text{Daftar Ulang}}{\Delta \te
 * **Prodi Baru (Basis $\text{DT}_{2022} = 0$):** $\Delta \text{DT} = \text{DT}_{2026}$ dan $\Delta \text{DU} = \text{DU}_{2026}$, sehingga nilainya ekuivalen dengan $\text{Fill Rate}_{2026} = \frac{\text{DU}_{2026}}{\text{DT}_{2026}}$.
 
 #### 3. Standar Penilaian MFR (Ambang Batas Manajerial):
-1. **$\text{MFR} \ge 0{,}80$ (Ekspansi Sangat Efektif & Sehat):** Minimal $80\%$ kursi baru berhasil terisi mahasiswa riil. Kampus berhasil mengekspansi skala tanpa menciptakan kursi kosong (Contoh: Ilmu Hukum, Keperawatan, PGSD).
+1. **$\text{MFR} \ge 0{,}80$ (Ekspansi Sangat Efektif & Ideal):** Minimal $80\%$ kursi baru berhasil terisi mahasiswa riil. Kampus berhasil mengekspansi skala tanpa menciptakan kursi kosong (Contoh: Ilmu Hukum, Keperawatan, PGSD).
 2. **$0{,}50 \le \text{MFR} < 0{,}80$ (Over-Ekspansi Parsial / Moderat):** Terjadi inefisiensi parsial; separuh kuota baru terserap, namun separuh lagi menjadi bangku kosong (Contoh: THP $\text{MFR} = 0{,}625$, Teknik Kimia $\text{MFR} = 0{,}600$).
 3. **$0{,}00 < \text{MFR} < 0{,}50$ (Over-Ekspansi Berat / Kritis):** Lebih dari separuh kuota tambahan mubazir menjadi kursi kosong semu (Contoh: Pendidikan Ekonomi $\text{MFR} = 0{,}400$).
 4. **$\text{MFR} \le 0{,}00$ (Gagal Total / Anomali):** Kuota ditambah atau dipatok tinggi, tetapi pendaftar yang masuk nol atau malah berkurang (Contoh: Budidaya Perairan $\text{MFR} = 0{,}00$).
@@ -574,7 +574,7 @@ Berikut adalah 3 simulasi matematis riil dari dataset S1 Kampus Utama USK untuk 
   $$\Delta \text{DU} = 295 - 127 = +168 \text{ mahasiswa baru masuk}$$
   $$\text{MFR} = \frac{\Delta \text{DU}}{\Delta \text{DT}} = \frac{168}{200} = 0{,}840 \quad (84{,}0\%)$$
 * **Narasi Penjelasan ke Mentor:**  
-  *"Sebagai pembanding prodi sehat, Ilmu Keperawatan membuka 200 kursi tambahan (+125%). Ternyata pasar menyerap 168 mahasiswa baru ($\text{MFR} = 84{,}0\%$). Meski di 2026 ada sisa 65 kursi kosong, Keperawatan **bukan** over-ekspansi karena rasio keterisian kelasnya tetap prima ($81{,}9\%$) dan terbukti mampu mendatangkan tambahan penerimaan mahasiswa baru dalam skala masif."*
+  *"Sebagai pembanding prodi berkinerja ideal, Ilmu Keperawatan membuka 200 kursi tambahan (+125%). Ternyata pasar menyerap 168 mahasiswa baru ($\text{MFR} = 84{,}0\%$). Meski di 2026 ada sisa 65 kursi kosong, Keperawatan **bukan** over-ekspansi karena rasio keterisian kelasnya tetap prima ($81{,}9\%$) dan terbukti mampu mendatangkan tambahan penerimaan mahasiswa baru dalam skala masif."*
 
 ---
 
@@ -591,7 +591,7 @@ Bagaimana kita menentukan dan merangkingkan prodi yang masuk ke dalam kategori o
 #### 2. Logika Penyaringan Dua Tahap (*Two-Tier Filtering Algorithm*):
 Untuk menyaring prodi yang benar-benar mengalami inefisiensi kuota secara adil:
 * **Tahap 1 (Filter Keterisian Kelas Gagal):** Saring hanya prodi yang memiliki $\text{Fill Rate}_{2026} < 70\%$ (berada di zona krisis/Kuadran III).  
-  *Catatan Analitis:* Prodi seperti **Keperawatan** memiliki 65 kursi kosong di 2026, tetapi **BUKAN** over-ekspansi karena kuotanya raksasa (360 kursi), tingkat keterisiannya sangat tinggi (**81,9%**), dan $\text{MFR}$-nya mencapai **0,84** (sangat sehat).
+  *Catatan Analitis:* Prodi seperti **Keperawatan** memiliki 65 kursi kosong di 2026, tetapi **BUKAN** over-ekspansi karena kuotanya raksasa (360 kursi), tingkat keterisiannya sangat tinggi (**81,9%**), dan $\text{MFR}$-nya mencapai **0,84** (sangat ideal).
 * **Tahap 2 (Urutkan Berdasarkan Kursi Kosong Absolut Terbanyak):** Dari kelompok prodi yang tidak efisien tersebut, lakukan perangkingan (*sorting descending*) berdasarkan **jumlah kursi kosong terbanyak di tahun 2026**.
 
 #### Hasil Ranking Top Kasus Over-Ekspansi S1 USK:
@@ -654,7 +654,7 @@ for r in range(2, ws.max_row + 1):
 
 df = pd.DataFrame(rows)
 
-# Filter 1: Keterisian tidak sehat (< 70%)
+# Filter 1: Keterisian belum ideal (< 70%)
 # Filter 2: Urutkan berdasarkan Kursi Kosong Terbanyak
 over_ekspansi = df[df['Fill_Rate'] < 70.0].sort_values('Kursi_Kosong', ascending=False)
 ```
@@ -666,11 +666,11 @@ over_ekspansi = df[df['Fill_Rate'] < 70.0].sort_values('Kursi_Kosong', ascending
 ### A. Latar Belakang & Urgensi Metodologis (Mengapa 2026 Saja Berpotensi Bias?)
 Jika analisis portofolio prodi hanya mengandalkan data **satu tahun tunggal (Snapshot 2026)**, pengambil kebijakan universitas berisiko terjebak dalam **dua bias kognitif & statistik**:
 1. **Survivorship / Temporary Spike Bias:**  
-   Suatu prodi bisa saja terlihat sangat sehat di 2026 akibat lonjakan peminat musiman, pembukaan jalur baru, atau tren viral sesaat, padahal selama 4 tahun sebelumnya selalu mengalami defisit pendaftar.
+   Suatu prodi bisa saja terlihat sangat ideal di 2026 akibat lonjakan peminat musiman, pembukaan jalur baru, atau tren viral sesaat, padahal selama 4 tahun sebelumnya selalu mengalami defisit pendaftar.
 2. **One-Off Anomaly / Noise Bias:**  
    Suatu prodi yang historisnya stabil bisa terlihat terpuruk di 2026 akibat perubahan teknis pendaftaran atau kuota nasional yang mendadak.
 
-Untuk mengeliminasi bias tersebut dan menguji apakah kesehatan portofolio prodi bersifat **struktural atau hanya insidental**, dibangun **Matriks 4 Kuadran Longitudinal 5 Tahun (2022–2026)** pada Grafik 13 (`13_matriks_4_kuadran_5_tahun_2022_2026.png`).
+Untuk mengeliminasi bias tersebut dan menguji apakah stabilitas ideal portofolio prodi bersifat **struktural atau hanya insidental**, dibangun **Matriks 4 Kuadran Longitudinal 5 Tahun (2022–2026)** pada Grafik 13 (`13_matriks_4_kuadran_5_tahun_2022_2026.png`).
 
 ---
 
@@ -754,7 +754,7 @@ Garis pemisah silang pada matriks diletakkan pada:
 #### 1. Justifikasi Sumbu X (Keketatan $\ge 4{,}0 : 1$):
 * **Standar Selektivitas BAN-PT (Instrumen Akreditasi IAPS 4.0 Kriteria 3):**
   * Rasio pendaftar $< 1{,}5 : 1$ dinyatakan **kehilangan fungsi seleksi** (*zero selectivity*), karena kampus terpaksa meluluskan hampir semua pelamar demi memenuhi kuota.
-  * Rasio $3{,}0 : 1$ adalah batas minimal standar seleksi sehat PTN.
+  * Rasio $3{,}0 : 1$ adalah batas minimal standar seleksi ideal PTN.
   * Rasio $\ge 4{,}0 : 1$ ditetapkan sebagai batas **Daya Tarik Pasar Tinggi (High Competitive Demand)**: universitas hanya menerima maksimal 25% pelamar terbaik, menandakan keunggulan kompetitif yang kuat.
 * **Nilai Median Empiris Internal USK:**
   * Berdasarkan dataset 66 Program Studi S1 USK, nilai **Median Keketatan Seleksi berada pada rentang $3{,}8\text{x}$ hingga $4{,}1\text{x}$**.
@@ -824,7 +824,7 @@ Sebagai praktisi visualisasi data tingkat lanjut, grafik penerimaan jalur masuk 
    * **ADIK:** Slate Gray (`#64748B`) -> Mewakili afirmasi daerah 3T.
 3. **Pill Badges dengan Kode Warna Evaluatif:**
    * Tingkat konversi registrasi (*Yield Rate*) diberi badge visual:
-     * **Hijau/Biru Sehat:** $\text{Yield Rate} \ge 80{,}0\%$
+     * **Hijau/Biru Ideal:** $\text{Yield Rate} \ge 80{,}0\%$
      * **Kuning Peringatan:** $65{,}0\% \le \text{Yield Rate} < 80{,}0\%$
      * **Merah Krisis:** $\text{Yield Rate} < 65{,}0\%$ (seperti TALENTA 2026 yang anjlok ke $24{,}9\%$).
 
@@ -846,7 +846,7 @@ Sebagai praktisi visualisasi data tingkat lanjut, grafik penerimaan jalur masuk 
 Data longitudinal membongkar fakta bahwa jalur TALENTA mengalami keruntuhan konversi akut pada tahun 2026:
 
 $$\begin{aligned}
-\text{Yield Rate TALENTA 2024} &= \frac{174}{197} \times 100\% = 88{,}3\% \quad (\text{Sangat Sehat}) \\
+\text{Yield Rate TALENTA 2024} &= \frac{174}{197} \times 100\% = 88{,}3\% \quad (\text{Sangat Ideal}) \\
 \text{Yield Rate TALENTA 2025} &= \frac{208}{307} \times 100\% = 67{,}8\% \quad (\text{Mulai Menurun}) \\
 \text{Yield Rate TALENTA 2026} &= \frac{308}{1.238} \times 100\% = \mathbf{24{,}9\%} \quad (\mathbf{Crash:\ 75{,}1\%\ Mangkir!})
 \end{aligned}$$
@@ -865,9 +865,9 @@ Sebagai data analyst profesional, membandingkan hanya dua titik waktu (*Point-to
    * Kasus **Fakultas Pertanian**: Keterisian tahun 2022 adalah **71,4%** dan tahun 2026 adalah **71,4%**.
    * Jika hanya melihat 2 titik, kesimpulannya: *"Pertanian stabil, tidak ada dinamika"*.
    * **Realita Sebenarnya:** Pada tahun 2023 Pertanian turun ke 64,3% dan pada 2024 terpuruk ke 63,6% (krisis pendaftaran). Pertanian baru pulih perlahan di 2025–2026. Analisis 2 titik membutakan manajemen dari krisis 2 tahun tersebut!
-2. **Kerapuhan Ambang Batas Sehat (*Fragile Equilibrium*):**
-   * **FKIP** (82,3%), **Teknik** (82,8%), dan **MIPA** (83,1%) tampak "sehat" di 2026 karena berada di atas 80%.
-   * Namun rata-rata 5 tahun ketiganya berada **di bawah 80%**: FKIP (78,2%), FT (78,0%), FMIPA (76,3%). Ketiganya baru saja merangkak melewati garis sehat di tahun terakhir, sehingga statusnya masih sangat rentan.
+2. **Kerapuhan Ambang Batas Ideal (*Fragile Equilibrium*):**
+   * **FKIP** (82,3%), **Teknik** (82,8%), dan **MIPA** (83,1%) tampak "ideal" di 2026 karena berada di atas 80%.
+   * Namun rata-rata 5 tahun ketiganya berada **di bawah 80%**: FKIP (78,2%), FT (78,0%), FMIPA (76,3%). Ketiganya baru saja merangkak melewati garis keterisian ideal di tahun terakhir, sehingga statusnya masih sangat rentan.
 3. **Distorsi Skala Relatif vs Absolut (*Scale Blindness*):**
    * Kedokteran Gigi terisi 100% dan Hukum terisi 99,6% tampak sangat sukses, tetapi keduanya memiliki daya tampung terbatas (100 dan 560 kursi).
    * FKIP (2.380 kursi) dan Teknik (1.760 kursi) menyumbang hampir 50% mahasiswa USK. Keterisian 82% di FKIP berarti menyisakan **421 bangku kosong**, dan di Teknik **302 bangku kosong**. Total 1.022 kursi kosong kampus tertumpuk di FKIP, Teknik, dan Pertanian!
@@ -877,7 +877,7 @@ Sebagai data analyst profesional, membandingkan hanya dua titik waktu (*Point-to
 ### B. Arsitektur Solusi Visualisasi Ahli Data: Dual-Tier Framework
 
 1. **Grafik 07 (Redesain Dual-Panel):**
-   * **Panel A:** Menampilkan keterisian 2022 vs 2026 lengkap dengan badge persentase, rasio riil $(DU / DT)$, dan delta pertumbuhan $(\Delta)$. Dilengkapi garis batas sehat 80% dan shading zona bahaya.
+   * **Panel A:** Menampilkan keterisian 2022 vs 2026 lengkap dengan badge persentase, rasio riil $(DU / DT)$, dan delta pertumbuhan $(\Delta)$. Dilengkapi garis batas ideal 80% dan shading zona bahaya.
    * **Panel B:** Menampilkan **Kursi Kosong Absolut** per fakultas tahun 2026, membongkar fakta bahwa 65% defisit kuota universitas berpusat di 3 fakultas (FKIP, Teknik, Pertanian).
 2. **Grafik 15 (Master Dashboard 5 Tahun: Heatmap & Trajectory Lines):**
    * **Panel A (Heatmap Matrix):** Matriks warna $12 \times 6$ (Tahun 2022 s.d. 2026 + Rata-rata 5 Tahun). Memungkinkan pimpinan melihat dalam 1 detik mana fakultas Hijau Konsisten (FK, FKG, FH), Kuning Rentan (FT, FKIP, FMIPA), dan Merah Kronis (Pertanian, FPK).
@@ -901,7 +901,7 @@ Sebagai data analyst profesional, membandingkan hanya dua titik waktu (*Point-to
 
 1. **Topeng Agregasi (*Intra-Faculty Masking*):**
    * Di tingkat fakultas, angka rata-rata sering kali menutupi penyakit kronis di level prodi.
-   * Contoh: Fakultas Teknik tampak sehat dengan keterisian **82,8%**. Namun angka ini ditopang oleh Teknik Pertambangan (98,3%) dan Teknik Geologi (97,5%). Di balik itu, **Teknik Kimia terdampar dengan 60 kursi kosong (66,7%)** dan Teknik Geofisika berada di 63,7%.
+   * Contoh: Fakultas Teknik tampak ideal dengan keterisian **82,8%**. Namun angka ini ditopang oleh Teknik Pertambangan (98,3%) dan Teknik Geologi (97,5%). Di balik itu, **Teknik Kimia terdampar dengan 60 kursi kosong (66,7%)** dan Teknik Geofisika berada di 63,7%.
    * Contoh lain: FMIPA tampak solid di **83,1%** karena didorong Farmasi (98,9%) dan Informatika (97,5%), padahal **Fisika Murni mengalami sakaratul maut pendaftaran dengan hanya 52,5% keterisian** (terendah di seluruh universitas).
 2. **Keterlibatan Kebijakan Kuota Riil (*Actionable Quota Policy*):**
    * Rektorat tidak memotong kuota "Fakultas Teknik" secara merata; pemotongan kuota harus ditujukan tepat ke program studi yang kelebihan kuota.
@@ -996,7 +996,7 @@ $$\text{Pangsa Akumulasi 5-Thn 15 Prodi} = \frac{3.850}{8.881} = \mathbf{43{,}4\
    * *Labeling Melayang Kaku:* Kotak defisit merah ditaruh melayang kaku di atas bar tanpa korelasi visual yang dinamis.
 2. **Pendekatan Desain Baru (Executive Dual-Panel Dashboard):**
    * **Panel A (Makro Tahunan):** Menampilkan evolusi agregat 2023–2026 (Daya Tampung vs Daftar Ulang) lengkap dengan panah penunjuk defisit tahunan dan *summary banner* akumulasi 4 tahun di bagian bawah.
-   * **Panel B (Mikro 11 Prodi):** Horizontal bar chart berurutan (*ranked*) dari prodi terendah hingga tertinggi, dilengkapi garis ambang batas kelayakan (50%) dan standar sehat (80%), serta pill badge detail (Rata 4Y, Kinerja 2026, dan Akumulasi Kursi Kosong).
+   * **Panel B (Mikro 11 Prodi):** Horizontal bar chart berurutan (*ranked*) dari prodi terendah hingga tertinggi, dilengkapi garis ambang batas kelayakan (50%) dan standar ideal (80%), serta pill badge detail (Rata 4Y, Kinerja 2026, dan Akumulasi Kursi Kosong).
 
 $$\text{Tingkat Keterisian Kumulatif D3 (4-Thn)} = \frac{1.245}{2.565} \times 100\% = \mathbf{48{,}5\%}$$
 $$\text{Akumulasi Bangku Terbuang} = 2.565 - 1.245 = \mathbf{1.320\text{ Kursi Kosong (51,5\%) } }$$

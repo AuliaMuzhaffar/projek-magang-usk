@@ -68,7 +68,7 @@
     * Sejak transisi PTN-BH (2024), daya tampung dinaikkan agresif dari 7.863 menjadi 10.435 kursi.
     * Realisasi mahasiswa daftar ulang tidak mampu mengejar lonjakan kuota, meninggalkan celah 1.995 hingga 2.481 kursi kosong setiap tahunnya.
 * **Speaker Notes (Skrip Narasi Pembicara):**
-  > *"Bapak Rektor dan Bapak Dekan, di permukaan, USK tampak sangat sehat. Dalam 5 tahun terakhir, minat pendaftar melonjak hampir 40%, mendekati 68 ribu peminat.*  
+  > *"Bapak Rektor dan Bapak Dekan, di permukaan, kinerja penerimaan USK tampak sangat ideal. Dalam 5 tahun terakhir, minat pendaftar melonjak hampir 40%, mendekati 68 ribu peminat.*  
   > *Sebagai respons transisi PTN-BH, kita menaikkan kuota agresif sebesar lebih dari 2.500 kursi. Namun, grafik ini menunjukkan alarm: garis keterisian kita tertahan di angka 76% hingga 80%. Artinya, ada sekitar 2.000 bangku kuliah yang setiap tahunnya kita sediakan tapi berakhir kosong tanpa mahasiswa."*
 * **Kalimat Transisi ke Slide 3:**
   > *"Lalu, di titik mana sebenarnya calon mahasiswa ini mulai berkurang? Mari kita bedah corong seleksinya di Slide 3."*
@@ -121,7 +121,7 @@
 * **Babak:** Babak 2 — Komplikasi Antar-Fakultas
 * **Layout Mock-up:**
   * Mempertahankan visual elegan dari Slide 4 tim:
-    * Panel Kiri: Horizontal Bar Chart Keterisian 2022 vs 2026 dengan garis batas kesehatan 80%.
+    * Panel Kiri: Horizontal Bar Chart Keterisian 2022 vs 2026 dengan garis batas keterisian ideal 80%.
     * Panel Kanan: Heatmap Keterisian 12 Fakultas selama 5 Tahun (Zona Hijau, Kuning, Merah).
   * Bawah: Insight Box perbandingan antar-fakultas.
 * **Konten Teks di Slide (On-Slide Content):**
@@ -131,7 +131,7 @@
     * **Kelompok Stabil Moderat (75% – 85%):** FISIP (87,8%), Keperawatan (80,7%), FKIP (78,2%), Teknik (77,6%), dan MIPA (76,3%).
     * **Zona Krisis Akut Menahun (<75%):** Fakultas Pertanian (rata-rata 67,9%) dan Fakultas Kelautan & Perikanan (rata-rata 59,7% selama 5 tahun berturut-turut).
 * **Speaker Notes (Skrip Narasi Pembicara):**
-  > *"Grafik ini menunjukkan ketimpangan yang sangat nyata di antara 12 fakultas kita. Fakultas Kedokteran Gigi, Kedokteran, Hukum, dan FEB beroperasi sangat sehat di atas 90% hingga 100%.*  
+  > *"Grafik ini menunjukkan ketimpangan yang sangat nyata di antara 12 fakultas kita. Fakultas Kedokteran Gigi, Kedokteran, Hukum, dan FEB beroperasi pada tingkat keterisian yang sangat ideal di atas 90% hingga 100%.*  
   > *Namun di sisi bawah, perhatikan Fakultas Pertanian dan khususnya Fakultas Kelautan dan Perikanan (FPK). Selama 5 tahun berturut-turut, keterisian FPK tidak pernah mampu menembus 65%, dengan rata-rata 5 tahun hanya 59,7%. Ada kesenjangan struktural yang membutuhkan perlakuan khusus antar-fakultas."*
 * **Kalimat Transisi ke Slide 6:**
   > *"Mengapa kesenjangan ini terjadi? Kita lihat perbandingan minat pelamar di level program studi pada Slide 6."*

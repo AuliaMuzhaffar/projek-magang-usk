@@ -107,7 +107,7 @@ Mari kita mulai dengan melihat potret besar universitas di Slide 2.""")
     s2_img = os.path.join(pdf_slides_dir, "slide_02.png")
     if os.path.exists(s2_img):
         s2.shapes.add_picture(s2_img, 0, 0, width=Inches(13.333), height=Inches(7.5))
-    add_notes(s2, """Bapak Rektor dan Bapak Dekan, di permukaan, USK tampak sangat sehat. Dalam 5 tahun terakhir, minat pendaftar melonjak hampir 40%, mendekati 68 ribu peminat.
+    add_notes(s2, """Bapak Rektor dan Bapak Dekan, di permukaan, kinerja penerimaan USK tampak sangat ideal. Dalam 5 tahun terakhir, minat pendaftar melonjak hampir 40%, mendekati 68 ribu peminat.
 
 Sebagai respons transisi PTN-BH, kita menaikkan kuota agresif sebesar lebih dari 2.500 kursi. Namun, grafik ini menunjukkan alarm: garis keterisian kita tertahan di angka 76% hingga 80%. Artinya, ada sekitar 2.000 bangku kuliah yang setiap tahunnya kita sediakan tapi berakhir kosong tanpa mahasiswa.
 
@@ -189,7 +189,7 @@ Ke mana perginya para mahasiswa yang mundur ini dan di jalur mana kebocoran terb
     p3.font.color.rgb = RGBColor(15, 23, 42)
 
     p4 = tf2.add_paragraph()
-    p4.text = "• Jalur Talenta 2026 mencatat konversi sehat: dari 461 peserta lulus seleksi, 308 mahasiswa mendaftar ulang (Yield Rate 66,8% | 153 gugur)."
+    p4.text = "• Jalur Talenta 2026 mencatat tingkat konversi yang ideal: dari 461 peserta lulus seleksi, 308 mahasiswa mendaftar ulang (Yield Rate 66,8% | 153 gugur)."
     p4.font.name = FONT_NAME
     p4.font.size = Pt(10.5)
     p4.font.color.rgb = RGBColor(15, 23, 42)
@@ -198,7 +198,7 @@ Ke mana perginya para mahasiswa yang mundur ini dan di jalur mana kebocoran terb
 
 Di panel kanan, kita melihat dinamika kebocoran kelulusan. Pada tahun 2026, total calon mahasiswa yang mundur terkendali di angka 1.617 orang, dengan kebocoran terbesar berasal dari SNBT (626 orang) dan SMMPTN (604 orang) akibat persaingan pilihan kampus lain.
 
-Khusus untuk Jalur Talenta 2026, data menunjukkan konversi yang sehat: dari 461 peserta yang dinyatakan lulus seleksi, 308 mahasiswa resmi mendaftar ulang (yield rate 66,8%), sementara 153 peserta mengundurkan diri.
+Khusus untuk Jalur Talenta 2026, data menunjukkan tingkat konversi yang ideal: dari 461 peserta yang dinyatakan lulus seleksi, 308 mahasiswa resmi mendaftar ulang (yield rate 66,8%), sementara 153 peserta mengundurkan diri.
 
 Setelah melihat gambaran makro universitas, pertanyaan pimpinan berikutnya: apakah masalah keterisian ini merata di semua fakultas? Jawabannya ada di Slide 5.""")
 
@@ -209,7 +209,7 @@ Setelah melihat gambaran makro universitas, pertanyaan pimpinan berikutnya: apak
     s5_img = os.path.join(pdf_slides_dir, "slide_04.png")
     if os.path.exists(s5_img):
         s5.shapes.add_picture(s5_img, 0, 0, width=Inches(13.333), height=Inches(7.5))
-    add_notes(s5, """Grafik ini menunjukkan ketimpangan yang sangat nyata di antara 12 fakultas kita. Fakultas Kedokteran Gigi, Kedokteran, Hukum, dan FEB beroperasi sangat sehat di atas 90% hingga 100%.
+    add_notes(s5, """Grafik ini menunjukkan ketimpangan yang sangat nyata di antara 12 fakultas kita. Fakultas Kedokteran Gigi, Kedokteran, Hukum, dan FEB beroperasi pada tingkat keterisian yang sangat ideal di atas 90% hingga 100%.
 
 Namun di sisi bawah, perhatikan Fakultas Pertanian dan khususnya Fakultas Kelautan dan Perikanan (FPK). Selama 5 tahun berturut-turut, keterisian FPK tidak pernah mampu menembus 65%, dengan rata-rata 5 tahun hanya 59,7%. Ada kesenjangan struktural yang membutuhkan perlakuan khusus antar-fakultas.
 

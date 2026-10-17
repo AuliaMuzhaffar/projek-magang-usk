@@ -79,7 +79,7 @@ Berdasarkan ambang batas keketatan seleksi **4,0 : 1** (rasio peminat terhadap k
 
 | Kuadran | Status Portofolio | Versi 66 Prodi S1 | Versi 60 Prodi Mapan | Implikasi Strategis Pimpinan |
 | :---: | :--- | :---: | :---: | :--- |
-| **Kuadran I** | **Unggulan** (Ketat & Sehat) | **27 Prodi** (40,9%) | **26 Prodi** (43,3%) | Pertahankan akreditasi unggul/internasional, perluas kemitraan. |
+| **Kuadran I** | **Unggulan** (Ketat & Ideal) | **27 Prodi** (40,9%) | **26 Prodi** (43,3%) | Pertahankan akreditasi unggul/internasional, perluas kemitraan. |
 | **Kuadran II** | **Stabil** (Niche Market Kuat) | **4 Prodi** (6,1%) | **3 Prodi** (5,0%) | **Kunci Kuota!** Jangan naikkan daya tampung agar equilibrium terjaga. |
 | **Kuadran III**| **Belum Optimal** (Ketat, Bocor Hilir) | **9 Prodi** (13,6%) | **7 Prodi** (11,7%) | **Jangan pangkas kuota!** Sediakan cicilan UKT/IPI & sistem cadangan mandiri cepat. |
 | **Kuadran IV** | **Perlu Revitalisasi** (Krisis Kronis) | **26 Prodi** (39,4%) | **24 Prodi** (40,0%) | **Wajib pangkas kuota 20%–40%** untuk menaikkan rasio keketatan dan akreditasi. |

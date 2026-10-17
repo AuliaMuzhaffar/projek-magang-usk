@@ -255,6 +255,6 @@ Dari total **81 Program Studi** (69 S1, 11 D3, 1 D4) di lingkungan Universitas S
 
 ## 6. Kesimpulan & Implikasi Manajerial
 
-1. **Stabilitas Sehat Institusi:** Sebanyak **80,3% program studi USK** berada pada tren positif (*Meningkat Konsisten*, *Meningkat Tajam*, atau *Fluktuatif Sehat*). Penurunan tajam terkonsentrasi hanya pada 14,8% prodi (12 prodi) yang sebagian besar dipicu oleh faktor kebijakan biaya IPI mandiri dan krisis peminat kampus satelit remote.
+1. **Stabilitas Kinerja Ideal Institusi:** Sebanyak **80,3% program studi USK** berada pada tren positif (*Meningkat Konsisten*, *Meningkat Tajam*, atau *Fluktuatif Ideal*). Penurunan tajam terkonsentrasi hanya pada 14,8% prodi (12 prodi) yang sebagian besar dipicu oleh faktor kebijakan biaya IPI mandiri dan krisis peminat kampus satelit remote.
 2. **Katalisator Pertumbuhan Baru:** Kehadiran prodi baru (*Bisnis Digital* dan *Teknik Perminyakan*) serta prodi Sarjana Terapan (*D4 Akuntansi Perpajakan*) membuktikan bahwa pasar merespons sangat cepat terhadap program studi yang memiliki relevansi industri nyata dan sertifikasi profesi.
 3. **Fokus Perbaikan Strategis:** Perhatian khusus diperlukan untuk revitalisasi 4 prodi PDD Gayo Lues dan rumpun Kelautan/Perikanan (FPK) melalui restrukturisasi kurikulum berbasis ekonomi biru (*blue economy*) dan pemberian paket insentif beasiswa penempatan.

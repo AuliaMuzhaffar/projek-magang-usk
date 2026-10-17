@@ -50,7 +50,7 @@ Klasifikasi tren tidak mengandalkan pertumbuhan tahunan (*YoY*) biasa yang renta
                    ┌─────────────────────────┴─────────────────────────┐
                    ▼                                                   ▼
            KONDISI KRITIS DASAR                                POLA PERTUMBUHAN DINAMIS
-         Fill Rate 5 Thn < 68% ATAU                           (Hanya untuk prodi sehat)
+         Fill Rate 5 Thn < 68% ATAU                           (Hanya untuk prodi ideal)
            Keketatan 2026 < 1,5x                                       │
                    │                                     ┌─────────────┴─────────────┐
                    ▼                                     ▼                           ▼

@@ -200,11 +200,11 @@ def build_beautified_selisih_excel():
     # Tier 1 Headers (Row 4)
     tier1_sections = [
         ("A", "D", "IDENTITAS PROGRAM STUDI", SUB_ID, False),
-        ("E", "H", "TAHUN AKADEMIK 2022", NAVY_2022, False),
-        ("I", "L", "TAHUN AKADEMIK 2023", CYAN_2023, False),
+        ("E", "H", "TAHUN AKADEMIK 2026", PURPLE_2026, False),
+        ("I", "L", "TAHUN AKADEMIK 2025", AMBER_2025, False),
         ("M", "P", "TAHUN AKADEMIK 2024", GREEN_2024, False),
-        ("Q", "T", "TAHUN AKADEMIK 2025", AMBER_2025, False),
-        ("U", "X", "TAHUN AKADEMIK 2026", PURPLE_2026, False),
+        ("Q", "T", "TAHUN AKADEMIK 2023", CYAN_2023, False),
+        ("U", "X", "TAHUN AKADEMIK 2022", NAVY_2022, False),
         ("Y", "AB", "TOTAL 5 TAHUN (2022–2026)", DARK_5THN, True),
     ]
     ws2.row_dimensions[4].height = 26
@@ -230,11 +230,11 @@ def build_beautified_selisih_excel():
     # Tier 2 Headers (Row 5)
     tier2_cols = [
         ("No", SUB_ID), ("Fakultas", SUB_ID), ("Nama Program Studi", SUB_ID), ("Jenjang", SUB_ID),
-        ("Lulus", SUB_2022), ("Daftar Ulang", SUB_2022), ("Gugur", SUB_2022), ("% Gugur", SUB_2022),
-        ("Lulus", SUB_2023), ("Daftar Ulang", SUB_2023), ("Gugur", SUB_2023), ("% Gugur", SUB_2023),
-        ("Lulus", SUB_2024), ("Daftar Ulang", SUB_2024), ("Gugur", SUB_2024), ("% Gugur", SUB_2024),
-        ("Lulus", SUB_2025), ("Daftar Ulang", SUB_2025), ("Gugur", SUB_2025), ("% Gugur", SUB_2025),
         ("Lulus", SUB_2026), ("Daftar Ulang", SUB_2026), ("Gugur", SUB_2026), ("% Gugur", SUB_2026),
+        ("Lulus", SUB_2025), ("Daftar Ulang", SUB_2025), ("Gugur", SUB_2025), ("% Gugur", SUB_2025),
+        ("Lulus", SUB_2024), ("Daftar Ulang", SUB_2024), ("Gugur", SUB_2024), ("% Gugur", SUB_2024),
+        ("Lulus", SUB_2023), ("Daftar Ulang", SUB_2023), ("Gugur", SUB_2023), ("% Gugur", SUB_2023),
+        ("Lulus", SUB_2022), ("Daftar Ulang", SUB_2022), ("Gugur", SUB_2022), ("% Gugur", SUB_2022),
         ("Total Lulus", SUB_5THN), ("Total DU", SUB_5THN), ("Total Gugur", SUB_5THN), ("Rata % Gugur", SUB_5THN),
     ]
     divider_cols = [4, 8, 12, 16, 20, 24, 28]
@@ -262,15 +262,15 @@ def build_beautified_selisih_excel():
         ws2.cell(cur_row, 3, p['prodi']).alignment = al_left
         ws2.cell(cur_row, 4, p['jenjang']).alignment = al_center
 
-        # 2022
-        ws2.cell(cur_row, 5, p[2022]['l'])
-        ws2.cell(cur_row, 6, p[2022]['d'])
+        # 2026
+        ws2.cell(cur_row, 5, p[2026]['l'])
+        ws2.cell(cur_row, 6, p[2026]['d'])
         ws2.cell(cur_row, 7, f"=MAX(0, E{cur_row}-F{cur_row})")
         ws2.cell(cur_row, 8, f"=IF(E{cur_row}>0, (G{cur_row}/E{cur_row})*100, 0)")
 
-        # 2023
-        ws2.cell(cur_row, 9, p[2023]['l'])
-        ws2.cell(cur_row, 10, p[2023]['d'])
+        # 2025
+        ws2.cell(cur_row, 9, p[2025]['l'])
+        ws2.cell(cur_row, 10, p[2025]['d'])
         ws2.cell(cur_row, 11, f"=MAX(0, I{cur_row}-J{cur_row})")
         ws2.cell(cur_row, 12, f"=IF(I{cur_row}>0, (K{cur_row}/I{cur_row})*100, 0)")
 
@@ -280,15 +280,15 @@ def build_beautified_selisih_excel():
         ws2.cell(cur_row, 15, f"=MAX(0, M{cur_row}-N{cur_row})")
         ws2.cell(cur_row, 16, f"=IF(M{cur_row}>0, (O{cur_row}/M{cur_row})*100, 0)")
 
-        # 2025
-        ws2.cell(cur_row, 17, p[2025]['l'])
-        ws2.cell(cur_row, 18, p[2025]['d'])
+        # 2023
+        ws2.cell(cur_row, 17, p[2023]['l'])
+        ws2.cell(cur_row, 18, p[2023]['d'])
         ws2.cell(cur_row, 19, f"=MAX(0, Q{cur_row}-R{cur_row})")
         ws2.cell(cur_row, 20, f"=IF(Q{cur_row}>0, (S{cur_row}/Q{cur_row})*100, 0)")
 
-        # 2026
-        ws2.cell(cur_row, 21, p[2026]['l'])
-        ws2.cell(cur_row, 22, p[2026]['d'])
+        # 2022
+        ws2.cell(cur_row, 21, p[2022]['l'])
+        ws2.cell(cur_row, 22, p[2022]['d'])
         ws2.cell(cur_row, 23, f"=MAX(0, U{cur_row}-V{cur_row})")
         ws2.cell(cur_row, 24, f"=IF(U{cur_row}>0, (W{cur_row}/U{cur_row})*100, 0)")
 
@@ -468,11 +468,11 @@ def build_beautified_selisih_excel():
         cell.border = border_cell
 
     year_mapping = [
-        (2022, 'E', 'F', 'G', 'H'),
-        (2023, 'I', 'J', 'K', 'L'),
+        (2022, 'U', 'V', 'W', 'X'),
+        (2023, 'Q', 'R', 'S', 'T'),
         (2024, 'M', 'N', 'O', 'P'),
-        (2025, 'Q', 'R', 'S', 'T'),
-        (2026, 'U', 'V', 'W', 'X')
+        (2025, 'I', 'J', 'K', 'L'),
+        (2026, 'E', 'F', 'G', 'H')
     ]
     for idx, (yr, col_l, col_d, col_g, col_p) in enumerate(year_mapping, 10):
         ws1.row_dimensions[idx].height = 20

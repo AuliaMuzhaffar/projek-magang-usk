@@ -62,14 +62,14 @@ Mari kita bedah data riil tahun demi tahun (*year-by-year*) dari dataset master 
 #### B. Kasus Pendidikan Ekonomi (FKIP) — Bukti *Law of Diminishing Returns*
 | Tahun Akademik | Daya Tampung (DT) | Daftar Ulang (DU) | Kursi Kosong Semu | Tingkat Keterisian (*Fill Rate*) |
 | :---: | :---: | :---: | :---: | :---: |
-| **2022** | 100 | **79** | 21 | 79,0% (Kondisi Sehat) |
+| **2022** | 100 | **79** | 21 | 79,0% (Kondisi Ideal) |
 | **2023** | 110 | **76** | 34 | 69,1% |
 | **2024 (Kuota Naik ke 160)** | 160 | **107** | 53 | 66,9% |
 | **2025** | 160 | **104** | 56 | 65,0% |
 | **2026** | 160 | **103** | 57 | 64,4% |
 | **Rata-rata 5 Tahun** | **138,0** | **93,8 mhs** | **44,2 kursi** | **68,9%** |
 
-* **Bukti:** Sebelum kuota dinaikkan (2022), prodi ini sehat (Fill Rate 79%). Begitu kuota digelembungkan menjadi 160 pada 2024, jumlah mahasiswa yang masuk langsung **mentok dan stagnan di 107 $\rightarrow$ 104 $\rightarrow$ 103 orang**. Kursi kosong membengkak dari 21 kursi menjadi **53, 56, dan 57 kursi** selama 3 tahun berturut-turut.
+* **Bukti:** Sebelum kuota dinaikkan (2022), prodi ini berada pada tingkat keterisian ideal (Fill Rate 79%). Begitu kuota digelembungkan menjadi 160 pada 2024, jumlah mahasiswa yang masuk langsung **mentok dan stagnan di 107 $\rightarrow$ 104 $\rightarrow$ 103 orang**. Kursi kosong membengkak dari 21 kursi menjadi **53, 56, dan 57 kursi** selama 3 tahun berturut-turut.
 
 #### C. Kasus Teknik Kimia (FT) — Kursi Kosong Kronis
 * Kursi kosong berurutan dari 2022 s.d. 2026 adalah: **44 $\rightarrow$ 55 $\rightarrow$ 60 $\rightarrow$ 64 $\rightarrow$ 60 kursi**.
@@ -136,7 +136,7 @@ Mari kita uji apakah rumus 5 tahun ini mengubah kesimpulan kita. Berikut hasil p
 | **Pendidikan Ekonomi** | $+17{,}00$ | $+7{,}60$ | $\mathbf{0{,}447}$ ($44{,}7\%$) | $\mathbf{0{,}400}$ ($40{,}0\%$) | $0{,}047$ | **Konsisten Over-Ekspansi Berat** |
 | **Teknik Kimia** | $+12{,}00$ | $+7{,}90$ | $\mathbf{0{,}658}$ ($65{,}8\%$) | $\mathbf{0{,}600}$ ($60{,}0\%$) | $0{,}058$ | **Konsisten Over-Ekspansi Parsial** |
 | **Teknologi Hasil Pertanian** | $+22{,}00$ | $+14{,}20$ | $\mathbf{0{,}645}$ ($64{,}5\%$) | $\mathbf{0{,}625}$ ($62{,}5\%$) | $0{,}020$ | **Konsisten Over-Ekspansi Parsial** |
-| *Ilmu Keperawatan (Benchmark)* | $+56{,}00$ | $+45{,}20$ | $\mathbf{0{,}807}$ ($80{,}7\%$) | $\mathbf{0{,}840}$ ($84{,}0\%$) | $0{,}033$ | *Konsisten Ekspansi Sehat* |
+| *Ilmu Keperawatan (Benchmark)* | $+56{,}00$ | $+45{,}20$ | $\mathbf{0{,}807}$ ($80{,}7\%$) | $\mathbf{0{,}840}$ ($84{,}0\%$) | $0{,}033$ | *Konsisten Ekspansi Ideal* |
 
 > **Kesimpulan Kritis:**  
 > Selisih antara metode 2-titik dan metode OLS 5 tahun **hanya berkisar antara 0,02 hingga 0,06 (sangat kecil)**!  

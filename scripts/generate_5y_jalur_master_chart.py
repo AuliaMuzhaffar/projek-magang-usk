@@ -201,7 +201,7 @@ def generate_three_panel(mode='opsi1', out_filename='14_tren_jalur_masuk_dan_keb
     ax2.axhspan(52, 80, facecolor='#FFFBEB', alpha=0.35, zorder=0)
 
     ax2.axhline(80.0, color='#059669', linestyle='--', linewidth=1.5, alpha=0.85, zorder=2)
-    ax2.text(2022.05, 80.8, 'Target Registrasi Sehat (≥ 80.0%)', fontsize=9, fontweight='bold', color='#047857', zorder=3)
+    ax2.text(2022.05, 80.8, 'Target Registrasi Ideal (≥ 80.0%)', fontsize=9, fontweight='bold', color='#047857', zorder=3)
 
     for j in jalurs_yield:
         y_vals = data_yield[j]

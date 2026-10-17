@@ -554,21 +554,21 @@ Untuk mengevaluasi kinerja fakultas di kampus utama, analisis membedah efisiensi
 
 #### Tabel Kinerja Komparatif 12 Fakultas S1 Kampus Utama USK (2022–2026)
 
-| Fakultas S1 | Keterisian 2022 (%) | Keterisian 2026 (%) | Delta (2026 vs 2022) | Rata-rata Keterisian 5-Thn | Sisa Kursi Kosong 2026 | Pangsa Defisit Kampus | Status Kesehatan Portofolio |
+| Fakultas S1 | Keterisian 2022 (%) | Keterisian 2026 (%) | Delta (2026 vs 2022) | Rata-rata Keterisian 5-Thn | Sisa Kursi Kosong 2026 | Pangsa Defisit Kampus | Status Kinerja Portofolio |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Kedokteran Gigi (FKG)** | 102,5% | **100,0%** | -2,5% | **97,3%** | **0 Kursi** | 0,0% | **Prima (Zero Deficit)** |
 | **Hukum (FH)** | 96,1% | **99,6%** | +3,5% | **97,8%** | **2 Kursi** | 0,1% | **Prima (Sangat Stabil)** |
 | **Kedokteran (FK)** | 101,2% | **98,8%** | -2,4% | **97,0%** | **4 Kursi** | 0,2% | **Prima (Kompetitif)** |
-| **Kedokteran Hewan (FKH)** | 87,7% | **93,3%** | +5,6% | **91,0%** | **16 Kursi** | 0,9% | **Sehat Konsisten** |
-| **Ekonomi & Bisnis (FEB)** | 80,3% | **90,0%** | +9,7% | **87,6%** | **88 Kursi** | 5,1% | **Sehat Tumbuh** |
-| **FISIP** | 90,0% | **86,2%** | -3,8% | **86,7%** | **108 Kursi** | 6,3% | **Sehat Stabil** |
+| **Kedokteran Hewan (FKH)** | 87,7% | **93,3%** | +5,6% | **91,0%** | **16 Kursi** | 0,9% | **Ideal Konsisten** |
+| **Ekonomi & Bisnis (FEB)** | 80,3% | **90,0%** | +9,7% | **87,6%** | **88 Kursi** | 5,1% | **Ideal Bertumbuh** |
+| **FISIP** | 90,0% | **86,2%** | -3,8% | **86,7%** | **108 Kursi** | 6,3% | **Ideal Stabil** |
 | **MIPA (FMIPA)** | 80,0% | **83,1%** | +3,1% | **76,3%** | **110 Kursi** | 6,4% | *Rentan (Rata-rata 5-Thn < 80%)* |
 | **FKIP** | 79,1% | **82,3%** | +3,2% | **78,2%** | **421 Kursi** | **24,6%** | *Raksasa Rentan (Episentrum Defisit)* |
-| **Keperawatan (FKep)** | 79,4% | **81,9%** | +2,5% | **80,7%** | **65 Kursi** | 3,8% | **Sehat Moderat** |
+| **Keperawatan (FKep)** | 79,4% | **81,9%** | +2,5% | **80,7%** | **65 Kursi** | 3,8% | **Ideal Moderat** |
 | **Teknik (FT)** | 77,2% | **78,4%** | +1,2% | **77,6%** | **402 Kursi** | **23,5%** | *Raksasa Rentan (Defisit Masif)* |
 | **Pertanian (FP)** | 71,4% | **70,4%** | -1,0% | **67,6%** | **314 Kursi** | **18,3%** | **Krisis Kronis (Dip 63,6% di 2024)** |
 | **Kelautan & Perikanan (FPK)**| 60,2% | **62,4%** | +2,2% | **59,8%** | **184 Kursi** | **10,7%** | **Kritis Akut (5 Tahun < 65%)** |
-| **TOTAL KAMPUS UTAMA** | **80,2%** | **82,3%** | **+2,1%** | **79,5%** | **1.714 Kursi** | **100,0%** | **Batas Sehat Terlampaui Tipis** |
+| **TOTAL KAMPUS UTAMA** | **80,2%** | **82,3%** | **+2,1%** | **79,5%** | **1.714 Kursi** | **100,0%** | **Batas Ideal Terlampaui Tipis** |
 
 #### Tiga Temuan Kritis Kinerja Fakultas:
 
@@ -576,7 +576,7 @@ Untuk mengevaluasi kinerja fakultas di kampus utama, analisis membedah efisiensi
    * Jika analis hanya membandingkan tahun 2022 (71,4%) dengan tahun 2026 (71,4%), kesimpulan yang ditarik adalah *"Fakultas Pertanian stabil tanpa perubahan"*.
    * **Fakta Melalui Lintasan 5 Tahun:** Pertanian sebenarnya mengalami guncangan krisis hebat pada tahun 2023 (64,3%) dan 2024 (63,6%), sebelum perlahan merangkak kembali ke 71,4%. Rata-rata 5 tahun Pertanian hanya **67,9%**, membuktikan adanya masalah struktural peminat yang belum terselesaikan.
 2. **Episentrum Bangku Kosong Terkonsentrasi pada 3 Fakultas (1.137 Kursi Kosong):**
-   * Meskipun FKIP berhasil melampaui batas keterisian sehat 80% pada tahun 2026 (82,3%) dan Teknik mencapai 78,4%, **keduanya merupakan penyumbang kursi kosong terbesar di universitas**.
+   * Meskipun FKIP berhasil melampaui batas keterisian ideal 80% pada tahun 2026 (82,3%) dan Teknik mencapai 78,4%, **keduanya merupakan penyumbang kursi kosong terbesar di universitas**.
    * FKIP mencatatkan **421 kursi kosong (24,6% total defisit S1)** dan Teknik mencatatkan **402 kursi kosong (23,5% total defisit S1)**. Bersama Pertanian (314 kursi), ketiga fakultas ini menampung **1.137 kursi kosong atau 66,3% dari seluruh bangku kosong di kampus utama S1 USK**!
 3. **Zona Merah Permanen Fakultas Kelautan & Perikanan (FPK):**
    * FPK adalah satu-satunya fakultas di USK yang selama 5 tahun berturut-turut tidak pernah mampu mencapai angka keterisian 65% (rata-rata 5 tahun hanya 59,8%). Tingkat keketatan seleksinya sangat rendah (1,42 : 1), mengindikasikan bahwa hampir semua pendaftar otomatis diterima namun tetap tidak mampu memenuhi kuota.

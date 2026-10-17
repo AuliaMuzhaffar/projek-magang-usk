@@ -28,7 +28,7 @@
 * **2. Dimensi Kapasitas & Efisiensi Kuota (Institutional Efficiency):**
   * Daya tampung diperluas agresif pasca PTN-BH sebesar +32,7% (dari 7.863 menjadi 10.435 kursi).
   * Realisasi mahasiswa masuk riil naik dari 6.197 ke 8.440 mhs, namun **persisten menyisakan ~2.000 bangku kosong per tahun**.
-  * S1 Kampus Utama relatif sehat (84,7% keterisian), sedangkan D3 Vokasi terpuruk (51,3%) dan PSDKU Gayo Lues krisis akut (18,6%).
+  * S1 Kampus Utama relatif ideal (84,7% keterisian), sedangkan D3 Vokasi terpuruk (51,3%) dan PSDKU Gayo Lues krisis akut (18,6%).
 * **3. Dimensi Kausalitas & Resolusi "Plot Twist" Kebocoran:**
   * **Terungkap Akar Masalah Kebocoran SNBT:** Anomali 626 kursi kosong di SNBT 2026 **98,2% identik dengan 615 calon mahasiswa KIP yang ditolak beasiswanya**, di mana **534 orang di antaranya berasal dari Desil 5 dan 6 (100% ditolak)**.
   * Ini membuktikan bahwa kursi kosong SNBT bukan disebabkan siswa kabur ke PTS/kedinasan, melainkan **kegagalan daya beli (*economic forced drop-out*) akibat pemotongan kuota beasiswa**.
@@ -251,7 +251,7 @@
 * **Visual Pendukung:** `grafik/07_analisa_peminatan_dan_keterisian_fakultas.png`, `grafik/08_evaluasi_multi_tahun_d3_vokasi.png`, `grafik/09_subanalisis_psdku_gayo_lues.png`
 * **Kinerja 12 Fakultas (2026):**
   * *Zona Prima (98%–100% Terisi):* FKG (100%), Fakultas Hukum (99,6%), Fakultas Kedokteran (98,8%).
-  * *Zona Sehat (>80% Terisi):* FISIP (89,6%), FKH (88,5%), Keperawatan (81,9%), FMIPA (81,9%), FKIP (81,5%), FT (81,4%).
+  * *Zona Ideal (>80% Terisi):* FISIP (89,6%), FKH (88,5%), Keperawatan (81,9%), FMIPA (81,9%), FKIP (81,5%), FT (81,4%).
   * *Zona Kritis (<80% Terisi):* FEB (77,2%), FPK (62,4%), Fakultas Pertanian (62,1%).
 * **Evaluasi Krisis Vokasi D3 (Keterisian 51,3%):**
   * Dari 665 kuota D3, tersisa 324 kursi kosong. D3 Manajemen Agribisnis hanya terisi 27% kursi.

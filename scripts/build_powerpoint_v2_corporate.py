@@ -574,7 +574,7 @@ def main():
 
     _, tf9 = add_card_v2(s9, Inches(8.85), CONTENT_TOP, Inches(3.68), Inches(5.2))
     add_card_title(tf9, "\"THE BIG FOUR\" OVER-EKSPANSI:", ROYAL_BLUE)
-    add_bullet_v2(tf9, "Formulasi:", "MFR = ΔDaftar Ulang / ΔDaya Tampung\n(Benchmark: MFR ≥ 0,80 = sehat)", font_size=10, space_after=8)
+    add_bullet_v2(tf9, "Formulasi:", "MFR = ΔDaftar Ulang / ΔDaya Tampung\n(Benchmark: MFR ≥ 0,80 = ideal)", font_size=10, space_after=8)
     add_bullet_v2(tf9, "Budidaya Perairan:", "Kuota 160, DU macet 90 → MFR 0,00 (GAGAL TOTAL). 70 Kursi Kosong.", font_size=10, space_after=5)
     add_bullet_v2(tf9, "THP Pertanian:", "Kuota 2x lipat (80→160), DU +50 → MFR 0,62. 58 Kursi Kosong.", font_size=10, space_after=5)
     add_bullet_v2(tf9, "Pend. Ekonomi:", "Kuota +60 kursi, DU hanya +24 → MFR 0,40. 57 Kursi Kosong.", font_size=10, space_after=5)
@@ -683,7 +683,7 @@ def main():
     add_bullet_v2(t11_4, "Prodi Kunci:", "Budidaya Perairan (56%), Fisika (65%), Teknik Kimia (67%), THP (64%), Pend. Kimia, Pend. Fisika.", font_size=9.2, space_after=2)
     add_bullet_v2(t11_4, "Karakteristik:", "Keketatan <4,0 dan keterisian <80% persisten 5 tahun; menyumbang 48,4% seluruh bangku kosong universitas.", font_size=9.2, space_after=2)
     add_bullet_v2(t11_4, "Aksi Strategis:", "RADICAL CAPACITY RATIONALIZATION — Pangkas kuota 20%–40% segera; hapus 400+ kursi kosong semu.", font_size=9.2, space_after=2, bold_color=ALERT_RED)
-    add_bullet_v2(t11_4, "Target 2027:", "Sehatkan rasio dosen-mahasiswa nasional & internasional demi menyelamatkan akreditasi unggul.", font_size=9.2, space_after=1, bold_color=DEEP_RED)
+    add_bullet_v2(t11_4, "Target 2027:", "Optimalkan rasio dosen-mahasiswa nasional & internasional menuju proporsi ideal demi menyelamatkan akreditasi unggul.", font_size=9.2, space_after=1, bold_color=DEEP_RED)
 
     add_footer(s11, sn, TOTAL)
     print(f"  [OK] Slide {sn}: Sintesis Tren × Kuadran (Enriched)")
@@ -900,7 +900,7 @@ def main():
                             bg_color=RGBColor(240, 253, 244), border_color=RGBColor(187, 247, 208))
     add_card_title(t19_2, "2. ZONASI KINERJA 12 FAKULTAS", SUCCESS_GRN, 11)
     add_bullet_v2(t19_2, "Prima (98–100%):", "FKG (100%), Hukum (99,6%), Kedokteran (98,8%). Sangat diminati & presisi.", font_size=9.5, space_after=3, bold_color=SUCCESS_GRN)
-    add_bullet_v2(t19_2, "Sehat (>80%):", "FISIP 89,6%, FKH 88,5%, FKep 81,9%, FMIPA 81,9%.", font_size=9.5, space_after=3)
+    add_bullet_v2(t19_2, "Ideal (>80%):", "FISIP 89,6%, FKH 88,5%, FKep 81,9%, FMIPA 81,9%.", font_size=9.5, space_after=3)
     add_bullet_v2(t19_2, "Kritis (<80%):", "FEB 77,2%, FPK 62,4%, Pertanian 62,1%. Perlu restrukturisasi.", font_size=9.5, space_after=2, bold_color=ALERT_RED)
 
     # Card 3: Episentrum Defisit

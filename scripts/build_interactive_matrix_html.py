@@ -1,15 +1,23 @@
 import os
+import sys
 import json
 import base64
 import pandas as pd
 import numpy as np
 
+# Impor konfigurasi sentral (Single Source of Truth)
+sys.path.insert(0, os.path.dirname(__file__))
+from core_data import (
+    BASE_DIR, MASTER_EXCEL_PATH, DASHBOARD_DIR, INTERACTIVE_HTML_PATH,
+    KEKETATAN_BENCHMARK, FILLRATE_BENCHMARK, FAKULTAS_ABBR, PRODI_HTML_SHORT_NAMES
+)
+
 def generate_interactive_html():
-    repo_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    excel_path = os.path.join(repo_dir, "data", "master", "master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx")
-    html_output_dir = os.path.join(repo_dir, "output", "dashboard")
+    repo_dir = BASE_DIR
+    excel_path = MASTER_EXCEL_PATH
+    html_output_dir = DASHBOARD_DIR
     os.makedirs(html_output_dir, exist_ok=True)
-    html_output_path = os.path.join(html_output_dir, "matriks_interaktif_kuadran_usk.html")
+    html_output_path = INTERACTIVE_HTML_PATH
 
     if not os.path.exists(excel_path):
         print(f"File {excel_path} tidak ditemukan!")
@@ -19,20 +27,7 @@ def generate_interactive_html():
     df_s1 = pd.read_excel(excel_path, sheet_name="S1_Kampus_Utama")
     df_d3 = pd.read_excel(excel_path, sheet_name="Diploma_3_Vokasi")
 
-    fak_abbr_map = {
-        'Kedokteran': 'FK',
-        'Kedokteran Gigi': 'FKG',
-        'Kedokteran Hewan': 'FKH',
-        'Keperawatan': 'FKep',
-        'MIPA': 'FMIPA',
-        'Teknik': 'FT',
-        'Ekonomi dan Bisnis': 'FEB',
-        'FISIP': 'FISIP',
-        'FKIP': 'FKIP',
-        'Hukum': 'FH',
-        'Pertanian': 'FP',
-        'Kelautan dan Perikanan': 'FPK'
-    }
+    fak_abbr_map = FAKULTAS_ABBR
 
     # ----------------------------------------------------
     # 1. PROCESS S1 DATA (66 Program Studi)
@@ -54,8 +49,8 @@ def generate_interactive_html():
         tren_resmi = str(r.get('Klasifikasi Tren Resmi', 'Tren Stabil')).strip()
         klaster = str(r.get('Klaster Analisis', 'Reguler')).strip()
 
-        # Klasifikasi Kuadran S1 (Ambang Standar: 4.0x & 80%)
-        if keketatan >= 4.0 and fill_rate >= 80.0:
+        # Klasifikasi Kuadran S1 (Ambang Standar dari core_data.py: 4.0x & 80%)
+        if keketatan >= KEKETATAN_BENCHMARK and fill_rate >= FILLRATE_BENCHMARK:
             kuadran = "I"
             kuadran_title = "KUADRAN I: UNGGULAN"
             kuadran_desc = "Peminat Tinggi & Daya Serap Kuota Penuh (Prima)"
@@ -64,7 +59,7 @@ def generate_interactive_html():
                 "Pertahankan standar kualitas seleksi tinggi. Alokasi daya tampung dapat dinaikkan selektif "
                 "(5–10%) jika kapasitas laboratorium dan rasio dosen mencukupi, mengingat animo pasar yang sangat kuat."
             )
-        elif keketatan < 4.0 and fill_rate >= 80.0:
+        elif keketatan < KEKETATAN_BENCHMARK and fill_rate >= FILLRATE_BENCHMARK:
             kuadran = "II"
             kuadran_title = "KUADRAN II: STABIL"
             kuadran_desc = "Kompetisi Moderat, Namun Kuota Terserap Optimal"
@@ -73,7 +68,7 @@ def generate_interactive_html():
                 "Pertahankan kuota tetap stabil. Tingkatkan branding dan promosi ke sekolah mitra di luar Aceh "
                 "untuk mendongkrak rasio keketatan seleksi menuju ambang kompetitif (>= 4,0 : 1)."
             )
-        elif keketatan >= 4.0 and fill_rate < 80.0:
+        elif keketatan >= KEKETATAN_BENCHMARK and fill_rate < FILLRATE_BENCHMARK:
             kuadran = "III"
             kuadran_title = "KUADRAN III: BELUM OPTIMAL"
             kuadran_desc = "Peminat Sangat Tinggi, Namun Daftar Ulang Belum Optimal"
@@ -256,7 +251,7 @@ def generate_interactive_html():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peta Portofolio Program Studi USK (2022–2026) — Dashboard Interaktif Eksekutif</title>
-    <link rel="icon" type="image/png" href="{usk_logo_b64}">
+    <link rel="icon" type="image/png" id="usk-favicon" href="">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1561,7 +1556,7 @@ def generate_interactive_html():
     <!-- TOP HEADER -->
     <header class="top-header">
         <div class="brand-area">
-            <img src="{usk_logo_b64}" alt="Logo Universitas Syiah Kuala" class="usk-header-logo" />
+            <img src="" data-usk-logo="1" alt="Logo Universitas Syiah Kuala" class="usk-header-logo" />
             <div class="brand-divider"></div>
             <div class="brand-titles">
                 <h1 id="header-main-title">PETA KUADRAN 60 PROGRAM STUDI S1 KAMPUS UTAMA USK</h1>
@@ -1716,13 +1711,13 @@ def generate_interactive_html():
         <aside class="inspector-panel" id="inspector-panel">
             <div class="inspector-placeholder" id="ins-placeholder">
                 <div id="ins-placeholder-s1">
-                    <img src="{usk_logo_b64}" alt="Logo USK" class="ins-placeholder-logo" />
+                    <img src="" data-usk-logo="1" alt="Logo USK" class="ins-placeholder-logo" />
                     <h3>Pilih Program Studi</h3>
                     <p>Klik salah satu lingkaran titik pada kanvas atau gunakan kotak pencarian untuk melihat rincian evaluasi 5 tahun, profil kebocoran kuota, dan rekomendasi kebijakan prodi.</p>
                 </div>
                 <div id="ins-placeholder-d3" style="display:none; text-align:left;">
                     <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; border-bottom:1px solid var(--border-subtle); padding-bottom:12px;">
-                        <img src="{usk_logo_b64}" alt="Logo USK" style="width:38px; height:38px; object-fit:contain;" />
+                        <img src="" data-usk-logo="1" alt="Logo USK" style="width:38px; height:38px; object-fit:contain;" />
                         <div>
                             <h4 style="font-size:13.5px; font-weight:800; color:var(--text-main); margin:0; letter-spacing:-0.2px;">STANDAR KLASTER VOKASI USK</h4>
                             <span style="font-size:11px; font-weight:600; color:var(--text-muted);">11 Program Studi D3 • Evaluasi Komparatif 2022–2026</span>
@@ -1868,12 +1863,20 @@ def generate_interactive_html():
             <strong>Universitas Syiah Kuala</strong> • Kampus Jantong Hate Rakyat Aceh • Akreditasi Unggul
         </div>
         <div id="footer-standards">
-            Standar Evaluasi S1: <strong>Keketatan 4,0 : 1</strong> | <strong>Keterisian Sehat 80%</strong>
+            Standar Evaluasi S1: <strong>Keketatan 4,0 : 1</strong> | <strong>Keterisian Ideal 80%</strong>
         </div>
     </footer>
 
     <!-- SCRIPT DATA & INTERACTION LOGIC -->
     <script>
+        const USK_LOGO_B64 = "{usk_logo_b64}";
+        if (USK_LOGO_B64) {{
+            const favEl = document.getElementById('usk-favicon');
+            if (favEl) favEl.href = USK_LOGO_B64;
+            document.querySelectorAll('img[data-usk-logo]').forEach(img => {{
+                img.src = USK_LOGO_B64;
+            }});
+        }}
         const DATA_BY_LEVEL = {json_data};
 
         // State Management
@@ -2273,93 +2276,7 @@ def generate_interactive_html():
         // ====================================================
         // PRODI SHORT NAME DICTIONARY & TITLE CASE FORMATTING
         // ====================================================
-        const PRODI_SHORT_NAMES = {{
-            'PENDIDIKAN PANCASILA DAN KEWARGANEGARAAN': 'PPKn',
-            'PENDIDIKAN KESEJAHTERAAN KELUARGA': 'PKK',
-            'PENDIDIKAN SENI DRAMA TARI DAN MUSIK': 'Sendratasik',
-            'PENDIDIKAN JASMANI KESEHATAN DAN REKREASI': 'Penjaskesrek',
-            'PERENCANAAN WILAYAH DAN KOTA': 'PWK',
-            'TEKNOLOGI INDUSTRI HASIL PERIKANAN': 'Tek. Ind. Perikanan',
-            'PEMANFAATAN SUMBERDAYA PERIKANAN': 'Pemanfaatan Perikanan',
-            'PENDIDIKAN GURU SEKOLAH DASAR': 'PGSD',
-            'PENDIDIKAN GURU PAUD': 'PG PAUD',
-            'PENDIDIKAN GURU PENDIDIKAN ANAK USIA DINI': 'PG PAUD',
-            'TEKNIK SUMBER DAYA AIR': 'Tek. SDA',
-            'TEKNOLOGI HASIL PERTANIAN': 'Tek. Hasil Pertanian',
-            'PENDIDIKAN DOKTER HEWAN': 'Dokter Hewan',
-            'PENDIDIKAN BAHASA INGGRIS': 'Pend. B. Inggris',
-            'PENDIDIKAN BAHASA INDONESIA': 'Pend. B. Indonesia',
-            'PENDIDIKAN DOKTER GIGI': 'Dokter Gigi',
-            'PENDIDIKAN DOKTER': 'Pend. Dokter',
-            'BIMBINGAN KONSELING': 'Bimb. Konseling',
-            'EKONOMI PEMBANGUNAN': 'Ek. Pembangunan',
-            'PENDIDIKAN MATEMATIKA': 'Pend. Matematika',
-            'PENDIDIKAN GEOGRAFI': 'Pend. Geografi',
-            'PENDIDIKAN EKONOMI': 'Pend. Ekonomi',
-            'PENDIDIKAN KIMIA': 'Pend. Kimia',
-            'PENDIDIKAN FISIKA': 'Pend. Fisika',
-            'PENDIDIKAN BIOLOGI': 'Pend. Biologi',
-            'PENDIDIKAN SEJARAH': 'Pend. Sejarah',
-            'ILMU ADMINISTRASI PUBLIK': 'Adm. Publik',
-            'ILMU ADMINISTRASI NEGARA': 'Adm. Negara',
-            'ILMU KOMUNIKASI': 'Ilmu Komunikasi',
-            'ILMU PEMERINTAHAN': 'Ilmu Pemerintahan',
-            'HUBUNGAN INTERNASIONAL': 'Hub. Internasional',
-            'ILMU POLITIK': 'Ilmu Politik',
-            'SOSIOLOGI': 'Sosiologi',
-            'ILMU HUKUM': 'Ilmu Hukum',
-            'TEKNIK INFORMATIKA': 'Informatika',
-            'INFORMATIKA': 'Informatika',
-            'SISTEM INFORMASI': 'Sistem Informasi',
-            'TEKNIK KOMPUTER': 'Tek. Komputer',
-            'TEKNIK SIPIL': 'Tek. Sipil',
-            'TEKNIK MESIN': 'Tek. Mesin',
-            'TEKNIK ELEKTRO': 'Tek. Elektro',
-            'TEKNIK KIMIA': 'Tek. Kimia',
-            'TEKNIK ARSITEKTUR': 'Arsitektur',
-            'ARSITEKTUR': 'Arsitektur',
-            'TEKNIK GEOFISIKA': 'Tek. Geofisika',
-            'TEKNIK GEOLOGI': 'Tek. Geologi',
-            'TEKNIK PERTAMBANGAN': 'Tek. Pertambangan',
-            'TEKNIK INDUSTRI': 'Tek. Industri',
-            'TEKNIK LINGKUNGAN': 'Tek. Lingkungan',
-            'TEKNIK PERTANIAN': 'Tek. Pertanian',
-            'AGRIBISNIS': 'Agribisnis',
-            'AGROTEKNOLOGI': 'Agroteknologi',
-            'PETERNAKAN': 'Peternakan',
-            'ILMU TANAH': 'Ilmu Tanah',
-            'PROTEKSI TANAMAN': 'Proteksi Tanaman',
-            'BUDIDAYA PERAIRAN': 'Budidaya Perairan',
-            'ILMU KELAUTAN': 'Ilmu Kelautan',
-            'KEDOKTERAN HEWAN': 'Dokter Hewan',
-            'FARMASI': 'Farmasi',
-            'KEPERAWATAN': 'Keperawatan',
-            'ILMU KEPERAWATAN': 'Keperawatan',
-            'KEDOKTERAN': 'Kedokteran',
-            'KEDOKTERAN GIGI': 'Kedokteran Gigi',
-            'STATISTIKA': 'Statistika',
-            'MATEMATIKA': 'Matematika',
-            'FISIKA': 'Fisika',
-            'KIMIA': 'Kimia',
-            'BIOLOGI': 'Biologi',
-            'MANAJEMEN': 'Manajemen',
-            'AKUNTANSI': 'Akuntansi',
-            'EKONOMI ISLAM': 'Ekonomi Islam',
-            'BISNIS DIGITAL': 'Bisnis Digital',
-            'AKUNTANSI PERPAJAKAN': 'Akun. Perpajakan',
-            'TEKNIK PERMINYAKAN': 'Tek. Perminyakan',
-            'PSIKOLOGI': 'Psikologi',
-            'KEHUTANAN': 'Kehutanan',
-            // D3 Vokasi
-            'KESEHATAN HEWAN': 'Kesehatan Hewan',
-            'MANAJEMEN AGRIBISNIS': 'Manaj. Agribisnis',
-            'TEKNIK LISTRIK': 'Tek. Listrik',
-            'BUDIDAYA PETERNAKAN': 'Budidaya Peternakan',
-            'MANAJEMEN PERUSAHAAN': 'Manaj. Perusahaan',
-            'KEUANGAN DAN PERBANKAN': 'Keuangan & Perbankan',
-            'MANAJEMEN INFORMATIKA': 'Manaj. Informatika',
-            'SEKRETARI': 'Sekretari'
-        }};
+        const PRODI_SHORT_NAMES = {json.dumps(PRODI_HTML_SHORT_NAMES, ensure_ascii=False)};
 
         function formatShortProdiLabel(d) {{
             const rawName = (d.nama || '').trim().toUpperCase();
@@ -2762,7 +2679,7 @@ def generate_interactive_html():
 
                 // Badges S1
                 svg.appendChild(createPillBadge(xThreshold, PLOT_Y + PLOT_H - 16, 190, 22, '#475569', '#94A3B8', '#FFFFFF', '▲ AMBANG KEKETATAN: 4,0 : 1'));
-                svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 250, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR KETERISIAN: 80% (TARGET SEHAT)'));
+                svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 250, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR KETERISIAN: 80% (TARGET IDEAL)'));
 
             }} else {{
                 // 2. D3 Canvas Rendering (Linear X 0-21, Critical Red Line 50%, Anomaly Banner)
@@ -2818,14 +2735,14 @@ def generate_interactive_html():
                 // Benchmark Lines D3
                 // Ambang Keketatan 4,0:1
                 svg.appendChild(createLine(xThreshold, PLOT_Y, xThreshold, PLOT_Y + PLOT_H, '#64748B', 2.0, '5,4', 0.95));
-                // Standar Keterisian Kuota Sehat 80% (Dashed slate)
+                // Standar Keterisian Kuota Ideal 80% (Dashed slate)
                 svg.appendChild(createLine(PLOT_X, yThreshold80, PLOT_X + PLOT_W, yThreshold80, '#64748B', 1.8, '5,4', 0.90));
                 // Batas Kritis Kelayakan Operasional 50% (Prominent Red Dotted Line)
                 svg.appendChild(createLine(PLOT_X, yThreshold50, PLOT_X + PLOT_W, yThreshold50, '#DC2626', 2.2, '3,4', 0.95));
 
                 // Badges D3
                 svg.appendChild(createPillBadge(xThreshold, PLOT_Y + PLOT_H - 18, 190, 22, '#475569', '#94A3B8', '#FFFFFF', '▲ AMBANG KEKETATAN: 4,0 : 1'));
-                svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 240, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR SEHAT: 80% KETERISIAN'));
+                svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 240, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR IDEAL: 80% KETERISIAN'));
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 145, yThreshold50, 270, 22, '#DC2626', '#F87171', '#FFFFFF', '⚠ BATAS KRITIS KELAYAKAN: 50%'));
 
                 // Callout Banner: Anomali Struktural Vokasi USK
@@ -3155,7 +3072,7 @@ def generate_interactive_html():
             const frCapped = clampFR(d.fill_rate);
             document.getElementById('ins-fillrate').textContent = `${{frCapped.toFixed(1)}}%`;
             if (currentLevel === 's1') {{
-                document.getElementById('ins-fillrate-status').textContent = frCapped >= 80.0 ? 'Kuota Sehat (>= 80%)' : 'Under-Enrolled (< 80%)';
+                document.getElementById('ins-fillrate-status').textContent = frCapped >= 80.0 ? 'Keterisian Ideal (>= 80%)' : 'Under-Enrolled (< 80%)';
             }} else {{
                 document.getElementById('ins-fillrate-status').textContent = frCapped >= 50.0 ? 'Di Atas Batas Kritis (>= 50%)' : 'Kritis Defisit (< 50%)';
             }}
@@ -3193,6 +3110,17 @@ def generate_interactive_html():
                     card.classList.toggle('active', currentD3Tier === tierNum);
                 }}
             }});
+        }}
+
+        function updateD3TierControls() {{
+            updateTierGuideCardStates();
+            renderFacultyFilters();
+        }}
+
+        function toggleTierFilter(tierNum) {{
+            currentD3Tier = (currentD3Tier === tierNum) ? 'ALL' : tierNum;
+            updateD3TierControls();
+            renderChart();
         }}
 
         function updateD3TierStripVisibility() {{
@@ -3307,11 +3235,11 @@ def generate_interactive_html():
                         document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (60 Prodi S1 Kampus Utama)';
                         document.getElementById('tab-s1-badge').textContent = '60 Prodi';
                     }}
-                    document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi S1: <strong>Keketatan 4,0 : 1</strong> | <strong>Keterisian Sehat 80%</strong>';
+                    document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi S1: <strong>Keketatan 4,0 : 1</strong> | <strong>Keterisian Ideal 80%</strong>';
                 }} else {{
                     document.getElementById('header-main-title').textContent = 'PETA KUADRAN 11 PROGRAM STUDI D3 VOKASI USK';
                     document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (11 Prodi D3 Vokasi)';
-                    document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Sehat 80%</strong> | <strong>Batas Kritis 50%</strong>';
+                    document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Ideal 80%</strong> | <strong>Batas Kritis 50%</strong>';
                 }}
 
                 updateD3TierStripVisibility();
@@ -3549,7 +3477,7 @@ def generate_interactive_html():
             }});
             document.getElementById('header-main-title').textContent = 'PETA KUADRAN 11 PROGRAM STUDI D3 VOKASI USK';
             document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (11 Prodi D3 Vokasi)';
-            document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Sehat 80%</strong> | <strong>Batas Kritis 50%</strong>';
+            document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Ideal 80%</strong> | <strong>Batas Kritis 50%</strong>';
             if (subsetSwitcher) subsetSwitcher.style.display = 'none';
         }} else {{
             if (subsetSwitcher) subsetSwitcher.style.display = 'inline-flex';

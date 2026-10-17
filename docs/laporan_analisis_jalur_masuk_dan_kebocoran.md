@@ -119,7 +119,7 @@ Tabel berikut menyajikan rekapitulasi performa 6 pintu masuk USK selama periode 
 
 #### 2. SNBT: Tulang Punggung Volume Mahasiswa USK (43,1% Share)
 * SNBT merupakan kontributor terbesar dengan akumulasi 15.812 mahasiswa baru selama 5 tahun.
-* Tingkat konversi SNBT tergolong sehat di angka **85,3%**, namun kebocoran sebesar 14,7% (2.731 orang) didorong oleh fenomena calon mahasiswa vokasi D3 dan fakultas tertentu yang memilih beralih ke universitas swasta atau menunggu seleksi mandiri gelombang lanjutan di Jawa.
+* Tingkat konversi SNBT tergolong ideal di angka **85,3%**, namun kebocoran sebesar 14,7% (2.731 orang) didorong oleh fenomena calon mahasiswa vokasi D3 dan fakultas tertentu yang memilih beralih ke universitas swasta atau menunggu seleksi mandiri gelombang lanjutan di Jawa.
 
 #### 3. SMMPTN: Sumber Kebocoran Volume Terbesar (3.268 Orang Gugur)
 * Jalur Mandiri SMMPTN-Barat menyumbang 21,1% dari total populasi mahasiswa baru.

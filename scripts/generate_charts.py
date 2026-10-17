@@ -665,36 +665,45 @@ def main():
         agg_dict[f"Peminat_{y}"] = "sum"
     fak_agg = df_s1.groupby("Fakultas").agg(agg_dict).reset_index()
 
-    fak_agg["FR_2022"] = (fak_agg["DU_2022"] / fak_agg["DT_2022"] * 100.0).round(1)
-    fak_agg["FR_2026"] = (fak_agg["DU_2026"] / fak_agg["DT_2026"] * 100.0).round(1)
+    fak_agg["DT_2022_eff"] = fak_agg.apply(lambda r: max(r["DT_2022"], r["DU_2022"]), axis=1)
+    fak_agg["DT_2026_eff"] = fak_agg.apply(lambda r: max(r["DT_2026"], r["DU_2026"]), axis=1)
+    fak_agg["FR_2022"] = (fak_agg["DU_2022"] / fak_agg["DT_2022_eff"] * 100.0).round(1)
+    fak_agg["FR_2026"] = (fak_agg["DU_2026"] / fak_agg["DT_2026_eff"] * 100.0).round(1)
     fak_agg["Sisa_2026"] = fak_agg["DT_2026"] - fak_agg["DU_2026"]
 
     fak_sorted_7 = fak_agg.sort_values("FR_2026", ascending=True).reset_index(drop=True)
 
-    fig7, (ax7_1, ax7_2) = plt.subplots(1, 2, figsize=(23, 9.2), dpi=300, gridspec_kw={'width_ratios': [1.38, 1.0]})
+    fig7, (ax7_1, ax7_2) = plt.subplots(1, 2, figsize=(23, 9.5), dpi=300, gridspec_kw={'width_ratios': [1.38, 1.0]})
     y_p7 = np.arange(len(fak_sorted_7))
     h7 = 0.38
 
     # Panel 1: Perbandingan Keterisian Kuota (2022 vs 2026) & Delta
-    bars22 = ax7_1.barh(y_p7 - h7/2.0, fak_sorted_7["FR_2022"], height=h7, label='Tingkat Keterisian 2022 (%)', 
+    bars22 = ax7_1.barh(y_p7 - h7/2.0, fak_sorted_7["FR_2022"], height=h7, 
                         color='#94A3B8', alpha=0.85, edgecolor='#64748B', linewidth=1.0, zorder=2)
     colors_26 = ['#DC2626' if fr < 80.0 else '#2563EB' for fr in fak_sorted_7["FR_2026"]]
-    bars26 = ax7_1.barh(y_p7 + h7/2.0, fak_sorted_7["FR_2026"], height=h7, label='Tingkat Keterisian 2026 (%)', 
+    bars26 = ax7_1.barh(y_p7 + h7/2.0, fak_sorted_7["FR_2026"], height=h7, 
                         color=colors_26, alpha=0.92, edgecolor='#1E3A8A', linewidth=1.1, zorder=2)
 
-    ax7_1.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.8, label='Batas Minimal Keterisian Sehat (80%)', zorder=3)
+    ax7_1.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.8, zorder=3)
     ax7_1.axvspan(0, 80.0, color='#FEF2F2', alpha=0.35, zorder=0)
 
     ax7_1.set_yticks(y_p7)
     ax7_1.set_yticklabels(fak_sorted_7["Fakultas"], fontsize=11, fontweight='bold', color='#1E293B')
-    ax7_1.set_xlim(0, 135)
+    ax7_1.set_xlim(0, 142)
     ax7_1.set_xlabel('Tingkat Keterisian Kuota (Fill Rate %)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
     ax7_1.set_title('A. Perbandingan Keterisian Kuota per Fakultas (2022 vs 2026)\nEvaluasi Efisiensi Serapan Kuota Pasca Penetapan PTN-BH', 
                     fontsize=12.5, fontweight='bold', pad=12, color='#1E40AF')
     ax7_1.grid(True, linestyle='--', alpha=0.4, color='#CBD5E1', zorder=0)
     ax7_1.spines['top'].set_visible(False)
     ax7_1.spines['right'].set_visible(False)
-    ax7_1.legend(loc='lower left', bbox_to_anchor=(0.02, 0.02), frameon=True, fontsize=9.5, framealpha=0.95)
+
+    legend_elements_7 = [
+        Line2D([0], [0], color='#DC2626', linestyle='--', linewidth=1.8, label='Batas Minimal Keterisian Ideal (80%)'),
+        Patch(facecolor='#94A3B8', edgecolor='#64748B', alpha=0.85, label='Tingkat Keterisian 2022 (%)'),
+        Patch(facecolor='#2563EB', edgecolor='#1E3A8A', alpha=0.92, label='Tingkat Keterisian 2026 (≥ 80% / Target Terpenuhi)'),
+        Patch(facecolor='#DC2626', edgecolor='#1E3A8A', alpha=0.92, label='Tingkat Keterisian 2026 (< 80% / Di Bawah Target)')
+    ]
+    ax7_1.legend(handles=legend_elements_7, loc='lower left', bbox_to_anchor=(0.02, 0.02), frameon=True, fontsize=9.0, framealpha=0.95)
 
     for i, r in fak_sorted_7.iterrows():
         f22 = r['FR_2022']
@@ -702,15 +711,18 @@ def main():
         delta = f26 - f22
         delta_str = f"+{delta:.1f}%" if delta > 0 else f"{delta:.1f}%"
         du26 = int(r['DU_2026'])
-        dt26 = int(r['DT_2026'])
-        badge_txt = f"{f26:.1f}% ({du26:,}/{dt26:,})  |  Δ: {delta_str}"
+        dt26 = int(r['DT_2026_eff'])
+        du22 = int(r['DU_2022'])
+        dt22 = int(r['DT_2022_eff'])
+        badge_txt = f"2026: {f26:.1f}% ({du26:,}/{dt26:,})\n2022: {f22:.1f}% ({du22:,}/{dt22:,}) | Δ: {delta_str}"
         border_c = '#EF4444' if f26 < 80.0 else '#93C5FD'
         bg_c = '#FEF2F2' if f26 < 80.0 else '#FFFFFF'
         txt_c = '#991B1B' if f26 < 80.0 else '#0F172A'
         
-        ax7_1.annotate(badge_txt, xy=(f26, i + h7/2.0), xytext=(7, 0), textcoords='offset points',
-                       va='center', ha='left', fontsize=8.8, fontweight='bold', color=txt_c,
-                       bbox=dict(boxstyle='round,pad=0.22', facecolor=bg_c, edgecolor=border_c, linewidth=0.8, alpha=0.95),
+        max_x = max(f26, f22)
+        ax7_1.annotate(badge_txt, xy=(max_x, i), xytext=(7, 0), textcoords='offset points',
+                       va='center', ha='left', fontsize=8.0, fontweight='bold', color=txt_c, linespacing=1.2,
+                       bbox=dict(boxstyle='round,pad=0.25', facecolor=bg_c, edgecolor=border_c, linewidth=0.8, alpha=0.95),
                        zorder=4)
 
     # Panel 2: Beban Kursi Kosong Absolut per Fakultas Tahun 2026
@@ -719,18 +731,18 @@ def main():
     sisa_cols = ['#991B1B' if s >= 200 else '#EA580C' if s >= 70 else '#059669' for s in fak_sisa_sorted['Sisa_2026']]
     bars_sisa = ax7_2.barh(y_pos2, fak_sisa_sorted['Sisa_2026'], color=sisa_cols, height=0.62, alpha=0.9, edgecolor='#0F172A', linewidth=1.0, zorder=2)
 
+    tot_sisa = fak_sisa_sorted['Sisa_2026'].sum()
+
     ax7_2.set_yticks(y_pos2)
     ax7_2.set_yticklabels(fak_sisa_sorted['Fakultas'], fontsize=11, fontweight='bold', color='#1E293B')
     max_sisa = fak_sisa_sorted['Sisa_2026'].max()
     ax7_2.set_xlim(0, max_sisa * 1.30)
     ax7_2.set_xlabel('Jumlah Kursi Kosong Absolut (Bangku Tidak Terisi)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
-    ax7_2.set_title('B. Kontribusi Beban Kursi Kosong per Fakultas (Tahun 2026)\nTotal 1,569 Bangku Kosong di 12 Fakultas S1 Kampus Utama', 
+    ax7_2.set_title(f'B. Kontribusi Beban Kursi Kosong per Fakultas (Tahun 2026)\nTotal {tot_sisa:,} Bangku Kosong di 12 Fakultas S1 Kampus Utama', 
                     fontsize=12.5, fontweight='bold', pad=12, color='#991B1B')
     ax7_2.grid(True, linestyle='--', alpha=0.4, color='#CBD5E1', zorder=0)
     ax7_2.spines['top'].set_visible(False)
     ax7_2.spines['right'].set_visible(False)
-
-    tot_sisa = fak_sisa_sorted['Sisa_2026'].sum()
     for i, r in fak_sisa_sorted.iterrows():
         s_val = int(r['Sisa_2026'])
         pct_share = (s_val / tot_sisa * 100.0) if tot_sisa > 0 else 0
@@ -822,7 +834,7 @@ def main():
     colors_bars2 = ['#991B1B' if fr < 45.0 else '#D97706' if fr < 60.0 else '#059669' for fr in d3_sorted['Rata_FR_4Y']]
 
     ax8_2.barh(y_pos2, d3_sorted['Rata_FR_4Y'], color=colors_bars2, height=0.62, alpha=0.9, edgecolor='#0F172A', linewidth=1.0, zorder=2)
-    ax8_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.6, label='Standar Keterisian Sehat (80%)', zorder=3)
+    ax8_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.6, label='Standar Keterisian Ideal (80%)', zorder=3)
     ax8_2.axvline(50.0, color='#64748B', linestyle=':', linewidth=1.4, label='Batas Kritis Kelayakan (50%)', zorder=3)
     ax8_2.axvspan(0, 50.0, color='#FEF2F2', alpha=0.4, zorder=0)
 
@@ -942,7 +954,7 @@ def main():
     colors_bars2_9 = ['#991B1B' for _ in range(len(psdku_sorted))]
 
     ax9_2.barh(y_pos2_9, psdku_sorted['Rata_FR_5Y'], color=colors_bars2_9, height=0.55, alpha=0.9, edgecolor='#0F172A', linewidth=1.0, zorder=2)
-    ax9_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.6, label='Standar Keterisian Sehat (80%)', zorder=3)
+    ax9_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.6, label='Standar Keterisian Ideal (80%)', zorder=3)
     ax9_2.axvline(50.0, color='#EA580C', linestyle=':', linewidth=1.4, label='Batas Kritis Kelayakan Kelas Mandiri (50%)', zorder=3)
     ax9_2.axvspan(0, 50.0, color='#FEF2F2', alpha=0.45, zorder=0)
 
@@ -1215,7 +1227,7 @@ def main():
     ax2.spines['bottom'].set_color('#94A3B8')
     line12_ref2 = ax2.axvline(1.0, color='#7F1D1D', linestyle='-', linewidth=2.4, zorder=1, label='Garis Kritis Mutlak 1,0 : 1 (Peminat < Kuota)')
     line12_ref3 = ax2.axvline(1.5, color='#DC2626', linestyle='--', linewidth=1.8, zorder=1, label='Batas Minimal BAN-PT (1,5 : 1)')
-    line12_ref4 = ax2.axvline(3.0, color='#16A34A', linestyle=':', linewidth=1.6, zorder=1, label='Batas Standar Sehat PTN (3,0 : 1)')
+    line12_ref4 = ax2.axvline(3.0, color='#16A34A', linestyle=':', linewidth=1.6, zorder=1, label='Batas Standar Ideal PTN (3,0 : 1)')
 
     for i, r in bot10_5y.iterrows():
         val = r['Rata_Keketatan_5Thn']
@@ -1239,7 +1251,7 @@ def main():
         'Batas Sangat Ketat (10 : 1)',
         'Garis Kritis Mutlak 1,0 : 1 (Peminat < Kuota)',
         'Batas Minimal BAN-PT (1,5 : 1)',
-        'Batas Standar Sehat PTN (3,0 : 1)'
+        'Batas Standar Ideal PTN (3,0 : 1)'
     ]
     fig.legend(handles12, labels12, loc='lower center', bbox_to_anchor=(0.5, 0.015), ncol=5, frameon=True,
                fontsize=9.5, facecolor='#F8FAFC', edgecolor='#CBD5E1', framealpha=0.98)
@@ -1304,7 +1316,7 @@ def main():
     ax.axhline(y=80.0, color=line_slate, linestyle='--', linewidth=1.9, alpha=0.9, zorder=2)
 
     # Badge Horizontal 80% (Pill solid non-black, anchor kanan rapi)
-    ax.text(49.5, 80.0, ' STANDAR KETERISIAN: 80% (TARGET SEHAT) ',
+    ax.text(49.5, 80.0, ' STANDAR KETERISIAN: 80% (TARGET IDEAL) ',
             ha='right', va='center', fontsize=9.0, color='#FFFFFF', fontweight='bold',
             bbox=dict(boxstyle='round,pad=0.35,rounding_size=0.5', facecolor=bg_slate, edgecolor=border_slate, linewidth=1.2, alpha=0.98),
             zorder=5)
@@ -1427,7 +1439,7 @@ def main():
     # -------------------------------------------------------------
     print("[13B] Generating 13_matriks_4_kuadran_5_tahun_d3_2022_2026.png...")
     fig_d3 = plt.figure(figsize=(24, 12), dpi=300, facecolor='#F8FAFC')
-    gs_d3 = gridspec.GridSpec(1, 2, width_ratios=[1.68, 1.0], wspace=0.14)
+    gs_d3 = gridspec.GridSpec(1, 2, width_ratios=[1.45, 1.0], wspace=0.12)
 
     ax_d3 = fig_d3.add_subplot(gs_d3[0])
     ax_d3_cards = fig_d3.add_subplot(gs_d3[1])
@@ -1438,65 +1450,53 @@ def main():
     x_max_d3 = 21.0
     y_min_d3, y_max_d3 = 18.0, 105.0
 
-    # Gentle Pastel Quadrant Backgrounds
+    # 4 Quadrants background
     ax_d3.axvspan(4.0, x_max_d3, ymin=(80.0 - y_min_d3)/(y_max_d3 - y_min_d3), ymax=1.0, color='#F0FDF4', alpha=0.55, zorder=0)
     ax_d3.axvspan(0.0, 4.0, ymin=(80.0 - y_min_d3)/(y_max_d3 - y_min_d3), ymax=1.0, color='#F0F9FF', alpha=0.55, zorder=0)
     ax_d3.axvspan(0.0, 4.0, ymin=0.0, ymax=(80.0 - y_min_d3)/(y_max_d3 - y_min_d3), color='#FFF1F2', alpha=0.55, zorder=0)
     ax_d3.axvspan(4.0, x_max_d3, ymin=0.0, ymax=(80.0 - y_min_d3)/(y_max_d3 - y_min_d3), color='#FFFBEB', alpha=0.65, zorder=0)
 
-    # Subtle Threshold lines
-    ax_d3.axvline(x=4.0, color='#64748B', linestyle='--', linewidth=1.6, alpha=0.85, zorder=1)
-    ax_d3.axhline(y=80.0, color='#64748B', linestyle='--', linewidth=1.6, alpha=0.85, zorder=1)
-    ax_d3.axhline(y=50.0, color='#DC2626', linestyle=':', linewidth=1.3, alpha=0.70, zorder=1)
+    # Threshold lines (Hanya 2 garis benchmark resmi seperti S1)
+    line_slate = '#64748B'
+    ax_d3.axvline(x=4.0, color=line_slate, linestyle='--', linewidth=1.8, alpha=0.85, zorder=1)
+    ax_d3.axhline(y=80.0, color=line_slate, linestyle='--', linewidth=1.8, alpha=0.85, zorder=1)
 
     # Badges on threshold lines
-    ax_d3.text(4.2, 19.5, 'Ambang Keketatan (4,0 : 1)', fontsize=8.5, color='#475569', fontweight='bold', zorder=2)
-    ax_d3.text(x_max_d3 - 0.4, 80.8, 'Standar Keterisian Kuota Sehat (80%)', ha='right', fontsize=8.5, color='#475569', fontweight='bold', zorder=2)
-    ax_d3.text(x_max_d3 - 0.4, 50.8, 'Batas Kritis Kelayakan Operasional (50%)', ha='right', fontsize=8.2, color='#DC2626', fontweight='bold', zorder=2)
+    ax_d3.text(4.2, 20.0, '▲ Ambang Keketatan: 4,0 : 1', fontsize=8.8, color='#475569', fontweight='bold', zorder=2)
+    ax_d3.text(x_max_d3 - 0.4, 80.8, 'Batas Minimal Keterisian Ideal (80%)', ha='right', fontsize=8.8, color='#475569', fontweight='bold', zorder=2)
 
-    # Subtle Quadrant Titles inside plot
+    # Quadrant Titles (100% Konsisten dengan S1)
     ax_d3.text(x_max_d3 - 0.8, 102.5, 'KUADRAN I: UNGGULAN\n0 Program Studi (0,0%)',
-               ha='right', va='top', fontsize=10.5, fontweight='bold', color='#047857', alpha=0.75, zorder=2, linespacing=1.2)
-    ax_d3.text(0.5, 102.5, 'KUADRAN II: STABIL \n0 Program Studi (0,0%)',
-               ha='left', va='top', fontsize=10.5, fontweight='bold', color='#1D4ED8', alpha=0.75, zorder=2, linespacing=1.2)
-    ax_d3.text(0.5, 20.5, 'KUADRAN III: KURANG DIMINATI\n0 Program Studi (0,0%)',
-               ha='left', va='bottom', fontsize=10.5, fontweight='bold', color='#B91C1C', alpha=0.75, zorder=2, linespacing=1.2)
-    ax_d3.text(x_max_d3 - 0.8, 20.5, 'KUADRAN IV: SELEKTIF TAPI BOCOR \n11 Program Studi (100,0% Seluruh Vokasi Terjebak di Sini)',
-               ha='right', va='bottom', fontsize=11.0, fontweight='bold', color='#B45309', alpha=0.95, zorder=2, linespacing=1.2)
+               ha='right', va='top', fontsize=11.0, fontweight='bold', color='#047857', alpha=0.75, zorder=2, linespacing=1.2)
+    ax_d3.text(0.5, 102.5, 'KUADRAN II: STABIL\n0 Program Studi (0,0%)',
+               ha='left', va='top', fontsize=11.0, fontweight='bold', color='#1D4ED8', alpha=0.75, zorder=2, linespacing=1.2)
+    ax_d3.text(0.5, 20.5, 'KUADRAN IV: PERLU DITINGKATKAN\n0 Program Studi (0,0%)',
+               ha='left', va='bottom', fontsize=11.0, fontweight='bold', color='#B91C1C', alpha=0.75, zorder=2, linespacing=1.2)
+    ax_d3.text(x_max_d3 - 0.8, 20.5, 'KUADRAN III: BELUM OPTIMAL\n(Peminat Tinggi, Keterisian Belum Optimal)\n11 Program Studi (100,0% Seluruh Vokasi)',
+               ha='right', va='bottom', fontsize=11.5, fontweight='bold', color='#B45309', alpha=0.95, zorder=2, linespacing=1.2)
 
-    # Callout banner for Kuadran IV anomaly in upper area
-    ax_d3.text(12.5, 93.5, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:\n100% (11 Program Studi D3) Terkonsentrasi di Kuadran IV\nPeminat Membludak (Keketatan 5,3x–17,7x), Namun Keterisian Anjlok (<80%)',
+    # Callout banner for Kuadran III anomaly
+    ax_d3.text(12.5, 93.5, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:\n100% (11 Program Studi D3) Terkonsentrasi di Kuadran III\nPeminat Membludak (Keketatan 5,3x–17,7x), Namun Keterisian Belum Optimal (<80%)',
                ha='center', va='center', fontsize=9.5, fontweight='bold', color='#92400E',
                bbox=dict(boxstyle='round,pad=0.55', facecolor='#FFFBEB', edgecolor='#F59E0B', linewidth=1.2, alpha=0.96),
                zorder=3)
 
-    # Scatter points
-    pt_cols_d3 = []
-    for _, r in df_d3.iterrows():
-        y = r['Rata_FillRate_5Thn_Persen']
-        if y >= 60.0:
-            pt_cols_d3.append('#059669')
-        elif y >= 45.0:
-            pt_cols_d3.append('#D97706')
-        else:
-            pt_cols_d3.append('#DC2626')
-
-    sizes_d3 = 90 + (df_d3['Rata_DT_5Thn'] / 100.0) * 320
+    # Scatter points - Ukuran seragam s=100 (sama seperti S1), selaras warna Kuadran III (#D97706)
     ax_d3.scatter(df_d3['Rata_Keketatan_5Thn'], df_d3['Rata_FillRate_5Thn_Persen'],
-                  s=sizes_d3, c=pt_cols_d3, edgecolors='#0F172A', linewidths=1.2, alpha=0.92, zorder=4)
+                  s=100, c='#D97706', edgecolors='#0F172A', linewidths=1.2, alpha=0.92, zorder=4)
 
     annots_config_d3 = [
         ('D3 Teknik Listrik (FT)\n5,3x | 48,3% | DT: 38', 'TEKNIK LISTRIK', (-18, 20), 'right'),
-        ('D3 Budidaya Peternakan (FP)\n5,6x | 30,6% | DT: 50', 'BUDIDAYA PETERNAKAN', (18, 16), 'left'),
+        ('D3 Budidaya Peternakan (FP)\n5,7x | 30,6% | DT: 50', 'BUDIDAYA PETERNAKAN', (18, 16), 'left'),
         ('D3 Manajemen Agribisnis (FP)\n6,2x | 27,4% | DT: 95', 'MANAJEMEN AGRIBISNIS', (18, -18), 'left'),
         ('D3 Sekretari (FEB)\n7,3x | 46,0% | DT: 45', 'SEKRETARI', (-18, -20), 'right'),
         ('D3 Teknik Mesin (FT)\n7,5x | 50,6% | DT: 38', 'TEKNIK MESIN', (-18, 22), 'right'),
         ('D3 Teknik Sipil (FT)\n8,1x | 40,6% | DT: 70', 'TEKNIK SIPIL', (18, -18), 'left'),
-        ('D3 Akuntansi (FEB)\n9,6x | 52,0% | DT: 73', 'AKUNTANSI', (16, 26), 'left'),
+        ('D3 Akuntansi (FEB)\n9,6x | 52,0% | DT: 72', 'AKUNTANSI', (16, 26), 'left'),
         ('D3 Keuangan & Perbankan (FEB)\n11,2x | 34,0% | DT: 69', 'KEUANGAN DAN PERBANKAN', (18, -16), 'left'),
-        ('D3 Kesehatan Hewan (FKH)\n12,2x | 49,4% | DT: 43', 'KESEHATAN HEWAN', (18, 20), 'left'),
-        ('D3 Manajemen Informatika (FMIPA)\n13,7x | 66,6% | DT: 80 ★ Bintang Vokasi', 'MANAJEMEN INFORMATIKA', (18, 16), 'left'),
-        ('D3 Manajemen Perusahaan (FEB)\n17,7x | 42,6% | DT: 43', 'MANAJEMEN PERUSAHAAN', (-18, 18), 'right')
+        ('D3 Kesehatan Hewan (FKH)\n12,2x | 49,4% | DT: 42', 'KESEHATAN HEWAN', (18, 20), 'left'),
+        ('D3 Manajemen Informatika (FMIPA)\n13,7x | 66,6% | DT: 80 ★ Keterisian Tertinggi', 'MANAJEMEN INFORMATIKA', (18, 16), 'left'),
+        ('D3 Manajemen Perusahaan (FEB)\n17,7x | 42,6% | DT: 42', 'MANAJEMEN PERUSAHAAN', (-18, 18), 'right')
     ]
 
     for label, pat, (ox, oy), ha_align in annots_config_d3:
@@ -1504,13 +1504,9 @@ def main():
         if len(m) > 0:
             px = float(m.iloc[0]['Rata_Keketatan_5Thn'])
             py = float(m.iloc[0]['Rata_FillRate_5Thn_Persen'])
-            badge_bg = '#F0FDF4' if py >= 60.0 else '#FEF2F2' if py < 45.0 else '#FFFBEB'
-            badge_edge = '#10B981' if py >= 60.0 else '#EF4444' if py < 45.0 else '#F59E0B'
-            badge_txt_c = '#065F46' if py >= 60.0 else '#991B1B' if py < 45.0 else '#92400E'
-
             ax_d3.annotate(label, xy=(px, py), xytext=(ox, oy), textcoords='offset points',
-                           ha=ha_align, va='center', fontsize=8.3, fontweight='bold', color=badge_txt_c,
-                           bbox=dict(boxstyle='round,pad=0.30', facecolor=badge_bg, edgecolor=badge_edge, linewidth=0.9, alpha=0.96),
+                           ha=ha_align, va='center', fontsize=8.3, fontweight='bold', color='#92400E',
+                           bbox=dict(boxstyle='round,pad=0.30', facecolor='#FFFBEB', edgecolor='#F59E0B', linewidth=0.9, alpha=0.96),
                            arrowprops=dict(arrowstyle='->', color='#475569', lw=1.0, shrinkA=2, shrinkB=4),
                            zorder=5)
 
@@ -1526,88 +1522,96 @@ def main():
     ax_d3.spines['left'].set_color('#94A3B8')
     ax_d3.spines['bottom'].set_color('#94A3B8')
 
-    leg_dt_d3 = [40, 70, 100]
-    leg_sizes_d3 = [90 + (dt / 100.0) * 320 for dt in leg_dt_d3]
-    leg_handles_d3 = [Line2D([0], [0], marker='o', color='w', label=f'{dt} kursi',
-                             markerfacecolor='#94A3B8', markersize=np.sqrt(s), markeredgecolor='#0F172A')
-                      for dt, s in zip(leg_dt_d3, leg_sizes_d3)]
-    leg_d3 = ax_d3.legend(handles=leg_handles_d3, loc='upper left', bbox_to_anchor=(0.02, 0.90),
-                          title='Kapasitas Kuota (Daya Tampung)', frameon=True, fontsize=8.5, title_fontsize=9.0)
-    leg_d3.get_frame().set_facecolor('#FFFFFF')
-    leg_d3.get_frame().set_edgecolor('#CBD5E1')
-    leg_d3.get_frame().set_alpha(0.95)
-
-    # Right Panel: Executive Cards
-    rect_summary_d3 = FancyBboxPatch((0.02, 0.875), 0.96, 0.115, boxstyle='round,pad=0.02',
+    # =========================================================================
+    # RIGHT PANEL: DIREKTORI ROSTER KUADRAN III & KESIMPULAN STRATEGIS
+    # =========================================================================
+    # 1. Header KPI Card
+    rect_summary_d3 = FancyBboxPatch((0.02, 0.885), 0.96, 0.105, boxstyle='round,pad=0.02',
                                      facecolor='#FFFFFF', edgecolor='#CBD5E1', linewidth=1.2,
                                      transform=ax_d3_cards.transAxes, zorder=2)
     ax_d3_cards.add_patch(rect_summary_d3)
-
-    ax_d3_cards.text(0.06, 0.965, 'RINGKASAN PORTOFOLIO DIPLOMA 3 VOKASI USK (HISTORIS)', fontsize=10, fontweight='bold', color='#0F172A', transform=ax_d3_cards.transAxes)
+    ax_d3_cards.text(0.05, 0.962, 'RINGKASAN PORTOFOLIO DIPLOMA 3 VOKASI USK (HISTORIS)', fontsize=9.8, fontweight='bold', color='#0F172A', transform=ax_d3_cards.transAxes)
 
     kpi_items_d3 = [
-        ('11 Prodi', '100% Kuadran IV', 0.06),
-        ('9,5 : 1', 'Rata-rata Keketatan', 0.40),
-        ('44,4%', 'Rata-rata Keterisian', 0.72)
+        ('11 Prodi', '100% Kuadran III', 0.05),
+        ('9,5 : 1', 'Rata-rata Keketatan', 0.38),
+        ('44,4%', 'Rata-rata Keterisian', 0.70)
     ]
     for val, lbl, x_pos in kpi_items_d3:
         color_kpi = '#B45309' if '%' in val else '#1E40AF'
-        ax_d3_cards.text(x_pos, 0.925, val, fontsize=13, fontweight='bold', color=color_kpi, transform=ax_d3_cards.transAxes)
-        ax_d3_cards.text(x_pos, 0.895, lbl, fontsize=8.0, color='#64748B', transform=ax_d3_cards.transAxes)
+        ax_d3_cards.text(x_pos, 0.925, val, fontsize=12.5, fontweight='bold', color=color_kpi, transform=ax_d3_cards.transAxes)
+        ax_d3_cards.text(x_pos, 0.898, lbl, fontsize=8.0, color='#64748B', transform=ax_d3_cards.transAxes)
 
-    cards_d3_data = [
-        {
-            'title': 'ANOMALI: 100% PRODI TERJEBAK DI KUADRAN IV',
-            'badge': '11 Prodi (100%)',
-            'badge_c': '#B45309', 'bg': '#FFFBEB', 'border': '#F59E0B', 'title_c': '#92400E',
-            'kondisi': 'Peminat tinggi (≥ 4,0x) tapi keterisian selalu rontok (< 80%).',
-            'contoh': 'Keketatan 5,3x s.d. 17,7x namun rata-rata keterisian hanya 44,4%.',
-            'rekomendasi': 'Ilusi Keketatan Semu: Dijadikan pilihan cadangan lalu gugur massal.'
-        },
-        {
-            'title': 'TIER 1: SATU-SATUNYA BINTANG VOKASI (FR ≥ 60%)',
-            'badge': '1 Prodi (9,1%)',
-            'badge_c': '#047857', 'bg': '#F0FDF4', 'border': '#10B981', 'title_c': '#065F46',
-            'kondisi': 'D3 Manajemen Informatika (FMIPA): FR 66,6% (2026: 72,5%, 2025: 82,5%).',
-            'contoh': 'Peminat tertinggi vokasi (1.100 mhs/thn) dengan keketatan 13,7 : 1.',
-            'rekomendasi': 'Prioritas #1 konversi menjadi Sarjana Terapan (D4 Rekayasa TI).'
-        },
-        {
-            'title': 'TIER 2: RENTAN KONVERSI (FR 45%–55%)',
-            'badge': '5 Prodi (45,5%)',
-            'badge_c': '#D97706', 'bg': '#FEF3C7', 'border': '#F59E0B', 'title_c': '#78350F',
-            'kondisi': 'Akuntansi (52%), Mesin (51%), Keswan (49%), Listrik (48%), Sekretari (46%).',
-            'contoh': 'Peminat besar (200–760 orang) namun konversi daftar ulang macet.',
-            'rekomendasi': 'Konversi prodi teknik/akuntansi ke D4; perkuat jalur magang industri.'
-        },
-        {
-            'title': 'TIER 3: KRISIS DEFISIT AKUT (FR < 45%)',
-            'badge': '5 Prodi (45,5%)',
-            'badge_c': '#B91C1C', 'bg': '#FFF1F2', 'border': '#F43F5E', 'title_c': '#991B1B',
-            'kondisi': 'Manajemen Perush (43%), Sipil (41%), Perbankan (34%), Peternakan (31%), Agribisnis (27%).',
-            'contoh': 'Episentrum bangku kosong: D3 Agribisnis & Perbankan rugi >150 kursi.',
-            'rekomendasi': 'Rasionalisasi kuota drastis (pangkas 40%–50%) atau moratorium.'
-        }
-    ]
+    # 2. Tabel Roster Direktori Kuadran III
+    rect_table_box = FancyBboxPatch((0.02, 0.285), 0.96, 0.585, boxstyle='round,pad=0.02',
+                                    facecolor='#FFFFFF', edgecolor='#CBD5E1', linewidth=1.2,
+                                    transform=ax_d3_cards.transAxes, zorder=2)
+    ax_d3_cards.add_patch(rect_table_box)
 
-    box_h = 0.185
-    y_starts = [0.665, 0.455, 0.245, 0.035]
+    ax_d3_cards.text(0.05, 0.845, 'DIREKTORI ROSTER 11 PROGRAM STUDI (KUADRAN III)', fontsize=9.8, fontweight='bold', color='#B45309', transform=ax_d3_cards.transAxes)
 
-    for idx, c in enumerate(cards_d3_data):
-        y = y_starts[idx]
-        rect = FancyBboxPatch((0.02, y), 0.96, box_h, boxstyle='round,pad=0.02',
-                              facecolor=c['bg'], edgecolor=c['border'], linewidth=1.2,
-                              transform=ax_d3_cards.transAxes, zorder=2)
-        ax_d3_cards.add_patch(rect)
+    # Table Header
+    y_th = 0.805
+    ax_d3_cards.text(0.05, y_th, 'No', fontsize=8.0, fontweight='bold', color='#475569', transform=ax_d3_cards.transAxes)
+    ax_d3_cards.text(0.10, y_th, 'Program Studi & Fakultas', fontsize=8.0, fontweight='bold', color='#475569', transform=ax_d3_cards.transAxes)
+    ax_d3_cards.text(0.55, y_th, 'Keketatan', fontsize=8.0, fontweight='bold', color='#475569', transform=ax_d3_cards.transAxes, ha='center')
+    ax_d3_cards.text(0.68, y_th, 'DT / DU', fontsize=8.0, fontweight='bold', color='#475569', transform=ax_d3_cards.transAxes, ha='center')
+    ax_d3_cards.text(0.81, y_th, 'Fill Rate', fontsize=8.0, fontweight='bold', color='#475569', transform=ax_d3_cards.transAxes, ha='center')
+    ax_d3_cards.text(0.93, y_th, 'Sisa', fontsize=8.0, fontweight='bold', color='#475569', transform=ax_d3_cards.transAxes, ha='center')
 
-        ax_d3_cards.text(0.06, y + box_h - 0.038, c['title'], fontsize=10, fontweight='bold', color=c['title_c'], transform=ax_d3_cards.transAxes)
-        ax_d3_cards.text(0.94, y + box_h - 0.038, c['badge'], fontsize=9, fontweight='bold', color=c['badge_c'], ha='right', transform=ax_d3_cards.transAxes)
-        ax_d3_cards.text(0.06, y + box_h - 0.078, f"Karakter: {c['kondisi']}", fontsize=8.3, color='#334155', transform=ax_d3_cards.transAxes)
-        ax_d3_cards.text(0.06, y + box_h - 0.120, f"Detail: {c['contoh']}", fontsize=8.0, fontstyle='italic', color='#64748B', transform=ax_d3_cards.transAxes)
-        ax_d3_cards.text(0.06, y + 0.025, f"Rekomendasi: {c['rekomendasi']}", fontsize=8.4, fontweight='bold', color=c['title_c'], transform=ax_d3_cards.transAxes)
+    # Line under header
+    line_h = FancyBboxPatch((0.04, y_th - 0.012), 0.92, 0.003, boxstyle='square,pad=0',
+                            facecolor='#E2E8F0', edgecolor='none', transform=ax_d3_cards.transAxes, zorder=3)
+    ax_d3_cards.add_patch(line_h)
+
+    # Sorted data
+    fak_abbr_d3 = {'FMIPA': 'FMIPA', 'Ekonomi dan Bisnis': 'FEB', 'Teknik': 'FT', 'Pertanian': 'FP', 'Kedokteran Hewan': 'FKH'}
+    d3_sorted = df_d3.sort_values('Rata_FillRate_5Thn_Persen', ascending=False).reset_index(drop=True)
+
+    y_row = y_th - 0.045
+    for idx, r in d3_sorted.iterrows():
+        p_name = r['Program_Studi'].replace('DIPLOMA III ', '').replace('DIPLOMA 3 ', '').strip().title()
+        f_abbr = fak_abbr_d3.get(r['Fakultas'], r['Fakultas'])
+        full_name = f'{p_name} ({f_abbr})'
+        kek_val = f"{r['Rata_Keketatan_5Thn']:.1f}x"
+        dt_val = int(round(r['Rata_DT_5Thn']))
+        du_val = int(round(r['Rata_DU_5Thn']))
+        ratio_txt = f'{dt_val}/{du_val}'
+        fr_val = f"{r['Rata_FillRate_5Thn_Persen']:.1f}%"
+        sisa_val = int(round(r['Rata_DT_5Thn'] - r['Rata_DU_5Thn']))
+        
+        # Zebra striping
+        if idx % 2 == 1:
+            bg_row = FancyBboxPatch((0.04, y_row - 0.008), 0.92, 0.038, boxstyle='square,pad=0',
+                                    facecolor='#F8FAFC', edgecolor='none', transform=ax_d3_cards.transAxes, zorder=2)
+            ax_d3_cards.add_patch(bg_row)
+            
+        ax_d3_cards.text(0.05, y_row, f'{idx+1}.', fontsize=7.8, color='#64748B', transform=ax_d3_cards.transAxes)
+        ax_d3_cards.text(0.10, y_row, full_name, fontsize=7.8, fontweight='bold', color='#1E293B', transform=ax_d3_cards.transAxes)
+        ax_d3_cards.text(0.55, y_row, kek_val, fontsize=7.8, color='#0F172A', transform=ax_d3_cards.transAxes, ha='center')
+        ax_d3_cards.text(0.68, y_row, ratio_txt, fontsize=7.8, color='#475569', transform=ax_d3_cards.transAxes, ha='center')
+        
+        # Color coding for FR
+        fr_col = '#047857' if r['Rata_FillRate_5Thn_Persen'] >= 60.0 else '#B45309' if r['Rata_FillRate_5Thn_Persen'] >= 45.0 else '#DC2626'
+        ax_d3_cards.text(0.81, y_row, fr_val, fontsize=7.8, fontweight='bold', color=fr_col, transform=ax_d3_cards.transAxes, ha='center')
+        ax_d3_cards.text(0.93, y_row, f'{sisa_val}', fontsize=7.8, color='#DC2626' if sisa_val >= 25 else '#475569', transform=ax_d3_cards.transAxes, ha='center')
+        
+        y_row -= 0.040
+
+    # 3. Strategic Action Plan Card for Leadership
+    rect_action = FancyBboxPatch((0.02, 0.025), 0.96, 0.245, boxstyle='round,pad=0.02',
+                                 facecolor='#FFFBEB', edgecolor='#F59E0B', linewidth=1.2,
+                                 transform=ax_d3_cards.transAxes, zorder=2)
+    ax_d3_cards.add_patch(rect_action)
+
+    ax_d3_cards.text(0.05, 0.235, 'REKOMENDASI STRATEGIS KUADRAN III BAGI PIMPINAN:', fontsize=9.2, fontweight='bold', color='#92400E', transform=ax_d3_cards.transAxes)
+    ax_d3_cards.text(0.05, 0.185, '• Diagnosis Masalah:\n  Animo peminat sangat tinggi (5,3x–17,7x), namun terjadi kebocoran masif saat pendaftaran\n  ulang (rata-rata keterisian hanya 44,4%) karena dijadikan prodi cadangan seleksi nasional.',
+                     fontsize=7.8, color='#78350F', transform=ax_d3_cards.transAxes, linespacing=1.25)
+    ax_d3_cards.text(0.05, 0.095, '• Langkah Kebijakan:\n  1. Upgrade ke D4: Konversi D3 Manajemen Informatika (FR 66,6%) & rumpun Teknik ke Sarjana Terapan.\n  2. Rasionalisasi Kuota: Pangkas kuota pada prodi defisit tinggi (Agribisnis, Perbankan, Peternakan).\n  3. Afirmasi Industri: Wajibkan kemitraan magang industri langsung untuk mengikat komitmen mahasiswa.',
+                     fontsize=7.8, color='#78350F', fontweight='bold', transform=ax_d3_cards.transAxes, linespacing=1.25)
 
     fig_d3.suptitle('MATRIKS 4 KUADRAN: PORTOFOLIO 11 PROGRAM STUDI DIPLOMA 3 VOKASI USK', fontsize=15, fontweight='bold', y=0.980, color='#0F172A')
-    fig_d3.subplots_adjust(left=0.075, right=0.985, top=0.915, bottom=0.075, wspace=0.14)
+    fig_d3.subplots_adjust(left=0.075, right=0.985, top=0.915, bottom=0.075, wspace=0.12)
 
     plt.savefig(os.path.join(chart_dir, "13_matriks_4_kuadran_5_tahun_d3_2022_2026.png"), dpi=300)
     plt.savefig(os.path.join(chart_dir, "13b_matriks_4_kuadran_d3_vokasi_2022_2026.png"), dpi=300)
@@ -1706,7 +1710,7 @@ def main():
                              bbox=dict(boxstyle='round,pad=0.15', facecolor='#FFFFFF', edgecolor=jalur_colors_map[j], linewidth=0.7, alpha=0.9),
                              zorder=5)
 
-    ax2.axhline(80.0, color='#64748B', linestyle='--', linewidth=1.5, alpha=0.85, label='Batas Standar Sehat (80%)', zorder=2)
+    ax2.axhline(80.0, color='#64748B', linestyle='--', linewidth=1.5, alpha=0.85, label='Batas Standar Ideal (80%)', zorder=2)
     ax2.set_xticks(years)
     ax2.set_xticklabels([str(y) for y in years], fontsize=11, fontweight='bold', color='#1E293B')
     ax2.set_ylim(50, 102)
@@ -1768,8 +1772,9 @@ def main():
     # -------------------------------------------------------------
     print("[15/15] Generating 15_evaluasi_kinerja_fakultas_5_tahun_2022_2026.png...")
     for yr in years:
-        fak_agg[f'FR_{yr}'] = (fak_agg[f'DU_{yr}'] / fak_agg[f'DT_{yr}'] * 100.0).round(1)
-    fak_agg['Rata_FR_5Thn'] = (fak_agg['Rata_DU_5Thn'] / fak_agg['Rata_DT_5Thn'] * 100.0).round(1)
+        fak_agg[f'FR_{yr}'] = (fak_agg[f'DU_{yr}'] / fak_agg[f'DT_{yr}'] * 100.0).round(1).clip(upper=100.0)
+    fr_cols = [f'FR_{yr}' for yr in years]
+    fak_agg['Rata_FR_5Thn'] = fak_agg[fr_cols].mean(axis=1).round(1)
 
     fak_5y_sorted = fak_agg.sort_values('Rata_FR_5Thn', ascending=False).reset_index(drop=True)
 
@@ -1780,13 +1785,13 @@ def main():
     col_labels = ['2022', '2023', '2024', '2025', '2026', 'Rata 5-Thn']
     row_labels = fak_5y_sorted['Fakultas'].tolist()
 
-    im = ax_heat.imshow(matrix_data, cmap=plt.cm.RdYlGn, norm=mcolors.Normalize(vmin=55, vmax=102), aspect='auto')
+    im = ax_heat.imshow(matrix_data, cmap=plt.cm.RdYlGn, norm=mcolors.Normalize(vmin=55, vmax=100), aspect='auto')
 
     ax_heat.set_xticks(np.arange(len(col_labels)))
     ax_heat.set_yticks(np.arange(len(row_labels)))
     ax_heat.set_xticklabels(col_labels, fontsize=11, fontweight='bold', color='#1E293B')
     ax_heat.set_yticklabels(row_labels, fontsize=11, fontweight='bold', color='#1E293B')
-    ax_heat.set_title('A. Heatmap Keterisian Kuota 12 Fakultas (2022–2026)\nIdentifikasi Zona Hijau (Prima), Kuning (Rentan), & Merah Kronis', 
+    ax_heat.set_title('A. Heatmap Keterisian Kuota 12 Fakultas (2022–2026)\nPemetaan Tingkat Utilisasi: Zona Optimal (≥80%), Moderat (70–79%), & Perlu Intervensi (<70%)', 
                       fontsize=12.5, fontweight='bold', pad=14, color='#065F46')
 
     for r in range(len(row_labels)):
@@ -1821,15 +1826,15 @@ def main():
                      label=f"{fak_name} ({r['Rata_FR_5Thn']:.1f}%)", zorder=4)
         raw_endpoints.append({'fak': fak_name, 'val': y_trajectory[-1], 'col': col})
 
-    ax_line.axhline(80.0, color='#DC2626', linestyle='--', linewidth=2.0, alpha=0.85, label='Batas Keterisian Sehat (80%)', zorder=2)
-    ax_line.axvspan(2022, 2026, ymin=0, ymax=(80-50)/(107-50), color='#FEF2F2', alpha=0.45, zorder=0)
+    ax_line.axhline(80.0, color='#DC2626', linestyle='--', linewidth=2.0, alpha=0.85, label='Batas Keterisian Ideal (80%)', zorder=2)
+    ax_line.axvspan(2022, 2026, ymin=0, ymax=(80-50)/(104-50), color='#FEF2F2', alpha=0.45, zorder=0)
 
     ax_line.set_xticks(years)
     ax_line.set_xticklabels([str(y) for y in years], fontsize=11, fontweight='bold', color='#1E293B')
-    ax_line.set_ylim(50, 107)
+    ax_line.set_ylim(50, 104)
     ax_line.set_xlim(2021.8, 2028.0)
     ax_line.set_ylabel('Tingkat Keterisian Kuota (Fill Rate %)', fontsize=11, fontweight='bold', color='#0F172A', labelpad=10)
-    ax_line.set_title('B. Lintasan Historis Keterisian Kuota 12 Fakultas (2022–2026)\nMenyingkap Krisis 2023–2024 dan Pemulihan Rentan Menuju 2026', 
+    ax_line.set_title('B. Lintasan Historis Keterisian Kuota 12 Fakultas (2022–2026)\nDinamika Fluktuasi Periode Transisi 2023–2024 dan Tren Pemulihan Menuju 2026', 
                       fontsize=12.5, fontweight='bold', pad=12, color='#1E40AF')
     ax_line.grid(True, linestyle='--', alpha=0.4, color='#CBD5E1', zorder=0)
     ax_line.spines['top'].set_visible(False)
@@ -1858,14 +1863,14 @@ def main():
                          bbox=dict(boxstyle='round,pad=0.18', facecolor='#FFFFFF', edgecolor=ep['col'], linewidth=0.7, alpha=0.92),
                          zorder=5)
 
-    ax_line.annotate('Anjloknya Pertanian (63.6%):\nTitik krisis pendaftaran 2023-2024',
+    ax_line.annotate('Titik Terendah Serapan Pertanian (63.6% pada 2024):\nTren Pemulihan Berlanjut ke 70.4% di 2026',
                      xy=(2024, 63.6), xytext=(2022.6, 53.5),
                      arrowprops=dict(facecolor='#DC2626', edgecolor='#DC2626', shrink=0.08, width=1.5, headwidth=6),
                      fontsize=8.5, fontweight='bold', color='#991B1B',
                      bbox=dict(boxstyle='round,pad=0.25', facecolor='#FEE2E2', edgecolor='#EF4444', linewidth=1.1),
                      zorder=6)
 
-    plt.suptitle('PANORAMA EVALUASI LONGITUDINAL 5 TAHUN DAYA SERAP KUOTA 12 FAKULTAS USK (2022–2026)\nMenghilangkan Bias Titik Tunggal: Memetakan Konsistensi Fakultas Prima vs Krisis Kapasitas Kronis',
+    plt.suptitle('PANORAMA EVALUASI LONGITUDINAL 5 TAHUN DAYA SERAP KUOTA 12 FAKULTAS USK (2022–2026)\nMenghilangkan Bias Titik Tunggal: Memetakan Konsistensi Fakultas Unggulan vs Kebutuhan Rasionalisasi Kapasitas',
                  fontsize=14.5, fontweight='bold', y=0.985, color='#0F172A')
 
     fig15.tight_layout(rect=[0.01, 0.02, 0.99, 0.93])
@@ -1939,7 +1944,7 @@ def main():
     legend_elements1 = [
         Patch(facecolor='#991B1B', edgecolor='#0F172A', label='Keterisian Kritis (<65%) - Defisit Berat'),
         Patch(facecolor='#D97706', edgecolor='#0F172A', label='Keterisian Rentan (65%–79%) - Defisit Sedang'),
-        Patch(facecolor='#2563EB', edgecolor='#0F172A', label='Keterisian Sehat (≥80%) tapi Kuota Terlampau Besar (Over-Ekspansi)')
+        Patch(facecolor='#2563EB', edgecolor='#0F172A', label='Keterisian Ideal (≥80%) tapi Kuota Terlampau Besar (Over-Ekspansi)')
     ]
     ax16_1.legend(handles=legend_elements1, loc='upper center', bbox_to_anchor=(0.5, -0.08), ncol=2, frameon=True, fontsize=8.8, framealpha=0.95)
 
@@ -1950,7 +1955,7 @@ def main():
     colors_fr2 = ['#DC2626' if i < 12 else '#059669' for i in range(len(combined_fr))]
     ax16_2.barh(y_pos2, combined_fr['FR_2026'], color=colors_fr2, height=0.64, alpha=0.9, edgecolor='#0F172A', linewidth=1.0, zorder=2)
 
-    ax16_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.8, label='Batas Keterisian Sehat (80%)', zorder=3)
+    ax16_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.8, label='Batas Keterisian Ideal (80%)', zorder=3)
     ax16_2.axvspan(0, 80.0, color='#FEF2F2', alpha=0.35, zorder=0)
 
     ax16_2.axhline(11.5, color='#475569', linestyle='-', linewidth=1.2, alpha=0.75, zorder=3)
@@ -2058,7 +2063,7 @@ def main():
     legend_elements1_17 = [
         Patch(facecolor='#991B1B', edgecolor='#0F172A', label='Rata-rata 5-Thn Kritis (<65%) - Defisit Kronis'),
         Patch(facecolor='#D97706', edgecolor='#0F172A', label='Rata-rata 5-Thn Rentan (65%–79%) - Defisit Sedang'),
-        Patch(facecolor='#2563EB', edgecolor='#0F172A', label='Rata-rata 5-Thn Sehat (≥80%) tapi Kuota Kumulatif Sangat Besar')
+        Patch(facecolor='#2563EB', edgecolor='#0F172A', label='Rata-rata 5-Thn Ideal (≥80%) tapi Kuota Kumulatif Sangat Besar')
     ]
     ax17_1.legend(handles=legend_elements1_17, loc='upper center', bbox_to_anchor=(0.5, -0.08), ncol=2, frameon=True, fontsize=8.8, framealpha=0.95)
 
@@ -2069,7 +2074,7 @@ def main():
     colors_fr2_17 = ['#DC2626' if i < 12 else '#059669' for i in range(len(combined_fr_5y))]
     ax17_2.barh(y_pos2_17, combined_fr_5y['Rata_FR_5Thn'], color=colors_fr2_17, height=0.64, alpha=0.9, edgecolor='#0F172A', linewidth=1.0, zorder=2)
 
-    ax17_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.8, label='Batas Keterisian Sehat (80%)', zorder=3)
+    ax17_2.axvline(80.0, color='#DC2626', linestyle='--', linewidth=1.8, label='Batas Keterisian Ideal (80%)', zorder=3)
     ax17_2.axvspan(0, 80.0, color='#FEF2F2', alpha=0.35, zorder=0)
 
     ax17_2.axhline(11.5, color='#475569', linestyle='-', linewidth=1.2, alpha=0.75, zorder=3)
