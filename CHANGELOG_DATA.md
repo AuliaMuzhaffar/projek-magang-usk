@@ -5,6 +5,36 @@ Dokumen ini mencatat setiap kronologi perubahan data master, penyesuaian angka h
 
 ---
 
+## [2026-10-18 00:40] - Penyelarasan Global Istilah "Ideal", Standardisasi Matriks D3, Penyempurnaan Grafik Pimpinan, dan Pemutakhiran Pipeline
+- **Inisiator/Konteks:** Menindaklanjuti arahan strategis untuk meningkatkan bobot formalitas dan kesesuaian bahasa bagi rapat pimpinan universitas (Rektor, Warek, Senat, dan Dekan), menyelaraskan seluruh terminologi metrik operasional menjadi "Ideal", menstandardisasi visualisasi matriks D3 Vokasi agar setara dengan S1, serta menyempurnakan visualisasi komparasi fakultas (Chart 07 & Chart 15).
+- **Tindakan & Penyesuaian Data/Sistem:**
+  1. **Penyelarasan Nomenklatur Global ("Sehat" $\rightarrow$ "Ideal"):**
+     - Memodifikasi seluruh label metrik visualisasi, skrip analisis, dan narasi kebijakan di seluruh repositori (10 skrip Python, `README.md`, `DATA_DICTIONARY.md`, dan 11 dokumen kajian di `docs/`).
+     - *Proteksi Integritas Ketat:* Nama resmi program studi (`D3 Kesehatan Hewan` dan `Pendidikan Jasmani Kesehatan dan Rekreasi`), rumpun keilmuan medis (`klaster kesehatan`, `tenaga kesehatan`, `layanan kesehatan mental`, `Kedokteran & Kesehatan`), dan fungsi audit developer (`kesehatan sinkronisasi repo`) dipertahankan murni tanpa perubahan.
+  2. **Standardisasi Matriks 4 Kuadran D3 Vokasi (Chart 13B):**
+     - Ukuran titik sebar (*scatter points*) diseragamkan (`s=100`) mengikuti format resmi S1.
+     - Legenda kuota yang membebani kanvas (*chartjunk*) dihapus bersih; kapasitas kuota dipindahkan ke badge anotasi titik (`DT: ...`) dan tabel roster.
+     - Garis non-standar 50% dihilangkan; visualisasi kini bertumpu pada 2 benchmark resmi universitas: Ambang Keketatan $4,0:1$ dan Batas Minimal Keterisian Ideal ($80\%$).
+     - Panel kanan dirombak dari sistem tier menjadi **Direktori Roster 11 Program Studi Kuadran III** terurut berbasis *Fill Rate*, dilengkapi KPI Card komprehensif dan 3 butir rekomendasi kebijakan strategis (Upgrade D4, Rasionalisasi Kuota, dan Afirmasi Industri).
+  3. **Penyempurnaan Visualisasi Komparasi Fakultas (Chart 07 & Chart 15):**
+     - **Grafik 07 (Daya Serap & Defisit Fakultas):**
+       - Menambahkan entri warna biru pada legenda Panel A (`Tingkat Keterisian 2026 (≥ 80% / Target Terpenuhi)`).
+       - Mengimplementasikan konsep kapasitas efektif (`max(DT, DU)`) pada kode agar bar over-enrollment (Kedokteran Gigi & Kedokteran 2022) tertahan rapi di batas $100,0\%$.
+       - Mendesain badge anotasi dua baris kompak (2026 vs 2022 disertai $\Delta$ perubahan poin persentase).
+     - **Grafik 15 (Panorama Longitudinal 5 Tahun Kinerja Fakultas):**
+       - Menghilangkan terminologi alarmis/konfrontatif ("kuning rentan", "merah kronis", "krisis kapasitas kronis", "titik krisis") dan menggantikannya dengan rumusan bahasa rapat pimpinan yang konstruktif dan berbasis ambang batas angka (`Pemetaan Tingkat Utilisasi: Zona Optimal (≥80%), Moderat (70–79%), & Perlu Intervensi (<70%)`, `Fakultas Unggulan vs Kebutuhan Rasionalisasi Kapasitas`, dll.).
+       - Membatasi keterisian tahunan maksimal $100,0\%$ murni pada level kode (`.clip(upper=100.0)`) pada kedua panel (Heatmap dan Lintasan Tren Garis) tanpa menyentuh database Excel asli.
+       - Kolom `Rata 5-Thn` diselaraskan sebagai rata-rata aritmatika horizontal dari 5 kolom tahunan yang telah di-cap, memudahkan verifikasi langsung oleh pimpinan.
+  4. **Pembaruan Pipeline Orkestrasi & Keamanan Git:**
+     - Penambahan modul fallback impor `adjustText` pada `generate_chart13_all_labels.py` dan `generate_chart13_tanpa_prodi_baru.py` sehingga kebal terhadap variasi lingkungan virtual Python.
+     - Pembuatan dan integrasi modul `scripts/build_rekap_daya_tampung_excel.py` ke dalam pipeline master (`data/processed/rekap_daya_tampung_peminat_dan_sisa_kuota_2022_2026.xlsx`).
+     - Perlindungan berkas privat/non-repositori pada `.gitignore` (`assets/WhatsApp Image 2026-10-12 at 17.11.32.jpeg`).
+     - Eksekusi master orchestrator `scripts/build_all.py` sukses 100% (7 tahap dalam 94,3 detik).
+     - Seluruh perubahan berhasil di-commit dan di-push ke GitHub (`main` -> commit `472b087`).
+- **Hasil Audit Verifikasi (`scripts/verify_sync.py`):** 100% Seluruh artefak hilir (17 grafik reguler, 2 matriks komparasi, direktori roster, berkas rekapitulasi Excel, dan dashboard HTML interaktif) berstatus **`[SYNCED]`**.
+
+---
+
 ## [2026-10-12 16:40] - Penyelarasan Penuh Rekap Selisih Lulus vs DU & Integrasi Pipeline Otomatis
 - **Inisiator/Konteks:** Menyelaraskan seluruh 1.215 sel data pada `data/processed/rekap_selisih_lulus_vs_daftar_ulang_2022_2026.xlsx` dengan Database Master resmi (`Master_Semua_Prodi`) dan mengintegrasikannya ke dalam pipeline workflow otomatis (`scripts/build_all.py` dan `scripts/verify_sync.py`).
 - **Tindakan & Penyesuaian Data:**
@@ -22,6 +52,8 @@ Dokumen ini mencatat setiap kronologi perubahan data master, penyesuaian angka h
 - **Hasil Audit Verifikasi:** 81 Program Studi x 15 Kolom = 1.215 Sel diuji secara cell-by-cell. Total selisih: **0 (100% Sempurna & Identik)**.
 
 ---
+
+## [2026-10-12 14:00] - Restrukturisasi Repositori Menjadi Standar Modular
 - **Inisiator/Konteks:** Merapikan repositori yang sebelumnya memiliki direktori bertingkat berulang (`tugas-5/analisa_peminatan_dan_daya_tampung/`) dan file-file yang tersebar di root menjadi struktur modular standar industri kelas dunia.
 - **Tindakan & Pengelompokan Berkas:**
   1. `data/`:
