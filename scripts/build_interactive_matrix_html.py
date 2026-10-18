@@ -2,19 +2,25 @@ import os
 import sys
 import json
 import base64
+import sys, os
+libs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "libs"))
+if os.path.exists(libs_dir) and libs_dir not in sys.path:
+    sys.path.insert(0, libs_dir)
+
 import pandas as pd
 import numpy as np
 
 # Impor konfigurasi sentral (Single Source of Truth)
 sys.path.insert(0, os.path.dirname(__file__))
 from core_data import (
-    BASE_DIR, MASTER_EXCEL_PATH, DASHBOARD_DIR, INTERACTIVE_HTML_PATH,
+    BASE_DIR, MASTER_EXCEL_PATH, RAW_EXCEL_PATH, DASHBOARD_DIR, INTERACTIVE_HTML_PATH,
     KEKETATAN_BENCHMARK, FILLRATE_BENCHMARK, FAKULTAS_ABBR, PRODI_HTML_SHORT_NAMES
 )
 
 def generate_interactive_html():
     repo_dir = BASE_DIR
     excel_path = MASTER_EXCEL_PATH
+    raw_path = RAW_EXCEL_PATH
     html_output_dir = DASHBOARD_DIR
     os.makedirs(html_output_dir, exist_ok=True)
     html_output_path = INTERACTIVE_HTML_PATH
@@ -23,9 +29,41 @@ def generate_interactive_html():
         print(f"File {excel_path} tidak ditemukan!")
         return
 
-    print("Membaca data Excel S1 Kampus Utama dan Diploma 3 Vokasi...")
+    print("Membaca data Excel Master_Semua_Prodi, S1 Kampus Utama, dan Diploma 3 Vokasi...")
+    df_all = pd.read_excel(excel_path, sheet_name="Master_Semua_Prodi")
     df_s1 = pd.read_excel(excel_path, sheet_name="S1_Kampus_Utama")
     df_d3 = pd.read_excel(excel_path, sheet_name="Diploma_3_Vokasi")
+
+    # Pemetaan Kode Prodi 7 Digit Resmi dari raw_path
+    prodi_to_code = {}
+    if os.path.exists(raw_path):
+        try:
+            df_raw = pd.read_excel(raw_path, sheet_name="Rekapitulasi Data", header=None)
+            for _, rr in df_raw.iloc[4:].iterrows():
+                kode_val = rr.iloc[1]
+                nama_val = rr.iloc[2]
+                if pd.notna(nama_val):
+                    n_str = str(nama_val).strip().upper()
+                    if pd.notna(kode_val):
+                        try:
+                            k_str = str(int(float(kode_val))).zfill(7)
+                        except Exception:
+                            k_str = str(kode_val).strip()
+                        prodi_to_code[n_str] = k_str
+        except Exception:
+            pass
+    prodi_to_code["TEKNIK PERMINYAKAN"] = "0411601"
+    prodi_to_code["HUBUNGAN INTERNASIONAL"] = "0910101"
+
+    def resolve_prodi_code(nama_str):
+        n_up = nama_str.strip().upper()
+        c = prodi_to_code.get(n_up)
+        if not c:
+            for k, v in prodi_to_code.items():
+                if n_up in k or k in n_up:
+                    c = v
+                    break
+        return c or "-"
 
     fak_abbr_map = FAKULTAS_ABBR
 
@@ -37,6 +75,7 @@ def generate_interactive_html():
         p_name = str(r['Nama Program Studi']).strip()
         fak = str(r['Fakultas']).strip()
         fak_abbr = fak_abbr_map.get(fak, fak)
+        kode_prodi = resolve_prodi_code(p_name)
 
         keketatan = round(float(r['Rata Keketatan 5-Thn']), 2)
         raw_fill_rate = round(float(r['Rata Fill Rate 5-Thn (%)']), 1)
@@ -89,20 +128,34 @@ def generate_interactive_html():
 
         # Riwayat Tahunan 2022-2026 dengan Capping 100%
         history = []
+        tot_dt_5 = 0
+        tot_lu_5 = 0
+        tot_du_5 = 0
         for yr in [2022, 2023, 2024, 2025, 2026]:
             try:
                 pem_y = int(r[f'Peminat {yr}']) if pd.notna(r.get(f'Peminat {yr}')) else 0
                 dt_y = int(r[f'Daya Tampung {yr}']) if pd.notna(r.get(f'Daya Tampung {yr}')) else 0
+                lu_y = int(r[f'Lulus Seleksi {yr}']) if pd.notna(r.get(f'Lulus Seleksi {yr}')) else 0
                 du_y = int(r[f'Daftar Ulang {yr}']) if pd.notna(r.get(f'Daftar Ulang {yr}')) else 0
                 raw_fr_y = round(float(r[f'Fill Rate {yr} (%)']), 1) if pd.notna(r.get(f'Fill Rate {yr} (%)')) else 0.0
                 fr_y = min(raw_fr_y, 100.0) # Capped at 100%
+                yr_y = round(float(r[f'Yield Rate {yr} (%)']), 1) if pd.notna(r.get(f'Yield Rate {yr} (%)')) else 0.0
                 kek_y = round(float(r[f'Keketatan {yr}']), 2) if pd.notna(r.get(f'Keketatan {yr}')) else 0.0
+                sisa_y = dt_y - du_y
+                batal_y = lu_y - du_y
+                tot_dt_5 += dt_y
+                tot_lu_5 += lu_y
+                tot_du_5 += du_y
                 history.append({
                     "tahun": yr,
                     "peminat": pem_y,
                     "dt": dt_y,
+                    "lulus": lu_y,
                     "du": du_y,
+                    "sisa": sisa_y,
+                    "batal": batal_y,
                     "fill_rate": fr_y,
+                    "yield_rate": yr_y,
                     "keketatan": kek_y
                 })
             except Exception:
@@ -110,6 +163,7 @@ def generate_interactive_html():
 
         s1_data.append({
             "id": idx + 1,
+            "kode": kode_prodi,
             "jenjang": "S1",
             "nama": p_name,
             "fakultas": fak,
@@ -118,12 +172,18 @@ def generate_interactive_html():
             "kuadran_title": kuadran_title,
             "kuadran_desc": kuadran_desc,
             "color": color,
+            "rekomendasi": rekomendasi,
             "keketatan": keketatan,
             "fill_rate": fill_rate,
             "peminat_5thn": peminat_5thn,
             "dt_5thn": dt_5thn,
             "du_5thn": du_5thn,
             "sisa_5thn": sisa_kursi_5thn,
+            "tot_dt": tot_dt_5,
+            "tot_lulus": tot_lu_5,
+            "tot_du": tot_du_5,
+            "tot_sisa": tot_dt_5 - tot_du_5,
+            "tot_batal": tot_lu_5 - tot_du_5,
             "tren_resmi": tren_resmi,
             "klaster": klaster,
             "is_prodi_baru": bool(tren_resmi == "Data Terbatas (Prodi Baru)"),
@@ -138,6 +198,7 @@ def generate_interactive_html():
         p_name = str(r['Nama Program Studi']).strip()
         fak = str(r['Fakultas']).strip()
         fak_abbr = fak_abbr_map.get(fak, fak)
+        kode_prodi = resolve_prodi_code(p_name)
 
         keketatan = round(float(r['Rata Keketatan 5-Thn']), 2)
         raw_fill_rate = round(float(r['Rata Fill Rate 5-Thn (%)']), 1)
@@ -187,20 +248,34 @@ def generate_interactive_html():
 
         # Riwayat Tahunan D3 2022-2026
         history = []
+        tot_dt_5 = 0
+        tot_lu_5 = 0
+        tot_du_5 = 0
         for yr in [2022, 2023, 2024, 2025, 2026]:
             try:
                 pem_y = int(r[f'Peminat {yr}']) if pd.notna(r.get(f'Peminat {yr}')) else 0
                 dt_y = int(r[f'Daya Tampung {yr}']) if pd.notna(r.get(f'Daya Tampung {yr}')) else 0
+                lu_y = int(r[f'Lulus Seleksi {yr}']) if pd.notna(r.get(f'Lulus Seleksi {yr}')) else 0
                 du_y = int(r[f'Daftar Ulang {yr}']) if pd.notna(r.get(f'Daftar Ulang {yr}')) else 0
                 raw_fr_y = round(float(r[f'Fill Rate {yr} (%)']), 1) if pd.notna(r.get(f'Fill Rate {yr} (%)')) else 0.0
                 fr_y = min(raw_fr_y, 100.0)
+                yr_y = round(float(r[f'Yield Rate {yr} (%)']), 1) if pd.notna(r.get(f'Yield Rate {yr} (%)')) else 0.0
                 kek_y = round(float(r[f'Keketatan {yr}']), 2) if pd.notna(r.get(f'Keketatan {yr}')) else 0.0
+                sisa_y = dt_y - du_y
+                batal_y = lu_y - du_y
+                tot_dt_5 += dt_y
+                tot_lu_5 += lu_y
+                tot_du_5 += du_y
                 history.append({
                     "tahun": yr,
                     "peminat": pem_y,
                     "dt": dt_y,
+                    "lulus": lu_y,
                     "du": du_y,
+                    "sisa": sisa_y,
+                    "batal": batal_y,
                     "fill_rate": fr_y,
+                    "yield_rate": yr_y,
                     "keketatan": kek_y
                 })
             except Exception:
@@ -208,6 +283,7 @@ def generate_interactive_html():
 
         d3_data.append({
             "id": 100 + idx + 1,
+            "kode": kode_prodi,
             "jenjang": "D3",
             "nama": p_name,
             "fakultas": fak,
@@ -219,14 +295,155 @@ def generate_interactive_html():
             "kuadran_title": kuadran_title,
             "kuadran_desc": kuadran_desc,
             "color": color,
+            "rekomendasi": rekomendasi,
             "keketatan": keketatan,
             "fill_rate": fill_rate,
             "peminat_5thn": peminat_5thn,
             "dt_5thn": dt_5thn,
             "du_5thn": du_5thn,
             "sisa_5thn": sisa_kursi_5thn,
+            "tot_dt": tot_dt_5,
+            "tot_lulus": tot_lu_5,
+            "tot_du": tot_du_5,
+            "tot_sisa": tot_dt_5 - tot_du_5,
+            "tot_batal": tot_lu_5 - tot_du_5,
             "tren_resmi": tren_resmi,
             "klaster": klaster,
+            "history": history
+        })
+
+    # ----------------------------------------------------
+    # 3. PROCESS ALL 81 PRODI FROM MASTER_SEMUA_PRODI
+    # ----------------------------------------------------
+    all_prodi_data = []
+    for idx, r in df_all.iterrows():
+        no_val = int(r['No']) if pd.notna(r.get('No')) else (idx + 1)
+        p_name = str(r['Nama Program Studi']).strip()
+        fak = str(r['Fakultas']).strip()
+        fak_abbr = fak_abbr_map.get(fak, fak)
+        jenjang = str(r.get('Jenjang', 'S1')).strip()
+        klaster = str(r.get('Klaster Analisis', 'S1 Kampus Utama')).strip()
+        kode_prodi = resolve_prodi_code(p_name)
+
+        keketatan = round(float(r['Rata Keketatan 5-Thn']), 2)
+        raw_fill_rate = round(float(r['Rata Fill Rate 5-Thn (%)']), 1)
+        fill_rate = min(raw_fill_rate, 100.0)
+        peminat_5thn = round(float(r['Rata Peminat 5-Thn']), 1)
+        dt_5thn = round(float(r['Rata DT 5-Thn']), 1)
+        du_5thn = round(float(r['Rata DU 5-Thn']), 1)
+        sisa_kursi_5thn = max(0.0, round(dt_5thn - du_5thn, 1))
+        tren_resmi = str(r.get('Klasifikasi Tren Resmi', 'Tren Stabil')).strip()
+        is_prodi_baru = bool(tren_resmi == "Data Terbatas (Prodi Baru)" and klaster == "S1 Kampus Utama")
+
+        if keketatan >= KEKETATAN_BENCHMARK and fill_rate >= FILLRATE_BENCHMARK:
+            kuadran = "I"
+            kuadran_title = "KUADRAN I: UNGGULAN"
+            kuadran_desc = "Peminat Tinggi & Daya Serap Kuota Penuh (Prima)"
+            color = "#059669"
+            rekomendasi = (
+                "Pertahankan standar kualitas seleksi tinggi. Alokasi daya tampung dapat dinaikkan selektif "
+                "(5–10%) jika kapasitas laboratorium dan rasio dosen mencukupi."
+            )
+        elif keketatan < KEKETATAN_BENCHMARK and fill_rate >= FILLRATE_BENCHMARK:
+            kuadran = "II"
+            kuadran_title = "KUADRAN II: STABIL"
+            kuadran_desc = "Kompetisi Moderat, Namun Kuota Terserap Optimal"
+            color = "#2563EB"
+            rekomendasi = (
+                "Pertahankan kuota tetap stabil. Tingkatkan promosi untuk mendongkrak rasio keketatan seleksi "
+                "menuju ambang kompetitif (>= 4,0 : 1)."
+            )
+        elif keketatan >= KEKETATAN_BENCHMARK and fill_rate < FILLRATE_BENCHMARK:
+            kuadran = "III"
+            kuadran_title = "KUADRAN III: BELUM OPTIMAL"
+            kuadran_desc = "Peminat Sangat Tinggi, Namun Daftar Ulang Belum Optimal"
+            color = "#D97706"
+            rekomendasi = (
+                "Investigasi mendalam penyebab tingginya calon mahasiswa lulus yang batal daftar ulang (yield loss). "
+                "Tinjau tarif UKT/IPI dan optimalkan pemanggilan cadangan."
+            )
+        else:
+            kuadran = "IV"
+            kuadran_title = "KUADRAN IV: PERLU DITINGKATKAN"
+            kuadran_desc = "Peminat Rendah & Kuota Kerap Tidak Terisi Penuh"
+            color = "#E11D48"
+            rekomendasi = (
+                "Prioritas rasionalisasi daya tampung (downsizing kuota 15–30%) untuk menekan akumulasi kursi kosong, "
+                "disertai penyegaran kurikulum berbasis kebutuhan pasar."
+            )
+
+        history = []
+        tot_pem_5 = 0
+        tot_dt_5 = 0
+        tot_lu_5 = 0
+        tot_du_5 = 0
+        for yr in [2022, 2023, 2024, 2025, 2026]:
+            pem_y = int(r[f'Peminat {yr}']) if pd.notna(r.get(f'Peminat {yr}')) else 0
+            dt_y = int(r[f'Daya Tampung {yr}']) if pd.notna(r.get(f'Daya Tampung {yr}')) else 0
+            lu_y = int(r[f'Lulus Seleksi {yr}']) if pd.notna(r.get(f'Lulus Seleksi {yr}')) else 0
+            du_y = int(r[f'Daftar Ulang {yr}']) if pd.notna(r.get(f'Daftar Ulang {yr}')) else 0
+            raw_fr_y = round(float(r[f'Fill Rate {yr} (%)']), 1) if pd.notna(r.get(f'Fill Rate {yr} (%)')) else 0.0
+            fr_y = min(raw_fr_y, 100.0)
+            yr_y = round(float(r[f'Yield Rate {yr} (%)']), 1) if pd.notna(r.get(f'Yield Rate {yr} (%)')) else 0.0
+            kek_y = round(float(r[f'Keketatan {yr}']), 2) if pd.notna(r.get(f'Keketatan {yr}')) else 0.0
+            sisa_y = dt_y - du_y
+            batal_y = lu_y - du_y
+            tot_pem_5 += pem_y
+            tot_dt_5 += dt_y
+            tot_lu_5 += lu_y
+            tot_du_5 += du_y
+            history.append({
+                "tahun": yr,
+                "peminat": pem_y,
+                "dt": dt_y,
+                "lulus": lu_y,
+                "du": du_y,
+                "sisa": sisa_y,
+                "batal": batal_y,
+                "fill_rate": fr_y,
+                "yield_rate": yr_y,
+                "keketatan": kek_y
+            })
+
+        tot_sisa_5 = tot_dt_5 - tot_du_5
+        tot_batal_5 = tot_lu_5 - tot_du_5
+        pct_sisa_5 = round((tot_sisa_5 / tot_dt_5 * 100.0), 1) if tot_dt_5 > 0 else 0.0
+        pct_batal_5 = round((tot_batal_5 / tot_lu_5 * 100.0), 1) if tot_lu_5 > 0 else 0.0
+        fill_5 = round((tot_du_5 / tot_dt_5 * 100.0), 1) if tot_dt_5 > 0 else 0.0
+        yield_5 = round((tot_du_5 / tot_lu_5 * 100.0), 1) if tot_lu_5 > 0 else 0.0
+
+        all_prodi_data.append({
+            "id": 200 + no_val,
+            "no": no_val,
+            "kode": kode_prodi,
+            "jenjang": jenjang,
+            "klaster": klaster,
+            "nama": p_name,
+            "fakultas": fak,
+            "fakultas_abbr": fak_abbr,
+            "kuadran": kuadran,
+            "kuadran_title": kuadran_title,
+            "kuadran_desc": kuadran_desc,
+            "color": color,
+            "rekomendasi": rekomendasi,
+            "keketatan": keketatan,
+            "fill_rate": fill_rate,
+            "peminat_5thn": peminat_5thn,
+            "dt_5thn": dt_5thn,
+            "du_5thn": du_5thn,
+            "sisa_5thn": sisa_kursi_5thn,
+            "tot_peminat": tot_pem_5,
+            "tot_dt": tot_dt_5,
+            "tot_lulus": tot_lu_5,
+            "tot_du": tot_du_5,
+            "tot_sisa": tot_sisa_5,
+            "tot_batal": tot_batal_5,
+            "pct_sisa": pct_sisa_5,
+            "pct_batal": pct_batal_5,
+            "fill_5thn": min(fill_5, 100.0),
+            "yield_5thn": min(yield_5, 100.0),
+            "tren_resmi": tren_resmi,
+            "is_prodi_baru": is_prodi_baru,
             "history": history
         })
 
@@ -238,10 +455,11 @@ def generate_interactive_html():
             b64_str = base64.b64encode(f.read()).decode("utf-8")
             usk_logo_b64 = f"data:image/png;base64,{b64_str}"
 
-    print(f"Total S1: {len(s1_data)} prodi, Total D3: {len(d3_data)} prodi.")
+    print(f"Total Semua Prodi: {len(all_prodi_data)} | S1: {len(s1_data)} | D3: {len(d3_data)}.")
     dataset_payload = {
         "s1": s1_data,
-        "d3": d3_data
+        "d3": d3_data,
+        "all": all_prodi_data
     }
     json_data = json.dumps(dataset_payload, ensure_ascii=False)
 
@@ -1519,6 +1737,374 @@ def generate_interactive_html():
             color: #047857;
         }}
 
+        /* View Switcher: Segmented Control (Apple / Tailwind style) */
+        .view-mode-switcher {{
+            display: inline-flex;
+            align-items: center;
+            background: #F1F5F9;
+            border: 1px solid #CBD5E1;
+            border-radius: 28px;
+            padding: 3.5px;
+            gap: 4px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+        }}
+        .view-mode-btn {{
+            background: transparent;
+            color: #475569;
+            border: 1px solid transparent;
+            padding: 6px 14px;
+            border-radius: 22px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }}
+        .view-mode-btn:hover {{
+            color: #0F172A;
+            background: rgba(255, 255, 255, 0.7);
+        }}
+        .view-mode-btn.active {{
+            background: #FFFFFF;
+            color: #0F172A;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12), 0 1px 2px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(203, 213, 225, 0.8);
+        }}
+        .view-mode-btn .vm-badge {{
+            background: #E2E8F0;
+            color: #475569;
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-size: 10.5px;
+            font-weight: 800;
+            transition: all 0.2s ease;
+        }}
+        .view-mode-btn.active .vm-badge {{
+            background: #EFF6FF;
+            color: #1D4ED8;
+        }}
+        .view-mode-btn:hover .vm-badge {{
+            background: #CBD5E1;
+            color: #0F172A;
+        }}
+
+        /* Trend Evaluation View Container */
+        #trend-view-wrapper {{
+            display: none;
+            padding: 18px 28px 32px 28px;
+            flex-direction: column;
+            gap: 18px;
+        }}
+        .trend-macro-grid {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }}
+        .trend-kpi-card {{
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4.5px solid #0F172A;
+        }}
+        .trend-kpi-card.tk-blue {{ border-left-color: #2563EB; }}
+        .trend-kpi-card.tk-emerald {{ border-left-color: #059669; }}
+        .trend-kpi-card.tk-rose {{ border-left-color: #E11D48; background: linear-gradient(180deg, #FFF1F2 0%, #FFFFFF 60%); }}
+        .trend-kpi-card.tk-amber {{ border-left-color: #D97706; background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 60%); }}
+        .tk-title {{
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }}
+        .tk-val {{
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-top: 4px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }}
+        .tk-val span.tk-pct {{
+            font-size: 13px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 6px;
+        }}
+        .tk-sub {{
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 5px;
+            line-height: 1.4;
+        }}
+
+        /* Macro Leaky Bucket Panel */
+        .macro-leaky-panel {{
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 18px 20px;
+            box-shadow: var(--shadow-sm);
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 20px;
+            align-items: center;
+        }}
+        .macro-table {{
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }}
+        .macro-table th {{
+            background: #F1F5F9;
+            color: #334155;
+            font-weight: 700;
+            padding: 8px 10px;
+            text-align: right;
+            border-bottom: 2px solid #CBD5E1;
+        }}
+        .macro-table th:first-child {{ text-align: left; }}
+        .macro-table td {{
+            padding: 7px 10px;
+            text-align: right;
+            border-bottom: 1px solid #E2E8F0;
+            font-variant-numeric: tabular-nums;
+        }}
+        .macro-table td:first-child {{ text-align: left; font-weight: 700; }}
+        .macro-table tr.total-row td {{
+            background: #0F172A;
+            color: #FFFFFF;
+            font-weight: 800;
+            border-bottom: none;
+        }}
+
+        /* Trend Controls & Presets Bar */
+        .trend-controls-card {{
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 14px 18px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }}
+        .trend-toolbar-row {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }}
+        .preset-group {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            align-items: center;
+        }}
+        .preset-btn {{
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            color: #334155;
+            padding: 6.5px 12px;
+            border-radius: 8px;
+            font-size: 11.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }}
+        .preset-btn:hover {{
+            background: #F1F5F9;
+            border-color: #94A3B8;
+        }}
+        .preset-btn.active {{
+            background: #0F172A;
+            color: #FFFFFF;
+            border-color: #0F172A;
+        }}
+        .preset-btn.preset-rose.active {{
+            background: #E11D48;
+            border-color: #E11D48;
+            color: #FFFFFF;
+        }}
+        .preset-btn.preset-amber.active {{
+            background: #D97706;
+            border-color: #D97706;
+            color: #FFFFFF;
+        }}
+        .trend-select {{
+            padding: 6.5px 11px;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1E293B;
+            background: #F8FAFC;
+            cursor: pointer;
+        }}
+        .trend-search-input {{
+            padding: 7px 12px;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            width: 260px;
+        }}
+
+        /* 81 Prodi Sparkline Table */
+        .trend-table-card {{
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }}
+        .trend-table-scroll {{
+            overflow-x: auto;
+            max-height: 760px;
+            overflow-y: auto;
+        }}
+        table.prodi-trend-table {{
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 12px;
+        }}
+        table.prodi-trend-table thead th {{
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #0F172A;
+            color: #FFFFFF;
+            font-weight: 700;
+            padding: 10px 10px;
+            text-align: center;
+            border-bottom: 2px solid #334155;
+            white-space: nowrap;
+        }}
+        table.prodi-trend-table thead tr.sub-hdr th {{
+            top: 39px;
+            background: #1E293B;
+            color: #E2E8F0;
+            font-size: 11px;
+            padding: 6px 8px;
+            border-bottom: 2px solid #475569;
+        }}
+        table.prodi-trend-table tbody tr {{
+            cursor: pointer;
+            transition: background 0.12s ease;
+        }}
+        table.prodi-trend-table tbody tr:nth-child(even) {{
+            background: #F8FAFC;
+        }}
+        table.prodi-trend-table tbody tr:hover {{
+            background: #EFF6FF !important;
+        }}
+        table.prodi-trend-table td {{
+            padding: 9px 10px;
+            border-bottom: 1px solid #E2E8F0;
+            vertical-align: middle;
+        }}
+        .yr-vals-strip {{
+            display: inline-grid;
+            grid-template-columns: repeat(5, 36px);
+            gap: 3px;
+            font-variant-numeric: tabular-nums;
+            font-size: 11px;
+        }}
+        .yr-pill {{
+            text-align: center;
+            padding: 2px 3px;
+            border-radius: 4px;
+            background: #F1F5F9;
+            color: #334155;
+            font-weight: 600;
+        }}
+        .yr-pill.hi-rose {{ background: #FFE4E6; color: #9F1239; font-weight: 700; }}
+        .yr-pill.hi-amber {{ background: #FEF3C7; color: #92400E; font-weight: 700; }}
+        .yr-pill.hi-ok {{ background: #DCFCE7; color: #166534; }}
+
+        /* Drilldown Modal */
+        .modal-backdrop {{
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }}
+        .modal-backdrop.open {{
+            display: flex;
+        }}
+        .modal-dialog {{
+            background: #FFFFFF;
+            border-radius: 18px;
+            width: 100%;
+            max-width: 1080px;
+            max-height: 92vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 48px rgba(15, 23, 42, 0.35);
+            border: 1px solid #CBD5E1;
+            display: flex;
+            flex-direction: column;
+        }}
+        .modal-header {{
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #FFFFFF;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-radius: 17px 17px 0 0;
+        }}
+        .modal-body {{
+            padding: 20px 24px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }}
+        .modal-charts-grid {{
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 16px;
+        }}
+        .modal-chart-box {{
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 14px 16px;
+        }}
+        .modal-chart-box h4 {{
+            font-family: 'Outfit', sans-serif;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 4px;
+        }}
+        .modal-chart-box p {{
+            font-size: 11.5px;
+            color: #64748B;
+            margin-bottom: 10px;
+        }}
+
         /* Footer */
         footer.bottom-bar {{
             background: #FFFFFF;
@@ -1533,10 +2119,10 @@ def generate_interactive_html():
         }}
 
         @media (max-width: 1100px) {{
-            .workspace {{
+            .workspace, .macro-leaky-panel, .modal-charts-grid {{
                 grid-template-columns: 1fr;
             }}
-            .kpi-ribbon {{
+            .kpi-ribbon, .trend-macro-grid {{
                 grid-template-columns: repeat(2, 1fr);
             }}
         }}
@@ -1566,6 +2152,16 @@ def generate_interactive_html():
 
         <!-- NAVIGATION & SUBSET SWITCHER GROUP -->
         <div class="nav-controls-group" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <!-- PRIMARY VIEW MODE SWITCHER -->
+            <div class="view-mode-switcher" id="view-mode-switcher">
+                <button class="view-mode-btn active" data-view="matrix" id="vm-btn-matrix" title="Tampilkan Peta Scatter 4 Kuadran">
+                    📊 Peta Kuadran
+                </button>
+                <button class="view-mode-btn" data-view="trend" id="vm-btn-trend" title="Tampilkan Evaluasi Tren 81 Prodi: Kursi Kosong (DT-DU) & Batal Daftar Ulang (Lulus-DU)">
+                    📉 Evaluasi Tren <span class="vm-badge">81 Prodi</span>
+                </button>
+            </div>
+
             <div class="level-switcher" id="level-switcher">
                 <button class="level-tab active" data-level="s1" id="tab-s1">
                     🎓 S1 Sarjana <span class="tab-badge" id="tab-s1-badge">60 Prodi</span>
@@ -1586,7 +2182,7 @@ def generate_interactive_html():
             </div>
         </div>
 
-        <div class="header-actions">
+        <div class="header-actions" id="matrix-header-actions">
             <button class="btn btn-outline" id="btn-toggle-labels" title="Tampilkan atau sembunyikan semua label prodi di kanvas">
                 🏷️ Toggle Semua Label
             </button>
@@ -1596,6 +2192,10 @@ def generate_interactive_html():
         </div>
     </header>
 
+    <!-- ================================================================= -->
+    <!-- VIEW 1: MATRIX SCATTER 4 KUADRAN                                  -->
+    <!-- ================================================================= -->
+    <div id="matrix-view-wrapper" style="display:flex; flex-direction:column; flex:1;">
     <!-- KPI SUMMARY CARDS (Clickable Filters) -->
     <section class="kpi-ribbon" id="kpi-ribbon-container">
         <!-- Rendered dynamically via JavaScript -->
@@ -1842,20 +2442,275 @@ def generate_interactive_html():
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th>Tahun</th>
-                            <th>Peminat</th>
+                            <th>Thn</th>
                             <th>Kuota</th>
-                            <th>Registrasi</th>
-                            <th>Fill Rate</th>
+                            <th>Lulus</th>
+                            <th>DU</th>
+                            <th title="Kursi Kosong (DT - DU)">Kosong</th>
+                            <th title="Batal Daftar Ulang (Lulus - DU)">Batal</th>
+                            <th>FR%</th>
                         </tr>
                     </thead>
                     <tbody id="ins-history-tbody">
                         <!-- Injected via JS -->
                     </tbody>
                 </table>
+                <button type="button" id="btn-open-modal-from-ins" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #0F172A; background:#0F172A; color:#FFFFFF; font-family:inherit; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+                    📈 Bedah Grafik Tren Detail (Kursi Kosong &amp; Batal DU)
+                </button>
             </div>
         </aside>
     </main>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 2: EVALUASI TREN 81 PRODI (KURSI KOSONG VS BATAL DAFTAR ULANG)-->
+    <!-- ================================================================= -->
+    <div id="trend-view-wrapper">
+        <!-- BAGIAN 1: 4 KPI MAKRO (THE LEAKY BUCKET SUMMARY) -->
+        <div class="trend-macro-grid">
+            <div class="trend-kpi-card tk-blue">
+                <div class="tk-title"><span>1. Akumulasi Daya Tampung &amp; Lulus (5-Thn)</span><span>🏛️</span></div>
+                <div class="tk-val"><span id="tm-tot-dt">0</span> <span class="tk-pct" style="background:#EFF6FF; color:#1D4ED8;" id="tm-lulus-badge">Lulus: 0</span></div>
+                <div class="tk-sub" id="tm-dt-sub">Total kapasitas kursi &amp; peserta lulus seleksi (2022–2026)</div>
+            </div>
+            <div class="trend-kpi-card tk-emerald">
+                <div class="tk-title"><span>2. Realisasi Daftar Ulang (5-Thn)</span><span>✅</span></div>
+                <div class="tk-val"><span id="tm-tot-du">0</span> <span class="tk-pct" style="background:#DCFCE7; color:#15803D;" id="tm-fr-badge">FR: 0%</span></div>
+                <div class="tk-sub" id="tm-du-sub">Mahasiswa aktif terealisasi • Yield Rate kelulusan</div>
+            </div>
+            <div class="trend-kpi-card tk-rose">
+                <div class="tk-title"><span>3. Tren Kuota Tidak Terisi (DT − DU)</span><span>🔴</span></div>
+                <div class="tk-val" style="color:#BE123C;"><span id="tm-tot-sisa">0</span> <span class="tk-pct" style="background:#FFE4E6; color:#9F1239;" id="tm-sisa-pct">0% Kuota</span></div>
+                <div class="tk-sub" id="tm-sisa-sub">Akumulasi bangku kosong tidak terisi selama 5 tahun</div>
+            </div>
+            <div class="trend-kpi-card tk-amber">
+                <div class="tk-title"><span>4. Tren Batal Daftar Ulang (Lulus − DU)</span><span>🟠</span></div>
+                <div class="tk-val" style="color:#B45309;"><span id="tm-tot-batal">0</span> <span class="tk-pct" style="background:#FEF3C7; color:#92400E;" id="tm-batal-pct">0% Lulus</span></div>
+                <div class="tk-sub" id="tm-batal-sub">Calon mahasiswa sudah lulus seleksi namun gugur/mundur</div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 1B: VISUALISASI MAKRO "THE LEAKY BUCKET" (CHART + TABEL KRONOLOGIS 2022-2026) -->
+        <div class="macro-leaky-panel">
+            <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                    <div>
+                        <h3 style="font-family:'Outfit',sans-serif; font-size:15.5px; font-weight:800; color:#0F172A;">Grafik Makro "The Leaky Bucket": Daya Tampung vs Lulus vs Daftar Ulang (2022–2026)</h3>
+                        <p style="font-size:11.5px; color:#64748B;">Membedakan kebocoran akibat kurang peminat (DT − Lulus) vs batal daftar ulang pasca kelulusan (Lulus − DU)</p>
+                    </div>
+                    <div style="display:flex; gap:10px; font-size:11px; font-weight:700;">
+                        <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:2px; background:#3B82F6;"></span> Daya Tampung</span>
+                        <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:2px; background:#6366F1;"></span> Lulus Seleksi</span>
+                        <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:2px; background:#10B981;"></span> Daftar Ulang</span>
+                    </div>
+                </div>
+                <svg id="macro-leaky-svg" viewBox="0 0 620 235" style="width:100%; height:auto; background:#F8FAFC; border-radius:10px; border:1px solid #E2E8F0;"></svg>
+            </div>
+            <div>
+                <h3 style="font-family:'Outfit',sans-serif; font-size:14.5px; font-weight:800; color:#0F172A; margin-bottom:4px;">Rekapitulasi Tren Tahunan Makro (2022 → 2026)</h3>
+                <p style="font-size:11.5px; color:#64748B; margin-bottom:10px;">Menyesuaikan otomatis dengan filter klaster/fakultas yang dipilih di bawah</p>
+                <table class="macro-table">
+                    <thead>
+                        <tr>
+                            <th>Tahun</th>
+                            <th>Daya Tampung</th>
+                            <th>Lulus</th>
+                            <th>Daftar Ulang</th>
+                            <th style="color:#BE123C;">Kursi Kosong (DT−DU)</th>
+                            <th style="color:#B45309;">Batal DU (Lulus−DU)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="macro-trend-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- BAGIAN 2: KONTROL FILTER & PRESET SORTIR 1-KLIK -->
+        <div class="trend-controls-card">
+            <div class="trend-toolbar-row">
+                <div class="preset-group" id="trend-klaster-pills">
+                    <button type="button" class="preset-btn active" data-klaster="ALL">🌐 Semua Prodi USK (81)</button>
+                    <button type="button" class="preset-btn" data-klaster="S1_ALL">🎓 S1 Kampus Utama (66)</button>
+                    <button type="button" class="preset-btn" data-klaster="S1_60">🏛️ 60 Prodi S1 Mapan</button>
+                    <button type="button" class="preset-btn" data-klaster="D3">🛠️ D3 Vokasi (11)</button>
+                    <button type="button" class="preset-btn" data-klaster="PSDKU">⛰️ PSDKU Gayo Lues (4)</button>
+                </div>
+                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                    <input type="text" id="trend-search-input" class="trend-search-input" placeholder="🔍 Cari prodi / kode / fakultas...">
+                    <select id="trend-fak-select" class="trend-select">
+                        <option value="ALL">Semua Fakultas (12)</option>
+                    </select>
+                    <select id="trend-quad-select" class="trend-select">
+                        <option value="ALL">Semua Kuadran</option>
+                        <option value="I">Kuadran I: Unggulan</option>
+                        <option value="II">Kuadran II: Stabil</option>
+                        <option value="III">Kuadran III: Belum Optimal</option>
+                        <option value="IV">Kuadran IV: Perlu Ditingkatkan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="trend-toolbar-row" style="border-top:1px solid #F1F5F9; padding-top:10px;">
+                <div class="preset-group" id="trend-sort-presets">
+                    <span style="font-size:11.5px; font-weight:800; color:#475569; margin-right:4px;">⚡ SORTIR EKSEKUTIF:</span>
+                    <button type="button" class="preset-btn preset-rose active" data-sort="sisa_desc">🔴 Kursi Kosong Terbanyak (DT − DU)</button>
+                    <button type="button" class="preset-btn preset-amber" data-sort="batal_desc">🟠 Batal Daftar Ulang Terbanyak (Lulus − DU)</button>
+                    <button type="button" class="preset-btn preset-rose" data-sort="pct_sisa_desc">📉 % Kursi Kosong Tertinggi</button>
+                    <button type="button" class="preset-btn preset-amber" data-sort="pct_batal_desc">⚠️ % Batal DU Tertinggi</button>
+                    <button type="button" class="preset-btn" data-sort="no_asc">🔢 Urut No / Fakultas Resmi</button>
+                </div>
+                <div id="trend-count-label" style="font-size:12px; font-weight:700; color:#334155;">
+                    Menampilkan: 81 Program Studi
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 3: TABEL MATRIKS CERDAS SELURUH 81 PRODI DENGAN SPARKLINE -->
+        <div class="trend-table-card">
+            <div class="trend-table-scroll">
+                <table class="prodi-trend-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width:42px;">No</th>
+                            <th rowspan="2" style="text-align:left; min-width:230px;">Program Studi &amp; Identitas</th>
+                            <th rowspan="2" style="min-width:95px;">Kuadran</th>
+                            <th colspan="3" style="background:#1E293B;">Akumulasi 5 Tahun (2022–2026)</th>
+                            <th colspan="3" style="background:#881337;">🔴 TREN KUOTA TIDAK TERISI / KURSI KOSONG (DT − DU)</th>
+                            <th colspan="3" style="background:#78350F;">🟠 TREN BATAL DAFTAR ULANG / MUNDUR (LULUS − DU)</th>
+                            <th rowspan="2" style="width:90px;">Detail</th>
+                        </tr>
+                        <tr class="sub-hdr">
+                            <th>Total DT</th>
+                            <th>Total Lulus</th>
+                            <th>Total DU</th>
+                            <th style="background:#9F1239;">Tren 2022 → 2026</th>
+                            <th style="background:#9F1239;">Sparkline</th>
+                            <th style="background:#9F1239;">Total Kosong (%)</th>
+                            <th style="background:#92400E;">Tren 2022 → 2026</th>
+                            <th style="background:#92400E;">Sparkline</th>
+                            <th style="background:#92400E;">Total Batal (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prodi-trend-tbody">
+                        <!-- Rendered dynamically via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- DRILL-DOWN MODAL: BEDAH GRAFIK TREN PRODI (2022–2026)              -->
+    <!-- ================================================================= -->
+    <div class="modal-backdrop" id="prodi-drilldown-modal">
+        <div class="modal-dialog" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+                        <span id="md-kode" style="background:rgba(255,255,255,0.15); padding:2.5px 8px; border-radius:6px; font-size:11px; font-weight:700;">KODE</span>
+                        <span id="md-fakultas" style="background:rgba(212,175,55,0.22); color:#FDE047; padding:2.5px 9px; border-radius:6px; font-size:11px; font-weight:700;">FAKULTAS</span>
+                        <span id="md-kuadran" style="padding:2.5px 9px; border-radius:6px; font-size:11px; font-weight:800; background:#059669;">KUADRAN</span>
+                        <span id="md-tren" style="background:rgba(255,255,255,0.12); padding:2.5px 9px; border-radius:6px; font-size:11px; font-weight:600;">TREN</span>
+                    </div>
+                    <h2 id="md-title" style="font-family:'Outfit',sans-serif; font-size:21px; font-weight:800; color:#FFFFFF; margin:0;">Nama Program Studi</h2>
+                </div>
+                <button type="button" onclick="closeProdiModal()" style="background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.25); color:#FFFFFF; padding:7px 13px; border-radius:8px; font-weight:700; cursor:pointer; font-size:12.5px;">✕ Tutup</button>
+            </div>
+            <div class="modal-body">
+                <!-- 4 KPI Prodi -->
+                <div class="trend-macro-grid">
+                    <div class="trend-kpi-card tk-blue">
+                        <div class="tk-title"><span>Total Daya Tampung (5-Thn)</span><span>🏛️</span></div>
+                        <div class="tk-val"><span id="md-tot-dt">0</span> <span class="tk-pct" style="background:#EFF6FF; color:#1D4ED8;" id="md-tot-lulus">Lulus: 0</span></div>
+                        <div class="tk-sub" id="md-keketatan-sub">Rasio Keketatan 5-Thn: 0.0 : 1</div>
+                    </div>
+                    <div class="trend-kpi-card tk-emerald">
+                        <div class="tk-title"><span>Realisasi Daftar Ulang (5-Thn)</span><span>✅</span></div>
+                        <div class="tk-val"><span id="md-tot-du">0</span> <span class="tk-pct" style="background:#DCFCE7; color:#15803D;" id="md-fr-pct">FR: 0%</span></div>
+                        <div class="tk-sub" id="md-yield-sub">Yield Rate (DU / Lulus): 0%</div>
+                    </div>
+                    <div class="trend-kpi-card tk-rose">
+                        <div class="tk-title"><span>Akumulasi Kursi Kosong (DT − DU)</span><span>🔴</span></div>
+                        <div class="tk-val" style="color:#BE123C;"><span id="md-tot-sisa">0</span> <span class="tk-pct" style="background:#FFE4E6; color:#9F1239;" id="md-sisa-pct">0%</span></div>
+                        <div class="tk-sub">Kuota tidak terserap selama 2022–2026</div>
+                    </div>
+                    <div class="trend-kpi-card tk-amber">
+                        <div class="tk-title"><span>Akumulasi Batal DU (Lulus − DU)</span><span>🟠</span></div>
+                        <div class="tk-val" style="color:#B45309;"><span id="md-tot-batal">0</span> <span class="tk-pct" style="background:#FEF3C7; color:#92400E;" id="md-batal-pct">0%</span></div>
+                        <div class="tk-sub">Calon mahasiswa lulus yang tidak daftar ulang</div>
+                    </div>
+                </div>
+
+                <!-- 2 Grafik Interaktif Prodi -->
+                <div class="modal-charts-grid">
+                    <div class="modal-chart-box">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
+                            <div>
+                                <h4>1. Grafik Komparasi Kapasitas vs Lulus vs Daftar Ulang (2022–2026)</h4>
+                                <p style="margin-bottom:6px;">Jurang antara garis menunjukkan Kursi Kosong (DT − DU) dan Batal Daftar Ulang (Lulus − DU)</p>
+                            </div>
+                        </div>
+                        <!-- KETERANGAN WARNA & JENIS GARIS (LEGENDA) -->
+                        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; font-size:11px; font-weight:700;">
+                            <span style="display:inline-flex; align-items:center; gap:5px; background:#EFF6FF; color:#1D4ED8; padding:3px 8px; border-radius:6px; border:1px solid #BFDBFE;">
+                                <span style="width:12px; height:3.5px; background:#2563EB; border-radius:2px;"></span> 🔵 Garis Biru: <strong>Daya Tampung (DT)</strong>
+                            </span>
+                            <span style="display:inline-flex; align-items:center; gap:5px; background:#F3E8FF; color:#6B21A8; padding:3px 8px; border-radius:6px; border:1px solid #DDD6FE;">
+                                <span style="width:14px; height:0px; border-top:2.5px dashed #7C3AED;"></span> 🟣 Garis Putus-putus: <strong>Lulus Seleksi</strong>
+                            </span>
+                            <span style="display:inline-flex; align-items:center; gap:5px; background:#DCFCE7; color:#15803D; padding:3px 8px; border-radius:6px; border:1px solid #86EFAC;">
+                                <span style="width:12px; height:3.5px; background:#059669; border-radius:2px;"></span> 🟢 Garis Hijau: <strong>Daftar Ulang (DU)</strong>
+                            </span>
+                            <span style="display:inline-flex; align-items:center; gap:5px; background:#FFF1F2; color:#9F1239; padding:3px 8px; border-radius:6px; border:1px solid #FECDD3;">
+                                <span style="width:10px; height:10px; background:#FECDD3; border-radius:2px;"></span> 🔴 Arsiran Merah: Sisa Kuota
+                            </span>
+                        </div>
+                        <svg id="md-chart-lines" viewBox="0 0 540 230" style="width:100%; height:auto; background:#FFFFFF; border-radius:8px; border:1px solid #E2E8F0;"></svg>
+                    </div>
+                    <div class="modal-chart-box">
+                        <h4>2. Tren Tahunan Kursi Kosong vs Batal Daftar Ulang (2022–2026)</h4>
+                        <p style="margin-bottom:6px;">Perbandingan langsung jumlah kursi kosong (merah) dan mahasiswa mundur (oranye) tiap tahun</p>
+                        <!-- KETERANGAN WARNA BATANG (LEGENDA) -->
+                        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; font-size:11px; font-weight:700;">
+                            <span style="display:inline-flex; align-items:center; gap:5px; background:#FFF1F2; color:#BE123C; padding:3px 8px; border-radius:6px; border:1px solid #FECDD3;">
+                                <span style="width:10px; height:10px; background:#E11D48; border-radius:2px;"></span> 🔴 Batang Merah: <strong>Kursi Kosong (DT − DU)</strong>
+                            </span>
+                            <span style="display:inline-flex; align-items:center; gap:5px; background:#FFFBEB; color:#B45309; padding:3px 8px; border-radius:6px; border:1px solid #FDE68A;">
+                                <span style="width:10px; height:10px; background:#D97706; border-radius:2px;"></span> 🟠 Batang Oranye: <strong>Batal Daftar Ulang (Lulus − DU)</strong>
+                            </span>
+                        </div>
+                        <svg id="md-chart-bars" viewBox="0 0 420 230" style="width:100%; height:auto; background:#FFFFFF; border-radius:8px; border:1px solid #E2E8F0;"></svg>
+                    </div>
+                </div>
+
+                <!-- Tabel Rincian Multi-Tahun (Descending 2026 -> 2022 sesuai GEMINI.md) -->
+                <div>
+                    <h4 style="font-family:'Outfit',sans-serif; font-size:14px; font-weight:800; color:#0F172A; margin-bottom:8px;">Tabel Rincian Tahunan Program Studi (Urutan Tahun Menurun: 2026 → 2022 &amp; Total 5 Tahun)</h4>
+                    <table class="macro-table" style="border:1px solid #E2E8F0;">
+                        <thead>
+                            <tr>
+                                <th>Tahun</th>
+                                <th>Peminat</th>
+                                <th>Daya Tampung (DT)</th>
+                                <th>Lulus Seleksi</th>
+                                <th>Daftar Ulang (DU)</th>
+                                <th style="color:#BE123C;">Kursi Kosong (DT−DU)</th>
+                                <th>Fill Rate (%)</th>
+                                <th style="color:#B45309;">Batal DU (Lulus−DU)</th>
+                                <th>% Batal DU</th>
+                            </tr>
+                        </thead>
+                        <tbody id="md-history-tbody"></tbody>
+                    </table>
+                </div>
+
+                <div class="rekomendasi-box">
+                    <h4>💡 REKOMENDASI KEBIJAKAN PROGRAM STUDI</h4>
+                    <p id="md-rekomendasi-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="bottom-bar">
@@ -2745,19 +3600,6 @@ def generate_interactive_html():
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 240, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR IDEAL: 80% KETERISIAN'));
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 145, yThreshold50, 270, 22, '#DC2626', '#F87171', '#FFFFFF', '⚠ BATAS KRITIS KELAYAKAN: 50%'));
 
-                // Callout Banner: Anomali Struktural Vokasi USK
-                const bannerGroup = createSVGElement('g', {{ transform: `translate(${{PLOT_X + PLOT_W / 2}}, ${{PLOT_Y + 49}})` }});
-                const bannerRect = createSVGElement('rect', {{
-                    x: -290, y: -26, width: 580, height: 52, rx: 12,
-                    fill: '#FFFBEB', stroke: '#F59E0B', 'stroke-width': 1.5, opacity: 0.97
-                }});
-                const bannerT1 = createText(0, -7, 'middle', '11.5', '800', '#92400E', 1, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:');
-                const bannerT2 = createText(0, 11, 'middle', '10', '700', '#B45309', 1, '100% (11 Prodi D3) Terkonsentrasi di Kuadran III: Belum Optimal (Keketatan 5,3×–17,7×, FR < 80%)');
-                bannerGroup.appendChild(bannerRect);
-                bannerGroup.appendChild(bannerT1);
-                bannerGroup.appendChild(bannerT2);
-                svg.appendChild(bannerGroup);
-
                 // Watermark Quadrant Titles D3 (Format & Desain Seragam 100% dengan S1)
                 // Q1 (Top-Right)
                 svg.appendChild(createText(PLOT_X + PLOT_W - 14, PLOT_Y + 18, 'end', '12', '800', '#059669', 0.85, 'KUADRAN I: UNGGULAN'));
@@ -3084,22 +3926,34 @@ def generate_interactive_html():
             document.getElementById('ins-rekomendasi-text').textContent = d.rekomendasi;
             document.getElementById('ins-tren-tag').textContent = d.tren_resmi.toUpperCase();
 
-            // Render table with 100% Capped Fill Rate
+            // Render table with 100% Capped Fill Rate + Kursi Kosong & Batal DU
             const tbody = document.getElementById('ins-history-tbody');
             tbody.innerHTML = '';
             d.history.forEach(h => {{
                 const frHistory = clampFR(h.fill_rate);
                 const tr = document.createElement('tr');
                 const thresholdBenchmark = (currentLevel === 's1') ? 80.0 : 50.0;
+                const sisaVal = (h.sisa !== undefined) ? h.sisa : (h.dt - h.du);
+                const batalVal = (h.batal !== undefined) ? h.batal : ((h.lulus || h.dt) - h.du);
                 tr.innerHTML = `
-                    <td>${{h.tahun}}</td>
-                    <td>${{h.peminat.toLocaleString('id-ID')}}</td>
+                    <td><strong>${{h.tahun}}</strong></td>
                     <td>${{h.dt}}</td>
+                    <td>${{(h.lulus !== undefined ? h.lulus : '-')}}</td>
                     <td>${{h.du}}</td>
+                    <td style="color:#BE123C; font-weight:700;">${{sisaVal}}</td>
+                    <td style="color:#B45309; font-weight:700;">${{batalVal}}</td>
                     <td style="font-weight:700; color:${{frHistory >= thresholdBenchmark ? '#059669' : '#DC2626'}}">${{frHistory.toFixed(1)}}%</td>
                 `;
                 tbody.appendChild(tr);
             }});
+
+            const btnModal = document.getElementById('btn-open-modal-from-ins');
+            if (btnModal) {{
+                btnModal.onclick = () => {{
+                    const matchAll = (DATA_BY_LEVEL.all || []).find(x => x.nama.toUpperCase() === d.nama.toUpperCase() && x.jenjang === d.jenjang);
+                    openProdiModal(matchAll || d);
+                }};
+            }}
         }}
 
         // Sub-Tier Guide Card State & Visibility Handlers
@@ -3469,7 +4323,562 @@ def generate_interactive_html():
             renderChart();
         }});
 
+        // =================================================================
+        // VIEW 2 LOGIC: EVALUASI TREN 81 PRODI (KURSI KOSONG & BATAL DU)
+        // =================================================================
+        let currentViewMode = (window.location.hash.includes('tren')) ? 'trend' : 'matrix';
+        let trendKlaster = 'ALL'; // ALL, S1_ALL, S1_60, D3, PSDKU
+        let trendFak = 'ALL';
+        let trendQuad = 'ALL';
+        let trendSort = 'sisa_desc';
+        let trendSearch = '';
+
+        // Populate Fakultas Select in Trend View
+        function initTrendFakOptions() {{
+            const sel = document.getElementById('trend-fak-select');
+            if (!sel) return;
+            const faks = {{}};
+            (DATA_BY_LEVEL.all || []).forEach(p => {{
+                faks[p.fakultas] = (faks[p.fakultas] || 0) + 1;
+            }});
+            Object.keys(faks).sort((a, b) => faks[b] - faks[a]).forEach(f => {{
+                const opt = document.createElement('option');
+                opt.value = f;
+                opt.textContent = `${{fak_abbr_map_client[f] || f}} — ${{f}} (${{faks[f]}})`;
+                sel.appendChild(opt);
+            }});
+        }}
+
+        function getFilteredTrendProdi() {{
+            const list = DATA_BY_LEVEL.all || [];
+            const filtered = list.filter(p => {{
+                if (trendKlaster === 'S1_ALL' && p.klaster !== 'S1 Kampus Utama') return false;
+                if (trendKlaster === 'S1_60' && (p.klaster !== 'S1 Kampus Utama' || p.is_prodi_baru)) return false;
+                if (trendKlaster === 'D3' && p.klaster !== 'Diploma 3 Vokasi') return false;
+                if (trendKlaster === 'PSDKU' && p.klaster !== 'PSDKU Gayo Lues') return false;
+                if (trendFak !== 'ALL' && p.fakultas !== trendFak) return false;
+                if (trendQuad !== 'ALL' && p.kuadran !== trendQuad) return false;
+                if (trendSearch.trim() !== '') {{
+                    const q = trendSearch.trim().toLowerCase();
+                    const matchName = p.nama.toLowerCase().includes(q);
+                    const matchCode = (p.kode || '').toLowerCase().includes(q);
+                    const matchFak = p.fakultas.toLowerCase().includes(q) || p.fakultas_abbr.toLowerCase().includes(q);
+                    if (!matchName && !matchCode && !matchFak) return false;
+                }}
+                return true;
+            }});
+
+            filtered.sort((a, b) => {{
+                if (trendSort === 'sisa_desc') return (b.tot_sisa - a.tot_sisa) || (b.pct_sisa - a.pct_sisa);
+                if (trendSort === 'batal_desc') return (b.tot_batal - a.tot_batal) || (b.pct_batal - a.pct_batal);
+                if (trendSort === 'pct_sisa_desc') return (b.pct_sisa - a.pct_sisa) || (b.tot_sisa - a.tot_sisa);
+                if (trendSort === 'pct_batal_desc') return (b.pct_batal - a.pct_batal) || (b.tot_batal - a.tot_batal);
+                return a.no - b.no;
+            }});
+            return filtered;
+        }}
+
+        // Build Inline SVG Sparkline (5 points: 2022..2026)
+        function buildSparklineSVG(vals, colorHex, fillHex) {{
+            const w = 88, h = 28, padX = 6, padY = 5;
+            const minV = Math.min(...vals, 0);
+            const maxV = Math.max(...vals, 1);
+            const range = Math.max(maxV - minV, 1);
+            const pts = vals.map((v, i) => {{
+                const x = padX + (i / 4) * (w - 2 * padX);
+                const y = padY + (1 - (v - minV) / range) * (h - 2 * padY);
+                return `${{x.toFixed(1)}},${{y.toFixed(1)}}`;
+            }});
+            const lastPt = pts[pts.length - 1].split(',');
+            const firstPt = pts[0].split(',');
+            const areaPts = `${{firstPt[0]}},${{h - 2}} ${{pts.join(' ')}} ${{lastPt[0]}},${{h - 2}}`;
+            return `<svg width="${{w}}" height="${{h}}" viewBox="0 0 ${{w}} ${{h}}" style="overflow:visible; display:block; margin:0 auto;">
+                <polygon points="${{areaPts}}" fill="${{fillHex}}" opacity="0.55"/>
+                <polyline points="${{pts.join(' ')}}" fill="none" stroke="${{colorHex}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="${{lastPt[0]}}" cy="${{lastPt[1]}}" r="2.8" fill="${{colorHex}}"/>
+            </svg>`;
+        }}
+
+        function renderMacroLeakyBucket(filteredList) {{
+            const yrStats = {{
+                2022: {{ dt: 0, lu: 0, du: 0, sisa: 0, batal: 0 }},
+                2023: {{ dt: 0, lu: 0, du: 0, sisa: 0, batal: 0 }},
+                2024: {{ dt: 0, lu: 0, du: 0, sisa: 0, batal: 0 }},
+                2025: {{ dt: 0, lu: 0, du: 0, sisa: 0, batal: 0 }},
+                2026: {{ dt: 0, lu: 0, du: 0, sisa: 0, batal: 0 }}
+            }};
+            let sumDT = 0, sumLU = 0, sumDU = 0, sumSisa = 0, sumBatal = 0;
+
+            filteredList.forEach(p => {{
+                sumDT += p.tot_dt;
+                sumLU += p.tot_lulus;
+                sumDU += p.tot_du;
+                sumSisa += p.tot_sisa;
+                sumBatal += p.tot_batal;
+                p.history.forEach(h => {{
+                    if (yrStats[h.tahun]) {{
+                        yrStats[h.tahun].dt += h.dt;
+                        yrStats[h.tahun].lu += h.lulus;
+                        yrStats[h.tahun].du += h.du;
+                        yrStats[h.tahun].sisa += h.sisa;
+                        yrStats[h.tahun].batal += h.batal;
+                    }}
+                }});
+            }});
+
+            const pctSisa = sumDT > 0 ? (sumSisa / sumDT * 100).toFixed(1) : '0.0';
+            const pctBatal = sumLU > 0 ? (sumBatal / sumLU * 100).toFixed(1) : '0.0';
+            const pctFR = sumDT > 0 ? (sumDU / sumDT * 100).toFixed(1) : '0.0';
+            const pctYield = sumLU > 0 ? (sumDU / sumLU * 100).toFixed(1) : '0.0';
+
+            document.getElementById('tm-tot-dt').textContent = sumDT.toLocaleString('id-ID') + ' Kursi';
+            document.getElementById('tm-lulus-badge').textContent = 'Lulus: ' + sumLU.toLocaleString('id-ID');
+            document.getElementById('tm-dt-sub').textContent = `Rata-rata ${{Math.round(sumDT / 5).toLocaleString('id-ID')}} kursi/thn (${{filteredList.length}} Prodi)`;
+
+            document.getElementById('tm-tot-du').textContent = sumDU.toLocaleString('id-ID') + ' Mhs';
+            document.getElementById('tm-fr-badge').textContent = `Fill Rate: ${{pctFR}}%`;
+            document.getElementById('tm-du-sub').textContent = `Yield Rate Kelulusan: ${{pctYield}}% daftar ulang dari yang lulus`;
+
+            document.getElementById('tm-tot-sisa').textContent = sumSisa.toLocaleString('id-ID') + ' Kursi';
+            document.getElementById('tm-sisa-pct').textContent = `${{pctSisa}}% Kuota Kosong`;
+            document.getElementById('tm-sisa-sub').textContent = `Rata-rata ${{Math.round(sumSisa / 5).toLocaleString('id-ID')}} kursi/thn tidak terisi`;
+
+            document.getElementById('tm-tot-batal').textContent = sumBatal.toLocaleString('id-ID') + ' Org';
+            document.getElementById('tm-batal-pct').textContent = `${{pctBatal}}% Batal DU`;
+            const shareBatalOfSisa = sumSisa > 0 ? Math.min(100, Math.round(sumBatal / sumSisa * 100)) : 0;
+            document.getElementById('tm-batal-sub').textContent = `Rata-rata ${{Math.round(sumBatal / 5).toLocaleString('id-ID')}} org/thn gugur pasca dinyatakan lulus (${{shareBatalOfSisa}}% beban kursi kosong)`;
+
+            // Render Macro Table (Chronological 2022 -> 2026 + Total 5-Thn)
+            const tbody = document.getElementById('macro-trend-tbody');
+            tbody.innerHTML = '';
+            [2022, 2023, 2024, 2025, 2026].forEach(yr => {{
+                const st = yrStats[yr];
+                const pSisa = st.dt > 0 ? (st.sisa / st.dt * 100).toFixed(1) : '0.0';
+                const pBatal = st.lu > 0 ? (st.batal / st.lu * 100).toFixed(1) : '0.0';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${{yr}}</td>
+                    <td>${{st.dt.toLocaleString('id-ID')}}</td>
+                    <td>${{st.lu.toLocaleString('id-ID')}}</td>
+                    <td style="font-weight:700; color:#059669;">${{st.du.toLocaleString('id-ID')}}</td>
+                    <td style="font-weight:700; color:#BE123C;">${{st.sisa.toLocaleString('id-ID')}} <span style="font-size:10.5px; color:#64748B;">(${{pSisa}}%)</span></td>
+                    <td style="font-weight:700; color:#B45309;">${{st.batal.toLocaleString('id-ID')}} <span style="font-size:10.5px; color:#64748B;">(${{pBatal}}%)</span></td>
+                `;
+                tbody.appendChild(tr);
+            }});
+            const trTot = document.createElement('tr');
+            trTot.className = 'total-row';
+            trTot.innerHTML = `
+                <td>TOTAL 5-THN</td>
+                <td>${{sumDT.toLocaleString('id-ID')}}</td>
+                <td>${{sumLU.toLocaleString('id-ID')}}</td>
+                <td style="color:#6EE7B7;">${{sumDU.toLocaleString('id-ID')}}</td>
+                <td style="color:#FDA4AF;">${{sumSisa.toLocaleString('id-ID')}} (${{pctSisa}}%)</td>
+                <td style="color:#FDE047;">${{sumBatal.toLocaleString('id-ID')}} (${{pctBatal}}%)</td>
+            `;
+            tbody.appendChild(trTot);
+
+            // Render Macro Leaky Bucket SVG Chart
+            const svg = document.getElementById('macro-leaky-svg');
+            if (!svg) return;
+            const W = 620, H = 235, padL = 48, padR = 18, padT = 26, padB = 34;
+            const plotW = W - padL - padR, plotH = H - padT - padB;
+            const years = [2022, 2023, 2024, 2025, 2026];
+            const maxVal = Math.max(...years.map(y => Math.max(yrStats[y].dt, yrStats[y].lu, yrStats[y].du)), 100) * 1.15;
+
+            let svgHtml = '';
+            // Grid lines
+            for (let i = 0; i <= 4; i++) {{
+                const v = Math.round((maxVal / 4) * i);
+                const yPos = padT + plotH - (i / 4) * plotH;
+                svgHtml += `<line x1="${{padL}}" y1="${{yPos}}" x2="${{W - padR}}" y2="${{yPos}}" stroke="#E2E8F0" stroke-dasharray="3,3"/>`;
+                svgHtml += `<text x="${{padL - 6}}" y="${{yPos + 4}}" text-anchor="end" font-size="10" fill="#64748B" font-weight="600">${{v.toLocaleString('id-ID')}}</text>`;
+            }}
+
+            const groupW = plotW / 5;
+            const barW = 20;
+            years.forEach((yr, idx) => {{
+                const st = yrStats[yr];
+                const cx = padL + groupW * idx + groupW / 2;
+                const hDT = (st.dt / maxVal) * plotH;
+                const hLU = (st.lu / maxVal) * plotH;
+                const hDU = (st.du / maxVal) * plotH;
+                const yDT = padT + plotH - hDT;
+                const yLU = padT + plotH - hLU;
+                const yDU = padT + plotH - hDU;
+
+                // Bars: DT, Lulus, DU
+                svgHtml += `<rect x="${{cx - barW * 1.5 - 2}}" y="${{yDT}}" width="${{barW}}" height="${{hDT}}" rx="3" fill="#3B82F6"/>`;
+                svgHtml += `<rect x="${{cx - barW * 0.5}}" y="${{yLU}}" width="${{barW}}" height="${{hLU}}" rx="3" fill="#6366F1"/>`;
+                svgHtml += `<rect x="${{cx + barW * 0.5 + 2}}" y="${{yDU}}" width="${{barW}}" height="${{hDU}}" rx="3" fill="#10B981"/>`;
+
+                // Year label
+                svgHtml += `<text x="${{cx}}" y="${{H - 12}}" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0F172A">${{yr}}</text>`;
+
+                // Callout badge above bars: Kosong & Batal
+                const topY = Math.min(yDT, yLU, yDU) - 7;
+                svgHtml += `<text x="${{cx}}" y="${{topY}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#BE123C">Kosong:${{st.sisa.toLocaleString('id-ID')}} | Batal:${{st.batal.toLocaleString('id-ID')}}</text>`;
+            }});
+            svg.innerHTML = svgHtml;
+        }}
+
+        function renderTrendTable() {{
+            const filtered = getFilteredTrendProdi();
+            renderMacroLeakyBucket(filtered);
+
+            const countEl = document.getElementById('trend-count-label');
+            if (countEl) countEl.textContent = `Menampilkan: ${{filtered.length}} dari ${{(DATA_BY_LEVEL.all || []).length}} Program Studi`;
+
+            const tbody = document.getElementById('prodi-trend-tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            filtered.forEach((p, idx) => {{
+                const tr = document.createElement('tr');
+                tr.title = `Klik untuk membuka grafik detail ${{p.nama}}`;
+                tr.addEventListener('click', () => openProdiModal(p));
+
+                const sisaArr = p.history.map(h => h.sisa);
+                const batalArr = p.history.map(h => h.batal);
+
+                const sisaPills = p.history.map(h => {{
+                    const cls = h.sisa >= 30 ? 'hi-rose' : (h.sisa <= 5 ? 'hi-ok' : '');
+                    return `<span class="yr-pill ${{cls}}" title="Kursi Kosong ${{h.tahun}}: ${{h.sisa}}">${{h.sisa}}</span>`;
+                }}).join('');
+
+                const batalPills = p.history.map(h => {{
+                    const cls = h.batal >= 25 ? 'hi-amber' : (h.batal <= 5 ? 'hi-ok' : '');
+                    return `<span class="yr-pill ${{cls}}" title="Batal DU ${{h.tahun}}: ${{h.batal}}">${{h.batal}}</span>`;
+                }}).join('');
+
+                const sparkSisa = buildSparklineSVG(sisaArr, '#E11D48', '#FECDD3');
+                const sparkBatal = buildSparklineSVG(batalArr, '#D97706', '#FDE68A');
+
+                const jenjangBadge = p.klaster === 'PSDKU Gayo Lues'
+                    ? `<span style="background:#F3E8FF; color:#6B21A8; padding:1.5px 6px; border-radius:4px; font-size:10px; font-weight:700;">PSDKU</span>`
+                    : `<span style="background:#F1F5F9; color:#334155; padding:1.5px 6px; border-radius:4px; font-size:10px; font-weight:700;">${{p.jenjang}}</span>`;
+
+                const baruBadge = p.is_prodi_baru
+                    ? `<span style="background:#DBEAFE; color:#1E40AF; padding:1.5px 5px; border-radius:4px; font-size:9.5px; font-weight:700; margin-left:4px;">BARU</span>`
+                    : '';
+
+                tr.innerHTML = `
+                    <td style="text-align:center; font-weight:700; color:#64748B;">${{idx + 1}}</td>
+                    <td>
+                        <div style="font-weight:800; color:#0F172A; font-size:12.5px;">${{p.jenjang === 'D3' ? 'D3 ' : ''}}${{p.nama}}${{baruBadge}}</div>
+                        <div style="display:flex; align-items:center; gap:6px; margin-top:3px; font-size:11px; color:#64748B;">
+                            <span>Kode: <strong>${{p.kode}}</strong></span> • <span><strong>${{p.fakultas_abbr}}</strong> (${{p.fakultas}})</span> • ${{jenjangBadge}}
+                        </div>
+                    </td>
+                    <td style="text-align:center;">
+                        <span style="display:inline-block; padding:3px 8px; border-radius:6px; font-size:10.5px; font-weight:800; color:#FFFFFF; background:${{p.color}};">
+                            Kuadran ${{p.kuadran}}
+                        </span>
+                        <div style="font-size:10px; color:#64748B; margin-top:2px;">FR: ${{p.fill_rate}}% • ${{p.keketatan}}x</div>
+                    </td>
+                    <td style="text-align:right; font-weight:600;">${{p.tot_dt.toLocaleString('id-ID')}}</td>
+                    <td style="text-align:right; font-weight:600;">${{p.tot_lulus.toLocaleString('id-ID')}}</td>
+                    <td style="text-align:right; font-weight:700; color:#059669;">${{p.tot_du.toLocaleString('id-ID')}}</td>
+                    <td style="text-align:center; background:#FFFDFD;">
+                        <div class="yr-vals-strip">${{sisaPills}}</div>
+                    </td>
+                    <td style="text-align:center; background:#FFFDFD;">${{sparkSisa}}</td>
+                    <td style="text-align:right; background:#FFF1F2; font-weight:800; color:#BE123C;">
+                        <div>${{p.tot_sisa.toLocaleString('id-ID')}} kursi</div>
+                        <div style="font-size:10.5px; font-weight:700; color:#9F1239;">(${{p.pct_sisa}}% DT)</div>
+                    </td>
+                    <td style="text-align:center; background:#FFFDF9;">
+                        <div class="yr-vals-strip">${{batalPills}}</div>
+                    </td>
+                    <td style="text-align:center; background:#FFFDF9;">${{sparkBatal}}</td>
+                    <td style="text-align:right; background:#FFFBEB; font-weight:800; color:#B45309;">
+                        <div>${{p.tot_batal.toLocaleString('id-ID')}} org</div>
+                        <div style="font-size:10.5px; font-weight:700; color:#92400E;">(${{p.pct_batal}}% Lulus)</div>
+                    </td>
+                    <td style="text-align:center;">
+                        <button type="button" style="padding:5px 9px; border-radius:6px; border:1px solid #CBD5E1; background:#FFFFFF; color:#0F172A; font-size:11px; font-weight:700; cursor:pointer;">🔍 Grafik</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }});
+        }}
+
+        // Modal Drilldown Functions
+        function openProdiModal(p) {{
+            const modal = document.getElementById('prodi-drilldown-modal');
+            if (!modal || !p) return;
+
+            const totDT = p.tot_dt !== undefined ? p.tot_dt : p.history.reduce((s, h) => s + h.dt, 0);
+            const totLU = p.tot_lulus !== undefined ? p.tot_lulus : p.history.reduce((s, h) => s + (h.lulus || 0), 0);
+            const totDU = p.tot_du !== undefined ? p.tot_du : p.history.reduce((s, h) => s + h.du, 0);
+            const totSisa = totDT - totDU;
+            const totBatal = totLU - totDU;
+            const pctSisa = totDT > 0 ? (totSisa / totDT * 100).toFixed(1) : '0.0';
+            const pctBatal = totLU > 0 ? (totBatal / totLU * 100).toFixed(1) : '0.0';
+            const pctFR = totDT > 0 ? (totDU / totDT * 100).toFixed(1) : '0.0';
+            const pctYield = totLU > 0 ? (totDU / totLU * 100).toFixed(1) : '0.0';
+
+            document.getElementById('md-kode').textContent = `Kode: ${{p.kode || '-'}}`;
+            document.getElementById('md-fakultas').textContent = `${{p.fakultas_abbr}} • ${{p.fakultas}} (${{p.jenjang}})`;
+            const qEl = document.getElementById('md-kuadran');
+            qEl.textContent = p.kuadran_title;
+            qEl.style.background = p.color;
+            document.getElementById('md-tren').textContent = p.tren_resmi;
+            document.getElementById('md-title').textContent = (p.jenjang === 'D3' ? 'D3 ' : '') + p.nama;
+
+            document.getElementById('md-tot-dt').textContent = totDT.toLocaleString('id-ID') + ' Kursi';
+            document.getElementById('md-tot-lulus').textContent = `Lulus: ${{totLU.toLocaleString('id-ID')}}`;
+            document.getElementById('md-keketatan-sub').textContent = `Rasio Keketatan 5-Thn: ${{p.keketatan}} : 1`;
+
+            document.getElementById('md-tot-du').textContent = totDU.toLocaleString('id-ID') + ' Mhs';
+            document.getElementById('md-fr-pct').textContent = `Fill Rate: ${{pctFR}}%`;
+            document.getElementById('md-yield-sub').textContent = `Yield Rate (DU / Lulus): ${{pctYield}}%`;
+
+            document.getElementById('md-tot-sisa').textContent = totSisa.toLocaleString('id-ID') + ' Kursi';
+            document.getElementById('md-sisa-pct').textContent = `${{pctSisa}}% DT`;
+
+            document.getElementById('md-tot-batal').textContent = totBatal.toLocaleString('id-ID') + ' Org';
+            document.getElementById('md-batal-pct').textContent = `${{pctBatal}}% Lulus`;
+            document.getElementById('md-rekomendasi-text').textContent = p.rekomendasi || '';
+
+            // 1. Render Modal Left Chart: 3 Lines (DT, Lulus, DU)
+            const svgLines = document.getElementById('md-chart-lines');
+            if (svgLines) {{
+                const W = 540, H = 230, padL = 52, padR = 24, padT = 26, padB = 32;
+                const plotW = W - padL - padR, plotH = H - padT - padB;
+                const maxV = Math.max(...p.history.map(h => Math.max(h.dt, h.lulus || 0, h.du)), 10) * 1.18;
+
+                let html = '';
+                for (let i = 0; i <= 4; i++) {{
+                    const v = Math.round((maxV / 4) * i);
+                    const y = padT + plotH - (i / 4) * plotH;
+                    html += `<line x1="${{padL}}" y1="${{y}}" x2="${{W - padR}}" y2="${{y}}" stroke="#E2E8F0" stroke-dasharray="3,3"/>`;
+                    html += `<text x="${{padL - 7}}" y="${{y + 4}}" text-anchor="end" font-size="10" fill="#64748B">${{v}}</text>`;
+                }}
+
+                const getPt = (val, idx) => {{
+                    const x = padL + (idx / 4) * plotW;
+                    const y = padT + plotH - (val / maxV) * plotH;
+                    return [x, y];
+                }};
+
+                const dtPts = p.history.map((h, i) => getPt(h.dt, i));
+                const luPts = p.history.map((h, i) => getPt(h.lulus || 0, i));
+                const duPts = p.history.map((h, i) => getPt(h.du, i));
+
+                // Shaded gap area between DT and DU
+                const polyDT_DU = [...dtPts.map(pt => pt.join(',')), ...duPts.slice().reverse().map(pt => pt.join(','))].join(' ');
+                html += `<polygon points="${{polyDT_DU}}" fill="#FECDD3" opacity="0.35"/>`;
+
+                const drawLine = (pts, color, dash='') => {{
+                    const s = pts.map(pt => pt.join(',')).join(' ');
+                    return `<polyline points="${{s}}" fill="none" stroke="${{color}}" stroke-width="2.6" ${{dash ? `stroke-dasharray="${{dash}}"` : ''}}/>`;
+                }};
+                html += drawLine(dtPts, '#2563EB');
+                html += drawLine(luPts, '#7C3AED', '5,3');
+                html += drawLine(duPts, '#059669');
+
+                p.history.forEach((h, i) => {{
+                    const [x, yDT] = dtPts[i];
+                    const [_, yLU] = luPts[i];
+                    const [__, yDU] = duPts[i];
+                    const luVal = h.lulus || 0;
+
+                    // Circles with native hover tooltip
+                    html += `<circle cx="${{x}}" cy="${{yDT}}" r="4" fill="#2563EB"><title>${{h.tahun}}: Daya Tampung = ${{h.dt}} kursi</title></circle>`;
+                    html += `<circle cx="${{x}}" cy="${{yLU}}" r="3.5" fill="#7C3AED"><title>${{h.tahun}}: Lulus Seleksi = ${{luVal}} orang</title></circle>`;
+                    html += `<circle cx="${{x}}" cy="${{yDU}}" r="4" fill="#059669"><title>${{h.tahun}}: Daftar Ulang = ${{h.du}} mahasiswa</title></circle>`;
+
+                    // 1. Data label Lulus (Ungu): di atas titik Lulus
+                    html += `<text x="${{x}}" y="${{yLU - 7}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#6B21A8">${{luVal}}</text>`;
+
+                    // 2. Data label DT (Biru)
+                    if (Math.abs(yDT - yLU) < 14) {{
+                        if (Math.abs(yDU - yDT) > 22) {{
+                            html += `<text x="${{x}}" y="${{yDT + 12}}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1D4ED8">${{h.dt}}</text>`;
+                        }} else {{
+                            html += `<text x="${{x - 14}}" y="${{yDT - 2}}" text-anchor="end" font-size="9.5" font-weight="700" fill="#1D4ED8">${{h.dt}}</text>`;
+                        }}
+                    }} else {{
+                        html += `<text x="${{x}}" y="${{yDT - 7}}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1D4ED8">${{h.dt}}</text>`;
+                    }}
+
+                    // 3. Data label DU (Hijau): di bawah titik DU
+                    if (Math.abs(yDU - yDT) < 14 && Math.abs(yDT - yLU) < 14) {{
+                        html += `<text x="${{x + 14}}" y="${{yDU + 12}}" text-anchor="start" font-size="9.5" font-weight="800" fill="#047857">${{h.du}}</text>`;
+                    }} else {{
+                        html += `<text x="${{x}}" y="${{yDU + 13}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#047857">${{h.du}}</text>`;
+                    }}
+
+                    // 4. Label Tahun X-axis
+                    html += `<text x="${{x}}" y="${{H - 10}}" text-anchor="middle" font-size="11" font-weight="800" fill="#0F172A">${{h.tahun}}</text>`;
+                }});
+                svgLines.innerHTML = html;
+            }}
+
+            // 2. Render Modal Right Chart: Bars Kursi Kosong vs Batal DU
+            const svgBars = document.getElementById('md-chart-bars');
+            if (svgBars) {{
+                const W = 420, H = 230, padL = 44, padR = 18, padT = 26, padB = 32;
+                const plotW = W - padL - padR, plotH = H - padT - padB;
+                const maxB = Math.max(...p.history.map(h => Math.max(h.sisa, h.batal, 0)), 10) * 1.22;
+
+                let html = '';
+                for (let i = 0; i <= 4; i++) {{
+                    const v = Math.round((maxB / 4) * i);
+                    const y = padT + plotH - (i / 4) * plotH;
+                    html += `<line x1="${{padL}}" y1="${{y}}" x2="${{W - padR}}" y2="${{y}}" stroke="#E2E8F0" stroke-dasharray="3,3"/>`;
+                    html += `<text x="${{padL - 6}}" y="${{y + 4}}" text-anchor="end" font-size="10" fill="#64748B">${{v}}</text>`;
+                }}
+
+                const gW = plotW / 5, bW = 16;
+                p.history.forEach((h, i) => {{
+                    const cx = padL + gW * i + gW / 2;
+                    const sVal = Math.max(0, h.sisa);
+                    const bVal = Math.max(0, h.batal);
+                    const hS = (sVal / maxB) * plotH;
+                    const hB = (bVal / maxB) * plotH;
+                    const yS = padT + plotH - hS;
+                    const yB = padT + plotH - hB;
+
+                    html += `<rect x="${{cx - bW - 1}}" y="${{yS}}" width="${{bW}}" height="${{hS}}" rx="3" fill="#E11D48"><title>${{h.tahun}}: Kursi Kosong = ${{h.sisa}}</title></rect>`;
+                    html += `<text x="${{cx - bW/2 - 1}}" y="${{yS - 4}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#BE123C">${{h.sisa}}</text>`;
+
+                    html += `<rect x="${{cx + 1}}" y="${{yB}}" width="${{bW}}" height="${{hB}}" rx="3" fill="#D97706"><title>${{h.tahun}}: Batal Daftar Ulang = ${{h.batal}}</title></rect>`;
+                    html += `<text x="${{cx + bW/2 + 1}}" y="${{yB - 4}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#B45309">${{h.batal}}</text>`;
+
+                    html += `<text x="${{cx}}" y="${{H - 10}}" text-anchor="middle" font-size="11" font-weight="800" fill="#0F172A">${{h.tahun}}</text>`;
+                }});
+                svgBars.innerHTML = html;
+            }}
+
+            // 3. Render Descending Multi-Year Table (2026 -> 2022 + Total 5 Tahun)
+            const tbody = document.getElementById('md-history-tbody');
+            tbody.innerHTML = '';
+            p.history.slice().reverse().forEach(h => {{
+                const pBatal = h.lulus > 0 ? (h.batal / h.lulus * 100).toFixed(1) : '0.0';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${{h.tahun}}</td>
+                    <td>${{h.peminat.toLocaleString('id-ID')}}</td>
+                    <td>${{h.dt.toLocaleString('id-ID')}}</td>
+                    <td>${{h.lulus.toLocaleString('id-ID')}}</td>
+                    <td style="font-weight:700; color:#059669;">${{h.du.toLocaleString('id-ID')}}</td>
+                    <td style="font-weight:800; color:#BE123C; background:#FFF1F2;">${{h.sisa.toLocaleString('id-ID')}}</td>
+                    <td style="font-weight:700;">${{clampFR(h.fill_rate).toFixed(1)}}%</td>
+                    <td style="font-weight:800; color:#B45309; background:#FFFBEB;">${{h.batal.toLocaleString('id-ID')}}</td>
+                    <td style="font-weight:700;">${{pBatal}}%</td>
+                `;
+                tbody.appendChild(tr);
+            }});
+            const totPem = p.tot_peminat !== undefined ? p.tot_peminat : p.history.reduce((s, h) => s + h.peminat, 0);
+            const trTot = document.createElement('tr');
+            trTot.className = 'total-row';
+            trTot.innerHTML = `
+                <td>TOTAL 5 TAHUN</td>
+                <td>${{totPem.toLocaleString('id-ID')}}</td>
+                <td>${{totDT.toLocaleString('id-ID')}}</td>
+                <td>${{totLU.toLocaleString('id-ID')}}</td>
+                <td style="color:#6EE7B7;">${{totDU.toLocaleString('id-ID')}}</td>
+                <td style="color:#FDA4AF;">${{totSisa.toLocaleString('id-ID')}}</td>
+                <td>${{pctFR}}%</td>
+                <td style="color:#FDE047;">${{totBatal.toLocaleString('id-ID')}}</td>
+                <td>${{pctBatal}}%</td>
+            `;
+            tbody.appendChild(trTot);
+
+            modal.classList.add('open');
+        }}
+
+        function closeProdiModal() {{
+            const modal = document.getElementById('prodi-drilldown-modal');
+            if (modal) modal.classList.remove('open');
+        }}
+
+        document.getElementById('prodi-drilldown-modal')?.addEventListener('click', () => closeProdiModal());
+        document.addEventListener('keydown', (e) => {{
+            if (e.key === 'Escape') closeProdiModal();
+        }});
+
+        // View Mode Switching (Matrix vs Trend 81 Prodi)
+        function setViewMode(mode) {{
+            currentViewMode = mode;
+            document.querySelectorAll('.view-mode-btn').forEach(b => {{
+                b.classList.toggle('active', b.getAttribute('data-view') === mode);
+            }});
+            const matrixWrapper = document.getElementById('matrix-view-wrapper');
+            const trendWrapper = document.getElementById('trend-view-wrapper');
+            const lvlSwitcher = document.getElementById('level-switcher');
+            const subSwitcher = document.getElementById('s1-subset-switcher');
+            const hdrActions = document.getElementById('matrix-header-actions');
+
+            if (mode === 'trend') {{
+                matrixWrapper.style.display = 'none';
+                trendWrapper.style.display = 'flex';
+                if (lvlSwitcher) lvlSwitcher.style.display = 'none';
+                if (subSwitcher) subSwitcher.style.display = 'none';
+                if (hdrActions) hdrActions.style.display = 'none';
+                document.getElementById('header-main-title').textContent = 'EVALUASI TREN 81 PRODI USK: KURSI KOSONG (DT−DU) & BATAL DAFTAR ULANG (LULUS−DU)';
+                renderTrendTable();
+            }} else {{
+                matrixWrapper.style.display = 'flex';
+                trendWrapper.style.display = 'none';
+                if (lvlSwitcher) lvlSwitcher.style.display = 'inline-flex';
+                if (subSwitcher) subSwitcher.style.display = (currentLevel === 's1') ? 'inline-flex' : 'none';
+                if (hdrActions) hdrActions.style.display = 'flex';
+                if (currentLevel === 'd3') {{
+                    document.getElementById('header-main-title').textContent = 'PETA KUADRAN 11 PROGRAM STUDI D3 VOKASI USK';
+                }} else {{
+                    document.getElementById('header-main-title').textContent = (currentS1Subset === 'all')
+                        ? 'PETA KUADRAN 66 PROGRAM STUDI S1 LENGKAP USK'
+                        : 'PETA KUADRAN 60 PROGRAM STUDI S1 KAMPUS UTAMA USK';
+                }}
+                renderChart();
+            }}
+        }}
+
+        document.querySelectorAll('.view-mode-btn').forEach(btn => {{
+            btn.addEventListener('click', () => {{
+                setViewMode(btn.getAttribute('data-view'));
+            }});
+        }});
+
+        // Event Listeners for Trend View Controls
+        document.querySelectorAll('#trend-klaster-pills .preset-btn').forEach(btn => {{
+            btn.addEventListener('click', () => {{
+                trendKlaster = btn.getAttribute('data-klaster');
+                document.querySelectorAll('#trend-klaster-pills .preset-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderTrendTable();
+            }});
+        }});
+
+        document.querySelectorAll('#trend-sort-presets .preset-btn').forEach(btn => {{
+            btn.addEventListener('click', () => {{
+                trendSort = btn.getAttribute('data-sort');
+                document.querySelectorAll('#trend-sort-presets .preset-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderTrendTable();
+            }});
+        }});
+
+        document.getElementById('trend-fak-select')?.addEventListener('change', (e) => {{
+            trendFak = e.target.value;
+            renderTrendTable();
+        }});
+
+        document.getElementById('trend-quad-select')?.addEventListener('change', (e) => {{
+            trendQuad = e.target.value;
+            renderTrendTable();
+        }});
+
+        document.getElementById('trend-search-input')?.addEventListener('input', (e) => {{
+            trendSearch = e.target.value;
+            renderTrendTable();
+        }});
+
         // Initial Load
+        initTrendFakOptions();
         const subsetSwitcher = document.getElementById('s1-subset-switcher');
         if (currentLevel === 'd3') {{
             document.querySelectorAll('.level-tab').forEach(t => {{
@@ -3505,6 +4914,10 @@ def generate_interactive_html():
         renderFacultyFilters();
         renderChart();
 
+        if (currentViewMode === 'trend') {{
+            setViewMode('trend');
+        }}
+
         // Initial Load bersih (tanpa auto-select, kanvas bebas dari label mengambang)
         selectedProdiId = null;
         document.getElementById('ins-content').style.display = 'none';
@@ -3517,6 +4930,10 @@ def generate_interactive_html():
         // Dengarkan navigasi browser back/forward melalui hashchange
         window.addEventListener('hashchange', () => {{
             const h = (window.location.hash || '').toLowerCase();
+            if (h.includes('tren')) {{
+                setViewMode('trend');
+                return;
+            }}
             const newLevel = h.includes('d3') ? 'd3' : 's1';
             const newSubset = (h.includes('60') || h.includes('tanpa') || h.includes('established')) ? 'established' : 'all';
 

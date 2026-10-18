@@ -11,6 +11,12 @@ dari modul ini agar semua file di repositori selalu konsisten secara otomatis.
 
 import os
 import sys
+
+# Ensure local dependencies in scripts/libs are accessible in sandbox
+libs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "libs"))
+if os.path.exists(libs_dir) and libs_dir not in sys.path:
+    sys.path.insert(0, libs_dir)
+
 import warnings
 import pandas as pd
 import numpy as np

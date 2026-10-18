@@ -1,0 +1,20 @@
+# =============================================================================
+# Repositori Analisis Peminatan, Daya Tampung, & Jalur Masuk USK (2022–2026)
+# File Dependensi Lingkungan Python (Requirements)
+# =============================================================================
+
+# Inti Pemrosesan Data & Perhitungan Numerik
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualisasi Data & Chart Rendering
+matplotlib>=3.7.0
+adjustText>=0.8
+
+# Pemrosesan Berkas Excel & Presentasi PowerPoint
+openpyxl>=3.1.0
+python-pptx>=0.6.21
+
+# Utilitas Waktu & Kompatibilitas
+python-dateutil>=2.8.2
+six>=1.16.0

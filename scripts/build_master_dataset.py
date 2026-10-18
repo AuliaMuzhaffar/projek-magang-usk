@@ -1,4 +1,10 @@
 import os
+import sys
+
+libs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "libs"))
+if os.path.exists(libs_dir) and libs_dir not in sys.path:
+    sys.path.insert(0, libs_dir)
+
 import openpyxl
 import pandas as pd
 import numpy as np
@@ -98,15 +104,35 @@ def main():
     os.makedirs(out_dir, exist_ok=True)
     out_file = os.path.join(out_dir, "master_analisa_peminatan_dan_daya_tampung_2022_2026.xlsx")
 
-    print(f"Loading {file_old} and {file_2026}...")
+    print(f"Loading {file_old}...")
     wb_old = openpyxl.load_workbook(file_old, data_only=True)
     ws_old = wb_old["Rekapitulasi Data"]
 
-    wb_2026 = openpyxl.load_workbook(file_2026, data_only=True)
-    ws_2026 = wb_2026["DT D3_D4_S1 2026"]
+    # Load 2026 pathway applicants cache
+    peminat_2026_cache = {}
+    rows_26 = None
+    if os.path.exists(file_2026):
+        try:
+            wb_2026 = openpyxl.load_workbook(file_2026, data_only=True)
+            ws_2026 = wb_2026["DT D3_D4_S1 2026"]
+            rows_26 = list(ws_2026.iter_rows(min_row=7, max_row=87, values_only=True))
+            print(f"Loaded {file_2026} successfully.")
+        except Exception as e:
+            print(f"Could not load {file_2026}: {e}. Falling back to master cache.")
+
+    if rows_26 is None and os.path.exists(out_file):
+        try:
+            wb_prev_master = openpyxl.load_workbook(out_file, data_only=True)
+            if "Rincian_Jalur_Masuk_2026" in wb_prev_master.sheetnames:
+                ws_j26 = wb_prev_master["Rincian_Jalur_Masuk_2026"]
+                for r in list(ws_j26.iter_rows(values_only=True))[1:]:
+                    # r[3] is Program_Studi, r[6] is Jalur_Penerimaan, r[8] is Peminat
+                    peminat_2026_cache.setdefault(str(r[3]).strip().upper(), {})[str(r[6]).strip().upper()] = float(r[8] or 0)
+                print(f"Loaded 2026 pathway applicant cache for {len(peminat_2026_cache)} prodi from existing master.")
+        except Exception as e:
+            print(f"Notice: Failed to load applicant cache from master: {e}")
 
     rows_old = list(ws_old.iter_rows(min_row=7, max_row=87, values_only=True))
-    rows_26 = list(ws_2026.iter_rows(min_row=7, max_row=87, values_only=True))
 
     master_records = []
     jalur_records_all = []
@@ -118,7 +144,7 @@ def main():
 
     for idx in range(81):
         r_old = rows_old[idx]
-        r_26 = rows_26[idx]
+        r_26 = rows_26[idx] if rows_26 is not None else None
 
         no = idx + 1
         kd_prodi = str(r_old[1] or '').strip()
@@ -275,19 +301,30 @@ def main():
         dt_snbp_26 = float(r_old[99] or 0)
         la_snbp_26 = float(r_old[100] or 0)
         du_snbp_26 = float(r_old[101] or 0)
-        pm_snbp_26 = float(r_26[22] or 0)
+        if rows_26 is not None:
+            r_26 = rows_26[idx]
+            pm_snbp_26 = float(r_26[22] or 0)
+            pm_snbt_26 = float(r_26[37] or 0)
+            pm_smm_26 = float(r_26[48] or 0)
+            pm_tal_26 = float(r_26[56] or 0)
+            pm_smc_26 = float(r_26[64] or 0)
+        else:
+            p_cache = peminat_2026_cache.get(nm_prodi, {})
+            pm_snbp_26 = float(p_cache.get("SNBP", 0.0))
+            pm_snbt_26 = float(p_cache.get("SNBT", 0.0))
+            pm_smm_26 = float(p_cache.get("SMMPTN", 0.0))
+            pm_tal_26 = float(p_cache.get("TALENTA", 0.0))
+            pm_smc_26 = float(p_cache.get("SMC", 0.0))
 
         dt_snbt_26 = float(r_old[103] or 0)
         la_snbt_26 = float(r_old[104] or 0)
         du_snbt_26 = float(r_old[105] or 0)
-        pm_snbt_26 = float(r_26[37] or 0)
 
         dt_smm_26 = float(r_old[107] or 0)
         la_smm_26 = float(r_old[108] or 0)
         du_smm_26 = float(r_old[109] or 0)
-        pm_smm_26 = float(r_26[48] or 0)
 
-        # Apply SK Rektor No. 121 kuota jalur masuk 2026
+        # Apply SK Rektor No. 121 kuota jalur masuk 2026 (already baked into rekap data (fix))
         if nm_prodi in SK_121_2026:
             dt_snbp_26 = SK_121_2026[nm_prodi]["snbp"]
             dt_snbt_26 = SK_121_2026[nm_prodi]["snbt"]
@@ -296,12 +333,10 @@ def main():
         dt_tal_26 = float(r_old[111] or 0)
         la_tal_26 = float(r_old[112] or 0)
         du_tal_26 = float(r_old[113] or 0)
-        pm_tal_26 = float(r_26[56] or 0)
 
         dt_smc_26 = float(r_old[115] or 0)
         la_smc_26 = float(r_old[116] or 0)
         du_smc_26 = float(r_old[117] or 0)
-        pm_smc_26 = float(r_26[64] or 0)
 
         la_adik_26 = float(r_old[119] or 0)
         du_adik_26 = float(r_old[120] or 0)
@@ -413,12 +448,12 @@ def main():
         rec["Rata_Keketatan_5Thn"] = round(np.mean([rec[f"Keketatan_{yr}"] for yr in [2022, 2023, 2024, 2025, 2026] if rec[f"DT_{yr}"] > 0]), 2)
 
         # 5 Official Classification Categories (Tahap 6 Panduan)
-        if du_vals[0] == 0:
-            kategori = "Data Terbatas (Prodi Baru)"
+        if klaster == "Diploma 3 Vokasi":
+            kategori = "Diploma 3 Vokasi"
         elif klaster == "PSDKU Gayo Lues":
             kategori = "Peminatan Relatif Rendah (PSDKU)"
-        elif klaster == "Diploma 3 Vokasi":
-            kategori = "Diploma 3 Vokasi"
+        elif du_vals[0] == 0:
+            kategori = "Data Terbatas (Prodi Baru)"
         elif rec["Rata_FillRate_5Thn_Persen"] < 68.0 or rec["Keketatan_2026"] < 1.5:
             if delta_dt > 30 and rec["Marginal_Fill_Rate"] < 0.35:
                 kategori = "Over-Ekspansi Kuota (Defisit)"

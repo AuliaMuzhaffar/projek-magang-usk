@@ -1,4 +1,9 @@
 import os
+import sys, os
+libs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "libs"))
+if os.path.exists(libs_dir) and libs_dir not in sys.path:
+    sys.path.insert(0, libs_dir)
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -134,16 +139,11 @@ def annotate_stacked_bars(ax, data_dict, tot_list, is_intake=True, mode='opsi1')
         
     if is_intake or mode != 'opsi3':
         for idx, tot in enumerate(tot_list):
-            if is_intake:
+            if is_intake or mode == 'opsi2':
                 lbl = 'Total:'
                 bg_col = '#EFF6FF'
                 edge_col = '#3B82F6'
                 txt_col = '#0F172A'
-            elif mode == 'opsi2':
-                lbl = 'Mundur:'
-                bg_col = '#FEF2F2'
-                edge_col = '#EF4444'
-                txt_col = '#991B1B'
             else: # opsi1
                 lbl = 'Tidak DU:'
                 bg_col = '#FEF2F2'

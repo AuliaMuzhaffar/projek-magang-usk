@@ -1,4 +1,9 @@
 import os
+import sys, os
+libs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "libs"))
+if os.path.exists(libs_dir) and libs_dir not in sys.path:
+    sys.path.insert(0, libs_dir)
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -1475,11 +1480,6 @@ def main():
     ax_d3.text(x_max_d3 - 0.8, 20.5, 'KUADRAN III: BELUM OPTIMAL\n(Peminat Tinggi, Keterisian Belum Optimal)\n11 Program Studi (100,0% Seluruh Vokasi)',
                ha='right', va='bottom', fontsize=11.5, fontweight='bold', color='#B45309', alpha=0.95, zorder=2, linespacing=1.2)
 
-    # Callout banner for Kuadran III anomaly
-    ax_d3.text(12.5, 93.5, 'TEMUAN ANOMALI STRUKTURAL VOKASI USK:\n100% (11 Program Studi D3) Terkonsentrasi di Kuadran III\nPeminat Membludak (Keketatan 5,3x–17,7x), Namun Keterisian Belum Optimal (<80%)',
-               ha='center', va='center', fontsize=9.5, fontweight='bold', color='#92400E',
-               bbox=dict(boxstyle='round,pad=0.55', facecolor='#FFFBEB', edgecolor='#F59E0B', linewidth=1.2, alpha=0.96),
-               zorder=3)
 
     # Scatter points - Ukuran seragam s=100 (sama seperti S1), selaras warna Kuadran III (#D97706)
     ax_d3.scatter(df_d3['Rata_Keketatan_5Thn'], df_d3['Rata_FillRate_5Thn_Persen'],

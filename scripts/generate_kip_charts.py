@@ -1,5 +1,10 @@
 import os
 from typing import Any, cast
+import sys, os
+libs_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "libs"))
+if os.path.exists(libs_dir) and libs_dir not in sys.path:
+    sys.path.insert(0, libs_dir)
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

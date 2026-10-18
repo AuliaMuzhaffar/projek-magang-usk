@@ -16,6 +16,7 @@ __pycache__/
 *.pyc
 *.bak
 data/master/*.bak
+scripts/libs/
 
 # Asset Sementara & Scratch Testing
 output/grafik/pdf_slides/
@@ -24,3 +25,14 @@ output/grafik/test_*.png
 output/grafik/header_*.png
 output/grafik/logo_usk_maganghub.png
 assets/WhatsApp Image 2026-10-12 at 17.11.32.jpeg
+
+# Snapshot Backup Otomatis Pipeline
+data/snapshots/
+
+# Draf Kerja Data Mentah Manual (Di luar Pipeline Resmi)
+data/raw/Rekap Data Analis.xlsx
+
+# Draf Dokumen Word Lokal & Temporary Files
+output/presentasi/*.docx
+*.docx
+
