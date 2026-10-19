@@ -62,6 +62,10 @@ Untuk memastikan pengguna **tidak perlu kerja 2 kali**, AI wajib mematuhi aturan
 
 ---
 
-## 4. Kebijakan Keamanan & Git (Version Control)
+## 4. Kebijakan Keamanan, Git & Workflow GitHub Issue
 - **Izin Commit/Push:** Dilarang melakukan `git commit` atau `git push` ke GitHub tanpa instruksi/izin eksplisit dari pengguna.
+- **Workflow GitHub Issue & Otomasi Penutupan (Issue-Linked Commits):**
+  1. **Dokumentasi Masalah & Kebutuhan (Issue-Driven):** Setiap penemuan bug data, permintaan fitur visualisasi baru, atau penyesuaian regulasi/SK Rektor dapat dicatat terlebih dahulu sebagai GitHub Issue dengan label yang relevan (`bug`, `enhancement`, `data-update`).
+  2. **Konvensi Pesan Commit:** Saat melakukan commit untuk menyelesaikan sebuah Issue, AI/Pengguna wajib menyematkan nomor Issue dengan kata kunci otomatisasi GitHub (misal: `fix: remove BARU badge on D3 prodi (closes #1)` atau `feat: add 5-year trend modal (fixes #2)`).
+  3. **Audit Trail:** Memastikan setiap perubahan kode/data di repo memiliki referensi yang jelas ke riwayat diskusi atau tiket masalah terkait.
 - **Integritas Dokumen:** Seluruh diagram arsitektur, catatan data dictionary, dan panduan workflow harus selalu konsisten dengan implementasi kode terbaru.

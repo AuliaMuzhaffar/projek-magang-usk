@@ -113,7 +113,7 @@ def generate_interactive_html():
             kuadran_desc = "Peminat Sangat Tinggi, Namun Daftar Ulang Belum Optimal"
             color = "#D97706" # Amber
             rekomendasi = (
-                "Investigasi mendalam penyebab kebocoran registrasi ulang (yield loss). Evaluasi penyesuaian "
+                "Investigasi mendalam kendala registrasi ulang (yield loss). Evaluasi penyesuaian "
                 "kelompok UKT, tinjau waktu pengumuman, dan perketat komitmen calon mahasiswa pada jalur mandiri/SNBT."
             )
         else:
@@ -141,8 +141,9 @@ def generate_interactive_html():
                 fr_y = min(raw_fr_y, 100.0) # Capped at 100%
                 yr_y = round(float(r[f'Yield Rate {yr} (%)']), 1) if pd.notna(r.get(f'Yield Rate {yr} (%)')) else 0.0
                 kek_y = round(float(r[f'Keketatan {yr}']), 2) if pd.notna(r.get(f'Keketatan {yr}')) else 0.0
-                sisa_y = dt_y - du_y
-                batal_y = lu_y - du_y
+                sisa_y = max(0, dt_y - du_y)
+                batal_y = max(0, lu_y - du_y)
+                surplus_y = max(0, du_y - dt_y)
                 tot_dt_5 += dt_y
                 tot_lu_5 += lu_y
                 tot_du_5 += du_y
@@ -154,12 +155,16 @@ def generate_interactive_html():
                     "du": du_y,
                     "sisa": sisa_y,
                     "batal": batal_y,
+                    "surplus": surplus_y,
                     "fill_rate": fr_y,
                     "yield_rate": yr_y,
                     "keketatan": kek_y
                 })
             except Exception:
                 pass
+
+        tot_sisa_5 = sum(h["sisa"] for h in history)
+        tot_batal_5 = sum(h["batal"] for h in history)
 
         s1_data.append({
             "id": idx + 1,
@@ -182,8 +187,8 @@ def generate_interactive_html():
             "tot_dt": tot_dt_5,
             "tot_lulus": tot_lu_5,
             "tot_du": tot_du_5,
-            "tot_sisa": tot_dt_5 - tot_du_5,
-            "tot_batal": tot_lu_5 - tot_du_5,
+            "tot_sisa": tot_sisa_5,
+            "tot_batal": tot_batal_5,
             "tren_resmi": tren_resmi,
             "klaster": klaster,
             "is_prodi_baru": bool(tren_resmi == "Data Terbatas (Prodi Baru)"),
@@ -212,38 +217,26 @@ def generate_interactive_html():
         klaster = str(r.get('Klaster Analisis', 'Vokasi')).strip()
 
         # Seluruh 11 D3 berada di Kuadran III secara formal (Keketatan >= 4.0x & Fill Rate < 80%)
-        # Diselaraskan 100% dengan standar S1: KUADRAN III: BELUM OPTIMAL
+        # Diselaraskan 100% dengan standar S1 & Grafik 13b: KUADRAN III: BELUM OPTIMAL
         kuadran = "III"
         kuadran_title = "KUADRAN III: BELUM OPTIMAL"
         kuadran_desc = "Peminat Sangat Tinggi, Namun Daftar Ulang Belum Optimal"
+        color = "#D97706"  # Amber Kuadran III (Selaras Grafik 13b)
 
-        # Sub-klasifikasi berdasarkan 3 Klaster Evaluasi Vokasi:
         if fill_rate >= 60.0:
-            tier = 1
-            tier_title = "KLASTER 1: KOMPETITIF"
-            tier_desc = "Daya Saing Tinggi: Fill Rate Prima (≥ 60%) & Peminat Membludak"
-            color = "#059669" # Emerald Green
             rekomendasi = (
-                "Prioritas #1 untuk segera dikonversi dan dinaikkan statusnya menjadi Sarjana Terapan "
-                "(D4 Rekayasa Perangkat Lunak / TI). Animo pasar sangat tinggi (1.100 mhs/thn) dengan daya serap terbaik di vokasi USK (66,6%)."
+                "Prioritas untuk dikonversi dan dinaikkan statusnya menjadi Sarjana Terapan "
+                "(D4 Rekayasa Perangkat Lunak / TI). Animo pasar sangat tinggi dengan daya serap terbaik di vokasi USK (66,6%)."
             )
         elif fill_rate >= 45.0:
-            tier = 2
-            tier_title = "KLASTER 2: PERLU PENDAMPINGAN"
-            tier_desc = "Keterisian Moderat (45%–55%), Memerlukan Pendampingan Strategis"
-            color = "#D97706" # Amber
             rekomendasi = (
                 "Kandidat konversi ke Sarjana Terapan (D4) dengan restrukturisasi kurikulum berbasis kemitraan industri "
                 "(teaching factory). Perkuat skema ikatan kerja agar pendaftar tidak gugur massal saat tahap daftar ulang."
             )
         else:
-            tier = 3
-            tier_title = "KLASTER 3: EVALUASI KHUSUS"
-            tier_desc = "Keterisian Kritis (< 45%), Memerlukan Evaluasi Restrukturisasi"
-            color = "#DC2626" # Crimson Red
             rekomendasi = (
-                "Evaluasi kelayakan operasional mendesak. Lakukan rasionalisasi daya tampung drastis (pangkas kuota 40%–50%) "
-                "untuk menghentikan akumulasi bangku kosong (>150 kursi/thn), atau pertimbangkan moratorium/merger prodi jika defisit terus berlanjut."
+                "Evaluasi kelayakan operasional. Lakukan rasionalisasi daya tampung terukur "
+                "untuk menghentikan akumulasi bangku kosong, serta perkuat kemitraan magang industri langsung."
             )
 
         # Riwayat Tahunan D3 2022-2026
@@ -261,8 +254,9 @@ def generate_interactive_html():
                 fr_y = min(raw_fr_y, 100.0)
                 yr_y = round(float(r[f'Yield Rate {yr} (%)']), 1) if pd.notna(r.get(f'Yield Rate {yr} (%)')) else 0.0
                 kek_y = round(float(r[f'Keketatan {yr}']), 2) if pd.notna(r.get(f'Keketatan {yr}')) else 0.0
-                sisa_y = dt_y - du_y
-                batal_y = lu_y - du_y
+                sisa_y = max(0, dt_y - du_y)
+                batal_y = max(0, lu_y - du_y)
+                surplus_y = max(0, du_y - dt_y)
                 tot_dt_5 += dt_y
                 tot_lu_5 += lu_y
                 tot_du_5 += du_y
@@ -274,12 +268,16 @@ def generate_interactive_html():
                     "du": du_y,
                     "sisa": sisa_y,
                     "batal": batal_y,
+                    "surplus": surplus_y,
                     "fill_rate": fr_y,
                     "yield_rate": yr_y,
                     "keketatan": kek_y
                 })
             except Exception:
                 pass
+
+        tot_sisa_5 = sum(h["sisa"] for h in history)
+        tot_batal_5 = sum(h["batal"] for h in history)
 
         d3_data.append({
             "id": 100 + idx + 1,
@@ -289,9 +287,6 @@ def generate_interactive_html():
             "fakultas": fak,
             "fakultas_abbr": fak_abbr,
             "kuadran": kuadran,
-            "tier": tier,
-            "tier_title": tier_title,
-            "tier_desc": tier_desc,
             "kuadran_title": kuadran_title,
             "kuadran_desc": kuadran_desc,
             "color": color,
@@ -305,8 +300,8 @@ def generate_interactive_html():
             "tot_dt": tot_dt_5,
             "tot_lulus": tot_lu_5,
             "tot_du": tot_du_5,
-            "tot_sisa": tot_dt_5 - tot_du_5,
-            "tot_batal": tot_lu_5 - tot_du_5,
+            "tot_sisa": tot_sisa_5,
+            "tot_batal": tot_batal_5,
             "tren_resmi": tren_resmi,
             "klaster": klaster,
             "history": history
@@ -386,8 +381,9 @@ def generate_interactive_html():
             fr_y = min(raw_fr_y, 100.0)
             yr_y = round(float(r[f'Yield Rate {yr} (%)']), 1) if pd.notna(r.get(f'Yield Rate {yr} (%)')) else 0.0
             kek_y = round(float(r[f'Keketatan {yr}']), 2) if pd.notna(r.get(f'Keketatan {yr}')) else 0.0
-            sisa_y = dt_y - du_y
-            batal_y = lu_y - du_y
+            sisa_y = max(0, dt_y - du_y)
+            batal_y = max(0, lu_y - du_y)
+            surplus_y = max(0, du_y - dt_y)
             tot_pem_5 += pem_y
             tot_dt_5 += dt_y
             tot_lu_5 += lu_y
@@ -400,13 +396,14 @@ def generate_interactive_html():
                 "du": du_y,
                 "sisa": sisa_y,
                 "batal": batal_y,
+                "surplus": surplus_y,
                 "fill_rate": fr_y,
                 "yield_rate": yr_y,
                 "keketatan": kek_y
             })
 
-        tot_sisa_5 = tot_dt_5 - tot_du_5
-        tot_batal_5 = tot_lu_5 - tot_du_5
+        tot_sisa_5 = sum(h["sisa"] for h in history)
+        tot_batal_5 = sum(h["batal"] for h in history)
         pct_sisa_5 = round((tot_sisa_5 / tot_dt_5 * 100.0), 1) if tot_dt_5 > 0 else 0.0
         pct_batal_5 = round((tot_batal_5 / tot_lu_5 * 100.0), 1) if tot_lu_5 > 0 else 0.0
         fill_5 = round((tot_du_5 / tot_dt_5 * 100.0), 1) if tot_dt_5 > 0 else 0.0
@@ -1080,253 +1077,6 @@ def generate_interactive_html():
             border-radius: 12px;
             border: 1px solid #E2E8F0;
         }}
-
-        .tier-guide-card {{
-            background: #FFFFFF;
-            border-radius: 10px;
-            padding: 12px 14px;
-            border: 1px solid #E2E8F0;
-            border-left-width: 4.5px;
-            cursor: pointer;
-            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            user-select: none;
-        }}
-
-        .tier-guide-card:hover {{
-            transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.08);
-            border-color: #CBD5E1;
-        }}
-
-        .tier-guide-card.active {{
-            box-shadow: 0 0 0 2px var(--brand-navy), 0 6px 14px rgba(15,23,42,0.12);
-        }}
-
-        .tier-guide-card.tg-tier-1 {{
-            border-left-color: #059669;
-        }}
-        .tier-guide-card.tg-tier-1.active {{
-            background: #F0FDF4;
-            border-color: #86EFAC;
-            border-left-color: #059669;
-        }}
-
-        .tier-guide-card.tg-tier-2 {{
-            border-left-color: #D97706;
-        }}
-        .tier-guide-card.tg-tier-2.active {{
-            background: #FFFBEB;
-            border-color: #FDE68A;
-            border-left-color: #D97706;
-        }}
-
-        .tier-guide-card.tg-tier-3 {{
-            border-left-color: #DC2626;
-        }}
-        .tier-guide-card.tg-tier-3.active {{
-            background: #FFF1F2;
-            border-color: #FECDD3;
-            border-left-color: #DC2626;
-        }}
-
-        .tgc-header {{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }}
-
-        .tgc-title-group {{
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12.5px;
-            font-weight: 800;
-            font-family: 'Outfit', sans-serif;
-        }}
-
-        .tg-tier-1 .tgc-title-group {{ color: #065F46; }}
-        .tg-tier-2 .tgc-title-group {{ color: #92400E; }}
-        .tg-tier-3 .tgc-title-group {{ color: #991B1B; }}
-
-        .tgc-badge {{
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2.5px 7px;
-            border-radius: 6px;
-            background: #F1F5F9;
-            color: #475569;
-        }}
-
-        .tgc-rule {{
-            font-size: 11px;
-            font-weight: 700;
-            color: #1E293B;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }}
-
-        .tgc-rule span.kriteria-tag {{
-            font-size: 9px;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 2px 5px;
-            border-radius: 4px;
-            letter-spacing: 0.3px;
-        }}
-        .tg-tier-1 .tgc-rule span.kriteria-tag {{ background: #DCFCE7; color: #166534; }}
-        .tg-tier-2 .tgc-rule span.kriteria-tag {{ background: #FEF3C7; color: #92400E; }}
-        .tg-tier-3 .tgc-rule span.kriteria-tag {{ background: #FFE4E6; color: #9F1239; }}
-
-        .tgc-prodi {{
-            font-size: 11px;
-            font-weight: 500;
-            color: #334155;
-            line-height: 1.45;
-            margin-top: 2px;
-        }}
-
-        /* D3 Sub-Tier Executive Sidebar Card Styles */
-        .d3-sidebar-card {{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }}
-
-        .d3-sidebar-tier-block {{
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            border-radius: 10px;
-            padding: 11px 13px;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-            cursor: pointer;
-        }}
-
-        .d3-sidebar-tier-block:hover {{
-            transform: translateY(-1.5px);
-            box-shadow: 0 5px 12px rgba(0,0,0,0.07);
-        }}
-
-        .d3-stb-tier-1 {{
-            border-left: 4.5px solid #059669;
-            background: linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 100%);
-        }}
-
-        .d3-stb-tier-2 {{
-            border-left: 4.5px solid #D97706;
-            background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 100%);
-        }}
-
-        .d3-stb-tier-3 {{
-            border-left: 4.5px solid #DC2626;
-            background: linear-gradient(180deg, #FFF1F2 0%, #FFFFFF 100%);
-        }}
-
-        .d3-stb-header {{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 7px;
-        }}
-
-        .d3-stb-title {{
-            font-size: 12px;
-            font-weight: 800;
-            font-family: 'Outfit', sans-serif;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }}
-
-        .d3-stb-tier-1 .d3-stb-title {{ color: #065F46; }}
-        .d3-stb-tier-2 .d3-stb-title {{ color: #92400E; }}
-        .d3-stb-tier-3 .d3-stb-title {{ color: #991B1B; }}
-
-        .d3-stb-badges {{
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }}
-
-        .d3-stb-badge-fr {{
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 5px;
-        }}
-
-        .d3-stb-tier-1 .d3-stb-badge-fr {{ background: #DCFCE7; color: #166534; }}
-        .d3-stb-tier-2 .d3-stb-badge-fr {{ background: #FEF3C7; color: #92400E; }}
-        .d3-stb-tier-3 .d3-stb-badge-fr {{ background: #FFE4E6; color: #9F1239; }}
-
-        .d3-stb-badge-count {{
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 5px;
-            background: #F1F5F9;
-            color: #475569;
-        }}
-
-        .d3-prodi-chips {{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }}
-
-        .d3-prodi-chip {{
-            display: inline-flex;
-            align-items: center;
-            font-size: 10.5px;
-            font-weight: 600;
-            padding: 3.5px 8.5px;
-            border-radius: 6px;
-            background: #FFFFFF;
-            border: 1px solid #CBD5E1;
-            color: #334155;
-            transition: all 0.15s ease;
-            cursor: pointer;
-        }}
-
-        .d3-prodi-chip:hover {{
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }}
-
-        .d3-stb-tier-1 .d3-prodi-chip {{
-            background: #F0FDF4;
-            border-color: #A7F3D0;
-            color: #065F46;
-        }}
-        .d3-stb-tier-1 .d3-prodi-chip:hover {{
-            background: #DCFCE7;
-            border-color: #34D399;
-        }}
-
-        .d3-stb-tier-2 .d3-prodi-chip {{
-            background: #FFFDF5;
-            border-color: #FDE68A;
-            color: #78350F;
-        }}
-        .d3-stb-tier-2 .d3-prodi-chip:hover {{
-            background: #FEF3C7;
-            border-color: #FBBF24;
-        }}
-
-        .d3-stb-tier-3 .d3-prodi-chip {{
-            background: #FFF5F5;
-            border-color: #FECDD3;
-            color: #881337;
-        }}
-        .d3-stb-tier-3 .d3-prodi-chip:hover {{
-            background: #FFE4E6;
-            border-color: #FB7185;
-        }}
-
         .svg-wrapper {{
             position: relative;
             width: 100%;
@@ -1618,16 +1368,6 @@ def generate_interactive_html():
             align-items: center;
         }}
 
-        .ins-tier-tag {{
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3.5px 9px;
-            border-radius: 20px;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            border: 1px solid transparent;
-        }}
 
         .ins-sub {{
             font-size: 12px;
@@ -1711,32 +1451,6 @@ def generate_interactive_html():
             background: #F8FAFC;
         }}
 
-        /* Executive Recommendation Box */
-        .rekomendasi-box {{
-            background: #F0FDF4;
-            border: 1px solid #BBF7D0;
-            border-radius: 10px;
-            padding: 14px;
-            position: relative;
-        }}
-
-        .rekomendasi-box h4 {{
-            font-family: 'Outfit', sans-serif;
-            font-size: 12.5px;
-            font-weight: 700;
-            color: #065F46;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }}
-
-        .rekomendasi-box p {{
-            font-size: 12px;
-            line-height: 1.5;
-            color: #047857;
-        }}
-
         /* View Switcher: Segmented Control (Apple / Tailwind style) */
         .view-mode-switcher {{
             display: inline-flex;
@@ -1790,6 +1504,37 @@ def generate_interactive_html():
         .view-mode-btn:hover .vm-badge {{
             background: #CBD5E1;
             color: #0F172A;
+        }}
+        .macro-bar-interactive, .modal-bar-interactive {{
+            cursor: pointer;
+            transition: opacity 0.15s ease, filter 0.15s ease;
+        }}
+        .macro-bar-interactive:hover, .modal-bar-interactive:hover {{
+            opacity: 0.82;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+        }}
+        .modal-point-interactive {{
+            cursor: pointer;
+            transition: r 0.15s ease, filter 0.15s ease;
+        }}
+        .modal-point-interactive:hover {{
+            r: 6px;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.35));
+        }}
+        .modal-year-interactive {{
+            cursor: pointer;
+            transition: fill 0.15s ease;
+        }}
+        .modal-year-interactive:hover {{
+            fill: #2563EB;
+            font-weight: 900;
+        }}
+        .chart-halo-text {{
+            paint-order: stroke fill;
+            stroke: #FFFFFF;
+            stroke-width: 3.5px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }}
 
         /* Trend Evaluation View Container */
@@ -2229,45 +1974,6 @@ def generate_interactive_html():
                 </div>
             </div>
 
-            <!-- D3 KLASTER EVALUASI CLASSIFICATION GUIDE STRIP (Visible only when currentLevel === 'd3') -->
-            <div id="d3-tier-legend-strip" class="d3-tier-legend-strip">
-                <div class="tier-guide-card tg-tier-1" data-tier="1" id="card-tier-1" title="Klik untuk memfilter Klaster 1">
-                    <div class="tgc-header">
-                        <div class="tgc-title-group">
-                            <span>⭐</span>
-                            <span>Klaster 1: Kompetitif</span>
-                        </div>
-                        <span class="tgc-badge">1 Prodi (9,1%)</span>
-                    </div>
-                    <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) ≥ 60%</div>
-                    <div class="tgc-prodi"><strong>D3 Manajemen Informatika</strong></div>
-                </div>
-
-                <div class="tier-guide-card tg-tier-2" data-tier="2" id="card-tier-2" title="Klik untuk memfilter Klaster 2">
-                    <div class="tgc-header">
-                        <div class="tgc-title-group">
-                            <span>🔄</span>
-                            <span>Klaster 2: Perlu Pendampingan</span>
-                        </div>
-                        <span class="tgc-badge">5 Prodi (45,5%)</span>
-                    </div>
-                    <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) 45% – 55%</div>
-                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Akuntansi, Tek. Mesin, Keswan, Tek. Listrik, Sekretari</div>
-                </div>
-
-                <div class="tier-guide-card tg-tier-3" data-tier="3" id="card-tier-3" title="Klik untuk memfilter Klaster 3">
-                    <div class="tgc-header">
-                        <div class="tgc-title-group">
-                            <span>📉</span>
-                            <span>Klaster 3: Evaluasi Khusus</span>
-                        </div>
-                        <span class="tgc-badge">5 Prodi (45,5%)</span>
-                    </div>
-                    <div class="tgc-rule"><span class="kriteria-tag">Kriteria</span> Fill Rate (FR) &lt; 45% (Batas Kritis &lt; 50%)</div>
-                    <div class="tgc-prodi"><strong>5 Prodi:</strong> Manaj. Perusahaan, Tek. Sipil, Keu. Perbankan, Peternakan, Agribisnis</div>
-                </div>
-            </div>
-
             <div class="svg-wrapper" id="svg-container">
                 <!-- SVG injected dynamically -->
                 <svg id="matrix-svg" class="main-svg" viewBox="0 0 1000 580" preserveAspectRatio="xMidYMid meet"></svg>
@@ -2313,73 +2019,7 @@ def generate_interactive_html():
                 <div id="ins-placeholder-s1">
                     <img src="" data-usk-logo="1" alt="Logo USK" class="ins-placeholder-logo" />
                     <h3>Pilih Program Studi</h3>
-                    <p>Klik salah satu lingkaran titik pada kanvas atau gunakan kotak pencarian untuk melihat rincian evaluasi 5 tahun, profil kebocoran kuota, dan rekomendasi kebijakan prodi.</p>
-                </div>
-                <div id="ins-placeholder-d3" style="display:none; text-align:left;">
-                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; border-bottom:1px solid var(--border-subtle); padding-bottom:12px;">
-                        <img src="" data-usk-logo="1" alt="Logo USK" style="width:38px; height:38px; object-fit:contain;" />
-                        <div>
-                            <h4 style="font-size:13.5px; font-weight:800; color:var(--text-main); margin:0; letter-spacing:-0.2px;">STANDAR KLASTER VOKASI USK</h4>
-                            <span style="font-size:11px; font-weight:600; color:var(--text-muted);">11 Program Studi D3 • Evaluasi Komparatif 2022–2026</span>
-                        </div>
-                    </div>
-                    <p style="font-size:12px; color:var(--text-muted); line-height:1.55; margin-bottom:14px;">
-                        Seluruh 11 Program Studi D3 USK berada pada <strong>Kuadran III</strong> (Peminat Membludak, Keterisian &lt; 80%). Untuk analisis terarah, prodi diklasifikasikan ke dalam <strong>3 Klaster Evaluasi Keterisian Kuota (Fill Rate)</strong>:
-                    </p>
-                    <div class="d3-sidebar-card">
-                        <!-- KLASTER 1 -->
-                        <div class="d3-sidebar-tier-block d3-stb-tier-1" onclick="toggleTierFilter(1)" title="Klik untuk memfilter Klaster 1">
-                            <div class="d3-stb-header">
-                                <div class="d3-stb-title">⭐ Klaster 1: Kompetitif</div>
-                                <div class="d3-stb-badges">
-                                    <span class="d3-stb-badge-fr">FR ≥ 60%</span>
-                                    <span class="d3-stb-badge-count">1 Prodi (9,1%)</span>
-                                </div>
-                            </div>
-                            <div class="d3-prodi-chips">
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('MANAJEMEN INFORMATIKA')" title="Klik untuk membedah data prodi">D3 Manajemen Informatika</span>
-                            </div>
-                        </div>
-
-                        <!-- KLASTER 2 -->
-                        <div class="d3-sidebar-tier-block d3-stb-tier-2" onclick="toggleTierFilter(2)" title="Klik untuk memfilter Klaster 2">
-                            <div class="d3-stb-header">
-                                <div class="d3-stb-title">🔄 Klaster 2: Perlu Pendampingan</div>
-                                <div class="d3-stb-badges">
-                                    <span class="d3-stb-badge-fr">FR 45%–55%</span>
-                                    <span class="d3-stb-badge-count">5 Prodi (45,5%)</span>
-                                </div>
-                            </div>
-                            <div class="d3-prodi-chips">
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('AKUNTANSI')" title="Klik untuk membedah data prodi">D3 Akuntansi</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('TEKNIK MESIN')" title="Klik untuk membedah data prodi">D3 Teknik Mesin</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('KESEHATAN HEWAN')" title="Klik untuk membedah data prodi">D3 Kesehatan Hewan</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('TEKNIK LISTRIK')" title="Klik untuk membedah data prodi">D3 Teknik Listrik</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('SEKRETARI')" title="Klik untuk membedah data prodi">D3 Sekretari</span>
-                            </div>
-                        </div>
-
-                        <!-- KLASTER 3 -->
-                        <div class="d3-sidebar-tier-block d3-stb-tier-3" onclick="toggleTierFilter(3)" title="Klik untuk memfilter Klaster 3">
-                            <div class="d3-stb-header">
-                                <div class="d3-stb-title">📉 Klaster 3: Evaluasi Khusus</div>
-                                <div class="d3-stb-badges">
-                                    <span class="d3-stb-badge-fr">FR &lt; 45%</span>
-                                    <span class="d3-stb-badge-count">5 Prodi (45,5%)</span>
-                                </div>
-                            </div>
-                            <div class="d3-prodi-chips">
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('MANAJEMEN PERUSAHAAN')" title="Klik untuk membedah data prodi">D3 Manajemen Perusahaan</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('TEKNIK SIPIL')" title="Klik untuk membedah data prodi">D3 Teknik Sipil</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('KEUANGAN')" title="Klik untuk membedah data prodi">D3 Keuangan &amp; Perbankan</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('PETERNAKAN')" title="Klik untuk membedah data prodi">D3 Budidaya Peternakan</span>
-                                <span class="d3-prodi-chip" onclick="event.stopPropagation(); selectD3ProdiByName('AGRIBISNIS')" title="Klik untuk membedah data prodi">D3 Manajemen Agribisnis</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="margin-top:14px; font-size:11.5px; color:#475569; text-align:center; background:#F8FAFC; padding:10px 12px; border-radius:8px; border:1px dashed #CBD5E1; line-height:1.45;">
-                        💡 Klik salah satu kartu klaster di atas atau titik prodi pada kanvas untuk memfilter dan membedah detail evaluasi prodi.
-                    </div>
+                    <p>Klik salah satu lingkaran titik pada kanvas atau gunakan kotak pencarian untuk melihat rincian evaluasi 5 tahun dan profil keterisian kuota prodi.</p>
                 </div>
             </div>
 
@@ -2394,10 +2034,9 @@ def generate_interactive_html():
                     <!-- Baris 2: Nama Program Studi -->
                     <div class="ins-title" id="ins-name">Nama Program Studi</div>
 
-                    <!-- Baris 3: Badges Status (Kuadran & Tier Vokasi) -->
+                    <!-- Baris 3: Badges Status (Kuadran) -->
                     <div class="ins-badges-row">
                         <span class="ins-kuadran-tag" id="ins-quad-tag">KUADRAN I</span>
-                        <span class="ins-tier-tag" id="ins-tier-tag" style="display:none;">TIER 1</span>
                     </div>
 
                     <!-- Baris 4: Deskripsi Ringkas 1 Kalimat -->
@@ -2428,16 +2067,10 @@ def generate_interactive_html():
                     </div>
                 </div>
 
-                <!-- Executive Recommendation (Prominent Top Position) -->
-                <div class="rekomendasi-box" id="ins-rekomendasi-box" style="margin-bottom: 18px;">
-                    <h4>💡 REKOMENDASI KEBIJAKAN EKSEKUTIF</h4>
-                    <p id="ins-rekomendasi-text">Rekomendasi alokasi kuota...</p>
-                </div>
-
                 <!-- 5-Year History Table -->
                 <div class="ins-section-title">
                     <span>Evaluasi Historis 5 Tahun (2022–2026)</span>
-                    <span id="ins-tren-tag" style="font-size:11px; padding:2px 8px; border-radius:12px; background:#F1F5F9; color:#475569;">TREN RESMI</span>
+                    <!-- Dinonaktifkan untuk tampilan pimpinan: <span id="ins-tren-tag" style="font-size:11px; padding:2px 8px; border-radius:12px; background:#F1F5F9; color:#475569;">TREN RESMI</span> -->
                 </div>
                 <table class="history-table">
                     <thead>
@@ -2467,7 +2100,7 @@ def generate_interactive_html():
     <!-- VIEW 2: EVALUASI TREN 81 PRODI (KURSI KOSONG VS BATAL DAFTAR ULANG)-->
     <!-- ================================================================= -->
     <div id="trend-view-wrapper">
-        <!-- BAGIAN 1: 4 KPI MAKRO (THE LEAKY BUCKET SUMMARY) -->
+        <!-- BAGIAN 1: 4 KPI MAKRO (RINGKASAN EVALUASI SERAPAN & RETENSI KUOTA) -->
         <div class="trend-macro-grid">
             <div class="trend-kpi-card tk-blue">
                 <div class="tk-title"><span>1. Akumulasi Daya Tampung &amp; Lulus (5-Thn)</span><span>🏛️</span></div>
@@ -2491,13 +2124,13 @@ def generate_interactive_html():
             </div>
         </div>
 
-        <!-- BAGIAN 1B: VISUALISASI MAKRO "THE LEAKY BUCKET" (CHART + TABEL KRONOLOGIS 2022-2026) -->
+        <!-- BAGIAN 1B: VISUALISASI MAKRO EVALUASI SERAPAN & RETENSI KUOTA (CHART + TABEL KRONOLOGIS 2022-2026) -->
         <div class="macro-leaky-panel">
             <div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
                     <div>
-                        <h3 style="font-family:'Outfit',sans-serif; font-size:15.5px; font-weight:800; color:#0F172A;">Grafik Makro "The Leaky Bucket": Daya Tampung vs Lulus vs Daftar Ulang (2022–2026)</h3>
-                        <p style="font-size:11.5px; color:#64748B;">Membedakan kebocoran akibat kurang peminat (DT − Lulus) vs batal daftar ulang pasca kelulusan (Lulus − DU)</p>
+                        <h3 style="font-family:'Outfit',sans-serif; font-size:15.5px; font-weight:800; color:#0F172A;">Grafik Makro Evaluasi Serapan &amp; Retensi Kuota: Daya Tampung vs Lulus vs Daftar Ulang (2022–2026)</h3>
+                        <p style="font-size:11.5px; color:#64748B;">Membedakan kuota belum terserap pada tahap seleksi (DT − Lulus) vs calon mahasiswa tidak registrasi ulang (Lulus − DU)</p>
                     </div>
                     <div style="display:flex; gap:10px; font-size:11px; font-weight:700;">
                         <span style="display:inline-flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:2px; background:#3B82F6;"></span> Daya Tampung</span>
@@ -2610,7 +2243,7 @@ def generate_interactive_html():
                         <span id="md-kode" style="background:rgba(255,255,255,0.15); padding:2.5px 8px; border-radius:6px; font-size:11px; font-weight:700;">KODE</span>
                         <span id="md-fakultas" style="background:rgba(212,175,55,0.22); color:#FDE047; padding:2.5px 9px; border-radius:6px; font-size:11px; font-weight:700;">FAKULTAS</span>
                         <span id="md-kuadran" style="padding:2.5px 9px; border-radius:6px; font-size:11px; font-weight:800; background:#059669;">KUADRAN</span>
-                        <span id="md-tren" style="background:rgba(255,255,255,0.12); padding:2.5px 9px; border-radius:6px; font-size:11px; font-weight:600;">TREN</span>
+                        <!-- Dinonaktifkan untuk tampilan pimpinan: <span id="md-tren" style="background:rgba(255,255,255,0.12); padding:2.5px 9px; border-radius:6px; font-size:11px; font-weight:600;">TREN</span> -->
                     </div>
                     <h2 id="md-title" style="font-family:'Outfit',sans-serif; font-size:21px; font-weight:800; color:#FFFFFF; margin:0;">Nama Program Studi</h2>
                 </div>
@@ -2647,7 +2280,7 @@ def generate_interactive_html():
                         <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
                             <div>
                                 <h4>1. Grafik Komparasi Kapasitas vs Lulus vs Daftar Ulang (2022–2026)</h4>
-                                <p style="margin-bottom:6px;">Jurang antara garis menunjukkan Kursi Kosong (DT − DU) dan Batal Daftar Ulang (Lulus − DU)</p>
+                                <p style="margin-bottom:6px;">Selisih antar-garis menunjukkan Kuota Tidak Terisi (DT − DU) dan Batal Daftar Ulang (Lulus − DU)</p>
                             </div>
                         </div>
                         <!-- KETERANGAN WARNA & JENIS GARIS (LEGENDA) -->
@@ -2703,14 +2336,12 @@ def generate_interactive_html():
                         <tbody id="md-history-tbody"></tbody>
                     </table>
                 </div>
-
-                <div class="rekomendasi-box">
-                    <h4>💡 REKOMENDASI KEBIJAKAN PROGRAM STUDI</h4>
-                    <p id="md-rekomendasi-text"></p>
-                </div>
             </div>
         </div>
     </div>
+
+    <!-- GLOBAL FLOATING TOOLTIP FOR CHARTS -->
+    <div id="chart-floating-tooltip" style="position:fixed; display:none; z-index:999999; pointer-events:none; background:#0F172A; color:#FFFFFF; padding:10px 14px; border-radius:8px; font-size:11.5px; font-weight:600; line-height:1.45; box-shadow:0 10px 25px rgba(15,23,42,0.3); border:1px solid rgba(255,255,255,0.18); max-width:300px; transition:opacity 0.1s ease;"></div>
 
     <!-- FOOTER -->
     <footer class="bottom-bar">
@@ -2734,12 +2365,40 @@ def generate_interactive_html():
         }}
         const DATA_BY_LEVEL = {json_data};
 
+        // Universal Floating Tooltip for Secondary Charts (Macro & Modal)
+        const ChartTooltip = {{
+            get el() {{ return document.getElementById('chart-floating-tooltip'); }},
+            show(e, html) {{
+                const t = this.el;
+                if (!t) return;
+                t.innerHTML = html;
+                t.style.display = 'block';
+                this.move(e);
+            }},
+            move(e) {{
+                const t = this.el;
+                if (!t || t.style.display === 'none') return;
+                const pad = 14;
+                let left = e.clientX + pad;
+                let top = e.clientY - t.offsetHeight - pad;
+                if (top < 10) top = e.clientY + pad;
+                if (left + t.offsetWidth > window.innerWidth - 12) {{
+                    left = e.clientX - t.offsetWidth - pad;
+                }}
+                t.style.left = left + 'px';
+                t.style.top = top + 'px';
+            }},
+            hide() {{
+                const t = this.el;
+                if (t) t.style.display = 'none';
+            }}
+        }};
+
         // State Management
         let currentLevel = (window.location.hash.includes('d3') || window.location.search.includes('d3')) ? "d3" : "s1";
         let currentS1Subset = (window.location.hash.includes('60') || window.location.hash.includes('tanpa') || window.location.hash.includes('established') || window.location.search.includes('60')) ? "established" : "all";
         let currentFaculty = "ALL";
         let currentFilterCard = "ALL"; // Quadrant in S1 & D3 (I, II, III, IV)
-        let currentD3Tier = "ALL"; // Sub-tier filter for D3 (1, 2, 3)
         let searchQuery = "";
         let showAllLabels = false;
         let selectedProdiId = null;
@@ -3013,33 +2672,6 @@ def generate_interactive_html():
                 container.appendChild(pill);
             }});
 
-            // If D3, append sub-tier filter pills
-            if (currentLevel === 'd3') {{
-                const sep = document.createElement('span');
-                sep.style.cssText = 'color:#94A3B8; font-weight:700; margin:0 6px; display:inline-flex; align-items:center; user-select:none;';
-                sep.textContent = '│';
-                container.appendChild(sep);
-
-                const tierConfigs = [
-                    {{ id: 'ALL', label: 'Semua Klaster (11)' }},
-                    {{ id: 1, label: '⭐ Klaster 1: Kompetitif (FR ≥ 60% • 1)' }},
-                    {{ id: 2, label: '🔄 Klaster 2: Pendampingan (FR 45%–55% • 5)' }},
-                    {{ id: 3, label: '📉 Klaster 3: Evaluasi Khusus (FR < 45% • 5)' }}
-                ];
-                tierConfigs.forEach(t => {{
-                    const pill = document.createElement('span');
-                    pill.className = `filter-pill ${{currentD3Tier === t.id ? 'active' : ''}}`;
-                    pill.textContent = t.label;
-                    pill.title = `Filter ${{t.label}}`;
-                    pill.addEventListener('click', () => {{
-                        currentD3Tier = (currentD3Tier === t.id && t.id !== 'ALL') ? 'ALL' : t.id;
-                        updateTierGuideCardStates();
-                        renderFacultyFilters();
-                        renderChart();
-                    }});
-                    container.appendChild(pill);
-                }});
-            }}
         }}
 
         const fak_abbr_map_client = {json.dumps(fak_abbr_map)};
@@ -3097,13 +2729,6 @@ def generate_interactive_html():
                 if (d.kuadran === 'IV') return true;
             }}
 
-            // 5. Pencarian berbasis Klaster Vokasi (Khusus D3)
-            if (currentLevel === 'd3') {{
-                if ((q === 'tier 1' || q === 'klaster 1' || q === 'kompetitif') && d.tier === 1) return true;
-                if ((q === 'tier 2' || q === 'klaster 2' || q === 'pendampingan' || q === 'perlu pendampingan') && d.tier === 2) return true;
-                if ((q === 'tier 3' || q === 'klaster 3' || q === 'evaluasi' || q === 'evaluasi khusus') && d.tier === 3) return true;
-            }}
-
             return false;
         }}
 
@@ -3117,9 +2742,6 @@ def generate_interactive_html():
 
             // Card Filter (Kuadran I, II, III, IV) - 100% seragam S1 & D3!
             if (currentFilterCard !== "ALL" && d.kuadran !== currentFilterCard) return false;
-
-            // D3 Tier Filter
-            if (currentLevel === 'd3' && currentD3Tier !== 'ALL' && d.tier !== currentD3Tier) return false;
 
             // Smart Search query
             if (searchQuery.trim() !== "") {{
@@ -3559,17 +3181,11 @@ def generate_interactive_html():
                     width: xThreshold - PLOT_X, height: (PLOT_Y + PLOT_H) - yThreshold80,
                     fill: '#FFF1F2', opacity: 0.50
                 }}));
-                // Lower right (x >= 4.0, 50 <= y < 80) - Amber Zone
+                // Lower right (x >= 4.0, y < 80) - Kuadran III Shading
                 svg.appendChild(createSVGElement('rect', {{
                     x: xThreshold, y: yThreshold80,
-                    width: (PLOT_X + PLOT_W) - xThreshold, height: yThreshold50 - yThreshold80,
+                    width: (PLOT_X + PLOT_W) - xThreshold, height: (PLOT_Y + PLOT_H) - yThreshold80,
                     fill: '#FFFBEB', opacity: 0.65
-                }}));
-                // Lower right below 50% (x >= 4.0, y < 50) - Rose Critical Zone
-                svg.appendChild(createSVGElement('rect', {{
-                    x: xThreshold, y: yThreshold50,
-                    width: (PLOT_X + PLOT_W) - xThreshold, height: (PLOT_Y + PLOT_H) - yThreshold50,
-                    fill: '#FFF1F2', opacity: 0.75
                 }}));
 
                 // D3 Gridlines (Linear X: 0 to 20)
@@ -3587,18 +3203,15 @@ def generate_interactive_html():
                     svg.appendChild(createText(xPos, PLOT_Y + PLOT_H + 18, 'middle', '11', '600', '#64748B', 1, xt.toFixed(1)));
                 }});
 
-                // Benchmark Lines D3
+                // Benchmark Lines D3 (Persis Chart 13b)
                 // Ambang Keketatan 4,0:1
                 svg.appendChild(createLine(xThreshold, PLOT_Y, xThreshold, PLOT_Y + PLOT_H, '#64748B', 2.0, '5,4', 0.95));
                 // Standar Keterisian Kuota Ideal 80% (Dashed slate)
                 svg.appendChild(createLine(PLOT_X, yThreshold80, PLOT_X + PLOT_W, yThreshold80, '#64748B', 1.8, '5,4', 0.90));
-                // Batas Kritis Kelayakan Operasional 50% (Prominent Red Dotted Line)
-                svg.appendChild(createLine(PLOT_X, yThreshold50, PLOT_X + PLOT_W, yThreshold50, '#DC2626', 2.2, '3,4', 0.95));
 
-                // Badges D3
+                // Badges D3 (Persis Chart 13b)
                 svg.appendChild(createPillBadge(xThreshold, PLOT_Y + PLOT_H - 18, 190, 22, '#475569', '#94A3B8', '#FFFFFF', '▲ AMBANG KEKETATAN: 4,0 : 1'));
                 svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 130, yThreshold80, 240, 22, '#475569', '#94A3B8', '#FFFFFF', 'STANDAR IDEAL: 80% KETERISIAN'));
-                svg.appendChild(createPillBadge(PLOT_X + PLOT_W - 145, yThreshold50, 270, 22, '#DC2626', '#F87171', '#FFFFFF', '⚠ BATAS KRITIS KELAYAKAN: 50%'));
 
                 // Watermark Quadrant Titles D3 (Format & Desain Seragam 100% dengan S1)
                 // Q1 (Top-Right)
@@ -3835,7 +3448,6 @@ def generate_interactive_html():
                 selectedProdiId = null;
                 document.getElementById('ins-content').style.display = 'none';
                 document.getElementById('ins-placeholder').style.display = 'block';
-                updatePlaceholderView();
                 renderChart();
             }} else {{
                 selectedProdiId = d.id;
@@ -3848,10 +3460,6 @@ def generate_interactive_html():
             const list = DATA_BY_LEVEL.d3;
             const p = list.find(item => item.nama.toUpperCase().includes(keyword.toUpperCase()));
             if (p) {{
-                if (currentD3Tier !== 'ALL' && p.tier !== currentD3Tier) {{
-                    currentD3Tier = 'ALL';
-                    updateD3TierControls();
-                }}
                 selectedProdiId = p.id;
                 renderChart();
                 showInspector(p);
@@ -3863,7 +3471,6 @@ def generate_interactive_html():
             selectedProdiId = null;
             document.getElementById('ins-content').style.display = 'none';
             document.getElementById('ins-placeholder').style.display = 'block';
-            updatePlaceholderView();
             renderChart();
         }}
 
@@ -3879,30 +3486,6 @@ def generate_interactive_html():
             qTag.textContent = d.kuadran_title;
             qTag.style.backgroundColor = d.color;
 
-            // Tier Tag (Khusus D3, tampil sebagai badge mandiri yang proporsional)
-            const tierTag = document.getElementById('ins-tier-tag');
-            if (currentLevel === 'd3') {{
-                tierTag.style.display = 'inline-flex';
-                if (d.tier === 1) {{
-                    tierTag.textContent = '⭐ Klaster 1: Kompetitif';
-                    tierTag.style.background = '#DCFCE7';
-                    tierTag.style.color = '#166534';
-                    tierTag.style.borderColor = '#86EFAC';
-                }} else if (d.tier === 2) {{
-                    tierTag.textContent = '🔄 Klaster 2: Perlu Pendampingan';
-                    tierTag.style.background = '#FEF3C7';
-                    tierTag.style.color = '#92400E';
-                    tierTag.style.borderColor = '#FDE68A';
-                }} else {{
-                    tierTag.textContent = '📉 Klaster 3: Evaluasi Khusus';
-                    tierTag.style.background = '#FFE4E6';
-                    tierTag.style.color = '#9F1239';
-                    tierTag.style.borderColor = '#FECDD3';
-                }}
-            }} else {{
-                tierTag.style.display = 'none';
-            }}
-
             document.getElementById('ins-name').textContent = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
             
             // Subtitle deskripsi status kuadran ringkas 1 kalimat (Bersih & tidak ramai)
@@ -3913,18 +3496,14 @@ def generate_interactive_html():
 
             const frCapped = clampFR(d.fill_rate);
             document.getElementById('ins-fillrate').textContent = `${{frCapped.toFixed(1)}}%`;
-            if (currentLevel === 's1') {{
-                document.getElementById('ins-fillrate-status').textContent = frCapped >= 80.0 ? 'Keterisian Ideal (>= 80%)' : 'Under-Enrolled (< 80%)';
-            }} else {{
-                document.getElementById('ins-fillrate-status').textContent = frCapped >= 50.0 ? 'Di Atas Batas Kritis (>= 50%)' : 'Kritis Defisit (< 50%)';
-            }}
+            document.getElementById('ins-fillrate-status').textContent = frCapped >= 80.0 ? 'Keterisian Ideal (>= 80%)' : 'Under-Enrolled (< 80%)';
 
             document.getElementById('ins-peminat').textContent = `${{Math.round(d.peminat_5thn).toLocaleString('id-ID')}} org/thn`;
             document.getElementById('ins-dt').textContent = `${{Math.round(d.dt_5thn)}} kursi/thn`;
-            document.getElementById('ins-sisa-kursi').textContent = d.sisa_5thn > 0 ? `Bocor/Kosong: ${{d.sisa_5thn}} kursi` : 'Kuota Terserap Penuh (100%)';
+            document.getElementById('ins-sisa-kursi').textContent = d.sisa_5thn > 0 ? `Belum Terisi: ${{d.sisa_5thn}} kursi` : 'Kuota Terserap Penuh (100%)';
 
-            document.getElementById('ins-rekomendasi-text').textContent = d.rekomendasi;
-            document.getElementById('ins-tren-tag').textContent = d.tren_resmi.toUpperCase();
+            const insTrenEl = document.getElementById('ins-tren-tag');
+            if (insTrenEl) insTrenEl.textContent = d.tren_resmi.toUpperCase();
 
             // Render table with 100% Capped Fill Rate + Kursi Kosong & Batal DU
             const tbody = document.getElementById('ins-history-tbody');
@@ -3956,102 +3535,6 @@ def generate_interactive_html():
             }}
         }}
 
-        // Sub-Tier Guide Card State & Visibility Handlers
-        function updateTierGuideCardStates() {{
-            [1, 2, 3].forEach(tierNum => {{
-                const card = document.getElementById(`card-tier-${{tierNum}}`);
-                if (card) {{
-                    card.classList.toggle('active', currentD3Tier === tierNum);
-                }}
-            }});
-        }}
-
-        function updateD3TierControls() {{
-            updateTierGuideCardStates();
-            renderFacultyFilters();
-        }}
-
-        function toggleTierFilter(tierNum) {{
-            currentD3Tier = (currentD3Tier === tierNum) ? 'ALL' : tierNum;
-            updateD3TierControls();
-            renderChart();
-        }}
-
-        function updateD3TierStripVisibility() {{
-            const strip = document.getElementById('d3-tier-legend-strip');
-            if (strip) {{
-                strip.style.display = (currentLevel === 'd3') ? 'grid' : 'none';
-            }}
-        }}
-
-        function updatePlaceholderView() {{
-            const phS1 = document.getElementById('ins-placeholder-s1');
-            const phD3 = document.getElementById('ins-placeholder-d3');
-            if (phS1 && phD3) {{
-                if (currentLevel === 'd3') {{
-                    phS1.style.display = 'none';
-                    phD3.style.display = 'block';
-                }} else {{
-                    phS1.style.display = 'block';
-                    phD3.style.display = 'none';
-                }}
-            }}
-        }}
-
-        // Click Event Handlers on Tier Guide Cards
-        [1, 2, 3].forEach(tierNum => {{
-            const card = document.getElementById(`card-tier-${{tierNum}}`);
-            if (card) {{
-                card.addEventListener('click', () => {{
-                    currentD3Tier = (currentD3Tier === tierNum) ? 'ALL' : tierNum;
-                    updateTierGuideCardStates();
-                    renderFacultyFilters();
-                    renderChart();
-                }});
-            }}
-        }});
-
-        // S1 Subset Switcher Event Handlers
-        document.querySelectorAll('.subset-tab').forEach(tab => {{
-            tab.addEventListener('click', () => {{
-                const targetSubset = tab.getAttribute('data-subset');
-                if (currentS1Subset === targetSubset) return;
-
-                currentS1Subset = targetSubset;
-                document.querySelectorAll('.subset-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                // Reset filter & seleksi
-                currentFaculty = "ALL";
-                currentFilterCard = "ALL";
-                searchQuery = "";
-                document.getElementById('prodi-search').value = "";
-                selectedProdiId = null;
-
-                // Update Header Titles & Badge
-                if (currentS1Subset === 'all') {{
-                    document.getElementById('header-main-title').textContent = 'PETA KUADRAN 66 PROGRAM STUDI S1 LENGKAP USK';
-                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (66 Prodi S1 Lengkap)';
-                    document.getElementById('tab-s1-badge').textContent = '66 Prodi';
-                }} else {{
-                    document.getElementById('header-main-title').textContent = 'PETA KUADRAN 60 PROGRAM STUDI S1 KAMPUS UTAMA USK';
-                    document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (60 Prodi S1 Kampus Utama)';
-                    document.getElementById('tab-s1-badge').textContent = '60 Prodi';
-                }}
-
-                document.getElementById('ins-content').style.display = 'none';
-                document.getElementById('ins-placeholder').style.display = 'block';
-                updatePlaceholderView();
-
-                renderKPIRibbon();
-                renderFacultyFilters();
-                renderChart();
-
-                // Sinkronisasi URL Hash
-                syncUrlHash();
-            }});
-        }});
-
         // Level Switcher Event Handlers
         document.querySelectorAll('.level-tab').forEach(tab => {{
             tab.addEventListener('click', () => {{
@@ -4065,7 +3548,6 @@ def generate_interactive_html():
                 // Reset filters on level switch
                 currentFaculty = "ALL";
                 currentFilterCard = "ALL";
-                currentD3Tier = "ALL";
                 searchQuery = "";
                 document.getElementById('prodi-search').value = "";
                 document.getElementById('search-clear-btn').style.display = 'none';
@@ -4093,11 +3575,8 @@ def generate_interactive_html():
                 }} else {{
                     document.getElementById('header-main-title').textContent = 'PETA KUADRAN 11 PROGRAM STUDI D3 VOKASI USK';
                     document.getElementById('chart-sub-heading').textContent = 'Matriks 4 Kuadran Interaktif (11 Prodi D3 Vokasi)';
-                    document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Ideal 80%</strong> | <strong>Batas Kritis 50%</strong>';
+                    document.getElementById('footer-standards').innerHTML = 'Standar Evaluasi D3: <strong>Keketatan 4,0 : 1</strong> | <strong>Standar Ideal 80%</strong>';
                 }}
-
-                updateD3TierStripVisibility();
-                updateTierGuideCardStates();
 
                 renderKPIRibbon();
                 renderFacultyFilters();
@@ -4107,7 +3586,6 @@ def generate_interactive_html():
                 selectedProdiId = null;
                 document.getElementById('ins-content').style.display = 'none';
                 document.getElementById('ins-placeholder').style.display = 'block';
-                updatePlaceholderView();
 
                 // Sinkronisasi URL Hash
                 syncUrlHash();
@@ -4156,25 +3634,14 @@ def generate_interactive_html():
                 const prodiDisplay = (d.jenjang === 'D3' ? 'D3 ' : '') + d.nama;
                 const fakBadge = d.fakultas_abbr || d.fakultas;
 
-                let quadBadgeHtml = '';
-                if (currentLevel === 'd3') {{
-                    const tierColors = {{
-                        1: {{ bg: '#ECFDF5', text: '#059669', border: '#A7F3D0', label: '⭐ Klaster 1' }},
-                        2: {{ bg: '#EFF6FF', text: '#2563EB', border: '#BFDBFE', label: '🔄 Klaster 2' }},
-                        3: {{ bg: '#FEF2F2', text: '#DC2626', border: '#FECACA', label: '📉 Klaster 3' }}
-                    }};
-                    const tc = tierColors[d.tier] || tierColors[2];
-                    quadBadgeHtml = `<span class="search-badge-quad" style="background:${{tc.bg}}; color:${{tc.text}}; border:1px solid ${{tc.border}};">${{tc.label}}</span>`;
-                }} else {{
-                    const quadColors = {{
-                        'I': {{ bg: '#ECFDF5', text: '#059669', border: '#A7F3D0', label: 'Kuadran I' }},
-                        'II': {{ bg: '#EFF6FF', text: '#2563EB', border: '#BFDBFE', label: 'Kuadran II' }},
-                        'III': {{ bg: '#FFFBEB', text: '#D97706', border: '#FDE68A', label: 'Kuadran III' }},
-                        'IV': {{ bg: '#FEF2F2', text: '#E11D48', border: '#FECDD3', label: 'Kuadran IV' }}
-                    }};
-                    const qc = quadColors[d.kuadran] || quadColors['I'];
-                    quadBadgeHtml = `<span class="search-badge-quad" style="background:${{qc.bg}}; color:${{qc.text}}; border:1px solid ${{qc.border}};">${{qc.label}}</span>`;
-                }}
+                const quadColors = {{
+                    'I': {{ bg: '#ECFDF5', text: '#059669', border: '#A7F3D0', label: 'Kuadran I' }},
+                    'II': {{ bg: '#EFF6FF', text: '#2563EB', border: '#BFDBFE', label: 'Kuadran II' }},
+                    'III': {{ bg: '#FFFBEB', text: '#D97706', border: '#FDE68A', label: 'Kuadran III' }},
+                    'IV': {{ bg: '#FEF2F2', text: '#E11D48', border: '#FECDD3', label: 'Kuadran IV' }}
+                }};
+                const qc = quadColors[d.kuadran] || quadColors['III'];
+                const quadBadgeHtml = `<span class="search-badge-quad" style="background:${{qc.bg}}; color:${{qc.text}}; border:1px solid ${{qc.border}};">${{qc.label}}</span>`;
 
                 item.innerHTML = `
                     <div class="search-item-left">
@@ -4207,10 +3674,6 @@ def generate_interactive_html():
             document.getElementById('search-clear-btn').style.display = 'flex';
 
             // Reset conflicting filters if needed
-            if (currentLevel === 'd3' && currentD3Tier !== 'ALL' && d.tier !== currentD3Tier) {{
-                currentD3Tier = 'ALL';
-                updateD3TierControls();
-            }}
             if (currentFilterCard !== 'ALL' && d.kuadran !== currentFilterCard) {{
                 currentFilterCard = 'ALL';
                 renderKPIRibbon();
@@ -4302,7 +3765,6 @@ def generate_interactive_html():
             TooltipManager.hide();
             currentFaculty = "ALL";
             currentFilterCard = "ALL";
-            currentD3Tier = "ALL";
             searchQuery = "";
             showAllLabels = false;
             selectedProdiId = null;
@@ -4312,11 +3774,8 @@ def generate_interactive_html():
             document.getElementById('search-dropdown').style.display = 'none';
             document.getElementById('btn-toggle-labels').classList.remove('active');
 
-            updateTierGuideCardStates();
-
             document.getElementById('ins-content').style.display = 'none';
             document.getElementById('ins-placeholder').style.display = 'block';
-            updatePlaceholderView();
 
             renderKPIRibbon();
             renderFacultyFilters();
@@ -4507,19 +3966,64 @@ def generate_interactive_html():
                 const yLU = padT + plotH - hLU;
                 const yDU = padT + plotH - hDU;
 
-                // Bars: DT, Lulus, DU
-                svgHtml += `<rect x="${{cx - barW * 1.5 - 2}}" y="${{yDT}}" width="${{barW}}" height="${{hDT}}" rx="3" fill="#3B82F6"/>`;
-                svgHtml += `<rect x="${{cx - barW * 0.5}}" y="${{yLU}}" width="${{barW}}" height="${{hLU}}" rx="3" fill="#6366F1"/>`;
-                svgHtml += `<rect x="${{cx + barW * 0.5 + 2}}" y="${{yDU}}" width="${{barW}}" height="${{hDU}}" rx="3" fill="#10B981"/>`;
+                // Bars: DT, Lulus, DU with interactive tooltips
+                svgHtml += `<rect class="macro-bar-interactive" data-type="dt" data-year="${{yr}}" x="${{cx - barW * 1.5 - 2}}" y="${{yDT}}" width="${{barW}}" height="${{hDT}}" rx="3" fill="#3B82F6"/>`;
+                svgHtml += `<rect class="macro-bar-interactive" data-type="lu" data-year="${{yr}}" x="${{cx - barW * 0.5}}" y="${{yLU}}" width="${{barW}}" height="${{hLU}}" rx="3" fill="#6366F1"/>`;
+                svgHtml += `<rect class="macro-bar-interactive" data-type="du" data-year="${{yr}}" x="${{cx + barW * 0.5 + 2}}" y="${{yDU}}" width="${{barW}}" height="${{hDU}}" rx="3" fill="#10B981"/>`;
 
                 // Year label
                 svgHtml += `<text x="${{cx}}" y="${{H - 12}}" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0F172A">${{yr}}</text>`;
 
-                // Callout badge above bars: Kosong & Batal
+                // Clean percentage badge above bars
                 const topY = Math.min(yDT, yLU, yDU) - 7;
-                svgHtml += `<text x="${{cx}}" y="${{topY}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#BE123C">Kosong:${{st.sisa.toLocaleString('id-ID')}} | Batal:${{st.batal.toLocaleString('id-ID')}}</text>`;
+                const frYr = st.dt > 0 ? (st.du / st.dt * 100).toFixed(0) : '0';
+                svgHtml += `<text x="${{cx}}" y="${{topY}}" text-anchor="middle" font-size="10" font-weight="800" fill="#475569" class="chart-halo-text">${{frYr}}%</text>`;
             }});
             svg.innerHTML = svgHtml;
+
+            // Attach interactive tooltips to macro bars
+            svg.querySelectorAll('.macro-bar-interactive').forEach(el => {{
+                el.addEventListener('mouseenter', (e) => {{
+                    const yr = el.getAttribute('data-year');
+                    const st = yrStats[yr];
+                    if (!st) return;
+                    const type = el.getAttribute('data-type');
+                    let html = '';
+                    if (type === 'dt') {{
+                        html = `
+                            <div style="font-size:10.5px; font-weight:800; color:#60A5FA; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.5px;">Daya Tampung (Kapasitas) • ${{yr}}</div>
+                            <div style="font-size:16px; font-weight:800; color:#FFFFFF; margin-bottom:5px;">${{st.dt.toLocaleString('id-ID')}} <span style="font-size:11px; font-weight:600; color:#CBD5E1;">kursi</span></div>
+                            <div style="font-size:11px; color:#CBD5E1; border-top:1px solid rgba(255,255,255,0.15); padding-top:5px; line-height:1.55;">
+                                Lulus Seleksi: <strong style="color:#FFFFFF;">${{st.lu.toLocaleString('id-ID')}}</strong><br/>
+                                Daftar Ulang: <strong style="color:#34D399;">${{st.du.toLocaleString('id-ID')}}</strong>
+                            </div>
+                        `;
+                    }} else if (type === 'lu') {{
+                        const pBatal = st.lu > 0 ? (st.batal / st.lu * 100).toFixed(1) : '0.0';
+                        html = `
+                            <div style="font-size:10.5px; font-weight:800; color:#A78BFA; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.5px;">Lulus Seleksi • ${{yr}}</div>
+                            <div style="font-size:16px; font-weight:800; color:#FFFFFF; margin-bottom:5px;">${{st.lu.toLocaleString('id-ID')}} <span style="font-size:11px; font-weight:600; color:#CBD5E1;">peserta</span></div>
+                            <div style="font-size:11px; color:#CBD5E1; border-top:1px solid rgba(255,255,255,0.15); padding-top:5px; line-height:1.55;">
+                                Daftar Ulang: <strong style="color:#34D399;">${{st.du.toLocaleString('id-ID')}}</strong><br/>
+                                Belum Registrasi: <strong style="color:#FBBF24;">${{st.batal.toLocaleString('id-ID')}} mhs (${{pBatal}}%)</strong>
+                            </div>
+                        `;
+                    }} else if (type === 'du') {{
+                        const fr = st.dt > 0 ? (st.du / st.dt * 100).toFixed(1) : '0.0';
+                        html = `
+                            <div style="font-size:10.5px; font-weight:800; color:#34D399; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.5px;">Daftar Ulang (Realisasi) • ${{yr}}</div>
+                            <div style="font-size:16px; font-weight:800; color:#FFFFFF; margin-bottom:5px;">${{st.du.toLocaleString('id-ID')}} <span style="font-size:11px; font-weight:600; color:#CBD5E1;">mahasiswa</span></div>
+                            <div style="font-size:11px; color:#CBD5E1; border-top:1px solid rgba(255,255,255,0.15); padding-top:5px; line-height:1.55;">
+                                Fill Rate: <strong style="color:#34D399;">${{fr}}%</strong><br/>
+                                Kuota Belum Terisi: <strong style="color:#FB7185;">${{st.sisa.toLocaleString('id-ID')}} kursi</strong>
+                            </div>
+                        `;
+                    }}
+                    ChartTooltip.show(e, html);
+                }});
+                el.addEventListener('mousemove', (e) => ChartTooltip.move(e));
+                el.addEventListener('mouseleave', () => ChartTooltip.hide());
+            }});
         }}
 
         function renderTrendTable() {{
@@ -4543,12 +4047,15 @@ def generate_interactive_html():
 
                 const sisaPills = p.history.map(h => {{
                     const cls = h.sisa >= 30 ? 'hi-rose' : (h.sisa <= 5 ? 'hi-ok' : '');
-                    return `<span class="yr-pill ${{cls}}" title="Kursi Kosong ${{h.tahun}}: ${{h.sisa}}">${{h.sisa}}</span>`;
+                    const titleTxt = (h.surplus && h.surplus > 0)
+                        ? `Tahun ${{h.tahun}}: Kuota Terisi Penuh 100% (+${{h.surplus}} mhs di atas daya tampung)`
+                        : `Kuota Belum Terisi ${{h.tahun}}: ${{h.sisa}} kursi`;
+                    return `<span class="yr-pill ${{cls}}" title="${{titleTxt}}">${{h.sisa}}</span>`;
                 }}).join('');
 
                 const batalPills = p.history.map(h => {{
                     const cls = h.batal >= 25 ? 'hi-amber' : (h.batal <= 5 ? 'hi-ok' : '');
-                    return `<span class="yr-pill ${{cls}}" title="Batal DU ${{h.tahun}}: ${{h.batal}}">${{h.batal}}</span>`;
+                    return `<span class="yr-pill ${{cls}}" title="Batal Registrasi Ulang ${{h.tahun}}: ${{h.batal}} orang">${{h.batal}}</span>`;
                 }}).join('');
 
                 const sparkSisa = buildSparklineSVG(sisaArr, '#E11D48', '#FECDD3');
@@ -4611,8 +4118,8 @@ def generate_interactive_html():
             const totDT = p.tot_dt !== undefined ? p.tot_dt : p.history.reduce((s, h) => s + h.dt, 0);
             const totLU = p.tot_lulus !== undefined ? p.tot_lulus : p.history.reduce((s, h) => s + (h.lulus || 0), 0);
             const totDU = p.tot_du !== undefined ? p.tot_du : p.history.reduce((s, h) => s + h.du, 0);
-            const totSisa = totDT - totDU;
-            const totBatal = totLU - totDU;
+            const totSisa = p.tot_sisa !== undefined ? p.tot_sisa : p.history.reduce((s, h) => s + Math.max(0, h.sisa), 0);
+            const totBatal = p.tot_batal !== undefined ? p.tot_batal : p.history.reduce((s, h) => s + Math.max(0, h.batal), 0);
             const pctSisa = totDT > 0 ? (totSisa / totDT * 100).toFixed(1) : '0.0';
             const pctBatal = totLU > 0 ? (totBatal / totLU * 100).toFixed(1) : '0.0';
             const pctFR = totDT > 0 ? (totDU / totDT * 100).toFixed(1) : '0.0';
@@ -4623,7 +4130,8 @@ def generate_interactive_html():
             const qEl = document.getElementById('md-kuadran');
             qEl.textContent = p.kuadran_title;
             qEl.style.background = p.color;
-            document.getElementById('md-tren').textContent = p.tren_resmi;
+            const mdTrenEl = document.getElementById('md-tren');
+            if (mdTrenEl) mdTrenEl.textContent = p.tren_resmi;
             document.getElementById('md-title').textContent = (p.jenjang === 'D3' ? 'D3 ' : '') + p.nama;
 
             document.getElementById('md-tot-dt').textContent = totDT.toLocaleString('id-ID') + ' Kursi';
@@ -4639,12 +4147,11 @@ def generate_interactive_html():
 
             document.getElementById('md-tot-batal').textContent = totBatal.toLocaleString('id-ID') + ' Org';
             document.getElementById('md-batal-pct').textContent = `${{pctBatal}}% Lulus`;
-            document.getElementById('md-rekomendasi-text').textContent = p.rekomendasi || '';
 
             // 1. Render Modal Left Chart: 3 Lines (DT, Lulus, DU)
             const svgLines = document.getElementById('md-chart-lines');
             if (svgLines) {{
-                const W = 540, H = 230, padL = 52, padR = 24, padT = 26, padB = 32;
+                const W = 540, H = 230, padL = 52, padR = 36, padT = 26, padB = 32;
                 const plotW = W - padL - padR, plotH = H - padT - padB;
                 const maxV = Math.max(...p.history.map(h => Math.max(h.dt, h.lulus || 0, h.du)), 10) * 1.18;
 
@@ -4684,36 +4191,109 @@ def generate_interactive_html():
                     const [__, yDU] = duPts[i];
                     const luVal = h.lulus || 0;
 
-                    // Circles with native hover tooltip
-                    html += `<circle cx="${{x}}" cy="${{yDT}}" r="4" fill="#2563EB"><title>${{h.tahun}}: Daya Tampung = ${{h.dt}} kursi</title></circle>`;
-                    html += `<circle cx="${{x}}" cy="${{yLU}}" r="3.5" fill="#7C3AED"><title>${{h.tahun}}: Lulus Seleksi = ${{luVal}} orang</title></circle>`;
-                    html += `<circle cx="${{x}}" cy="${{yDU}}" r="4" fill="#059669"><title>${{h.tahun}}: Daftar Ulang = ${{h.du}} mahasiswa</title></circle>`;
+                    // Circles with offset if very close to each other
+                    let cxDT = x, cxLU = x, cxDU = x;
+                    if (Math.abs(yDT - yDU) < 4) {{
+                        cxDT = x - 3.5;
+                        cxDU = x + 3.5;
+                    }}
+                    if (Math.abs(yLU - yDT) < 4 && Math.abs(yLU - yDU) < 4) {{
+                        cxLU = x;
+                    }} else if (Math.abs(yLU - yDT) < 4) {{
+                        cxLU = x + 3.5;
+                    }} else if (Math.abs(yLU - yDU) < 4) {{
+                        cxLU = x - 3.5;
+                    }}
 
-                    // 1. Data label Lulus (Ungu): di atas titik Lulus
-                    html += `<text x="${{x}}" y="${{yLU - 7}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#6B21A8">${{luVal}}</text>`;
+                    // Circles with white halo border & interactive hover
+                    html += `<circle class="modal-point-interactive" data-idx="${{i}}" cx="${{cxDT}}" cy="${{yDT}}" r="4.5" fill="#2563EB" stroke="#ffffff" stroke-width="1.8"/>`;
+                    html += `<circle class="modal-point-interactive" data-idx="${{i}}" cx="${{cxLU}}" cy="${{yLU}}" r="4.0" fill="#7C3AED" stroke="#ffffff" stroke-width="1.8"/>`;
+                    html += `<circle class="modal-point-interactive" data-idx="${{i}}" cx="${{cxDU}}" cy="${{yDU}}" r="4.5" fill="#059669" stroke="#ffffff" stroke-width="1.8"/>`;
+                    // Invisible target hit circle around the cluster to make mouse interaction natural and effortless
+                    const avgY = (yDT + yLU + yDU) / 3;
+                    html += `<circle class="modal-point-interactive" data-idx="${{i}}" cx="${{x}}" cy="${{avgY}}" r="14" fill="transparent" style="cursor:pointer;"/>`;
 
-                    // 2. Data label DT (Biru)
-                    if (Math.abs(yDT - yLU) < 14) {{
-                        if (Math.abs(yDU - yDT) > 22) {{
-                            html += `<text x="${{x}}" y="${{yDT + 12}}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1D4ED8">${{h.dt}}</text>`;
-                        }} else {{
-                            html += `<text x="${{x - 14}}" y="${{yDT - 2}}" text-anchor="end" font-size="9.5" font-weight="700" fill="#1D4ED8">${{h.dt}}</text>`;
+                    // Dynamic non-overlapping data labels with white halo text
+                    const pts = [
+                        {{ key: 'lu', val: luVal, y: yLU, color: '#6B21A8' }},
+                        {{ key: 'dt', val: h.dt, y: yDT, color: '#1D4ED8' }},
+                        {{ key: 'du', val: h.du, y: yDU, color: '#047857' }}
+                    ].sort((a, b) => a.y - b.y);
+
+                    const top = pts[0];
+                    const mid = pts[1];
+                    const bot = pts[2];
+
+                    let lblTop = {{ x: x, y: top.y - 8, anchor: 'middle' }};
+                    let lblMid = {{ x: x, y: mid.y - 8, anchor: 'middle' }};
+                    let lblBot = {{ x: x, y: bot.y + 13, anchor: 'middle' }};
+
+                    const totalSpread = bot.y - top.y;
+
+                    if (totalSpread < 18) {{
+                        // All 3 points are almost identical: spread horizontally and vertically
+                        lblTop = {{ x: x, y: top.y - 10, anchor: 'middle' }};
+                        lblMid = {{ x: x - 13, y: mid.y + 3, anchor: 'end' }};
+                        lblBot = {{ x: x + 13, y: bot.y + 3, anchor: 'start' }};
+                    }} else {{
+                        // If top and mid are too close to each other
+                        if (mid.y - top.y < 12) {{
+                            lblTop = {{ x: x - 11, y: top.y - 6, anchor: 'end' }};
+                            lblMid = {{ x: x + 11, y: mid.y - 6, anchor: 'start' }};
                         }}
-                    }} else {{
-                        html += `<text x="${{x}}" y="${{yDT - 7}}" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1D4ED8">${{h.dt}}</text>`;
+                        // If mid and bot are too close to each other
+                        if (bot.y - mid.y < 12) {{
+                            if (mid.y - top.y >= 12) {{
+                                lblMid = {{ x: x - 11, y: mid.y + 13, anchor: 'end' }};
+                                lblBot = {{ x: x + 11, y: bot.y + 13, anchor: 'start' }};
+                            }} else {{
+                                lblBot = {{ x: x, y: bot.y + 14, anchor: 'middle' }};
+                            }}
+                        }}
                     }}
 
-                    // 3. Data label DU (Hijau): di bawah titik DU
-                    if (Math.abs(yDU - yDT) < 14 && Math.abs(yDT - yLU) < 14) {{
-                        html += `<text x="${{x + 14}}" y="${{yDU + 12}}" text-anchor="start" font-size="9.5" font-weight="800" fill="#047857">${{h.du}}</text>`;
-                    }} else {{
-                        html += `<text x="${{x}}" y="${{yDU + 13}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#047857">${{h.du}}</text>`;
-                    }}
+                    html += `<text class="chart-halo-text" x="${{lblTop.x}}" y="${{lblTop.y}}" text-anchor="${{lblTop.anchor}}" font-size="9.5" font-weight="800" fill="${{top.color}}">${{top.val}}</text>`;
+                    html += `<text class="chart-halo-text" x="${{lblMid.x}}" y="${{lblMid.y}}" text-anchor="${{lblMid.anchor}}" font-size="9.5" font-weight="800" fill="${{mid.color}}">${{mid.val}}</text>`;
+                    html += `<text class="chart-halo-text" x="${{lblBot.x}}" y="${{lblBot.y}}" text-anchor="${{lblBot.anchor}}" font-size="9.5" font-weight="800" fill="${{bot.color}}">${{bot.val}}</text>`;
 
-                    // 4. Label Tahun X-axis
-                    html += `<text x="${{x}}" y="${{H - 10}}" text-anchor="middle" font-size="11" font-weight="800" fill="#0F172A">${{h.tahun}}</text>`;
+                    // Label Tahun X-axis interaktif
+                    html += `<text class="modal-year-interactive" data-idx="${{i}}" x="${{x}}" y="${{H - 10}}" text-anchor="middle" font-size="11" font-weight="800" fill="#0F172A">${{h.tahun}}</text>`;
                 }});
                 svgLines.innerHTML = html;
+
+                // Attach hover listeners to modal line chart points and year labels
+                svgLines.querySelectorAll('.modal-point-interactive, .modal-year-interactive').forEach(el => {{
+                    el.addEventListener('mouseenter', (e) => {{
+                        const idx = parseInt(el.getAttribute('data-idx'), 10);
+                        const h = p.history[idx];
+                        if (!h) return;
+                        const luVal = h.lulus || 0;
+                        const fr = h.dt > 0 ? (h.du / h.dt * 100).toFixed(1) : '0.0';
+                        const pBatal = luVal > 0 ? (h.batal / luVal * 100).toFixed(1) : '0.0';
+                        const html = `
+                            <div style="font-size:11px; font-weight:800; color:#F8FAFC; margin-bottom:5px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:4px;">Tahun ${{h.tahun}} • ${{p.nama}}</div>
+                            <div style="display:flex; justify-content:space-between; gap:16px; margin-bottom:2.5px; font-size:11px;">
+                                <span style="color:#60A5FA; font-weight:700;">● Daya Tampung:</span>
+                                <strong style="color:#FFFFFF;">${{h.dt.toLocaleString('id-ID')}} kursi</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; gap:16px; margin-bottom:2.5px; font-size:11px;">
+                                <span style="color:#A78BFA; font-weight:700;">● Lulus Seleksi:</span>
+                                <strong style="color:#FFFFFF;">${{luVal.toLocaleString('id-ID')}} mhs</strong>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; gap:16px; margin-bottom:5px; font-size:11px;">
+                                <span style="color:#34D399; font-weight:700;">● Daftar Ulang:</span>
+                                <strong style="color:#FFFFFF;">${{h.du.toLocaleString('id-ID')}} mhs (${{fr}}%)</strong>
+                            </div>
+                            <div style="border-top:1px solid rgba(255,255,255,0.15); padding-top:4px; font-size:10.5px; color:#CBD5E1; display:flex; justify-content:space-between; gap:12px;">
+                                <span>Sisa Kuota: <strong style="color:#FB7185;">${{h.sisa.toLocaleString('id-ID')}}</strong></span>
+                                <span>Batal DU: <strong style="color:#FBBF24;">${{h.batal.toLocaleString('id-ID')}} (${{pBatal}}%)</strong></span>
+                            </div>
+                        `;
+                        ChartTooltip.show(e, html);
+                    }});
+                    el.addEventListener('mousemove', (e) => ChartTooltip.move(e));
+                    el.addEventListener('mouseleave', () => ChartTooltip.hide());
+                }});
             }}
 
             // 2. Render Modal Right Chart: Bars Kursi Kosong vs Batal DU
@@ -4741,15 +4321,58 @@ def generate_interactive_html():
                     const yS = padT + plotH - hS;
                     const yB = padT + plotH - hB;
 
-                    html += `<rect x="${{cx - bW - 1}}" y="${{yS}}" width="${{bW}}" height="${{hS}}" rx="3" fill="#E11D48"><title>${{h.tahun}}: Kursi Kosong = ${{h.sisa}}</title></rect>`;
-                    html += `<text x="${{cx - bW/2 - 1}}" y="${{yS - 4}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#BE123C">${{h.sisa}}</text>`;
+                    html += `<rect class="modal-bar-interactive" data-type="sisa" data-idx="${{i}}" x="${{cx - bW - 1}}" y="${{yS}}" width="${{bW}}" height="${{hS}}" rx="3" fill="#E11D48"/>`;
+                    html += `<text class="chart-halo-text" x="${{cx - bW/2 - 1}}" y="${{yS - 4}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#BE123C">${{h.sisa}}</text>`;
 
-                    html += `<rect x="${{cx + 1}}" y="${{yB}}" width="${{bW}}" height="${{hB}}" rx="3" fill="#D97706"><title>${{h.tahun}}: Batal Daftar Ulang = ${{h.batal}}</title></rect>`;
-                    html += `<text x="${{cx + bW/2 + 1}}" y="${{yB - 4}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#B45309">${{h.batal}}</text>`;
+                    html += `<rect class="modal-bar-interactive" data-type="batal" data-idx="${{i}}" x="${{cx + 1}}" y="${{yB}}" width="${{bW}}" height="${{hB}}" rx="3" fill="#D97706"/>`;
+                    html += `<text class="chart-halo-text" x="${{cx + bW/2 + 1}}" y="${{yB - 4}}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#B45309">${{h.batal}}</text>`;
 
                     html += `<text x="${{cx}}" y="${{H - 10}}" text-anchor="middle" font-size="11" font-weight="800" fill="#0F172A">${{h.tahun}}</text>`;
                 }});
                 svgBars.innerHTML = html;
+
+                // Attach hover listeners to modal bars
+                svgBars.querySelectorAll('.modal-bar-interactive').forEach(el => {{
+                    el.addEventListener('mouseenter', (e) => {{
+                        const idx = parseInt(el.getAttribute('data-idx'), 10);
+                        const h = p.history[idx];
+                        if (!h) return;
+                        const type = el.getAttribute('data-type');
+                        let html = '';
+                        if (type === 'sisa') {{
+                            const pSisa = h.dt > 0 ? (h.sisa / h.dt * 100).toFixed(1) : '0.0';
+                            let surplusNote = '';
+                            if (h.sisa === 0 && h.surplus > 0) {{
+                                surplusNote = `<div style="font-size:10.5px; color:#34D399; margin-top:3px; font-weight:700;">+${{h.surplus}} mhs di atas kapasitas (Surplus)</div>`;
+                            }}
+                            html = `
+                                <div style="font-size:10.5px; font-weight:800; color:#FB7185; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.5px;">Sisa Kuota Belum Terisi • ${{h.tahun}}</div>
+                                <div style="font-size:16px; font-weight:800; color:#FFFFFF; margin-bottom:5px;">${{h.sisa.toLocaleString('id-ID')}} <span style="font-size:11px; font-weight:600; color:#CBD5E1;">kursi (${{pSisa}}% DT)</span></div>
+                                <div style="font-size:11px; color:#CBD5E1; border-top:1px solid rgba(255,255,255,0.15); padding-top:5px;">
+                                    Daya Tampung: <strong style="color:#FFFFFF;">${{h.dt.toLocaleString('id-ID')}}</strong> | DU: <strong style="color:#34D399;">${{h.du.toLocaleString('id-ID')}}</strong>
+                                    ${{surplusNote}}
+                                </div>
+                            `;
+                        }} else if (type === 'batal') {{
+                            const pBatal = h.lulus > 0 ? (h.batal / h.lulus * 100).toFixed(1) : '0.0';
+                            let surplusNote = '';
+                            if (h.batal === 0 && h.surplus_lulus > 0) {{
+                                surplusNote = `<div style="font-size:10.5px; color:#34D399; margin-top:3px; font-weight:700;">Seluruh lulusan registrasi penuh</div>`;
+                            }}
+                            html = `
+                                <div style="font-size:10.5px; font-weight:800; color:#FBBF24; margin-bottom:2px; text-transform:uppercase; letter-spacing:0.5px;">Tidak Daftar Ulang • ${{h.tahun}}</div>
+                                <div style="font-size:16px; font-weight:800; color:#FFFFFF; margin-bottom:5px;">${{h.batal.toLocaleString('id-ID')}} <span style="font-size:11px; font-weight:600; color:#CBD5E1;">peserta (${{pBatal}}% Lulus)</span></div>
+                                <div style="font-size:11px; color:#CBD5E1; border-top:1px solid rgba(255,255,255,0.15); padding-top:5px;">
+                                    Lulus: <strong style="color:#FFFFFF;">${{h.lulus.toLocaleString('id-ID')}}</strong> | DU: <strong style="color:#34D399;">${{h.du.toLocaleString('id-ID')}}</strong>
+                                    ${{surplusNote}}
+                                </div>
+                            `;
+                        }}
+                        ChartTooltip.show(e, html);
+                    }});
+                    el.addEventListener('mousemove', (e) => ChartTooltip.move(e));
+                    el.addEventListener('mouseleave', () => ChartTooltip.hide());
+                }});
             }}
 
             // 3. Render Descending Multi-Year Table (2026 -> 2022 + Total 5 Tahun)
@@ -4907,9 +4530,6 @@ def generate_interactive_html():
             }}
         }}
 
-        updateD3TierStripVisibility();
-        updateTierGuideCardStates();
-
         renderKPIRibbon();
         renderFacultyFilters();
         renderChart();
@@ -4922,7 +4542,6 @@ def generate_interactive_html():
         selectedProdiId = null;
         document.getElementById('ins-content').style.display = 'none';
         document.getElementById('ins-placeholder').style.display = 'block';
-        updatePlaceholderView();
 
         // Sinkronkan URL Hash pada pemuatan awal
         syncUrlHash();
